@@ -13,7 +13,8 @@ public class CommandParser {
     static final String ADD_USER_COMMAND = "addUser";
     static final int MAX_PARSE_COMMAND = 2;
 
-    private BalootDatabase balootDatabase;
+
+    private static BalootDatabase balootDatabase;
     CommandParser()
     {
 
@@ -54,8 +55,8 @@ public class CommandParser {
         String email = (String)jsonParser.get("email");
         String birthDate = (String)jsonParser.get("birthDate");
         String address = (String)jsonParser.get("address");
-        String credit = (String)jsonParser.get("credit");
-        BalootDatabase.addUser(name, password, email, birthDate, address, credit);
+        double credit = (double)jsonParser.get("credit");
+        balootDatabase.addUser(name, password, email, birthDate, address, credit);
     }
     public static void main(String[] args) {
         CommandParser commandParser = new CommandParser();
