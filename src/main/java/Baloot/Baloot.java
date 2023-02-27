@@ -1,12 +1,11 @@
 package Baloot;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 import java.util.Scanner;
 
-public class CommandParser {
+public class Baloot {
 
     static final int TYPE_COMMAND_INDEX = 0;
     static final int JSON_INDEX = 1;
@@ -15,7 +14,7 @@ public class CommandParser {
 
 
     private static BalootDatabase balootDatabase;
-    CommandParser()
+    Baloot()
     {
 
     }
@@ -27,8 +26,8 @@ public class CommandParser {
         {
             String new_command = inputReader.nextLine();
             String[] command_parsed = new_command.split(" ", MAX_PARSE_COMMAND);
-            parse_command(command_parsed[CommandParser.TYPE_COMMAND_INDEX],
-                    command_parsed[CommandParser.JSON_INDEX]);
+            parse_command(command_parsed[Baloot.TYPE_COMMAND_INDEX],
+                    command_parsed[Baloot.JSON_INDEX]);
         }
     }
 
@@ -39,7 +38,7 @@ public class CommandParser {
             JSONObject jsonParser = (JSONObject)jsonCommand.parse(json_input);
             switch(command_input)
             {
-                case CommandParser.ADD_USER_COMMAND:
+                case Baloot.ADD_USER_COMMAND:
                     add_user(jsonParser);
             }
         }
@@ -59,7 +58,7 @@ public class CommandParser {
         balootDatabase.addUser(name, password, email, birthDate, address, credit);
     }
     public static void main(String[] args) {
-        CommandParser commandParser = new CommandParser();
+        Baloot commandParser = new Baloot();
         commandParser.run();
     }
 
