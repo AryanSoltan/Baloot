@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="623ce7de-a262-4f37-8665-bdbdf2795ca8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/BalootDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/BalootDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/CommandParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="623ce7de-a262-4f37-8665-bdbdf2795ca8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
