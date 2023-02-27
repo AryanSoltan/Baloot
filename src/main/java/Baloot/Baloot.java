@@ -17,7 +17,8 @@ public class Baloot {
     static final int MAX_PARSE_COMMAND = 2;
 
 
-    private static BalootDatabase balootDatabase;
+    //private static BalootDatabase balootDatabase;
+    private static BalootDatabase balootDatabase = new BalootDatabase();
     Baloot()
     {
 
@@ -56,9 +57,11 @@ public class Baloot {
             {
                 case Baloot.ADD_USER_COMMAND:
                     addUser(jsonParser);
+                    break;
 
                 case Baloot.ADD_PROVIDER_COMMAND:
                     addProvider(jsonParser);
+                    break;
             }
         }
         catch (ParseException e) {
@@ -75,6 +78,8 @@ public class Baloot {
         String birthDate = (String)jsonParser.get("birthDate");
         String address = (String)jsonParser.get("address");
         double credit = (double)jsonParser.get("credit");
+
+        //System.out.println("hihi");
         if(balootDatabase.doesExist(name)) {
             balootDatabase.updateUser(name, password, email, birthDate, address, credit);
             printOutput(true, "User "+name+" updated");
