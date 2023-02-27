@@ -107,7 +107,7 @@ public class Baloot {
             }
         }
         catch (ParseException e) {
-            System.out.println("hehe");
+            System.out.println(e.getMessage());
         }
     }
 
