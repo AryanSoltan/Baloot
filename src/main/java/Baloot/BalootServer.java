@@ -1,6 +1,7 @@
 package Baloot;
 
 import Baloot.Exception.CommodityNotExist;
+import Baloot.Exception.UserNameNotValid;
 import Baloot.Exception.UserNotExist;
 
 import java.util.ArrayList;
@@ -38,16 +39,15 @@ public class BalootServer {
         providers.put(id, newProvider);
     }
 
-    public boolean checkUserNameValid(String name)
+    public boolean checkUserNameValid(String userName)
     {
-
+        return userName.matches("[a-zA-Z0-9]+");
     }
 
-    public void updateUser(String name, User newUser)
-    {
-        if(checkUserNameValid(name))
+    public void updateUser(String name, User newUser) throws Exception {
+        if(!checkUserNameValid(name))
         {
-            \\throw;
+            throw new UserNameNotValid(name);
         }
         users.remove(name);
         users.put(name, newUser);
@@ -75,8 +75,17 @@ public class BalootServer {
         return commiditesArray;
     }
 
-    public void rateCommodity(String username, int commodityId, int score)
+    public void rateCommodity(String username, int commodityId, String scoreStr)
     {
+        if(!scoreStr.matches("-?(0|[1-9]\\d*)"))
+        {
+            throw InvalidRating();
+        }
+        int score = Integer.parseInt(scoreStr);
+        if(score < 1 || score > 10)
+        {
+            throw InvalidRating();
+        }
         Commodity neededCommodity = commodities.get(commodityId);
         if(neededCommodity.hasRating(username))
         {
