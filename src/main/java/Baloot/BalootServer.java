@@ -1,8 +1,6 @@
 package Baloot;
 
-import Baloot.Exception.CommodityNotExist;
-import Baloot.Exception.UserNameNotValid;
-import Baloot.Exception.UserNotExist;
+import Baloot.Exception.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,8 +51,18 @@ public class BalootServer {
         users.put(name, newUser);
     }
 
-    public void addCommidity(int id, Commodity newCommidity)
-    {
+    private Provider findProvider(int providerId) throws ProviderNotExist {
+        if(providers.containsKey(providerId))
+            return providers.get(providerId);
+        else
+            throw new ProviderNotExist(providerId);
+    }
+
+    public void addCommidity(int providerId, int id, Commodity newCommidity)
+            throws ProviderNotExist {
+        Provider provider = findProvider(providerId);
+        String providerName = provider.getProviderName();
+        newCommidity.setProviderName(providerName);
         commodities.put(id, newCommidity);
     }
 
@@ -75,16 +83,15 @@ public class BalootServer {
         return commiditesArray;
     }
 
-    public void rateCommodity(String username, int commodityId, String scoreStr)
-    {
+    public void rateCommodity(String username, int commodityId, String scoreStr) throws InvalidRating {
         if(!scoreStr.matches("-?(0|[1-9]\\d*)"))
         {
-            throw InvalidRating();
+            throw new InvalidRating();
         }
         int score = Integer.parseInt(scoreStr);
         if(score < 1 || score > 10)
         {
-            throw InvalidRating();
+            throw new InvalidRating();
         }
         Commodity neededCommodity = commodities.get(commodityId);
         if(neededCommodity.hasRating(username))
@@ -119,8 +126,7 @@ public class BalootServer {
         return neededUser.hasBoughtCommodity(commodityId);
     }
 
-    public boolean commodityIsAvailable(int commodityId)
-    {
+    public boolean commodityIsAvailable(int commodityId) throws Exception {
         Commodity neededCommodity = findCommodity(commodityId);
         return neededCommodity.isAvailable();
     }
@@ -129,6 +135,10 @@ public class BalootServer {
 
         User neededUser = findUser(username);
         Commodity neededCommodity = findCommodity(commodityId);
+        if(!neededCommodity.isAvailable())
+            throw new CommodityOutOfStock(commodityId);
+        if(neededUser.hasBoughtCommodity(commodityId))
+            throw new CommodityAlreadyAdded(commodityId);
         neededUser.buyCommodity(commodityId, neededCommodity);
         neededCommodity.buyOne();
     }
@@ -141,13 +151,16 @@ public class BalootServer {
         neededCommodity.setProvider(providerName);
     }
 
-    public void removeFromBuyList(String username, int commodityId) {
-        User neededUser = users.get(username);
+    public void removeFromBuyList(String username, int commodityId) throws Exception {
+        User neededUser = findUser(username);
+        if(neededUser.hasBoughtCommodity(commodityId))
+        {
+            throw new CommodityIsNotInBuyList(commodityId);
+        }
         neededUser.removeFromBuyList(commodityId);
     }
 
-    public Commodity getCommodityById(int commodityId)
-    {
+    public Commodity getCommodityById(int commodityId) throws Exception {
         Commodity neededCommodity = findCommodity(commodityId);
         return neededCommodity;
     }

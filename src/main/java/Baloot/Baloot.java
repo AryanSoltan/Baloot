@@ -1,5 +1,7 @@
 package Baloot;
 
+import Baloot.Exception.InvalidRating;
+import Baloot.Exception.ProviderNotExist;
 import com.google.gson.GsonBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -120,13 +122,12 @@ public class Baloot {
                     break;
             }
         }
-        catch (ParseException e) {
+        catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private static void addUser(JSONObject jsonParser, String jsonInp, Gson gsonParser)
-    {
+    private static void addUser(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
         User user = gsonParser.fromJson(jsonInp, User.class);
         String name = (String)jsonParser.get("username");
 
@@ -148,29 +149,18 @@ public class Baloot {
         printOutput(true, "Provider " + name + " added");
     }
 
-    private static void addCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    private static void addCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser)
+            throws ProviderNotExist {
 
         int providerId = ((Number)jsonParser.get("providerId")).intValue();
 
         int id = ((Number) jsonParser.get("id")).intValue();
         Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
 
-        balootServer.addCommidity(providerId,id, offering);
+        balootServer.addCommidity(providerId, id, offering);
 
         printOutput(true, "Commodity " + id + "added");
 
-//        if(!balootServer.checkExistProvider(providerId))
-//        {
-//            printOutput(false, "Not exist provider");//todo
-//        }
-//        else {
-//            int id = ((Number) jsonParser.get("id")).intValue();
-//            Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
-//
-//            balootServer.addCommidity(id, offering);
-//            balootServer.setCommodityProviderName(id,providerId);
-//            printOutput(true, "Commodity " + id + "added");
-//        }
 
     }
 
@@ -193,7 +183,7 @@ public class Baloot {
 
     }
 
-    private static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    private static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws InvalidRating {
 
 
         String username = (String)jsonParser.get("username");
@@ -203,10 +193,9 @@ public class Baloot {
 
         balootServer.rateCommodity(username,commodityId,score);
 
-       // todo
     }
 
-    private static void addToBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    private static void addToBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
 
 
         String username = (String)jsonParser.get("username");
@@ -214,23 +203,11 @@ public class Baloot {
         balootServer.addCommidityToUserBuyList(username,commodityId);
         printOutput(true, "Commodity added to buyList");
 
-//        if(balootServer.commodityExistsInUserBuyList(username,commodityId))
-//        {
-//            printOutput(false, "Commodity is already added to buyList"); //todo
-//        }
-//        else if(balootServer.commodityIsAvailable(commodityId))
-//        {
-//            balootServer.addCommidityToUserBuyList(username,commodityId);
-//            printOutput(true, "Commodity added to buyList");
-//        }
-//        else{
-//            printOutput(false, "Commodity is not available");//todo
-//        }
-
 
     }
 
-    private static void removeFromBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    private static void removeFromBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser)
+            throws Exception {
 
 
         String username = (String)jsonParser.get("username");
@@ -238,20 +215,10 @@ public class Baloot {
         balootServer.removeFromBuyList(username,commodityId);
         printOutput(true, "Commodity removed from buyList");
 
-
-//        if(!balootServer.commodityExistsInUserBuyList(username,commodityId))
-//        {
-//            printOutput(false, "Commodity does not exist in buyList");//todo
-//        }
-//        else{
-//            balootServer.removeFromBuyList(username,commodityId);
-//            printOutput(true, "Commodity removed from buyList");
-//
-//        }
-
     }
 
-    private static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    private static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser)
+            throws Exception {
 
         int commodityId = ((Number) jsonParser.get("id")).intValue();
         Commodity commodity = balootServer.getCommodityById(commodityId);
@@ -283,7 +250,7 @@ public class Baloot {
 
     }
 
-    private static void getBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    private static void getBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
         String username = (String)jsonParser.get("username");
         ArrayList<Commodity> commoditiesList  = balootServer.getUserBuyList(username);
         ArrayList<JSONObject> commoditiesInfo = new ArrayList<JSONObject>();
