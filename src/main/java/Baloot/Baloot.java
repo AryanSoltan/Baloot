@@ -30,7 +30,7 @@ public class Baloot {
     static final String GET_COMMODITY_BY_ID="getCommodityById";
 
     static final String GET_COMMODITIES_BY_Category="getCommoditiesByCategory";
-    static final String GET_BUY_LIST="fetBuyList";
+    static final String GET_BUY_LIST="getBuyList";
 
     //static final String SUCCESSFUL = "addUser";
     static final int MAX_PARSE_COMMAND = 2;

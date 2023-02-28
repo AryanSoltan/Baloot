@@ -24,6 +24,7 @@ public class BalootServer {
 
     public void addUser(String name, User newUser)
     {
+        newUser.setBoughtCommitiesEmpty();
         users.put(name, newUser);
     }
 
@@ -48,6 +49,7 @@ public class BalootServer {
             throw new UserNameNotValid(name);
         }
         users.remove(name);
+        newUser.setBoughtCommitiesEmpty();
         users.put(name, newUser);
     }
 
@@ -62,6 +64,7 @@ public class BalootServer {
         Provider provider = findProvider(providerId);
         String providerName = provider.getProviderName();
         newCommidity.setProviderName(providerName);
+        newCommidity.setUserRatingsEmpty();
         commodities.put(id, newCommidity);
     }
 
@@ -91,6 +94,10 @@ public class BalootServer {
         if(score < 1 || score > 10)
         {
             throw new InvalidRating();
+        }
+        if(!users.containsKey(username))
+        {
+            throw new UserNotExist(username);
         }
         Commodity neededCommodity = findCommodity(commodityId);
         if(neededCommodity.hasRating(username))
@@ -152,7 +159,7 @@ public class BalootServer {
 
     public void removeFromBuyList(String username, int commodityId) throws Exception {
         User neededUser = findUser(username);
-        if(neededUser.hasBoughtCommodity(commodityId))
+        if(!neededUser.hasBoughtCommodity(commodityId))
         {
             throw new CommodityIsNotInBuyList(commodityId);
         }

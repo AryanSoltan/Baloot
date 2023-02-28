@@ -1,7 +1,10 @@
 package Baloot;
 
+import Baloot.Exception.CommodityIsNotInBuyList;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 public class User {
@@ -35,10 +38,10 @@ public class User {
         return boughtCommodities.containsKey(commodityId);
     }
 
-    public void removeFromBuyList(int commodityId) {
+    public void removeFromBuyList(int commodityId) throws CommodityIsNotInBuyList {
         if(!boughtCommodities.containsKey(commodityId))
         {
-            // throw
+            throw new CommodityIsNotInBuyList(commodityId);
         }
         boughtCommodities.remove(commodityId);
     }
@@ -46,5 +49,9 @@ public class User {
     public ArrayList<Commodity> getCommodities() {
         Collection<Commodity> commoditiesBought = boughtCommodities.values();
         return new ArrayList<Commodity>(commoditiesBought);
+    }
+
+    public void setBoughtCommitiesEmpty() {
+        boughtCommodities = new HashMap<>();
     }
 }
