@@ -14,8 +14,8 @@ public class Commodity {
 
     private String providerName;
     private double price;
-    ArrayList<String> categories;
-    Map<String, Integer> userRatings;
+    private ArrayList<String> categories;
+    private Map<String, Integer> userRatings;
     double rating;
     int inStock;
     public Commodity(int inputId, String inputName, int inputProviderId, double inputPrice,
@@ -28,7 +28,6 @@ public class Commodity {
         categories = inputCategories;
         rating = inputRating;
         inStock = inputInStock;
-        userRatings = new HashMap<String, Integer>();
     }
 
     public void setProviderName(String name){
@@ -104,5 +103,9 @@ public class Commodity {
 
     public boolean hasCategory(String category) {
         return categories.contains(category);
+    }
+
+    public void setUserRatingsEmpty() {
+        userRatings = new HashMap<>();
     }
 }
