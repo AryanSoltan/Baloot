@@ -56,12 +56,6 @@ public class Baloot {
         System.out.println(jsonObject.toString());
     }
 
-    private static void printOutput(boolean successful, ArrayList<JSONObject> JSONdata) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("success", successful);
-        jsonObject.put("data", JSONdata);
-        System.out.println(jsonObject.toString());
-    }
 
     private static void run()
     {
@@ -73,8 +67,12 @@ public class Baloot {
             String data="{}";
             if(command_parsed.length == MAX_PARSE_COMMAND)
                 data = command_parsed[Baloot.JSON_INDEX];
-
+            try{
              parseCommand(command_parsed[Baloot.TYPE_COMMAND_INDEX], data);
+            }
+            catch (Exception e){
+                printOutput(false,e.getMessage());
+            }
         }
     }
 
@@ -169,10 +167,21 @@ public class Baloot {
 
     private static void getCommoditiesList() {
 
-        ArrayList<Commodity> commodities = balootServer.getCommodityList();
-        Gson gson = new Gson();
-        String commoditiesInJson = gson.toJson(commodities);
-        printOutput(true, commoditiesInJson);
+        ArrayList<Commodity> commoditiesList = balootServer.getCommodityList();
+        ArrayList<JSONObject> commoditiesInfo = new ArrayList<JSONObject>();
+
+        for (Commodity commodity : commoditiesList) {
+            JSONObject commodityInfo = commodity.getJsonData();
+            commodityInfo.remove("provider");
+            commoditiesInfo.add(commodityInfo);
+        }
+
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("commoditiesList", commoditiesInfo);
+
+        printOutput(true, jsonObject);
+
     }
 
     private static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
@@ -269,7 +278,13 @@ public class Baloot {
             commodityInfo.remove("provider");
             commoditiesInfo.add(commodityInfo);
         }
-        printOutput(true, commoditiesInfo);
+
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("buyList", commoditiesInfo);
+
+        printOutput(true, jsonObject);
+
 
     }
 
