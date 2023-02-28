@@ -76,6 +76,41 @@ public class BalootDatabase {
         }
     }
 
+    private User findUser(String username)
+    {
+        if(!users.containsKey(username))
+        {
+            //throw
+        }
+        User neededUser = users.get(username);
+        return neededUser;
+    }
 
+    public Commodity findCommodity(int commodityId)
+    {
+        if(!commodities.containsKey(commodityId))
+        {
+            //throw
+        }
+        Commodity neededCommodity = commodities.get(commodityId);
+        return neededCommodity;
+    }
+    public boolean commodityExistsInUserBuyList(String username, int commodityId)
+    {
+        User neededUser = findUser(username);
+        return neededUser.hasBoughtCommodity(commodityId);
+    }
 
+    public boolean commodityIsAvailable(int commodityId)
+    {
+        Commodity neededCommodity = findCommodity(commodityId);
+        return neededCommodity.isAvailable();
+    }
+
+    public void addCommidityToUserBuyList(String username, int commodityId)
+    {
+        User neededUser = findUser(username);
+        Commodity neededCommodity = findCommodity(commodityId);
+        neededUser.boughtCommodities(commodityId, neededCommodity);
+    }
 }

@@ -24,5 +24,14 @@ public class User {
         credit = inputCredit;
     }
 
-    public void buyCommodity(String )
+    public void buyCommodity(int commodityId, Commodity newCommodity)
+    {
+        boughtCommodities.put(commodityId, newCommodity);
+    }
+
+    public boolean hasBoughtCommodity(int commodityId)
+    {
+        return boughtCommodities.containsKey(commodityId);
+    }
+
 }
