@@ -50,13 +50,12 @@ public class Baloot {
     }
 
     private static void printOutput(boolean successful, JSONObject JSONdata) {
-
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("success", successful);
         jsonObject.put("data", JSONdata);
         System.out.println(jsonObject.toString());
-
     }
+
     private static void run()
     {
         Scanner inputReader = new Scanner(System.in);
@@ -230,6 +229,21 @@ public class Baloot {
 
     private static void getCommoditiesByCategory(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         String category = (String)jsonParser.get("category");
+        ArrayList<Commodity> commiditesList = new ArrayList<Commodity>();
+        commiditesList = balootServer.getCommoditiesByCategory(category);
+
+        JSONObject jsonObject = new JSONObject();
+
+        ArrayList<JSONObject> commiditesInfo = new ArrayList<JSONObject>();
+
+
+
+        for (Commodity commodity : commiditesList) {
+                JSONObject obj = commodity.getJsonData();
+                commiditesInfo.add(obj);
+            }
+            //jsonObject.put("weeklySchedule", jsonArray);
+
 
         // todo
     }
