@@ -100,4 +100,8 @@ public class Commodity {
     public void setProvider(String inputProviderName) {
         providerName = inputProviderName;
     }
+
+    public boolean hasCategory(String category) {
+        return categories.contains(category);
+    }
 }

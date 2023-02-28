@@ -1,6 +1,7 @@
 package Baloot;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 public class User {
@@ -40,5 +41,10 @@ public class User {
             // throw
         }
         boughtCommodities.remove(commodityId);
+    }
+
+    public ArrayList<Commodity> getCommodities() {
+        Collection<Commodity> commoditiesBought = boughtCommodities.values();
+        return new ArrayList<Commodity>(commoditiesBought);
     }
 }

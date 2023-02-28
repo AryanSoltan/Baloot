@@ -1,5 +1,7 @@
 package Baloot;
 
+import Baloot.Exception.UserNotExist;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -76,11 +78,10 @@ public class BalootServer {
         }
     }
 
-    private User findUser(String username)
-    {
+    private User findUser(String username) throws Exception {
         if(!users.containsKey(username))
         {
-            //throw
+            throw new UserNotExist(username);
         }
         User neededUser = users.get(username);
         return neededUser;
@@ -95,8 +96,7 @@ public class BalootServer {
         Commodity neededCommodity = commodities.get(commodityId);
         return neededCommodity;
     }
-    public boolean commodityExistsInUserBuyList(String username, int commodityId)
-    {
+    public boolean commodityExistsInUserBuyList(String username, int commodityId) throws Exception {
         User neededUser = findUser(username);
         return neededUser.hasBoughtCommodity(commodityId);
     }
@@ -107,8 +107,8 @@ public class BalootServer {
         return neededCommodity.isAvailable();
     }
 
-    public void addCommidityToUserBuyList(String username, int commodityId)
-    {
+    public void addCommidityToUserBuyList(String username, int commodityId) throws Exception {
+
         User neededUser = findUser(username);
         Commodity neededCommodity = findCommodity(commodityId);
         neededUser.buyCommodity(commodityId, neededCommodity);
@@ -135,13 +135,20 @@ public class BalootServer {
     }
 
     public ArrayList<Commodity> getCommoditiesByCategory(String category) {
-        ArrayList<Commodity> commoditiesByCategory;
+        ArrayList<Commodity> commoditiesByCategory = new ArrayList<Commodity>();
         for(Commodity commodity: commodities.values())
         {
-            if(commodity.getCategory().equals(category))
+            if(commodity.hasCategory(category))
             {
-
+                commoditiesByCategory.add(commodity);
             }
         }
+        return commoditiesByCategory;
+    }
+
+    public ArrayList<Commodity> getUserByList(String userName) throws Exception {
+
+        User neededUser = findUser(userName);
+        return neededUser.getCommodities();
     }
 }
