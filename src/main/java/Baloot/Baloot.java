@@ -41,11 +41,20 @@ public class Baloot {
 
     }
 
-    private static void printOutput(boolean successful, String data) {
+//    private static void printOutput(boolean successful, String data) {
+//
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("success", successful);
+//        jsonObject.put("data", data);
+//        System.out.println(jsonObject.toString());
+//
+//    }
+
+    private static void printOutput(boolean successful, JSONObject JSONdata) {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("success", successful);
-        jsonObject.put("data", data);
+        jsonObject.put("data", JSONdata);
         System.out.println(jsonObject.toString());
 
     }
@@ -164,7 +173,11 @@ public class Baloot {
 
         String username = (String)jsonParser.get("username");
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
-        double score = ((Number) jsonParser.get("score")).doubleValue();
+        int score = ((Number) jsonParser.get("score")).intValue();
+
+
+        balootDatabase.rateCommodity(username,commodityId,score);
+
        // todo
     }
 
@@ -173,6 +186,18 @@ public class Baloot {
 
         String username = (String)jsonParser.get("username");
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
+        if(balootDatabase.commodityExistsInUserBuyList(username,commodityId))
+        {
+            printOutput(false, "Commodity is already added to buyList");
+        }
+        else if(balootDatabase.commodityIsAvailable(commodityId))
+        {
+            balootDatabase.addCommidityToUserBuyList(username,commodityId);
+            printOutput(true, "Commodity added to buyList");
+        }
+        else{
+            printOutput(false, "Commodity is not available");
+        }
 
         // todo
     }
@@ -182,12 +207,26 @@ public class Baloot {
 
         String username = (String)jsonParser.get("username");
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
+        if(!balootDatabase.commodityExistsInUserBuyList(username,commodityId))
+        {
+            printOutput(false, "Commodity does not exist in buyList");
+        }
+        else{
+            balootDatabase.removeFromBuyList(username,commodityId);
+            printOutput(true, "Commodity removed from buyList");
+
+        }
 
         // todo
     }
 
     private static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         int commodityId = ((Number) jsonParser.get("id")).intValue();
+
+        Commodity commodity = balootDatabase.getCommodityById(commodityId);
+        Gson gson = new Gson();
+        String commoditiesInJson = gson.toJson(commodity);
+        printOutput(true, commoditiesInJson);
 
         // todo
     }
