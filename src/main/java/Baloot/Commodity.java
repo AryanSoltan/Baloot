@@ -78,11 +78,14 @@ public class Commodity {
         jObj.put("id",id);
         jObj.put("name",name);
         jObj.put("provider",providerName);
+        jObj.put("providerId",providerId);
         jObj.put("price",price);
         jObj.put("categories",categories);
         jObj.put("rating",rating);
         return jObj;
     }
+
+
 
     public boolean isAvailable()
     {
