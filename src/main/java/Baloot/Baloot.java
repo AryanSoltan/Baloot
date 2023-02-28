@@ -56,6 +56,13 @@ public class Baloot {
         System.out.println(jsonObject.toString());
     }
 
+    private static void printOutput(boolean successful, ArrayList<JSONObject> JSONdata) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("success", successful);
+        jsonObject.put("data", JSONdata);
+        System.out.println(jsonObject.toString());
+    }
+
     private static void run()
     {
         Scanner inputReader = new Scanner(System.in);
@@ -232,30 +239,38 @@ public class Baloot {
 
     private static void getCommoditiesByCategory(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         String category = (String)jsonParser.get("category");
-        ArrayList<Commodity> commiditesList = new ArrayList<Commodity>();
-        commiditesList = balootServer.getCommoditiesByCategory(category);
+
+        ArrayList<Commodity> commoditiesList  = balootServer.getCommoditiesByCategory(category);
+
+        ArrayList<JSONObject> commoditiesInfo = new ArrayList<JSONObject>();
+
+        for (Commodity commodity : commoditiesList) {
+            JSONObject commodityInfo = commodity.getJsonData();
+            commodityInfo.remove("provider");
+            commoditiesInfo.add(commodityInfo);
+        }
 
         JSONObject jsonObject = new JSONObject();
 
-        ArrayList<JSONObject> commiditesInfo = new ArrayList<JSONObject>();
+        jsonObject.put("commoditiesListByCategory", commoditiesInfo);
 
+        printOutput(true, jsonObject);
 
-
-        for (Commodity commodity : commiditesList) {
-            JSONObject commodityInfo = commodity.getJsonData();
-            commodityInfo.remove("provider");
-            commiditesInfo.add(commodityInfo);
-        }
             //jsonObject.put("weeklySchedule", jsonArray);
-
-
-        // todo
     }
 
     private static void getBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         String username = (String)jsonParser.get("username");
+        ArrayList<Commodity> commoditiesList  = balootServer.getUserBuyList(username);
+        ArrayList<JSONObject> commoditiesInfo = new ArrayList<JSONObject>();
 
-        // todo
+        for (Commodity commodity : commoditiesList) {
+            JSONObject commodityInfo = commodity.getJsonData();
+            commodityInfo.remove("provider");
+            commoditiesInfo.add(commodityInfo);
+        }
+        printOutput(true, commoditiesInfo);
+
     }
 
     public static void main(String[] args) {
