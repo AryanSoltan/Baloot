@@ -183,7 +183,7 @@ public class Baloot {
 
     }
 
-    public static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws InvalidRating {
+    public static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
 
 
         String username = (String)jsonParser.get("username");
