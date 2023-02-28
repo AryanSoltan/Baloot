@@ -4,6 +4,7 @@ import Baloot.Exception.UserAlreadyExistError;
 
 import java.net.UnknownServiceException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,15 +13,19 @@ public class BalootDatabase {
     Map<String, User> users;
     Map<Integer, Provider> providers;
     Map<Integer, Commodity> commodities;
+
+    Map<String, Rating> ratings;
     BalootDatabase()
     {
         users = new HashMap<String, User>();
+        providers = new HashMap<Integer, Provider>();
+        commodities = new HashMap<Integer, Commodity>();
+
+
     }
 
-    public void addUser(String name, String password, String email,
-                         String birthDate, String address, double credit)
+    public void addUser(String name, User newUser)
     {
-        User newUser = new User(name, password, email, birthDate, address, credit);
         users.put(name, newUser);
     }
 
@@ -29,24 +34,19 @@ public class BalootDatabase {
         return users.containsKey(userName);
     }
 
-    public void addProvider(int id, String name, String registryDate)
+    public void addProvider(int id, Provider newProvider)
     {
-        Provider newProvider = new Provider(id, name, registryDate);
         providers.put(id, newProvider);
     }
 
-    public void updateUser(String name, String password, String email, String birthDate,
-                           String address, double credit)
+    public void updateUser(String name, User newUser)
     {
         users.remove(name);
-        addUser(name, password, email, birthDate, address, credit);
+        users.put(name, newUser);
     }
 
-    public void addCommidity(int id, String name, int providerId, double price,
-                             ArrayList<String> categories, double rating, int inStock)
+    public void addCommidity(int id, Commodity newCommidity)
     {
-        Commodity newCommidity = new Commodity(id, name, providerId, price, categories,
-                rating, inStock);
         commodities.put(id, newCommidity);
     }
 
@@ -60,6 +60,10 @@ public class BalootDatabase {
     public boolean checkExistProvider(int id)
     { return users.containsKey(id);}
 
-
-
+    public ArrayList<Commodity> getCommodityList()
+    {
+        Collection<Commodity> collectionCommidity = commodities.values();
+        ArrayList<Commodity> commiditesArray = new ArrayList<Commodity>(collectionCommidity);
+        return commiditesArray;
+    }
 }

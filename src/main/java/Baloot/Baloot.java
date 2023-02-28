@@ -1,10 +1,15 @@
 package Baloot;
 
+import com.google.gson.GsonBuilder;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.*;
+
 public class Baloot {
 
     static final int TYPE_COMMAND_INDEX = 0;
@@ -30,7 +35,6 @@ public class Baloot {
     static final int MAX_PARSE_COMMAND = 2;
 
 
-    //private static BalootDatabase balootDatabase;
     private static BalootDatabase balootDatabase = new BalootDatabase();
     Baloot()
     {
@@ -64,45 +68,47 @@ public class Baloot {
         }
     }
 
-    private static void parseCommand(String command_input, String json_input)
+    private static void parseCommand(String commandInput, String jsonInput)
     {
+
         JSONParser jsonCommand = new JSONParser();
+        Gson gsonParser = new GsonBuilder().create();
         try {
 
-            JSONObject jsonParser = (JSONObject)jsonCommand.parse(json_input);
+            JSONObject jsonParser = (JSONObject)jsonCommand.parse(jsonInput);
 
-            switch(command_input)
+            switch(commandInput)
             {
                 case Baloot.ADD_USER_COMMAND:
-                    addUser(jsonParser);
+                    addUser(jsonParser, jsonInput, gsonParser);
                     break;
 
                 case Baloot.ADD_PROVIDER_COMMAND:
-                    addProvider(jsonParser);
+                    addProvider(jsonParser, jsonInput, gsonParser);
                     break;
                 case Baloot.ADD_COMMODITY:
-                    addCommodity(jsonParser);
+                    addCommodity(jsonParser, jsonInput, gsonParser);
                     break;
                 case Baloot.GET_COMMODITIES_LIST:
                     getCommoditiesList();
                     break;
                 case Baloot.RATE_COMMODITY:
-                    rateCommodity(jsonParser);
+                    rateCommodity(jsonParser, jsonInput, gsonParser);
                     break;
                 case Baloot.ADD_TO_BUYLIST:
-                    addToBuyList(jsonParser);
+                    addToBuyList(jsonParser, jsonInput, gsonParser);
                     break;
                 case Baloot.REMOVE_FROM_BUYLIST:
-                    removeFromBuyList(jsonParser);
+                    removeFromBuyList(jsonParser, jsonInput, gsonParser);
                     break;
                 case Baloot.GET_COMMODITY_BY_ID:
-                    getCommodityById(jsonParser);
+                    getCommodityById(jsonParser, jsonInput, gsonParser);
                     break;
                 case Baloot.GET_COMMODITIES_BY_Category:
-                    getCommoditiesByCategory(jsonParser);
+                    getCommoditiesByCategory(jsonParser, jsonInput, gsonParser);
                     break;
                 case Baloot.GET_BUY_LIST:
-                    getBuyList(jsonParser);
+                    getBuyList(jsonParser, jsonInput, gsonParser);
                     break;
             }
         }
@@ -111,58 +117,52 @@ public class Baloot {
         }
     }
 
-    private static void addUser(JSONObject jsonParser)
+    private static void addUser(JSONObject jsonParser, String jsonInp, Gson gsonParser)
     {
-
+        User user = gsonParser.fromJson(jsonInp, User.class);
         String name = (String)jsonParser.get("username");
-        String password = (String)jsonParser.get("password");
-        String email = (String)jsonParser.get("email");
-        String birthDate = (String)jsonParser.get("birthDate");
-        String address = (String)jsonParser.get("address");
-        double credit = ((Number)jsonParser.get("credit")).doubleValue();
 
-
-        //System.out.println("hihi");
         if(balootDatabase.doesExist(name)) {
-            balootDatabase.updateUser(name, password, email, birthDate, address, credit);
+            balootDatabase.updateUser(name, user);
             printOutput(true, "User "+name+" updated");
         }
         else{
-            balootDatabase.addUser(name, password, email, birthDate, address, credit);
+            balootDatabase.addUser(name, user);
             printOutput(true, "User "+name+" added");
         }
     }
 
-    private static void addProvider(JSONObject jsonParser) {
-
-        int id = ((Number) jsonParser.get("id")).intValue();
+    private static void addProvider(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+        Provider newProvider = gsonParser.fromJson(jsonInp, Provider.class);
         String name = (String)jsonParser.get("name");
-        String date = (String) jsonParser.get("registryDate");
-        balootDatabase.addProvider(id, name, date);
+        int id = (Integer) jsonParser.get("id");
+        balootDatabase.addProvider(id, newProvider);
         printOutput(true, "Provider " + name + " added");
     }
 
-    private static void addCommodity(JSONObject jsonParser) {
+    private static void addCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
 
-        int id = ((Number) jsonParser.get("id")).intValue();
-        String name = (String)jsonParser.get("name");
-        int providerId = ((Number) jsonParser.get("providerId")).intValue();
-        double price = ((Number) jsonParser.get("price")).doubleValue();
-
-        String categories = (String)jsonParser.get("categories");
-        double rating = ((Number) jsonParser.get("rating")).doubleValue();
-        int inStock = ((Number) jsonParser.get("inStock")).intValue();
-       // balootDatabase.addCommodity(id, name, providerId,price,categories, rating,inStock);
-        printOutput(true, "Commodity added");
+        int providerId = (Integer)jsonParser.get("providerId");
+        if(balootDatabase.checkExistProvider(providerId))
+        {
+            printOutput(false, "Not exist provider");
+        }
+        else {
+            int id = (Integer)jsonParser.get("id");
+            Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
+            balootDatabase.addCommidity(id, offering);
+        }
     }
 
     private static void getCommoditiesList() {
 
-     //   String data = balootDatabase.getCommoditiesList();
-       // printOutput(true, data);
+        ArrayList<Commodity> commodities = balootDatabase.getCommodityList();
+        Gson gson = new Gson();
+        String commoditiesInJson = gson.toJson(commodities);
+        printOutput(true, commoditiesInJson);
     }
 
-    private static void rateCommodity(JSONObject jsonParser) {
+    private static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
 
 
         String username = (String)jsonParser.get("username");
@@ -171,7 +171,7 @@ public class Baloot {
        // todo
     }
 
-    private static void addToBuyList(JSONObject jsonParser) {
+    private static void addToBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
 
 
         String username = (String)jsonParser.get("username");
@@ -180,7 +180,7 @@ public class Baloot {
         // todo
     }
 
-    private static void removeFromBuyList(JSONObject jsonParser) {
+    private static void removeFromBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
 
 
         String username = (String)jsonParser.get("username");
@@ -189,19 +189,19 @@ public class Baloot {
         // todo
     }
 
-    private static void getCommodityById(JSONObject jsonParser) {
+    private static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         int commodityId = ((Number) jsonParser.get("id")).intValue();
 
         // todo
     }
 
-    private static void getCommoditiesByCategory(JSONObject jsonParser) {
+    private static void getCommoditiesByCategory(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         String category = (String)jsonParser.get("category");
 
         // todo
     }
 
-    private static void getBuyList(JSONObject jsonParser) {
+    private static void getBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         String username = (String)jsonParser.get("username");
 
         // todo
