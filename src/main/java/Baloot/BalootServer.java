@@ -133,4 +133,15 @@ public class BalootServer {
         Commodity neededCommodity = findCommodity(commodityId);
         return neededCommodity;
     }
+
+    public ArrayList<Commodity> getCommoditiesByCategory(String category) {
+        ArrayList<Commodity> commoditiesByCategory;
+        for(Commodity commodity: commodities.values())
+        {
+            if(commodity.getCategory().equals(category))
+            {
+
+            }
+        }
+    }
 }
