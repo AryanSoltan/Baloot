@@ -112,6 +112,25 @@ public class BalootServer {
         User neededUser = findUser(username);
         Commodity neededCommodity = findCommodity(commodityId);
         neededUser.buyCommodity(commodityId, neededCommodity);
+        neededCommodity.buyOne();
+    }
 
+    public void setCommodityProviderName(int commodityId, int providerId)
+    {
+        Commodity neededCommodity = commodities.get(commodityId);
+        Provider neededProvider = providers.get(providerId);
+        String providerName = neededProvider.getName();
+        neededCommodity.setProvider(providerName);
+    }
+
+    public void removeFromBuyList(String username, int commodityId) {
+        User neededUser = users.get(username);
+        neededUser.removeFromBuyList(commodityId);
+    }
+
+    public Commodity getCommodityById(int commodityId)
+    {
+        Commodity neededCommodity = findCommodity(commodityId);
+        return neededCommodity;
     }
 }

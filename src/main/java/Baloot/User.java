@@ -34,4 +34,11 @@ public class User {
         return boughtCommodities.containsKey(commodityId);
     }
 
+    public void removeFromBuyList(int commodityId) {
+        if(!boughtCommodities.containsKey(commodityId))
+        {
+            // throw
+        }
+        boughtCommodities.remove(commodityId);
+    }
 }

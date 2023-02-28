@@ -20,4 +20,8 @@ public class Provider {
     {
         commodities.add(newCommodity);
     }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -93,4 +93,8 @@ public class Commodity {
     {
         inStock -= 1;
     }
+
+    public void setProvider(String inputProviderName) {
+        providerName = inputProviderName;
+    }
 }
