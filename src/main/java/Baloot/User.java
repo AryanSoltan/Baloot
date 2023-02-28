@@ -1,5 +1,8 @@
 package Baloot;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class User {
 
     private String userName;
@@ -8,6 +11,8 @@ public class User {
     private String birthDate;
     private String address;
     private double credit;
+
+    Map<Integer, Commodity> boughtCommodities;
     User(String inputUserName, String inputPassword, String inputEmail,
          String inputBirthDate, String inputAddress, double inputCredit)
     {
@@ -18,4 +23,6 @@ public class User {
         address = inputAddress;
         credit = inputCredit;
     }
+
+    public void buyCommodity(String )
 }
