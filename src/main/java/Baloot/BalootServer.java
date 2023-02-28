@@ -83,7 +83,7 @@ public class BalootServer {
         return commiditesArray;
     }
 
-    public void rateCommodity(String username, int commodityId, String scoreStr) throws InvalidRating {
+    public void rateCommodity(String username, int commodityId, String scoreStr) throws Exception {
         if(!scoreStr.matches("-?(0|[1-9]\\d*)"))
         {
             throw new InvalidRating();
@@ -93,7 +93,7 @@ public class BalootServer {
         {
             throw new InvalidRating();
         }
-        Commodity neededCommodity = commodities.get(commodityId);
+        Commodity neededCommodity = findCommodity(commodityId);
         if(neededCommodity.hasRating(username))
         {
             neededCommodity.updateRating(username, score);

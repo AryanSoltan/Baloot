@@ -28,6 +28,7 @@ public class Commodity {
         categories = inputCategories;
         rating = inputRating;
         inStock = inputInStock;
+        userRatings = new HashMap<String, Integer>();
     }
 
     public void setProviderName(String name){
