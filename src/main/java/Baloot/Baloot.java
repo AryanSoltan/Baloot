@@ -224,7 +224,10 @@ public class Baloot {
 
         int commodityId = ((Number) jsonParser.get("id")).intValue();
         Commodity commodity = balootServer.getCommodityById(commodityId);
-        printOutput(true, commodity.getJsonData());
+
+        JSONObject commodityInfo = commodity.getJsonData();
+        commodityInfo.remove("providerID");
+        printOutput(true, commodityInfo);
     }
 
     private static void getCommoditiesByCategory(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
@@ -239,9 +242,10 @@ public class Baloot {
 
 
         for (Commodity commodity : commiditesList) {
-                JSONObject obj = commodity.getJsonData();
-                commiditesInfo.add(obj);
-            }
+            JSONObject commodityInfo = commodity.getJsonData();
+            commodityInfo.remove("provider");
+            commiditesInfo.add(commodityInfo);
+        }
             //jsonObject.put("weeklySchedule", jsonArray);
 
 
