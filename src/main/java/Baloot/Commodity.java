@@ -1,5 +1,7 @@
 package Baloot;
 
+import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +11,8 @@ public class Commodity {
     private int id;
     private String name;
     private int providerId;
+
+    private String providerName;
     private double price;
     ArrayList<String> categories;
     Map<String, Integer> userRatings;
@@ -26,6 +30,9 @@ public class Commodity {
         inStock = inputInStock;
     }
 
+    public void setProviderName(String name){
+        providerName=name;
+    }
     public void addRating(String username, int newRating)
     {
         double sumBefore;
@@ -64,5 +71,16 @@ public class Commodity {
     public boolean hasRating(String userName)
     {
         return userRatings.containsKey(userName);
+    }
+
+    public JSONObject getJsonData(){
+        JSONObject jObj = new JSONObject();
+        jObj.put("id",id);
+        jObj.put("name",name);
+        jObj.put("provider",providerName);
+        jObj.put("price",price);
+        jObj.put("categories",categories);
+        jObj.put("rating",rating);
+        return jObj;
     }
 }

@@ -41,14 +41,14 @@ public class Baloot {
 
     }
 
-//    private static void printOutput(boolean successful, String data) {
-//
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("success", successful);
-//        jsonObject.put("data", data);
-//        System.out.println(jsonObject.toString());
-//
-//    }
+    private static void printOutput(boolean successful, String data) {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("success", successful);
+        jsonObject.put("data", data);
+        System.out.println(jsonObject.toString());
+
+    }
 
     private static void printOutput(boolean successful, JSONObject JSONdata) {
 
@@ -155,7 +155,9 @@ public class Baloot {
         else {
             int id = ((Number) jsonParser.get("id")).intValue();
             Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
+
             balootDatabase.addCommidity(id, offering);
+            balootDatabase.setCommodityProviderName(id,providerId);
             printOutput(true, "Commodity " + id + "added");
         }
     }
@@ -221,14 +223,10 @@ public class Baloot {
     }
 
     private static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+
         int commodityId = ((Number) jsonParser.get("id")).intValue();
-
         Commodity commodity = balootDatabase.getCommodityById(commodityId);
-        Gson gson = new Gson();
-        String commoditiesInJson = gson.toJson(commodity);
-        printOutput(true, commoditiesInJson);
-
-        // todo
+        printOutput(true, commodity.getJsonData());
     }
 
     private static void getCommoditiesByCategory(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
