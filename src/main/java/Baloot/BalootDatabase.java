@@ -1,8 +1,5 @@
 package Baloot;
 
-import Baloot.Exception.UserAlreadyExistError;
-
-import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,13 +11,12 @@ public class BalootDatabase {
     Map<Integer, Provider> providers;
     Map<Integer, Commodity> commodities;
 
-    Map<String, Rating> ratings;
+
     BalootDatabase()
     {
         users = new HashMap<String, User>();
         providers = new HashMap<Integer, Provider>();
         commodities = new HashMap<Integer, Commodity>();
-
 
     }
 
@@ -66,4 +62,20 @@ public class BalootDatabase {
         ArrayList<Commodity> commiditesArray = new ArrayList<Commodity>(collectionCommidity);
         return commiditesArray;
     }
+
+    public void rateCommodity(String username, int commodityId, int score)
+    {
+        Commodity neededCommodity = commodities.get(commodityId);
+        if(neededCommodity.hasRating(username))
+        {
+            neededCommodity.updateRating(username, score);
+        }
+        else
+        {
+            neededCommodity.addRating(username, score);
+        }
+    }
+
+
+
 }
