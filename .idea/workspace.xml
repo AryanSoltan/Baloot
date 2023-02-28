@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="623ce7de-a262-4f37-8665-bdbdf2795ca8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Baloot/Exception/CommodityAlreadyAdded.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Baloot/Exception/CommodityIsNotInBuyList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Baloot/Exception/CommodityOutOfStock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Baloot/Exception/ProviderNotExist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Exception/CommodityNotExist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Exception/CommodityNotExist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Exception/UserAlreadyExistError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Exception/UserAlreadyExistError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Exception/UserNotExist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Exception/UserNotExist.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

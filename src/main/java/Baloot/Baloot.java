@@ -153,7 +153,7 @@ public class Baloot {
         int providerId = ((Number)jsonParser.get("providerId")).intValue();
         if(!balootServer.checkExistProvider(providerId))
         {
-            printOutput(false, "Not exist provider");
+            printOutput(false, "Not exist provider");//todo
         }
         else {
             int id = ((Number) jsonParser.get("id")).intValue();
@@ -189,7 +189,7 @@ public class Baloot {
 
         String username = (String)jsonParser.get("username");
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
-        int score = ((Number) jsonParser.get("score")).intValue();
+        String score = (String) jsonParser.get("score");
 
 
         balootServer.rateCommodity(username,commodityId,score);
@@ -204,7 +204,7 @@ public class Baloot {
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
         if(balootServer.commodityExistsInUserBuyList(username,commodityId))
         {
-            printOutput(false, "Commodity is already added to buyList");
+            printOutput(false, "Commodity is already added to buyList"); //todo
         }
         else if(balootServer.commodityIsAvailable(commodityId))
         {
@@ -212,7 +212,7 @@ public class Baloot {
             printOutput(true, "Commodity added to buyList");
         }
         else{
-            printOutput(false, "Commodity is not available");
+            printOutput(false, "Commodity is not available");//todo
         }
 
         // todo
@@ -225,7 +225,7 @@ public class Baloot {
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
         if(!balootServer.commodityExistsInUserBuyList(username,commodityId))
         {
-            printOutput(false, "Commodity does not exist in buyList");
+            printOutput(false, "Commodity does not exist in buyList");//todo
         }
         else{
             balootServer.removeFromBuyList(username,commodityId);
