@@ -151,18 +151,27 @@ public class Baloot {
     private static void addCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
 
         int providerId = ((Number)jsonParser.get("providerId")).intValue();
-        if(!balootServer.checkExistProvider(providerId))
-        {
-            printOutput(false, "Not exist provider");//todo
-        }
-        else {
-            int id = ((Number) jsonParser.get("id")).intValue();
-            Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
 
-            balootServer.addCommidity(id, offering);
-            balootServer.setCommodityProviderName(id,providerId);
-            printOutput(true, "Commodity " + id + "added");
-        }
+        int id = ((Number) jsonParser.get("id")).intValue();
+        Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
+
+        balootServer.addCommidity(providerId,id, offering);
+
+        printOutput(true, "Commodity " + id + "added");
+
+//        if(!balootServer.checkExistProvider(providerId))
+//        {
+//            printOutput(false, "Not exist provider");//todo
+//        }
+//        else {
+//            int id = ((Number) jsonParser.get("id")).intValue();
+//            Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
+//
+//            balootServer.addCommidity(id, offering);
+//            balootServer.setCommodityProviderName(id,providerId);
+//            printOutput(true, "Commodity " + id + "added");
+//        }
+
     }
 
     private static void getCommoditiesList() {
@@ -202,20 +211,23 @@ public class Baloot {
 
         String username = (String)jsonParser.get("username");
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
-        if(balootServer.commodityExistsInUserBuyList(username,commodityId))
-        {
-            printOutput(false, "Commodity is already added to buyList"); //todo
-        }
-        else if(balootServer.commodityIsAvailable(commodityId))
-        {
-            balootServer.addCommidityToUserBuyList(username,commodityId);
-            printOutput(true, "Commodity added to buyList");
-        }
-        else{
-            printOutput(false, "Commodity is not available");//todo
-        }
+        balootServer.addCommidityToUserBuyList(username,commodityId);
+        printOutput(true, "Commodity added to buyList");
 
-        // todo
+//        if(balootServer.commodityExistsInUserBuyList(username,commodityId))
+//        {
+//            printOutput(false, "Commodity is already added to buyList"); //todo
+//        }
+//        else if(balootServer.commodityIsAvailable(commodityId))
+//        {
+//            balootServer.addCommidityToUserBuyList(username,commodityId);
+//            printOutput(true, "Commodity added to buyList");
+//        }
+//        else{
+//            printOutput(false, "Commodity is not available");//todo
+//        }
+
+
     }
 
     private static void removeFromBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
@@ -223,17 +235,20 @@ public class Baloot {
 
         String username = (String)jsonParser.get("username");
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
-        if(!balootServer.commodityExistsInUserBuyList(username,commodityId))
-        {
-            printOutput(false, "Commodity does not exist in buyList");//todo
-        }
-        else{
-            balootServer.removeFromBuyList(username,commodityId);
-            printOutput(true, "Commodity removed from buyList");
+        balootServer.removeFromBuyList(username,commodityId);
+        printOutput(true, "Commodity removed from buyList");
 
-        }
 
-        // todo
+//        if(!balootServer.commodityExistsInUserBuyList(username,commodityId))
+//        {
+//            printOutput(false, "Commodity does not exist in buyList");//todo
+//        }
+//        else{
+//            balootServer.removeFromBuyList(username,commodityId);
+//            printOutput(true, "Commodity removed from buyList");
+//
+//        }
+
     }
 
     private static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
@@ -265,7 +280,7 @@ public class Baloot {
 
         printOutput(true, jsonObject);
 
-            //jsonObject.put("weeklySchedule", jsonArray);
+
     }
 
     private static void getBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
