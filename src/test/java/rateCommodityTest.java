@@ -7,7 +7,7 @@ public class rateCommodityTest {
     @BeforeClass
     public void setup() {
         balootInterface = new Baloot();
-        balootInterface.add
+        balootInterface.addUser
 
 
     }
