@@ -1,5 +1,6 @@
 package Baloot;
 
+import Baloot.Exception.CommodityNotExist;
 import Baloot.Exception.UserNotExist;
 
 import java.util.ArrayList;
@@ -37,8 +38,17 @@ public class BalootServer {
         providers.put(id, newProvider);
     }
 
+    public boolean checkUserNameValid(String name)
+    {
+
+    }
+
     public void updateUser(String name, User newUser)
     {
+        if(checkUserNameValid(name))
+        {
+            \\throw;
+        }
         users.remove(name);
         users.put(name, newUser);
     }
@@ -87,11 +97,10 @@ public class BalootServer {
         return neededUser;
     }
 
-    public Commodity findCommodity(int commodityId)
-    {
+    public Commodity findCommodity(int commodityId) throws Exception {
         if(!commodities.containsKey(commodityId))
         {
-            //throw
+            throw new CommodityNotExist(commodityId);
         }
         Commodity neededCommodity = commodities.get(commodityId);
         return neededCommodity;
