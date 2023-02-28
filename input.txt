@@ -3,6 +3,5 @@ getCommoditiesList
 addCommodity {"id":1,"name":"headphone","providerId":3, "price":3, "categories":["t", "a"],"rating":8,"inStock":50}
 addProvider {"id":1, "name":"provider1", "registryDate":"2020/1/0"}
 addProvider {"id":3, "name":"provider1", "registryDate":"2020/1/0"}
-addCommodity {"id":1,"name":"headphone","providerId":3, "price":3, "categories":["t", "a"],"rating":8,"inStock":50}
 getCommoditiesList
 rateCommodity {"username":"user1", "commodityId":3, "score":2}
