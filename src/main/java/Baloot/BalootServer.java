@@ -147,7 +147,7 @@ public class BalootServer {
     {
         Commodity neededCommodity = commodities.get(commodityId);
         Provider neededProvider = providers.get(providerId);
-        String providerName = neededProvider.getName();
+        String providerName = neededProvider.getProviderName();
         neededCommodity.setProvider(providerName);
     }
 

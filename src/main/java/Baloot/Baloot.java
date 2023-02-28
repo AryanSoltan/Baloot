@@ -36,13 +36,13 @@ public class Baloot {
     static final int MAX_PARSE_COMMAND = 2;
 
 
-    private static BalootServer balootServer = new BalootServer();
+    public static BalootServer balootServer = new BalootServer();
     Baloot()
     {
 
     }
 
-    private static void printOutput(boolean successful, String data) {
+    public static void printOutput(boolean successful, String data) {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("success", successful);
@@ -51,7 +51,7 @@ public class Baloot {
 
     }
 
-    private static void printOutput(boolean successful, JSONObject JSONdata) {
+    public static void printOutput(boolean successful, JSONObject JSONdata) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("success", successful);
         jsonObject.put("data", JSONdata);
@@ -59,7 +59,7 @@ public class Baloot {
     }
 
 
-    private static void run()
+    public static void run()
     {
         Scanner inputReader = new Scanner(System.in);
         while(true)
@@ -78,7 +78,7 @@ public class Baloot {
         }
     }
 
-    private static void parseCommand(String commandInput, String jsonInput)
+    public static void parseCommand(String commandInput, String jsonInput)
     {
 
         JSONParser jsonCommand = new JSONParser();
@@ -127,7 +127,7 @@ public class Baloot {
         }
     }
 
-    private static void addUser(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
+    public static void addUser(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
         User user = gsonParser.fromJson(jsonInp, User.class);
         String name = (String)jsonParser.get("username");
 
@@ -141,7 +141,7 @@ public class Baloot {
         }
     }
 
-    private static void addProvider(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    public static void addProvider(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         Provider newProvider = gsonParser.fromJson(jsonInp, Provider.class);
         String name = (String)jsonParser.get("name");
         int id = ((Number) jsonParser.get("id")).intValue();
@@ -149,7 +149,7 @@ public class Baloot {
         printOutput(true, "Provider " + name + " added");
     }
 
-    private static void addCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser)
+    public static void addCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser)
             throws ProviderNotExist {
 
         int providerId = ((Number)jsonParser.get("providerId")).intValue();
@@ -159,12 +159,12 @@ public class Baloot {
 
         balootServer.addCommidity(providerId, id, offering);
 
-        printOutput(true, "Commodity " + id + "added");
+        printOutput(true, "Commodity " + id + " added");
 
 
     }
 
-    private static void getCommoditiesList() {
+    public static void getCommoditiesList() {
 
         ArrayList<Commodity> commoditiesList = balootServer.getCommodityList();
         ArrayList<JSONObject> commoditiesInfo = new ArrayList<JSONObject>();
@@ -183,19 +183,19 @@ public class Baloot {
 
     }
 
-    private static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws InvalidRating {
+    public static void rateCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws InvalidRating {
 
 
         String username = (String)jsonParser.get("username");
         int commodityId = ((Number) jsonParser.get("commodityId")).intValue();
-        String score = (String) jsonParser.get("score");
+        String score = (String) jsonParser.get("score").toString();
 
 
         balootServer.rateCommodity(username,commodityId,score);
 
     }
 
-    private static void addToBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
+    public static void addToBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
 
 
         String username = (String)jsonParser.get("username");
@@ -206,7 +206,7 @@ public class Baloot {
 
     }
 
-    private static void removeFromBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser)
+    public static void removeFromBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser)
             throws Exception {
 
 
@@ -217,7 +217,7 @@ public class Baloot {
 
     }
 
-    private static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser)
+    public static void getCommodityById(JSONObject jsonParser, String jsonInp, Gson gsonParser)
             throws Exception {
 
         int commodityId = ((Number) jsonParser.get("id")).intValue();
@@ -228,7 +228,7 @@ public class Baloot {
         printOutput(true, commodityInfo);
     }
 
-    private static void getCommoditiesByCategory(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
+    public static void getCommoditiesByCategory(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         String category = (String)jsonParser.get("category");
 
         ArrayList<Commodity> commoditiesList  = balootServer.getCommoditiesByCategory(category);
@@ -250,7 +250,7 @@ public class Baloot {
 
     }
 
-    private static void getBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
+    public static void getBuyList(JSONObject jsonParser, String jsonInp, Gson gsonParser) throws Exception {
         String username = (String)jsonParser.get("username");
         ArrayList<Commodity> commoditiesList  = balootServer.getUserBuyList(username);
         ArrayList<JSONObject> commoditiesInfo = new ArrayList<JSONObject>();
