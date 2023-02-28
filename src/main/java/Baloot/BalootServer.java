@@ -146,7 +146,7 @@ public class BalootServer {
         return commoditiesByCategory;
     }
 
-    public ArrayList<Commodity> getUserByList(String userName) throws Exception {
+    public ArrayList<Commodity> getUserBuyList(String userName) throws Exception {
 
         User neededUser = findUser(userName);
         return neededUser.getCommodities();
