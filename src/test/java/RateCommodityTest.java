@@ -3,9 +3,6 @@ import Baloot.BalootServer;
 import Baloot.Exception.*;
 import org.json.simple.JSONObject;
 import org.junit.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +14,7 @@ import static org.junit.Assert.assertThrows;
 
 //import org.junit.params.ParameterizedTest;
 
-public class rateCommodityTest {
+public class RateCommodityTest {
     private BalootServer balootServer;
     @Before
     public void setup() throws ProviderNotExist {
