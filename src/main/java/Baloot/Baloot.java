@@ -44,12 +44,8 @@ public class Baloot {
     private static void printOutput(boolean successful, String data) {
 
         JSONObject jsonObject = new JSONObject();
-
-        if (successful){
-            jsonObject.put("success", successful);
-            jsonObject.put("data", data);
-
-        }
+        jsonObject.put("success", successful);
+        jsonObject.put("data", data);
         System.out.println(jsonObject.toString());
 
     }
