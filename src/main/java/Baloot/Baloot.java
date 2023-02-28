@@ -135,22 +135,23 @@ public class Baloot {
     private static void addProvider(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
         Provider newProvider = gsonParser.fromJson(jsonInp, Provider.class);
         String name = (String)jsonParser.get("name");
-        int id = (Integer) jsonParser.get("id");
+        int id = ((Number) jsonParser.get("id")).intValue();
         balootDatabase.addProvider(id, newProvider);
         printOutput(true, "Provider " + name + " added");
     }
 
     private static void addCommodity(JSONObject jsonParser, String jsonInp, Gson gsonParser) {
 
-        int providerId = (Integer)jsonParser.get("providerId");
-        if(balootDatabase.checkExistProvider(providerId))
+        int providerId = ((Number)jsonParser.get("providerId")).intValue();
+        if(!balootDatabase.checkExistProvider(providerId))
         {
             printOutput(false, "Not exist provider");
         }
         else {
-            int id = (Integer)jsonParser.get("id");
+            int id = ((Number) jsonParser.get("id")).intValue();
             Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
             balootDatabase.addCommidity(id, offering);
+            printOutput(true, "Commodity " + id + "added");
         }
     }
 
