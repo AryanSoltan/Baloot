@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="623ce7de-a262-4f37-8665-bdbdf2795ca8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/getCommoditiesByCategoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Commodity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Provider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/rateCommodityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rateCommodityTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

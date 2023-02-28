@@ -1,18 +1,18 @@
 import Baloot.*;
 import Baloot.BalootServer;
-import Baloot.Exception.CommodityNotExist;
-import Baloot.Exception.InvalidRating;
-import Baloot.Exception.ProviderNotExist;
-import Baloot.Exception.UserNameNotValid;
+import Baloot.Exception.*;
 import org.json.simple.JSONObject;
 import org.junit.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static junit.framework.Assert.assertNotSame;
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 
 //import org.junit.params.ParameterizedTest;
@@ -34,7 +34,7 @@ public class rateCommodityTest {
     public void teardown() {
         balootServer=null;
     }
-    @Test(expected = UserNameNotValid.class)
+    @Test(expected = UserNotExist.class)
     public void testUserNotExists() throws Exception
     {
         balootServer.rateCommodity("user4",1,"4");
@@ -46,12 +46,12 @@ public class rateCommodityTest {
         balootServer.rateCommodity("user1",2,"4");
     }
 
+//    @Test(expected = InvalidRating.class)
+//
 //    @ParameterizedTest
 //    @ValueSource(strings = {"0","11","4.4", "a"})
-//    @Test(expected = InvalidRating.class)
-//    public void testInvalidRating(String rate) throws Exception
-//    {
-//        balootServer.rateCommodity("user1",1,rate);
+//    public void testInvalidRating(String rate) throws Exception {
+//        //  balootServer.rateCommodity("user1",1,rate);
 //    }
 
     @Test
@@ -60,8 +60,9 @@ public class rateCommodityTest {
         balootServer.rateCommodity("user1",1,"4");
         Commodity commodity = balootServer.getCommodityById(1);
         JSONObject commodityInfo = commodity.getJsonData();
-        String rate = (String)commodityInfo.get("rating");
-        assertEquals("testRateWhenInitialRateIsZero failed","4",rate);
+        String rate = String.valueOf(commodityInfo.get("rating"));
+        double expectedResult = (double)4;
+        assertEquals("testRateWhenInitialRateIsZero failed",String.valueOf(expectedResult),rate);
     }
 
     @Test
@@ -73,8 +74,9 @@ public class rateCommodityTest {
 
         Commodity commodity = balootServer.getCommodityById(1);
         JSONObject commodityInfo = commodity.getJsonData();
-        String rate = (String)commodityInfo.get("rating");
-        assertEquals("testRateWhenInitialRateIsNotZero failed",(double)10/(double)3,rate);
+        String rate = String.valueOf(commodityInfo.get("rating"));
+        double expectedResult = (double)10/(double)3;
+        assertEquals("testRateWhenInitialRateIsNotZero failed",String.valueOf(expectedResult),rate);
     }
 
     @Test
@@ -85,8 +87,9 @@ public class rateCommodityTest {
         balootServer.rateCommodity("user2",1,"6");
         Commodity commodity = balootServer.getCommodityById(1);
         JSONObject commodityInfo = commodity.getJsonData();
-        String rate = (String)commodityInfo.get("rating");
-        assertEquals("testUpdateRate failed","5",rate);
+        String rate = String.valueOf(commodityInfo.get("rating"));
+        double expectedResult = (double)10/(double)2;
+        assertEquals("testUpdateRate failed",String.valueOf(expectedResult),rate);
     }
 
 
