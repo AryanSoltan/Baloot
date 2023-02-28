@@ -9,7 +9,7 @@ public class Provider {
     private String registryDate;
 
     private ArrayList<Commodity> commodities;
-    Provider(int inputId, String inputName, String inputRegistryDate)
+    public Provider(int inputId, String inputName, String inputRegistryDate)
     {
         id = inputId;
         name = inputName;

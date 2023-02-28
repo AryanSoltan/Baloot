@@ -18,7 +18,7 @@ public class Commodity {
     Map<String, Integer> userRatings;
     double rating;
     int inStock;
-    Commodity(int inputId, String inputName, int inputProviderId, double inputPrice,
+    public Commodity(int inputId, String inputName, int inputProviderId, double inputPrice,
               ArrayList<String> inputCategories, double inputRating, int inputInStock)
     {
         id = inputId;

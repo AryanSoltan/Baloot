@@ -14,7 +14,7 @@ public class User {
     private double credit;
 
     Map<Integer, Commodity> boughtCommodities;
-    User(String inputUserName, String inputPassword, String inputEmail,
+    public User(String inputUserName, String inputPassword, String inputEmail,
          String inputBirthDate, String inputAddress, double inputCredit)
     {
         userName = inputUserName;

@@ -14,7 +14,7 @@ public class BalootServer {
     Map<Integer, Commodity> commodities;
 
 
-    BalootServer()
+    public BalootServer()
     {
         users = new HashMap<String, User>();
         providers = new HashMap<Integer, Provider>();
@@ -58,8 +58,7 @@ public class BalootServer {
             throw new ProviderNotExist(providerId);
     }
 
-    public void addCommidity(int providerId, int id, Commodity newCommidity)
-            throws ProviderNotExist {
+    public void addCommidity(int providerId, int id, Commodity newCommidity) throws ProviderNotExist {
         Provider provider = findProvider(providerId);
         String providerName = provider.getProviderName();
         newCommidity.setProviderName(providerName);
