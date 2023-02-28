@@ -5,14 +5,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BalootDatabase {
+public class BalootServer {
 
     Map<String, User> users;
     Map<Integer, Provider> providers;
     Map<Integer, Commodity> commodities;
 
 
-    BalootDatabase()
+    BalootServer()
     {
         users = new HashMap<String, User>();
         providers = new HashMap<Integer, Provider>();
@@ -111,6 +111,7 @@ public class BalootDatabase {
     {
         User neededUser = findUser(username);
         Commodity neededCommodity = findCommodity(commodityId);
-        neededUser.boughtCommodities(commodityId, neededCommodity);
+        neededUser.buyCommodity(commodityId, neededCommodity);
+
     }
 }

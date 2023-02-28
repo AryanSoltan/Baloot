@@ -83,4 +83,14 @@ public class Commodity {
         jObj.put("rating",rating);
         return jObj;
     }
+
+    public boolean isAvailable()
+    {
+        return inStock != 0;
+    }
+
+    public void buyOne()
+    {
+        inStock -= 1;
+    }
 }
