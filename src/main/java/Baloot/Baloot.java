@@ -44,18 +44,19 @@ public class Baloot {
 
     public static void printOutput(boolean successful, String data) {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("success", successful);
-        jsonObject.put("data", data);
-        System.out.println(jsonObject.toString());
-
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("success", successful);
+//        jsonObject.put("data", data);
+//        System.out.println(jsonObject.toString());
+          System.out.println("{\"success\":" + successful + "," + "\"data\":" + data + "}");
     }
 
     public static void printOutput(boolean successful, JSONObject JSONdata) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("success", successful);
-        jsonObject.put("data", JSONdata);
-        System.out.println(jsonObject.toString());
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("success", successful);
+//        jsonObject.put("data", JSONdata);
+//        System.out.println(jsonObject.toString());
+          System.out.println("{\"success\":" + successful + "," + "\"data\":" + JSONdata.toJSONString() + "}");
     }
 
 
@@ -123,7 +124,7 @@ public class Baloot {
             }
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            printOutput(false,e.getMessage());
         }
     }
 
