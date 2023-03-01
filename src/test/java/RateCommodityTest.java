@@ -3,6 +3,13 @@ import Baloot.BalootServer;
 import Baloot.Exception.*;
 import org.json.simple.JSONObject;
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,12 +19,10 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 
-//import org.junit.params.ParameterizedTest;
-
 public class RateCommodityTest {
-    private BalootServer balootServer;
+    private static BalootServer balootServer;
     @Before
-    public void setup() throws ProviderNotExist {
+    public void setup() throws Exception {
         balootServer = new BalootServer();
         balootServer.addUser("user1",new User("user1","1234","user1@gmail.com","1977-09-15","add1",1500));
         balootServer.addUser("user2",new User("user2","1234","user2@gmail.com","1977-09-15","add2",500));
@@ -43,13 +48,15 @@ public class RateCommodityTest {
         balootServer.rateCommodity("user1",2,"4");
     }
 
-//    @Test(expected = InvalidRating.class)
-//
-//    @ParameterizedTest
-//    @ValueSource(strings = {"0","11","4.4", "a"})
-//    public void testInvalidRating(String rate) throws Exception {
-//        //  balootServer.rateCommodity("user1",1,rate);
-//    }
+    @ParameterizedTest
+    @ValueSource(strings = {"0","11","4.4", "a"})
+    public void testInvalidRating(String rate) throws Exception {
+        BalootServer balootServer1 = new BalootServer();
+        balootServer1.addUser("user1",new User("user1","1234","user1@gmail.com","1977-09-15","add1",1500));
+        balootServer1.addProvider(1,new Provider(1,"provider1","2023-09-15"));
+        balootServer1.addCommidity(1,1,new Commodity(1,"Headphone",1,35000,new ArrayList<>(Arrays.asList("Technology","Phone")),0,50));
+        assertThrows("testInvalidRating failed",InvalidRating.class, () -> balootServer1.rateCommodity("user1",1,rate));
+   }
 
     @Test
     public void testRateWhenInitialRateIsZero() throws Exception
