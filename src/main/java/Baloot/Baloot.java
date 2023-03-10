@@ -2,6 +2,7 @@ package Baloot;
 
 import Baloot.Exception.InvalidRating;
 import Baloot.Exception.ProviderNotExist;
+import ExternalServer.ExternalServer;
 import com.google.gson.GsonBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -62,6 +63,7 @@ public class Baloot {
 
     public static void run()
     {
+        ExternalServer externalServer = new ExternalServer("http://5.253.25.110:5000");
         Scanner inputReader = new Scanner(System.in);
         while(true)
         {
