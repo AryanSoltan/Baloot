@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="623ce7de-a262-4f37-8665-bdbdf2795ca8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Commodity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ExternalServer/ExternalServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ExternalServer/ExternalServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InterfaceServer/HTMLWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InterfaceServer/HTMLWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>

@@ -24,4 +24,8 @@ public class Provider {
     public String getProviderName() {
         return name;
     }
+
+    public int getId() {
+        return id;
+    }
 }

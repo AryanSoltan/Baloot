@@ -1,6 +1,9 @@
 package Baloot;
 
 import Baloot.Exception.*;
+import ExternalServer.ExternalServer;
+import com.google.gson.Gson;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,13 +16,11 @@ public class BalootServer {
     Map<Integer, Provider> providers;
     Map<Integer, Commodity> commodities;
 
-
     public BalootServer()
     {
         users = new HashMap<String, User>();
         providers = new HashMap<Integer, Provider>();
         commodities = new HashMap<Integer, Commodity>();
-
     }
 
     public void addUser(String name, User newUser)
@@ -33,8 +34,9 @@ public class BalootServer {
         return users.containsKey(userName);
     }
 
-    public void addProvider(int id, Provider newProvider)
+    public void addProvider(Provider newProvider)
     {
+        int id = newProvider.getId();
         providers.put(id, newProvider);
     }
 
@@ -53,20 +55,24 @@ public class BalootServer {
         users.put(name, newUser);
     }
 
-    private Provider findProvider(int providerId) throws ProviderNotExist {
+    private Provider findProvider(int providerId) throws Exception {
         if(providers.containsKey(providerId))
             return providers.get(providerId);
         else
             throw new ProviderNotExist(providerId);
     }
 
-    public void addCommidity(int providerId, int id, Commodity newCommidity) throws ProviderNotExist {
+
+    public void addCommidity(Commodity newCommidity) throws Exception {
+        int providerId = newCommidity.getProviderId();
+        int id = newCommidity.getId();
         Provider provider = findProvider(providerId);
         String providerName = provider.getProviderName();
         newCommidity.setProviderName(providerName);
         newCommidity.setUserRatingsEmpty();
         commodities.put(id, newCommidity);
     }
+
 
     public void addCommodityToProvider(int commoditiyId, int providerId)
     {

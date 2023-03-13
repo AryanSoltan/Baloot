@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.*;
 
 public class HTMLWriter {
 
@@ -12,23 +12,31 @@ public class HTMLWriter {
     {
         String tablHTML = "";
         tablHTML += "<table>";
+        boolean isBold = true;
         for(ArrayList<String> tableRow: inputTable)
         {
-            tablHTML += writeTableRow(tableRow);
+            tablHTML += writeTableRow(tableRow, isBold);
+            isBold = false;
         }
         tablHTML += "</table>";
         return tablHTML;
     }
 
-    private static String writeTableRow(ArrayList<String> tableRow)
+    private static String writeTableRow(ArrayList<String> tableRow, boolean isBold)
     {
         String tableRowHTML = "";
         tableRowHTML += "<tr>";
         for(String colData: tableRow)
         {
-            tableRowHTML += "<th>";
+            if(isBold == true)
+                tableRowHTML += "<th>";
+            else
+                tableRowHTML += "<td>";
             tableRowHTML += colData;
-            tableRowHTML += "</th>";
+            if(isBold == true)
+                tableRowHTML += "</th>";
+            else
+                tableRowHTML += "</td>";
         }
         tableRowHTML += "</tr>";
         return tableRowHTML;
@@ -46,5 +54,24 @@ public class HTMLWriter {
 
         }
         return fileContent;
+    }
+
+    public static String writeList(List<String> idNamesCommidity,
+                                   LinkedHashMap<String, String> listCommodityAttributes) {
+        String result = "<ul>";
+        int idx = 0;
+        for(String attribute : listCommodityAttributes.keySet())
+        {
+            String value = listCommodityAttributes.get(attribute);
+            result += "<li id=\"";
+            result += idNamesCommidity.get(idx);
+            result += "\">";
+            result += attribute;
+            result += ": ";
+            result += value;
+            result += "</li>";
+        }
+        result += "</ul>";
+        return result;
     }
 }

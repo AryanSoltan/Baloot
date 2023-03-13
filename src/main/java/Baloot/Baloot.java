@@ -37,7 +37,7 @@ public class Baloot {
     static final int MAX_PARSE_COMMAND = 2;
 
 
-    public static BalootServer balootServer = new BalootServer();
+    public static BalootServer balootServer;
     Baloot()
     {
 
@@ -63,7 +63,6 @@ public class Baloot {
 
     public static void run()
     {
-        ExternalServer externalServer = new ExternalServer("http://5.253.25.110:5000");
         Scanner inputReader = new Scanner(System.in);
         while(true)
         {
@@ -148,7 +147,7 @@ public class Baloot {
         Provider newProvider = gsonParser.fromJson(jsonInp, Provider.class);
         String name = (String)jsonParser.get("name");
         int id = ((Number) jsonParser.get("id")).intValue();
-        balootServer.addProvider(id, newProvider);
+//        balootServer.addProvider(id, newProvider);
         printOutput(true, "Provider " + name + " added");
     }
 
@@ -160,7 +159,7 @@ public class Baloot {
         int id = ((Number) jsonParser.get("id")).intValue();
         Commodity offering = gsonParser.fromJson(jsonInp, Commodity.class);
 
-        balootServer.addCommidity(providerId, id, offering);
+//        balootServer.addCommidity(providerId, id, offering);
 
         printOutput(true, "Commodity " + id + " added");
 

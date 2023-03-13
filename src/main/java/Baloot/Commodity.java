@@ -108,4 +108,47 @@ public class Commodity {
     public void setUserRatingsEmpty() {
         userRatings = new HashMap<>();
     }
+
+    public int getProviderId() {
+        return providerId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public ArrayList<String> getCategories()
+    {
+        return categories;
+    }
+
+    public int getInStock()
+    {
+        return inStock;
+    }
+
+    public String getStringCategories() {
+        String result = "";
+        boolean isComma = false;
+        for(String category: categories)
+        {
+            if(isComma)
+                result += ", ";
+            result += category;
+            isComma = true;
+        }
+        return result;
+    }
 }
