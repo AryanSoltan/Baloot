@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="623ce7de-a262-4f37-8665-bdbdf2795ca8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,24 +42,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/aryan/checking/Baloot&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/home/aryan/Desktop/University/online_courses/Semester8/IE/Projects/Baloot/src/main/java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Baloot" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Baloot">
-    <configuration name="Baloot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Baloot.Baloot" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Baloot" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop/University/online_courses/Semester8/IE/Projects/Baloot" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Baloot.*" />
@@ -107,7 +113,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Baloot" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in Baloot" />
         <item itemvalue="JUnit.RateCommodityTest" />
         <item itemvalue="JUnit.RateCommodityTest.testInvalidRating" />
