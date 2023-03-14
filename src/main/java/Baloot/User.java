@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class User {
 
-    private String userName;
+    private String username;
     private String password;
     private String email;
     private String birthDate;
@@ -20,7 +20,7 @@ public class User {
     public User(String inputUserName, String inputPassword, String inputEmail,
          String inputBirthDate, String inputAddress, double inputCredit)
     {
-        userName = inputUserName;
+        username = inputUserName;
         password = inputPassword;
         email = inputEmail;
         birthDate = inputBirthDate;
@@ -53,5 +53,33 @@ public class User {
 
     public void setBoughtCommitiesEmpty() {
         boughtCommodities = new HashMap<>();
+    }
+
+    public String getName() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void addCredit(double incCredit) {
+        credit += incCredit;
     }
 }

@@ -61,8 +61,10 @@ public class HTMLWriter {
             result += idNamesCommidity.get(idx);
             result += "\">";
             result += attribute;
-            result += ": ";
-            result += value;
+            if(value != "") {
+                result += ": ";
+                result += value;
+            }
             result += "</li>";
         }
         result += "</ul>";

@@ -138,7 +138,7 @@ public class Baloot {
             printOutput(true, "User "+name+" updated");
         }
         else{
-            balootServer.addUser(name, user);
+//            balootServer.addUser(name, user);
             printOutput(true, "User "+name+" added");
         }
     }

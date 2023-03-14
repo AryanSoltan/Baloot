@@ -4,6 +4,7 @@ import Baloot.BalootServer;
 import Baloot.Commodity;
 import Baloot.Exception.ProviderNotExist;
 import Baloot.Provider;
+import Baloot.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +30,19 @@ public class ExternalServer {
         balootServer = inputBalootServer;
         addProviders();
         addCommodities();
+        addUsers();
+    }
+
+    private void addUsers()
+    {
+        String pageUsers = getRequest("/api/users");
+        Gson gsonParser = new GsonBuilder().create();
+        List<User> users = gsonParser.fromJson(pageUsers,
+                new TypeToken<List<User>>() {}.getType());
+        for(User user: users)
+        {
+            balootServer.addUser(user);
+        }
     }
 
     public void addProviders()

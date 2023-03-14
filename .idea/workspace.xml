@@ -8,12 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Baloot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Commodity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ExternalServer/ExternalServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ExternalServer/ExternalServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InterfaceServer/HTMLWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InterfaceServer/HTMLWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

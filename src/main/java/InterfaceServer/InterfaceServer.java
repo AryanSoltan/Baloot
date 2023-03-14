@@ -2,6 +2,7 @@ package InterfaceServer;
 import Baloot.BalootServer;
 import Baloot.Commodity;
 import Baloot.Provider;
+import Baloot.User;
 import io.javalin.Javalin;
 
 import javax.swing.text.html.HTML;
@@ -36,6 +37,86 @@ public class InterfaceServer {
         addCommoditiesResponse();
         addCommodityResponse();
         addProviderResponse();
+        addUserResponse();
+        addcreditIncreaseResponse();
+        addSearchResponse();
+        addCategorySearchResponse();
+    }
+
+    private void addCategorySearchResponse()
+    {
+        serverJavalin.get("commodities/search/:category", ctx -> {
+            try {
+                String category = ctx.param("category");
+                ctx.html(createCommoditiesPage(balootServer.
+                        getCommoditiesByCategory(category)));
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+                ctx.status(502);
+            }
+        });
+    }
+
+    private void addcreditIncreaseResponse()
+    {
+        serverJavalin.get("/addCredit/:userName/:credit", ctx -> {
+            try {
+                String userName = ctx.param("userName");
+                String credit = ctx.param("credit");
+                increaseCredit(userName, credit);
+                ctx.html(HTMLWriter.readHTMLFile("200.html"));
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+                ctx.status(502).result(Integer.toString(ctx.status()) + ":| " + e.getMessage());
+            }
+        });
+    }
+
+    public void increaseCredit(String userName, String credit) throws Exception {
+        User neededUser = balootServer.findUser(userName);
+        neededUser.addCredit(Double.parseDouble(credit));
+    }
+
+    private void addUserResponse()
+    {
+        serverJavalin.get("/users/:userId", ctx -> {
+            String userId = ctx.param("userId");
+            try {
+                ctx.html(createUserPage(userId));
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+                ctx.status(502).result(Integer.toString(ctx.status()) + ":| " + e.getMessage());
+            }
+        });
+    }
+
+    private String createUserPage(String userId) throws Exception {
+        String userHTMLPage = HTMLWriter.readHTMLFile("UserHeader.html");
+        userHTMLPage += "<body>";
+        User neededUser = balootServer.findUser(userId);
+        LinkedHashMap<String, String> providerList = getUserListValue(neededUser);
+        userHTMLPage += HTMLWriter.writeList(idNamesProvider, providerList);
+        userHTMLPage += "</body></html>";
+        return userHTMLPage;
+    }
+
+    private LinkedHashMap<String, String> getUserListValue(User neededUser)
+    {
+        LinkedHashMap<String, String> userValues =
+                new LinkedHashMap<String, String>();
+        userValues.put("Name", neededUser.getName());
+        userValues.put("Email", neededUser.getEmail());
+        userValues.put("Birth Data", neededUser.getBirthDate());
+        userValues.put("address", neededUser.getAddress());
+        userValues.put("credit", String.valueOf((int)neededUser.getCredit()));
+        String formValue = String.format("<form action=\"\" method=\"POST\" >\n" +
+                "                <label>Buy List Payment</label>\n" +
+                "                <input id=\"form_payment\" type=\"hidden\" name=\"userId\" value=\"%s\">\n" +
+                "                <button type=\"submit\">Payment</button>\n" +
+                "            </form>", neededUser.getName());
+        userValues.put(formValue, "");
+        return userValues;
     }
 
     private void addProviderResponse() {
@@ -85,27 +166,32 @@ public class InterfaceServer {
     {
         LinkedHashMap<String, String> providerValues =
                 new LinkedHashMap<String, String>();
-//        providerValues.put("UserName", neededProvider.getProviderName());
-//        providerValues.put("Email", neededProvider.getEmail());
-//        providerValues.put("Birth Data", neededProvider.getBirthData());
-//        providerValues.put("address", neededProvider.getAddress());
-//        providerValues.put("credit", neededProvider.getCredit());
-//        String formValue = String.format("<form action=\"\" method=\"POST\" >\n" +
-//                "                <label>Buy List Payment</label>\n" +
-//                "                <input id=\"form_payment\" type=\"hidden\" name=\"userId\" value=\"%s\">\n" +
-//                "                <button type=\"submit\">Payment</button>\n" +
-//                "            </form>", neededProvider.getProviderName());
         providerValues.put("Id", String.valueOf(neededProvider.getId()));
         providerValues.put("Name", neededProvider.getProviderName());
         providerValues.put("Registry Date", neededProvider.getRegistryDate());
         return providerValues;
     }
 
+    private void addSearchResponse()
+    {
+        serverJavalin.get("commodities/search/:startPrice/:endPrice", ctx -> {
+            try {
+                double startPrice = Double.parseDouble(ctx.param("startPrice"));
+                double endPrice = Double.parseDouble(ctx.param("endPrice"));
+                ctx.html(createCommoditiesPage(balootServer.
+                        getCommodityRangePrice(startPrice, endPrice)));
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+                ctx.status(502);
+            }
+        });
+    }
+
     private void addCommoditiesResponse()
     {
         serverJavalin.get(commoditiesURL, ctx -> {
             try {
-                ctx.html(createCommoditiesPage());
+                ctx.html(createCommoditiesPage(balootServer.getCommodityList()));
             } catch (Exception e){
                 System.out.println(e.getMessage());
                 ctx.status(502);
@@ -155,7 +241,7 @@ public class InterfaceServer {
         return listCommodityAttributes;
     }
 
-    private String createCommoditiesPage()
+    private String createCommoditiesPage(ArrayList<Commodity> commodities)
     {
         String commidityHTMLPage = HTMLWriter.readHTMLFile("CommiditesHeader.html");
         ArrayList<ArrayList<String> > tableCommodities =
@@ -163,7 +249,6 @@ public class InterfaceServer {
         ArrayList<String>colName = new ArrayList<String>(colNamesCommidites);
         colName = HTMLWriter.makeAllTh(colName);
         tableCommodities.add(colName);
-        ArrayList<Commodity> commodities = balootServer.getCommodityList();
         for(Commodity commodity: commodities)
         {
             ArrayList<String> newCommodityRow = createNewCommodityRow(commodity);

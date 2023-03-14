@@ -23,10 +23,10 @@ public class BalootServer {
         commodities = new HashMap<Integer, Commodity>();
     }
 
-    public void addUser(String name, User newUser)
+    public void addUser(User newUser)
     {
         newUser.setBoughtCommitiesEmpty();
-        users.put(name, newUser);
+        users.put(newUser.getName(), newUser);
     }
 
     public boolean doesExist(String userName)
@@ -118,7 +118,7 @@ public class BalootServer {
         }
     }
 
-    private User findUser(String username) throws Exception {
+    public User findUser(String username) throws Exception {
         if(!users.containsKey(username))
         {
             throw new UserNotExist(username);
@@ -195,5 +195,15 @@ public class BalootServer {
 
         User neededUser = findUser(userName);
         return neededUser.getCommodities();
+    }
+
+    public ArrayList<Commodity> getCommodityRangePrice(double startPrice, double endPrice) {
+        ArrayList<Commodity> answerCommodities = new ArrayList<Commodity>();
+        for(Commodity commodity: commodities.values())
+        {
+            if(commodity.getPrice() <= endPrice && commodity.getPrice() >= startPrice)
+                answerCommodities.add(commodity);
+        }
+        return answerCommodities;
     }
 }
