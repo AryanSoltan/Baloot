@@ -39,6 +39,7 @@ public class ExternalServer {
                 new TypeToken<List<Provider>>() {}.getType());
         for(Provider provider: providers)
         {
+            provider.setCommoditiesEmpty();
             balootServer.addProvider(provider);
         }
     }

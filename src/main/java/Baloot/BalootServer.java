@@ -55,7 +55,7 @@ public class BalootServer {
         users.put(name, newUser);
     }
 
-    private Provider findProvider(int providerId) throws Exception {
+    public Provider findProvider(int providerId) throws Exception {
         if(providers.containsKey(providerId))
             return providers.get(providerId);
         else
@@ -71,6 +71,8 @@ public class BalootServer {
         newCommidity.setProviderName(providerName);
         newCommidity.setUserRatingsEmpty();
         commodities.put(id, newCommidity);
+        addCommodityToProvider(id, providerId);
+
     }
 
 

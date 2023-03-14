@@ -28,4 +28,16 @@ public class Provider {
     public int getId() {
         return id;
     }
+
+    public String getRegistryDate() {
+        return registryDate;
+    }
+
+    public ArrayList<Commodity> getCommodities() {
+        return commodities;
+    }
+
+    public void setCommoditiesEmpty() {
+        commodities = new ArrayList<Commodity>();
+    }
 }

@@ -8,35 +8,29 @@ import java.util.*;
 
 public class HTMLWriter {
 
-    public static String writeTable(ArrayList<ArrayList<String> > inputTable)
+    public static String writeTable(ArrayList<ArrayList<String> > inputTable, String caption)
     {
         String tablHTML = "";
         tablHTML += "<table>";
-        boolean isBold = true;
+        if(caption != "")
+        {
+            tablHTML += "<caption>" + caption + "</caption>";
+        }
         for(ArrayList<String> tableRow: inputTable)
         {
-            tablHTML += writeTableRow(tableRow, isBold);
-            isBold = false;
+            tablHTML += writeTableRow(tableRow);
         }
         tablHTML += "</table>";
         return tablHTML;
     }
 
-    private static String writeTableRow(ArrayList<String> tableRow, boolean isBold)
+    private static String writeTableRow(ArrayList<String> tableRow)
     {
         String tableRowHTML = "";
         tableRowHTML += "<tr>";
         for(String colData: tableRow)
         {
-            if(isBold == true)
-                tableRowHTML += "<th>";
-            else
-                tableRowHTML += "<td>";
             tableRowHTML += colData;
-            if(isBold == true)
-                tableRowHTML += "</th>";
-            else
-                tableRowHTML += "</td>";
         }
         tableRowHTML += "</tr>";
         return tableRowHTML;
@@ -73,5 +67,22 @@ public class HTMLWriter {
         }
         result += "</ul>";
         return result;
+    }
+
+    public static ArrayList<String> makeAllTd(ArrayList<String> newCommodityRow) {
+        ArrayList<String>addedTr = new ArrayList<String>();
+        for(String inputString: newCommodityRow)
+        {
+            addedTr.add("<td>" + inputString + "</td>");
+        }
+        return addedTr;
+    }
+    public static ArrayList<String> makeAllTh(ArrayList<String> newCommodityRow) {
+        ArrayList<String>addedTr = new ArrayList<String>();
+        for(String inputString: newCommodityRow)
+        {
+            addedTr.add("<th>" + inputString + "</th>");
+        }
+        return addedTr;
     }
 }

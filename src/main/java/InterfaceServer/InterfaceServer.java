@@ -1,6 +1,7 @@
 package InterfaceServer;
 import Baloot.BalootServer;
 import Baloot.Commodity;
+import Baloot.Provider;
 import io.javalin.Javalin;
 
 import javax.swing.text.html.HTML;
@@ -16,8 +17,11 @@ public class InterfaceServer {
     BalootServer balootServer;
     final static List<String> colNamesCommidites =  Arrays.asList("Id", "Name", "Provider Id", "Price",
             "Categories", "Rating", "In Stock", "Links");
+    final static List<String> colNamesCommiditesProvider =  Arrays.asList("Id", "Name", "Price",
+            "Categories", "Rating", "In Stock", "");
     final static List<String> idNamesCommidity =  Arrays.asList("id", "name", "providerId", "price",
             "categories", "rating", "inStock");
+    final static List<String> idNamesProvider = Arrays.asList("id", "name", "registryDate");
 
     public InterfaceServer(int portNum, BalootServer inputbalootServer)
     {
@@ -31,6 +35,70 @@ public class InterfaceServer {
     {
         addCommoditiesResponse();
         addCommodityResponse();
+        addProviderResponse();
+    }
+
+    private void addProviderResponse() {
+        serverJavalin.get("/providers/:providerId", ctx -> {
+            String providerId = ctx.param("providerId");
+            try {
+                ctx.html(createProviderPage(providerId));
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+                ctx.status(502).result(Integer.toString(ctx.status()) + ":| " + e.getMessage());
+            }
+        });
+    }
+
+    private String createProviderPage(String providerId) throws Exception {
+        String providerHTMLPage = HTMLWriter.readHTMLFile("ProviderHeader.html");
+        providerHTMLPage += "<body>";
+        Provider neededProvider = balootServer.findProvider(
+                Integer.parseInt(providerId));
+        LinkedHashMap<String, String> providerList = getProviderListValue(neededProvider);
+        providerHTMLPage += HTMLWriter.writeList(idNamesProvider, providerList);
+        ArrayList< ArrayList<String> > tableProducts = createProductsRows(
+                neededProvider.getCommodities());
+        providerHTMLPage += HTMLWriter.writeTable(tableProducts,
+                "<h3>Provided Commodities</h3>");
+        providerHTMLPage += "</body></html>";
+        return providerHTMLPage;
+    }
+
+    private ArrayList< ArrayList<String> > createProductsRows(ArrayList<Commodity> commodities) {
+
+        ArrayList<ArrayList<String> > productRows = new ArrayList<ArrayList<String>>();
+        ArrayList<String> colName = new ArrayList<String>(colNamesCommiditesProvider);
+        colName = HTMLWriter.makeAllTh(colName);
+        productRows.add(colName);
+        for(Commodity commodity: commodities)
+        {
+            ArrayList<String> newRow = createNewCommodityRowProvider(commodity);
+            newRow = HTMLWriter.makeAllTh(newRow);
+            productRows.add(newRow);
+        }
+        return productRows;
+    }
+
+    private LinkedHashMap<String, String> getProviderListValue(Provider neededProvider)
+    {
+        LinkedHashMap<String, String> providerValues =
+                new LinkedHashMap<String, String>();
+//        providerValues.put("UserName", neededProvider.getProviderName());
+//        providerValues.put("Email", neededProvider.getEmail());
+//        providerValues.put("Birth Data", neededProvider.getBirthData());
+//        providerValues.put("address", neededProvider.getAddress());
+//        providerValues.put("credit", neededProvider.getCredit());
+//        String formValue = String.format("<form action=\"\" method=\"POST\" >\n" +
+//                "                <label>Buy List Payment</label>\n" +
+//                "                <input id=\"form_payment\" type=\"hidden\" name=\"userId\" value=\"%s\">\n" +
+//                "                <button type=\"submit\">Payment</button>\n" +
+//                "            </form>", neededProvider.getProviderName());
+        providerValues.put("Id", String.valueOf(neededProvider.getId()));
+        providerValues.put("Name", neededProvider.getProviderName());
+        providerValues.put("Registry Date", neededProvider.getRegistryDate());
+        return providerValues;
     }
 
     private void addCommoditiesResponse()
@@ -93,14 +161,16 @@ public class InterfaceServer {
         ArrayList<ArrayList<String> > tableCommodities =
                 new ArrayList<ArrayList<String> >();
         ArrayList<String>colName = new ArrayList<String>(colNamesCommidites);
+        colName = HTMLWriter.makeAllTh(colName);
         tableCommodities.add(colName);
         ArrayList<Commodity> commodities = balootServer.getCommodityList();
         for(Commodity commodity: commodities)
         {
             ArrayList<String> newCommodityRow = createNewCommodityRow(commodity);
+            newCommodityRow = HTMLWriter.makeAllTd(newCommodityRow);
             tableCommodities.add(newCommodityRow);
         }
-        commidityHTMLPage += HTMLWriter.writeTable(tableCommodities);
+        commidityHTMLPage += HTMLWriter.writeTable(tableCommodities, "");
         commidityHTMLPage += "</html>";
         return commidityHTMLPage;
     }
@@ -115,7 +185,24 @@ public class InterfaceServer {
         newCommodityRow.add(commodity.getStringCategories());
         newCommodityRow.add(String.valueOf(commodity.getRating()));
         newCommodityRow.add(String.valueOf(commodity.getInStock()));
-        newCommodityRow.add("Link");
+        String linkSection = "<a href=\"/commodities/" +
+                String.valueOf(commodity.getId()) + "\">" + "Link</a>";
+        newCommodityRow.add(linkSection);
+        return newCommodityRow;
+    }
+
+    private ArrayList<String> createNewCommodityRowProvider(Commodity commodity)
+    {
+        ArrayList<String> newCommodityRow = new ArrayList<String>();
+        newCommodityRow.add(String.valueOf(commodity.getId()));
+        newCommodityRow.add(commodity.getName());
+        newCommodityRow.add(String.valueOf((int)commodity.getPrice()));
+        newCommodityRow.add(commodity.getStringCategories());
+        newCommodityRow.add(String.valueOf(commodity.getRating()));
+        newCommodityRow.add(String.valueOf(commodity.getInStock()));
+        String linkSection = "<a href=\"/commodities/" +
+                String.valueOf(commodity.getId()) + "\">" + "Link</a>";
+        newCommodityRow.add(linkSection);
         return newCommodityRow;
     }
 
