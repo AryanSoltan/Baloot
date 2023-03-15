@@ -72,7 +72,7 @@ public class BalootServer {
         newCommidity.setUserRatingsEmpty();
         commodities.put(id, newCommidity);
         addCommodityToProvider(id, providerId);
-
+        newCommidity.setCommentsEmpty();
     }
 
 
@@ -205,5 +205,13 @@ public class BalootServer {
                 answerCommodities.add(commodity);
         }
         return answerCommodities;
+    }
+
+    public void addComment(Comment comment)
+            throws Exception {
+        int commodityId = comment.getCommodityId();
+        comment.setRatingEmpty();
+        Commodity commodity = findCommodity(commodityId);
+        commodity.addComment(comment);
     }
 }

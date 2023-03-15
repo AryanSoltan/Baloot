@@ -18,6 +18,8 @@ public class Commodity {
     private Map<String, Integer> userRatings;
     double rating;
     int inStock;
+
+    ArrayList<Comment> comments;
     public Commodity(int inputId, String inputName, int inputProviderId, double inputPrice,
               ArrayList<String> inputCategories, double inputRating, int inputInStock)
     {
@@ -150,5 +152,21 @@ public class Commodity {
             isComma = true;
         }
         return result;
+    }
+
+    public void setCommentsEmpty()
+    {
+        comments = new ArrayList<Comment>();
+    }
+
+    public void addComment(Comment comment)
+    {
+        comments.add(comment);
+        comment.setUserName(name);
+    }
+
+    public ArrayList<Comment> getComments()
+    {
+        return comments;
     }
 }

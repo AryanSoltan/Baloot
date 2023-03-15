@@ -1,6 +1,7 @@
 package ExternalServer;
 
 import Baloot.BalootServer;
+import Baloot.Comment;
 import Baloot.Commodity;
 import Baloot.Exception.ProviderNotExist;
 import Baloot.Provider;
@@ -31,7 +32,20 @@ public class ExternalServer {
         addProviders();
         addCommodities();
         addUsers();
+        addComments();
     }
+
+    private void addComments() throws Exception {
+        String pageComments = getRequest("/api/comments");
+        Gson gsonParser = new GsonBuilder().create();
+        List<Comment> comments = gsonParser.fromJson(pageComments,
+                new TypeToken<List<Comment>>() {}.getType());
+        for(Comment comment: comments)
+        {
+            balootServer.addComment(comment);
+        }
+    }
+
 
     private void addUsers()
     {
