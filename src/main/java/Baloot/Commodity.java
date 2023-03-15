@@ -169,4 +169,21 @@ public class Commodity {
     {
         return comments;
     }
+
+    public boolean hasCommentId(int commentId) {
+        for(Comment comment: comments)
+        {
+            if(comment.getId() == commentId)
+                return true;
+        }
+        return false;
+    }
+
+    public void rateComment(int commentId, User user, int rate) {
+        for(Comment comment: comments)
+        {
+            if(comment.getId() == commentId)
+                comment.addRate(user, rate);
+        }
+    }
 }

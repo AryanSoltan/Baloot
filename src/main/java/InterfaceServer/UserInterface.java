@@ -2,6 +2,7 @@ package InterfaceServer;
 
 import Baloot.BalootServer;
 import Baloot.User;
+import io.javalin.Context;
 import io.javalin.Javalin;
 
 import java.util.LinkedHashMap;
@@ -49,6 +50,11 @@ public class UserInterface
                 "                <button type=\"submit\">Payment</button>\n" +
                 "            </form>", neededUser.getName());
         userValues.put(formValue, "");
+        userValues.put(String.format(" <form action=\"increaseAmount/%s\" method=\"POST\" >\n" +
+                "                <label>Increase Credit</label>\n" +
+                "                <input id=\"amount\" type=\"number\" name=\"amount\">\n" +
+                "                <button type=\"submit\">Increase</button>\n" +
+                "            </form>", neededUser.getName()), "");
         return userValues;
     }
 
@@ -74,4 +80,28 @@ public class UserInterface
     }
 
 
+    public static void addPostUserPage(Javalin serverJavalin, BalootServer balootServer)
+    {
+        serverJavalin.post("/users/:typeCommand/:userName", ctx -> {
+            try {
+                String typeCommand = ctx.param("typeCommand");
+                String userName = ctx.param("userName");
+                switch (typeCommand)
+                {
+                    case("increaseAmount"):
+                        handleIncreaseAmount(ctx, userName, balootServer);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            ctx.redirect("/users/" + ctx.param("userName"));
+        });
+    }
+
+    private static void handleIncreaseAmount(Context ctx, String userName,
+                                             BalootServer balootServer) throws Exception {
+        String amount = ctx.formParam("amount");
+        increaseCredit(userName, amount, balootServer);
+    }
 }

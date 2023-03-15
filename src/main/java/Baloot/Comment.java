@@ -9,6 +9,7 @@ public class Comment {
     private String date;
     private String userName;
     HashMap<String, Integer> rating;
+    int commentId;
     public Comment(String inputUserEmail, int inputCommodityId, String inputText,
                         String inputDate)
     {
@@ -62,5 +63,20 @@ public class Comment {
                 disLikes += 1;
         }
         return disLikes;
+    }
+
+    public int getId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentIdNow) {
+        commentId = commentIdNow;
+    }
+
+    public void addRate(User user, int rate) {
+        if(rating.containsKey(user.getName()))
+            rating.replace(user.getName(), rate);
+        else
+            rating.put(user.getName(), rate);
     }
 }

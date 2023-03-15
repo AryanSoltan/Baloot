@@ -5,6 +5,7 @@ import ExternalServer.ExternalServer;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 
+import javax.sql.CommonDataSource;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,12 +16,14 @@ public class BalootServer {
     Map<String, User> users;
     Map<Integer, Provider> providers;
     Map<Integer, Commodity> commodities;
+    int commentIdNow;
 
     public BalootServer()
     {
         users = new HashMap<String, User>();
         providers = new HashMap<Integer, Provider>();
         commodities = new HashMap<Integer, Commodity>();
+        commentIdNow = 0;
     }
 
     public void addUser(User newUser)
@@ -212,6 +215,20 @@ public class BalootServer {
         int commodityId = comment.getCommodityId();
         comment.setRatingEmpty();
         Commodity commodity = findCommodity(commodityId);
+        commentIdNow += 1;
+        comment.setCommentId(commentIdNow);
         commodity.addComment(comment);
+    }
+
+    public void addRatingToComment(int commentId, String userName, int rate)
+            throws Exception {
+        User user = findUser(userName);
+        for(Commodity commodity: commodities.values())
+        {
+            if(commodity.hasCommentId(commentId))
+            {
+                commodity.rateComment(commentId, user, rate);
+            }
+        }
     }
 }

@@ -3,13 +3,11 @@ package InterfaceServer;
 import Baloot.BalootServer;
 import Baloot.Comment;
 import Baloot.Commodity;
+import io.javalin.Context;
 import io.javalin.Javalin;
 import org.junit.jupiter.api.BeforeAll;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 public class CommodityInterface
 {
@@ -70,26 +68,22 @@ public class CommodityInterface
         newCommentRow.add(comment.getDate());
         int numLikes = comment.getLikes();
         int numDisLikes = comment.getDisLikes();
-        newCommentRow.add(String.format(" <form action=\"\" method=\"POST\">\n" +
-                "            <label for=\"\">%d</label>\n" +
+        newCommentRow.add(String.format(" <form action=\"rate/%d/%d\" method=\"POST\">\n" +
+                "            User Name: <input type=\"text\" name=\"userName\">" +
                 "            <input\n" +
                 "              id=\"form_comment_id\"\n" +
-                "              type=\"hidden\"\n" +
-                "              name=\"comment_id\"\n" +
-                "              value=\"01\"\n" +
-                "            />\n" +
-                "            <button type=\"submit\">like</button>\n" +
-                "          </form>", numLikes));
-        newCommentRow.add(String.format(" <form action=\"\" method=\"POST\">\n" +
-                "            <label for=\"\">%d</label>\n" +
+                "              type=\"radio\"\n" +
+                "              name=\"rate\"\n" +
+                "              value=\"like\"\n" +
+                "            />%d like\n" +
                 "            <input\n" +
                 "              id=\"form_comment_id\"\n" +
-                "              type=\"hidden\"\n" +
-                "              name=\"comment_id\"\n" +
-                "              value=\"01\"\n" +
-                "            />\n" +
-                "            <button type=\"submit\">dislike</button>\n" +
-                "          </form>", numDisLikes));
+                "              type=\"radio\"\n" +
+                "              name=\"rate\"\n" +
+                "              value=\"dislike\"\n" +
+                "            />%d dislike<br>\n" +
+                "            <button type=\"submit\">submit</button>\n" +
+                "          </form>", comment.getId(), comment.getCommodityId(),numLikes, numDisLikes));
         return newCommentRow;
     }
 
@@ -111,4 +105,46 @@ public class CommodityInterface
         return commentRows;
     }
 
+    public static void addVoteComment(Javalin serverJavalin, BalootServer balootServer)
+    {
+        serverJavalin.get("/voteComment/:userName/:commentId/:rate", ctx -> {
+            String commentId = ctx.param("commentId");
+            String userName = ctx.param("userName");
+            String rate = ctx.param("rate");
+            balootServer.addRatingToComment(Integer.parseInt(commentId), userName, Integer.parseInt(rate));
+            ctx.html(HTMLWriter.readHTMLFile("200.html"));
+        });
+    }
+
+    public static void addPostCommodityPage(Javalin serverJavalin, BalootServer balootServer)
+    {
+        serverJavalin.post("/commodities/:typeCommand/:commentId/:commodityId", ctx -> {
+            try {
+                String typeCommand = ctx.param("typeCommand");
+                String commentId = ctx.param("commentId");
+                switch (typeCommand)
+                {
+                    case("rate"):
+                        handleRateComment(ctx, commentId, balootServer);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            ctx.redirect("/commodities/" + ctx.param("commodityId"));
+        });
+    }
+
+    private static void handleRateComment(Context ctx, String commentId, BalootServer balootServer)
+            throws Exception {
+        int commentIdInt = Integer.parseInt(commentId);
+        String userName = ctx.formParam("userName");
+        String likeOrDislike = ctx.formParam("rate");
+        int rate = -1;
+        if(Objects.equals(likeOrDislike, "like"))
+        {
+            rate = 1;
+        }
+        balootServer.addRatingToComment(commentIdInt, userName, rate);
+    }
 }

@@ -26,7 +26,10 @@ public class InterfaceServer {
         ProviderInterface.addProviderResponse(serverJavalin, balootServer);
         UserInterface.addUserResponse(serverJavalin, balootServer);
         UserInterface.addcreditIncreaseResponse(serverJavalin, balootServer);
+        CommodityInterface.addVoteComment(serverJavalin, balootServer);
         CommoditiesInterface.addSearchResponse(serverJavalin, balootServer);
         CommoditiesInterface.addCategorySearchResponse(serverJavalin, balootServer);
+        UserInterface.addPostUserPage(serverJavalin, balootServer);
+        CommodityInterface.addPostCommodityPage(serverJavalin, balootServer);
     }
 }
