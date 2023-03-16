@@ -20,19 +20,20 @@ public class SearchCommiditiesTest {
     private Commodity headphoneCommodity;
 
     @Before
-    public void setup() throws ProviderNotExist {
+    public void setup() throws Exception {
 
         balootServer = new BalootServer();
 
         headphoneCommodity = new Commodity(1, "Headphone", 1,
                 1000, new ArrayList<>(Arrays.asList("Technology", "Phone")), 0, 80);
-        balootServer.addProvider(1, new Provider(1, "provider2", "2023-09-11"));
-        balootServer.addCommidity(1, 1, new Commodity(1, "Headphone", 1,
-                1000, new ArrayList<>(Arrays.asList("Technology", "Phone")), 0, 80));
-        balootServer.addCommidity(1, 2, new Commodity(2, "Bed", 1, 3500,
-                new ArrayList<>(Arrays.asList("House")), 0, 70));
-        balootServer.addCommidity(1, 3, new Commodity(3, "PS3", 1, 350, new ArrayList<>(Arrays.asList("Game")), 0, 50));
-        balootServer.addCommidity(1, 4, new Commodity(4, "SonyD101", 1, 50.5, new ArrayList<>(Arrays.asList("Camera")), 0, 40));
+        balootServer.addProvider(new Provider(1, "provider2", "2023-09-11"));
+        balootServer = new BalootServer();
+        balootServer.addCommidity(
+                new Commodity(1, "Headphone", 1, 3000, new ArrayList<>(Arrays.asList("Technology", "Phone")), 0, 50));
+        balootServer.addCommidity(new Commodity(1, "Headphone", 1, 2000,
+                new ArrayList<>(Arrays.asList("Technology", "Phone")), 1, 0));
+        balootServer.addCommidity(new Commodity(1, "Headphone", 1, 1000,
+                new ArrayList<>(Arrays.asList("Technology", "Phone")), 1, 1));
     }
 
     @After

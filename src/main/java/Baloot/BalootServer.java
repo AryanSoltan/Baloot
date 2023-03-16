@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 
 import javax.sql.CommonDataSource;
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,6 +42,7 @@ public class BalootServer {
     public void addProvider(Provider newProvider)
     {
         int id = newProvider.getId();
+        newProvider.setCommoditiesEmpty();
         providers.put(id, newProvider);
     }
 

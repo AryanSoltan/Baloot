@@ -20,9 +20,9 @@ public class GetCommoditiesByCategoryTest {
     Commodity iphoneCommodity;
     Commodity cameraCommodity;
     @Before
-    public void setup() throws ProviderNotExist {
+    public void setup() throws Exception {
         balootServer = new BalootServer();
-        balootServer.addProvider(1,new Provider(1,"provider1","2023-09-15"));
+        balootServer.addProvider(new Provider(1,"provider1","2023-09-15"));
         headphoneCommodity = new Commodity(1,"Headphone",1,
                 1000,new ArrayList<>(Arrays.asList("Technology","Phone")),0,50);
         TVCommodity = new Commodity(2,"TV",1,
@@ -31,10 +31,10 @@ public class GetCommoditiesByCategoryTest {
                 new ArrayList<>(Arrays.asList("Phone")),0,50);
         cameraCommodity = new Commodity(4,"SonyD101",1,50.5,
                 new ArrayList<>(Arrays.asList("Camera")),0,50);
-        balootServer.addCommidity(1,1,headphoneCommodity);
-        balootServer.addCommidity(1,2, TVCommodity);
-        balootServer.addCommidity(1,3, iphoneCommodity);
-        balootServer.addCommidity(1,4, cameraCommodity);
+        balootServer.addCommidity(headphoneCommodity);
+        balootServer.addCommidity( TVCommodity);
+        balootServer.addCommidity(iphoneCommodity);
+        balootServer.addCommidity(cameraCommodity);
     }
     @After
     public void teardown() {

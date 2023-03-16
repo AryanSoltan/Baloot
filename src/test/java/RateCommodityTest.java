@@ -24,12 +24,11 @@ public class RateCommodityTest {
     @Before
     public void setup() throws Exception {
         balootServer = new BalootServer();
-        balootServer.addUser("user1",new User("user1","1234","user1@gmail.com","1977-09-15","add1",1500));
-        balootServer.addUser("user2",new User("user2","1234","user2@gmail.com","1977-09-15","add2",500));
-        balootServer.addUser("user3",new User("user3","1234","user3@gmail.com","1977-09-15","add3",500));
-        balootServer.addProvider(1,new Provider(1,"provider1","2023-09-15"));
-        balootServer.addCommidity(1,1,new Commodity(1,"Headphone",1,35000,new ArrayList<>(Arrays.asList("Technology","Phone")),0,50));
-
+        balootServer.addUser(new User("user1","1234","user1@gmail.com","1977-09-15","add1",1500));
+        balootServer.addUser(new User("user2","1234","user2@gmail.com","1977-09-15","add2",500));
+        balootServer.addUser(new User("user3","1234","user3@gmail.com","1977-09-15","add3",500));
+        balootServer.addProvider(new Provider(1,"provider1","2023-09-15"));
+        balootServer.addCommidity(new Commodity(1,"Headphone",1,35000,new ArrayList<>(Arrays.asList("Technology","Phone")),0,50));
     }
 
     @After
@@ -52,9 +51,9 @@ public class RateCommodityTest {
     @ValueSource(strings = {"0","11","4.4", "a"})
     public void testInvalidRating(String rate) throws Exception {
         BalootServer balootServer1 = new BalootServer();
-        balootServer1.addUser("user1",new User("user1","1234","user1@gmail.com","1977-09-15","add1",1500));
-        balootServer1.addProvider(1,new Provider(1,"provider1","2023-09-15"));
-        balootServer1.addCommidity(1,1,new Commodity(1,"Headphone",1,35000,new ArrayList<>(Arrays.asList("Technology","Phone")),0,50));
+        balootServer1.addUser(new User("user1","1234","user1@gmail.com","1977-09-15","add1",1500));
+        balootServer1.addProvider(new Provider(1,"provider1","2023-09-15"));
+        balootServer1.addCommidity(new Commodity(1,"Headphone",1,35000,new ArrayList<>(Arrays.asList("Technology","Phone")),0,50));
         assertThrows("testInvalidRating failed",InvalidRating.class, () -> balootServer1.rateCommodity("user1",1,rate));
    }
 
