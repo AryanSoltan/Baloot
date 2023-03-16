@@ -1,5 +1,7 @@
 package InterfaceServer;
 import Baloot.*;
+import io.javalin.Context;
+import io.javalin.ErrorHandler;
 import io.javalin.Javalin;
 
 import javax.swing.text.html.HTML;
@@ -30,6 +32,16 @@ public class InterfaceServer {
         CommoditiesInterface.addSearchResponse(serverJavalin, balootServer);
         CommoditiesInterface.addCategorySearchResponse(serverJavalin, balootServer);
         UserInterface.addPostUserPage(serverJavalin, balootServer);
+        CommodityInterface.addRateCommodityResponse(serverJavalin, balootServer);
         CommodityInterface.addPostCommodityPage(serverJavalin, balootServer);
+        CommodityInterface.addGetBuyPage(serverJavalin, balootServer);
+        CommodityInterface.addGetRemoveCommodity(serverJavalin, balootServer);
+        ErrorHandler handlerError = new ErrorHandler() {
+            @Override
+            public void handle(Context ctx) {
+                ctx.html("<html><body><h1>" + "404 Not Found" + "</h1></body></html>");
+            }
+        };
+        serverJavalin.error(404, handlerError);
     }
 }

@@ -25,7 +25,23 @@ public class CommodityInterface
 
         LinkedHashMap<String, String> listCommodityAttributes = getCommodityValues(neededCommodity);
         commodityHTMLPage += HTMLWriter.writeList(idNamesCommidity, listCommodityAttributes);
-        commodityHTMLPage += HTMLWriter.readHTMLFile("CommodityFooter.html");
+        commodityHTMLPage += String.format(
+                "    <form action=\"commodityRate/%d\" method=\"POST\">\n" +
+                        "  <label>Your ID:</label>\n" +
+                        "    <input type=\"text\" name=\"userName\"/>\n" +
+                        "    <br><br>\n" +
+                "      <label>Rate(between 1 and 10):</label>\n" +
+                "      <input type=\"number\" id=\"quantity\" name=\"rate\" min=\"1\" max=\"10\">\n" +
+                "      <button type=\"submit\">Rate</button>\n" +
+                "    </form>\n" +
+                "    <br>\n" +
+                "    <form action=\"addBuyList/%d\" method=\"POST\">\n" +
+                        "  <label>Your ID:</label>\n" +
+                        "    <input type=\"text\" name=\"userName\"/>\n" +
+                        "    <br><br>\n" +
+                "      <button type=\"submit\">Add to BuyList</button>\n" +
+                "    </form>\n" +
+                "    <br />", neededCommodity.getId(), neededCommodity.getId());
         ArrayList<ArrayList<String>> tableComments = makeTableComments(commodityId, balootServer);
         commodityHTMLPage += HTMLWriter.writeTable(tableComments, "");
         commodityHTMLPage += "</html>";
@@ -55,7 +71,7 @@ public class CommodityInterface
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
-                ctx.status(502).result(Integer.toString(ctx.status()) + ":| " + e.getMessage());
+                ctx.html("<html><body><h1>" + e.getMessage() + "</h1></body></html>");
             }
         });
     }
@@ -118,6 +134,47 @@ public class CommodityInterface
 
     public static void addPostCommodityPage(Javalin serverJavalin, BalootServer balootServer)
     {
+        postRateComment(serverJavalin, balootServer);
+        postRateandAddCommodity(serverJavalin, balootServer);
+    }
+
+    private static void handleAddToBuyList(Context ctx, String commodityId, BalootServer balootServer)
+            throws Exception {
+            String userId = ctx.formParam("userName");
+            balootServer.addCommidityToUserBuyList(userId, Integer.parseInt(commodityId));
+    }
+
+    private static void postRateandAddCommodity(Javalin serverJavalin, BalootServer balootServer)
+    {
+        serverJavalin.post("/commodities/:typeCommand/:commodityId", ctx -> {
+            try {
+                String typeCommand = ctx.param("typeCommand");
+                String commodityId = ctx.param("commodityId");
+                switch (typeCommand)
+                {
+                    case("commodityRate"):
+                        handleRateCommodity(ctx, commodityId, balootServer);
+                        break;
+                    case("addBuyList"):
+                        handleAddToBuyList(ctx, commodityId, balootServer);
+                        break;
+                }
+                ctx.redirect("/commodities/" + ctx.param("commodityId"));
+            } catch (Exception e) {
+                ctx.html("<html><body><h1>" + e.getMessage() + "</h1></body></html>");
+            }
+        });
+    }
+
+    private static void handleRateCommodity(Context ctx, String commodityId, BalootServer balootServer)
+            throws Exception {
+        String userName = ctx.formParam("userName");
+        String rating = ctx.formParam("rate");
+        balootServer.rateCommodity(userName, Integer.parseInt(commodityId), rating);
+    }
+
+    private static void postRateComment(Javalin serverJavalin, BalootServer balootServer)
+    {
         serverJavalin.post("/commodities/:typeCommand/:commentId/:commodityId", ctx -> {
             try {
                 String typeCommand = ctx.param("typeCommand");
@@ -128,10 +185,13 @@ public class CommodityInterface
                         handleRateComment(ctx, commentId, balootServer);
                         break;
                 }
+                ctx.redirect("/commodities/" + ctx.param("commodityId"));
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                ctx.html("<html><body><h1>" + e.getMessage() + "</h1></body></html>");
+
             }
-            ctx.redirect("/commodities/" + ctx.param("commodityId"));
         });
     }
 
@@ -146,5 +206,37 @@ public class CommodityInterface
             rate = 1;
         }
         balootServer.addRatingToComment(commentIdInt, userName, rate);
+    }
+
+    public static void addRateCommodityResponse(Javalin serverJavalin, BalootServer balootServer)
+    {
+        serverJavalin.get("/rateCommodity/:userName/:commodityId/:rate", ctx -> {
+            String commodityId = ctx.param("commodityId");
+            String userName = ctx.param("userName");
+            String rate = ctx.param("rate");
+            balootServer.rateCommodity(userName, Integer.parseInt(commodityId),
+                    rate);
+            ctx.html(HTMLWriter.readHTMLFile("200.html"));
+        });
+    }
+
+    public static void addGetBuyPage(Javalin serverJavalin, BalootServer balootServer)
+    {
+        serverJavalin.get("/addToBuyList/:userName/:commodityId", ctx -> {
+            String commodityId = ctx.param("commodityId");
+            String userName = ctx.param("userName");
+            balootServer.addCommidityToUserBuyList(userName, Integer.parseInt(commodityId));
+            ctx.html(HTMLWriter.readHTMLFile("200.html"));
+        });
+    }
+
+    public static void addGetRemoveCommodity(Javalin serverJavalin, BalootServer balootServer)
+    {
+        serverJavalin.get("/removeFromBuyList/:userName/:commodityId", ctx -> {
+            String commodityId = ctx.param("commodityId");
+            String userName = ctx.param("userName");
+            balootServer.removeFromBuyList(userName, Integer.parseInt(commodityId));
+            ctx.html(HTMLWriter.readHTMLFile("200.html"));
+        });
     }
 }

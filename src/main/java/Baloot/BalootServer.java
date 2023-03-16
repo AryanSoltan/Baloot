@@ -29,6 +29,7 @@ public class BalootServer {
     public void addUser(User newUser)
     {
         newUser.setBoughtCommitiesEmpty();
+        newUser.setPurchasedCommodityEmpty();
         users.put(newUser.getName(), newUser);
     }
 
@@ -157,7 +158,6 @@ public class BalootServer {
         if(neededUser.hasBoughtCommodity(commodityId))
             throw new CommodityAlreadyAdded(commodityId);
         neededUser.buyCommodity(commodityId, neededCommodity);
-        neededCommodity.buyOne();
     }
 
     public void setCommodityProviderName(int commodityId, int providerId)
@@ -197,7 +197,7 @@ public class BalootServer {
     public ArrayList<Commodity> getUserBuyList(String userName) throws Exception {
 
         User neededUser = findUser(userName);
-        return neededUser.getCommodities();
+        return neededUser.getBoughtCommodities();
     }
 
     public ArrayList<Commodity> getCommodityRangePrice(double startPrice, double endPrice) {
@@ -230,5 +230,25 @@ public class BalootServer {
                 commodity.rateComment(commentId, user, rate);
             }
         }
+    }
+
+    public void handlePaymentUser(String userName) throws Exception
+    {
+        User user = findUser(userName);
+        ArrayList<Commodity> commodities = user.getBoughtCommodities();
+        double totalPrice = 0;
+        for(Commodity commodity: commodities)
+        {
+            if(commodity.getInStock() == 0)
+                throw new CommodityOutOfStock(commodity.getId());
+            totalPrice += commodity.getPrice();
+        }
+        if(user.getCredit() < totalPrice)
+            throw new NotEnoughCredit();
+        for(Commodity commodity: commodities) {
+            user.addPurchasedCommodity(commodity);
+            commodity.buyOne();
+        }
+        user.decreaseCredit(totalPrice);
     }
 }

@@ -25,7 +25,7 @@ public class ProviderInterface
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
-                ctx.status(502).result(Integer.toString(ctx.status()) + ":| " + e.getMessage());
+                ctx.html("<html><body><h1>" + e.getMessage() + "</h1></body></html>");
             }
         });
     }

@@ -23,7 +23,7 @@ public class CommoditiesInterface
                         getCommoditiesByCategory(category)));
             } catch (Exception e){
                 System.out.println(e.getMessage());
-                ctx.status(502);
+                ctx.html("<html><body><h1>" + e.getMessage() + "</h1></body></html>");
             }
         });
     }
@@ -74,7 +74,7 @@ public class CommoditiesInterface
                         getCommodityRangePrice(startPrice, endPrice)));
             } catch (Exception e){
                 System.out.println(e.getMessage());
-                ctx.status(502);
+                ctx.html("<html><body><h1>" + e.getMessage() + "</h1></body></html>");
             }
         });
     }
@@ -87,7 +87,7 @@ public class CommoditiesInterface
                 ctx.html(createCommoditiesPage(balootServer.getCommodityList()));
             } catch (Exception e){
                 System.out.println(e.getMessage());
-                ctx.status(502);
+                ctx.html("<html><body><h1>" + e.getMessage() + "</h1></body></html>");
             }
         });
     }

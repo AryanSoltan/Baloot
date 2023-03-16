@@ -1,6 +1,7 @@
 package Baloot;
 
 import Baloot.Exception.CommodityIsNotInBuyList;
+import InterfaceServer.CommodityInterface;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +18,7 @@ public class User {
     private double credit;
 
     Map<Integer, Commodity> boughtCommodities;
+    ArrayList<Commodity> purchased;
     public User(String inputUserName, String inputPassword, String inputEmail,
          String inputBirthDate, String inputAddress, double inputCredit)
     {
@@ -46,7 +48,7 @@ public class User {
         boughtCommodities.remove(commodityId);
     }
 
-    public ArrayList<Commodity> getCommodities() {
+    public ArrayList<Commodity> getBoughtCommodities() {
         Collection<Commodity> commoditiesBought = boughtCommodities.values();
         return new ArrayList<Commodity>(commoditiesBought);
     }
@@ -54,6 +56,7 @@ public class User {
     public void setBoughtCommitiesEmpty() {
         boughtCommodities = new HashMap<>();
     }
+    public void setPurchasedCommodityEmpty(){purchased = new ArrayList<Commodity>();}
 
     public String getName() {
         return username;
@@ -81,5 +84,16 @@ public class User {
 
     public void addCredit(double incCredit) {
         credit += incCredit;
+    }
+    public void decreaseCredit(double outCredit){credit -= outCredit;}
+
+    public void addPurchasedCommodity(Commodity commodity)
+    {
+        purchased.add(commodity);
+        boughtCommodities.remove(commodity.getId());
+    }
+
+    public ArrayList<Commodity> getPurchasedCommodities() {
+        return purchased;
     }
 }
