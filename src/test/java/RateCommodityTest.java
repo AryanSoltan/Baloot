@@ -1,6 +1,8 @@
 import Baloot.*;
 import Baloot.BalootServer;
 import Baloot.Exception.*;
+import InterfaceServer.InterfaceServer;
+import com.mashape.unirest.http.Unirest;
 import org.json.simple.JSONObject;
 import org.junit.*;
 import org.junit.jupiter.api.AfterEach;
@@ -21,9 +23,11 @@ import static org.junit.Assert.assertThrows;
 
 public class RateCommodityTest {
     private static BalootServer balootServer;
+    private static InterfaceServer interfaceServer;
     @Before
     public void setup() throws Exception {
         balootServer = new BalootServer();
+        interfaceServer = new InterfaceServer(8080, balootServer);
         balootServer.addUser(new User("user1","1234","user1@gmail.com","1977-09-15","add1",1500));
         balootServer.addUser(new User("user2","1234","user2@gmail.com","1977-09-15","add2",500));
         balootServer.addUser(new User("user3","1234","user3@gmail.com","1977-09-15","add3",500));
@@ -33,7 +37,10 @@ public class RateCommodityTest {
 
     @After
     public void teardown() {
+
         balootServer=null;
+        interfaceServer.closeConnection();
+        interfaceServer = null;
     }
     @Test(expected = UserNotExist.class)
     public void testUserNotExists() throws Exception
@@ -94,12 +101,14 @@ public class RateCommodityTest {
         double expectedResult = (double)10/(double)2;
         assertEquals("testUpdateRate failed",String.valueOf(expectedResult),rate);
     }
-
-
-
-
-
-
-
-
+    @Test
+    public void testFrontEnd() throws Exception
+    {
+        Unirest.get("http://localhost:8080/rateCommodity/user1/1/4").asString();
+        Unirest.get("http://localhost:8080/rateCommodity/user2/1/6").asString();
+        Commodity commodity = balootServer.getCommodityById(1);
+        double rate = commodity.getRating();
+        double expectedResult = (double)10/(double)2;
+        assertEquals("test interface failed",expectedResult,rate);
+    }
 }

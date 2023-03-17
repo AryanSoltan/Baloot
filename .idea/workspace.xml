@@ -6,12 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="623ce7de-a262-4f37-8665-bdbdf2795ca8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Baloot/BalootServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/AddToBuyListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AddToBuyListTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/GetCommoditiesByCategoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GetCommoditiesByCategoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InterfaceServer/InterfaceServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AddToBuyListTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/RateCommodityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/RateCommodityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SearchCommiditiesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SearchCommiditiesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SearchingByPrice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SearchCommiditiesTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SearchCommodityByPriceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SearchCommodityByPriceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,7 @@
       <recent name="Baloot" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SearchCommodityByPriceTest">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Baloot" />
@@ -85,21 +85,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RateCommodityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CheckViewBuyListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Baloot" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="RateCommodityTest" />
+      <option name="MAIN_CLASS_NAME" value="CheckViewBuyListTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RateCommodityTest.testInvalidRating" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RateCommodityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Baloot" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="RateCommodityTest" />
-      <option name="METHOD_NAME" value="testInvalidRating(java.lang.String)" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,11 +114,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SearchCommodityByPriceTest" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in Baloot" />
         <item itemvalue="JUnit.RateCommodityTest" />
-        <item itemvalue="JUnit.RateCommodityTest.testInvalidRating" />
+        <item itemvalue="JUnit.CheckViewBuyListTest" />
+        <item itemvalue="JUnit.SearchCommodityByPriceTest" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>

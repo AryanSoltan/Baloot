@@ -1,5 +1,6 @@
 import Baloot.*;
 import Baloot.Exception.CommodityNotExist;
+import InterfaceServer.InterfaceServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +17,8 @@ public class SearchCommodityByPriceTest {
     Commodity TVCommodity;
     Commodity iphoneCommodity;
     Commodity cameraCommodity;
+    int PORT_NUM = 8080;
+    InterfaceServer interfaceServer;
     @Before
     public void setup() throws Exception {
 
@@ -33,7 +36,6 @@ public class SearchCommodityByPriceTest {
         balootServer.addCommidity( TVCommodity);
         balootServer.addCommidity(iphoneCommodity);
         balootServer.addCommidity(cameraCommodity);
-
     }
 
     @After

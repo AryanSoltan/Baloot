@@ -47,8 +47,7 @@ public class ExternalServer {
     }
 
 
-    private void addUsers()
-    {
+    private void addUsers() throws Exception {
         String pageUsers = getRequest("/api/users");
         Gson gsonParser = new GsonBuilder().create();
         List<User> users = gsonParser.fromJson(pageUsers,

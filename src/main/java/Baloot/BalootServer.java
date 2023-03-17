@@ -27,11 +27,16 @@ public class BalootServer {
         commentIdNow = 0;
     }
 
-    public void addUser(User newUser)
-    {
-        newUser.setBoughtCommitiesEmpty();
-        newUser.setPurchasedCommodityEmpty();
-        users.put(newUser.getName(), newUser);
+    public void addUser(User newUser) throws Exception {
+        String name = newUser.getName();
+        if(doesExist(name)) {
+            updateUser(name, newUser);
+        }
+        else {
+            newUser.setBoughtCommitiesEmpty();
+            newUser.setPurchasedCommodityEmpty();
+            users.put(newUser.getName(), newUser);
+        }
     }
 
     public boolean doesExist(String userName)

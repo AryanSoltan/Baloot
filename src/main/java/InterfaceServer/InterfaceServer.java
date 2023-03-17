@@ -44,4 +44,9 @@ public class InterfaceServer {
         };
         serverJavalin.error(404, handlerError);
     }
+
+    public void closeConnection()
+    {
+        serverJavalin.stop();
+    }
 }
