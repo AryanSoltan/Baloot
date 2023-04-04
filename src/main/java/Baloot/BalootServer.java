@@ -1,261 +1,204 @@
 package Baloot;
 
 import Baloot.Exception.*;
-import ExternalServer.ExternalServer;
-import com.google.gson.Gson;
-import org.json.simple.JSONObject;
-
-import javax.sql.CommonDataSource;
-import java.awt.image.AreaAveragingScaleFilter;
+import Baloot.Managers.CommodityManager;
+import Baloot.Managers.PaymentManager;
+import Baloot.Managers.ProviderManager;
+import Baloot.Managers.UserManager;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BalootServer {
 
-    Map<String, User> users;
-    Map<Integer, Provider> providers;
-    Map<Integer, Commodity> commodities;
-    int commentIdNow;
+    private UserManager userManager;
+    private ProviderManager providerManager;
+    private CommodityManager commodityManager;
+    private PaymentManager paymentManager;
+    static int commentIdNow;
+    private static BalootServer instance = null;
 
     public BalootServer()
     {
-        users = new HashMap<String, User>();
-        providers = new HashMap<Integer, Provider>();
-        commodities = new HashMap<Integer, Commodity>();
         commentIdNow = 0;
+        userManager = new UserManager();
+        providerManager = new ProviderManager();
+        commodityManager = new CommodityManager();
+        paymentManager = new PaymentManager();
     }
 
-    public void addUser(User newUser) throws Exception {
-        String name = newUser.getName();
-        if(doesExist(name)) {
-            updateUser(name, newUser);
-        }
-        else {
-            newUser.setBoughtCommitiesEmpty();
-            newUser.setPurchasedCommodityEmpty();
-            users.put(newUser.getName(), newUser);
-        }
-    }
-
-    public boolean doesExist(String userName)
+    public static BalootServer getInstance()
     {
-        return users.containsKey(userName);
+        if(instance == null)
+            instance = new BalootServer();
+        return instance;
+
+    }
+
+    public void addUser(User newUser) throws Exception
+    {
+        String name = newUser.getName();
+        if(userManager.doesExist(name))
+            userManager.updateUser(name, newUser);
+        else
+            userManager.addNewUser(newUser);
     }
 
     public void addProvider(Provider newProvider)
     {
-        int id = newProvider.getId();
-        newProvider.setCommoditiesEmpty();
-        providers.put(id, newProvider);
+        providerManager.addNewProvider(newProvider);
     }
 
-    public boolean checkUserNameValid(String userName)
+    public void addCommidity(Commodity newCommidity) throws Exception
     {
-        return userName.matches("[a-zA-Z0-9]+");
+        int providerId = newCommidity.getProviderId();
+        Provider provider = findProvider(providerId);
+        commodityManager.addNewCommodity(newCommidity , provider.getProviderName());
+        Commodity neededCommodity = commodityManager.getCommodityByID(newCommidity.getId());
+        providerManager.addNewCommodity(neededCommodity,  provider);
     }
 
-    public void updateUser(String name, User newUser) throws Exception {
-        if(!checkUserNameValid(name))
-        {
-            throw new UserNameNotValid(name);
-        }
-        users.remove(name);
-        newUser.setBoughtCommitiesEmpty();
-        users.put(name, newUser);
+    public void addDiscountCode(DiscountCode discountCode)
+    {
+        paymentManager.addNewDiscountCode(discountCode);
     }
 
     public Provider findProvider(int providerId) throws Exception {
-        if(providers.containsKey(providerId))
-            return providers.get(providerId);
-        else
-            throw new ProviderNotExist(providerId);
-    }
-
-
-    public void addCommidity(Commodity newCommidity) throws Exception {
-        int providerId = newCommidity.getProviderId();
-        int id = newCommidity.getId();
-        Provider provider = findProvider(providerId);
-        String providerName = provider.getProviderName();
-        newCommidity.setProviderName(providerName);
-        newCommidity.setUserRatingsEmpty();
-        commodities.put(id, newCommidity);
-        addCommodityToProvider(id, providerId);
-        newCommidity.setCommentsEmpty();
-    }
-
-
-    public void addCommodityToProvider(int commoditiyId, int providerId)
-    {
-        Provider neededProvider = providers.get(providerId);
-        Commodity neededComodity = commodities.get(commoditiyId);
-        neededProvider.addCommodity(neededComodity);
-    }
-
-    public boolean checkExistProvider(int id)
-    { return users.containsKey(id);}
-
-    public ArrayList<Commodity> getCommodityList()
-    {
-        Collection<Commodity> collectionCommidity = commodities.values();
-        ArrayList<Commodity> commiditesArray = new ArrayList<Commodity>(collectionCommidity);
-        return commiditesArray;
-    }
-
-    public void rateCommodity(String username, int commodityId, String scoreStr) throws Exception {
-        if(!scoreStr.matches("-?(0|[1-9]\\d*)"))
-        {
-            throw new InvalidRating();
-        }
-        int score = Integer.parseInt(scoreStr);
-        if(score < 1 || score > 10)
-        {
-            throw new InvalidRating();
-        }
-        if(!users.containsKey(username))
-        {
-            throw new UserNotExist(username);
-        }
-        Commodity neededCommodity = findCommodity(commodityId);
-        if(neededCommodity.hasRating(username))
-        {
-            neededCommodity.updateRating(username, score);
-        }
-        else
-        {
-            neededCommodity.addRating(username, score);
-        }
+        return providerManager.getProviderByID(providerId);
     }
 
     public User findUser(String username) throws Exception {
-        if(!users.containsKey(username))
-        {
-            throw new UserNotExist(username);
-        }
-        User neededUser = users.get(username);
-        return neededUser;
-    }
-
-    public Commodity findCommodity(int commodityId) throws Exception {
-        if(!commodities.containsKey(commodityId))
-        {
-            throw new CommodityNotExist(commodityId);
-        }
-        Commodity neededCommodity = commodities.get(commodityId);
-        return neededCommodity;
-    }
-    public boolean commodityExistsInUserBuyList(String username, int commodityId) throws Exception {
-        User neededUser = findUser(username);
-        return neededUser.hasBoughtCommodity(commodityId);
-    }
-
-    public boolean commodityIsAvailable(int commodityId) throws Exception {
-        Commodity neededCommodity = findCommodity(commodityId);
-        return neededCommodity.isAvailable();
-    }
-
-    public void addCommidityToUserBuyList(String username, int commodityId) throws Exception {
-
-        User neededUser = findUser(username);
-        Commodity neededCommodity = findCommodity(commodityId);
-        if(!neededCommodity.isAvailable())
-            throw new CommodityOutOfStock(commodityId);
-        if(neededUser.hasBoughtCommodity(commodityId))
-            throw new CommodityAlreadyAdded(commodityId);
-        neededUser.buyCommodity(commodityId, neededCommodity);
-    }
-
-    public void setCommodityProviderName(int commodityId, int providerId)
-    {
-        Commodity neededCommodity = commodities.get(commodityId);
-        Provider neededProvider = providers.get(providerId);
-        String providerName = neededProvider.getProviderName();
-        neededCommodity.setProvider(providerName);
-    }
-
-    public void removeFromBuyList(String username, int commodityId) throws Exception {
-        User neededUser = findUser(username);
-        if(!neededUser.hasBoughtCommodity(commodityId))
-        {
-            throw new CommodityIsNotInBuyList(commodityId);
-        }
-        neededUser.removeFromBuyList(commodityId);
+        return userManager.getUserByUsername(username);
     }
 
     public Commodity getCommodityById(int commodityId) throws Exception {
-        Commodity neededCommodity = findCommodity(commodityId);
-        return neededCommodity;
+        return commodityManager.getCommodityByID(commodityId);
     }
 
-    public ArrayList<Commodity> getCommoditiesByCategory(String category) {
-        ArrayList<Commodity> commoditiesByCategory = new ArrayList<Commodity>();
-        for(Commodity commodity: commodities.values())
-        {
-            if(commodity.hasCategory(category))
-            {
-                commoditiesByCategory.add(commodity);
-            }
-        }
-        return commoditiesByCategory;
+    public ArrayList<Commodity> getCommodityList()
+    {
+        return commodityManager.getAllCommodities();
     }
 
-    public ArrayList<Commodity> getUserBuyList(String userName) throws Exception {
-
-        User neededUser = findUser(userName);
-        return neededUser.getBoughtCommodities();
+    public void rateCommodity(String username, int commodityId, String scoreStr) throws Exception
+    {
+        if(!scoreStr.matches("-?(0|[1-9]\\d*)"))
+            throw new InvalidRating();
+        int score = Integer.parseInt(scoreStr);
+        if(score < 1 || score > 10)
+            throw new InvalidRating();
+        if( !userManager.doesExist( username))
+            throw new UserNotExist(username);
+        commodityManager.rateCommodity(username, commodityId, score);
     }
 
-    public ArrayList<Commodity> getCommodityRangePrice(double startPrice, double endPrice) {
-        ArrayList<Commodity> answerCommodities = new ArrayList<Commodity>();
-        for(Commodity commodity: commodities.values())
-        {
-            if(commodity.getPrice() <= endPrice && commodity.getPrice() >= startPrice)
-                answerCommodities.add(commodity);
-        }
-        return answerCommodities;
+    public void addCredit(String username, String credit) throws Exception
+    {
+        if(!credit.matches("-?(0|[1-9]\\d*)"))
+            throw new InvalidCreditValue();
+        double creditVal = Double.parseDouble(credit);
+        if(creditVal < 1)
+            throw new InvalidCreditValue();
+        userManager.addCredit(username,creditVal);
     }
 
-    public void addComment(Comment comment)
-            throws Exception {
-        int commodityId = comment.getCommodityId();
-        comment.setRatingEmpty();
-        Commodity commodity = findCommodity(commodityId);
+    public void addCommidityToUserBuyList(String username, int commodityId) throws Exception { //done
+        Commodity neededCommodity = getCommodityById(commodityId);
+        if(!neededCommodity.isAvailable())
+            throw new CommodityOutOfStock(commodityId);
+        if(userManager.userHasBoughtCommodity(username,commodityId))
+            throw new CommodityAlreadyAdded(commodityId);
+        userManager.addCommidityToUserBuyList(username,neededCommodity);
+    }
+
+    public void removeFromBuyList(String username, int commodityId) throws Exception { //done
+        userManager.removeCommodityFromBuyList(username,commodityId);
+    }
+
+    public ArrayList<Commodity> getCommoditiesByCategory(String category) { //done
+       return commodityManager.getCommoditiesByCategory(category);
+    }
+
+    public BuyList getUserBuyList(String userName) throws Exception { //done
+        return userManager.getUserBuyList(userName);
+    }
+
+
+    public ArrayList<Commodity> getCommodityRangePrice(double startPrice, double endPrice) { //done
+        return commodityManager.getCommodityByRangePrice(startPrice,endPrice);
+    }
+
+    public void addComment(Comment comment) throws Exception { //done
+        User user = userManager.getUserByUseremail(comment.getUserEmail());
         commentIdNow += 1;
-        comment.setCommentId(commentIdNow);
-        commodity.addComment(comment);
+        commodityManager.addCommentToCommodity(comment, commentIdNow, user.getName());
     }
 
-    public void addRatingToComment(int commentId, String userName, int rate)
-            throws Exception {
+    public void addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
         User user = findUser(userName);
-        for(Commodity commodity: commodities.values())
-        {
-            if(commodity.hasCommentId(commentId))
-            {
-                commodity.rateComment(commentId, user, rate);
-            }
-        }
+        commodityManager.rateCommoditiesComment(commentId , user, rate);
     }
 
-    public void handlePaymentUser(String userName) throws Exception
+    public void handlePaymentUser(String userName) throws Exception //done
     {
         User user = findUser(userName);
-        ArrayList<Commodity> commodities = user.getBoughtCommodities();
-        double totalPrice = 0;
-        for(Commodity commodity: commodities)
-        {
-            if(commodity.getInStock() == 0)
-                throw new CommodityOutOfStock(commodity.getId());
-            totalPrice += commodity.getPrice();
-        }
+        BuyList userBuyList = user.getBuyList();
+        commodityManager.checkIfAllCommoditiesAreAvailabel(userBuyList);
+        double totalPrice = userBuyList.getBuylistPrice();
         if(user.getCredit() < totalPrice)
             throw new NotEnoughCredit();
-        for(Commodity commodity: commodities) {
-            user.addPurchasedCommodity(commodity);
-            commodity.buyOne();
-        }
-        user.decreaseCredit(totalPrice);
+
+        commodityManager.decreaseStock(userBuyList);
+        userManager.userBoughtBuyList(user,totalPrice);
+    }
+
+    public ArrayList<Commodity> getSuggestedCommodities(int commodityID) throws Exception
+    {
+        Commodity targetCommodity = getCommodityById(commodityID);
+        return CommodityManager.getMostSimilarCommodities(targetCommodity,3);
+    }
+
+    public void logIn(String username, String password) throws Exception
+    {
+        userManager.login(username,password);
+    }
+    public void logOut()
+    {
+        userManager.logOut();
+    }
+
+    public User getLoggedInUser()
+    {
+        return userManager.getLoggedInUser();
+    }
+
+    public void setSearchFilters(String searchContent, String filterType)
+    {
+        commodityManager.setFilterContent(searchContent);
+        commodityManager.setSearchFilter();
+        commodityManager.setFilterType(filterType);
+    }
+
+    public void clearFilters()
+    {
+        commodityManager.clearSearchFilter();
+    }
+
+    public void setSortFilters(String sortType)
+    {
+        commodityManager.setSortBy(sortType);
+        commodityManager.setSortFilter();
+    }
+
+    public ArrayList<Commodity> getFilteredCommodities()
+    {
+        return commodityManager.getFilteredCommodities();
+    }
+
+    public void applyDiscountCode(String username, String code) throws Exception
+    {
+        if(!paymentManager.discountCodeIsValid(code))
+            throw new InvalidDiscountCode(code);
+        DiscountCode discountCode = paymentManager.getDiscountCode(code);
+        User user = findUser(username);
+        userManager.addDiscountCodeToUserBuyList(user, discountCode);
     }
 }

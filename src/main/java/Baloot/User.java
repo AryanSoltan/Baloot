@@ -17,8 +17,10 @@ public class User {
     private String address;
     private double credit;
 
-    Map<Integer, Commodity> boughtCommodities;
+    private BuyList buyList;
     ArrayList<Commodity> purchased;
+    ArrayList<DiscountCode> usedDiscountCodes ;
+
     public User(String inputUserName, String inputPassword, String inputEmail,
          String inputBirthDate, String inputAddress, double inputCredit)
     {
@@ -28,35 +30,41 @@ public class User {
         birthDate = inputBirthDate;
         address = inputAddress;
         credit = inputCredit;
+        buyList = new BuyList();
+        // usedDiscountCodes = new ArrayList<DiscountCode>();
+
     }
 
-    public void buyCommodity(int commodityId, Commodity newCommodity)
+    public void buyCommodity(Commodity newCommodity)
     {
-        boughtCommodities.put(commodityId, newCommodity);
+        buyList.addNewCommodityToBuyList(newCommodity);
     }
 
     public boolean hasBoughtCommodity(int commodityId)
     {
-        return boughtCommodities.containsKey(commodityId);
+        return buyList.contains(commodityId);
+
     }
 
     public void removeFromBuyList(int commodityId) throws CommodityIsNotInBuyList {
-        if(!boughtCommodities.containsKey(commodityId))
+        if(!buyList.contains(commodityId))
         {
             throw new CommodityIsNotInBuyList(commodityId);
         }
-        boughtCommodities.remove(commodityId);
+        buyList.removeCommodityFromBuyList(commodityId);
     }
 
     public ArrayList<Commodity> getBoughtCommodities() {
-        Collection<Commodity> commoditiesBought = boughtCommodities.values();
-        return new ArrayList<Commodity>(commoditiesBought);
+        return buyList.getAllCommodities();
     }
 
     public void setBoughtCommitiesEmpty() {
-        boughtCommodities = new HashMap<>();
+
+        buyList = new BuyList();
     }
     public void setPurchasedCommodityEmpty(){purchased = new ArrayList<Commodity>();}
+
+    public void setUSedDiscountCodesEmpty(){usedDiscountCodes = new ArrayList<DiscountCode>();}
 
     public String getName() {
         return username;
@@ -87,13 +95,56 @@ public class User {
     }
     public void decreaseCredit(double outCredit){credit -= outCredit;}
 
-    public void addPurchasedCommodity(Commodity commodity)
+    public void addBuyListToPurchasedCommodities()
     {
-        purchased.add(commodity);
-        boughtCommodities.remove(commodity.getId());
+        for(Commodity commodity: buyList.getAllCommodities())
+        {
+            purchased.add(commodity);
+        }
+    }
+    public void clearBuylist()
+    {
+        if(buyList.hasDiscount())
+        {
+            usedDiscountCodes.add(buyList.getBuylistDiscountCode());
+        }
+        buyList.emptyList();
     }
 
     public ArrayList<Commodity> getPurchasedCommodities() {
         return purchased;
+    }
+
+    public BuyList getBuyList()
+    {
+        return buyList;
+    }
+
+    public boolean passwordMatches(String pass)
+    {
+        if(password.equals(pass))
+            return true;
+        return false;
+    }
+
+    public boolean emailEquals(String emailAdd)
+    {
+        if(email.equals(emailAdd))
+            return true;
+        return false;
+    }
+
+    public boolean hasUsedDiscountCode(DiscountCode discountCode)
+    {
+        if(usedDiscountCodes.isEmpty())
+            return false;
+        if(usedDiscountCodes.contains(discountCode))
+            return true;
+        return false;
+    }
+
+    public void addDiscountToBuylist(DiscountCode discountCode)
+    {
+        buyList.setDiscountCode(discountCode);
     }
 }

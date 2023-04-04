@@ -1,11 +1,9 @@
 package ExternalServer;
 
-import Baloot.BalootServer;
-import Baloot.Comment;
-import Baloot.Commodity;
+import Baloot.*;
+import Baloot.Exception.NotEnoughCredit;
 import Baloot.Exception.ProviderNotExist;
-import Baloot.Provider;
-import Baloot.User;
+import Baloot.Exception.UserNotExist;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -26,35 +24,54 @@ public class ExternalServer {
 
     String serverAddress;
     BalootServer balootServer;
-    public ExternalServer(String inputServerAddress, BalootServer inputBalootServer) throws Exception {
-        serverAddress = inputServerAddress;
-        balootServer = inputBalootServer;
-        addProviders();
-        addCommodities();
-        addUsers();
-        addComments();
+    public ExternalServer(String inputServerAddress, BalootServer inputBalootServer) //throws Exception
+    {
+        try {
+            serverAddress = inputServerAddress;
+            balootServer = inputBalootServer;
+            addProviders();
+            addCommodities();
+            addUsers();
+            addComments();
+            addDiscountCode();
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
-    private void addComments() throws Exception {
-        String pageComments = getRequest("/api/comments");
-        Gson gsonParser = new GsonBuilder().create();
-        List<Comment> comments = gsonParser.fromJson(pageComments,
-                new TypeToken<List<Comment>>() {}.getType());
-        for(Comment comment: comments)
-        {
-            balootServer.addComment(comment);
+    private void addComments() //throws Exception
+    {
+        try {
+            String pageComments = getRequest("/api/comments");
+            Gson gsonParser = new GsonBuilder().create();
+            List<Comment> comments = gsonParser.fromJson(pageComments,
+                    new TypeToken<List<Comment>>() {
+                    }.getType());
+            for (Comment comment : comments) {
+                balootServer.addComment(comment);
+            }
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
         }
     }
 
 
-    private void addUsers() throws Exception {
-        String pageUsers = getRequest("/api/users");
-        Gson gsonParser = new GsonBuilder().create();
-        List<User> users = gsonParser.fromJson(pageUsers,
-                new TypeToken<List<User>>() {}.getType());
-        for(User user: users)
-        {
-            balootServer.addUser(user);
+    private void addUsers() //throws Exception
+    {
+        try {
+            String pageUsers = getRequest("/api/users");
+            Gson gsonParser = new GsonBuilder().create();
+            List<User> users = gsonParser.fromJson(pageUsers,
+                    new TypeToken<List<User>>() {
+                    }.getType());
+            for (User user : users) {
+                balootServer.addUser(user);
+            }
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
         }
     }
 
@@ -70,14 +87,41 @@ public class ExternalServer {
             balootServer.addProvider(provider);
         }
     }
-    public void addCommodities() throws Exception {
-        String pageCommodities = getRequest("/api/commodities");
-        Gson gsonParser = new GsonBuilder().create();
-        List<Commodity> commodities = gsonParser.fromJson(pageCommodities,
-                new TypeToken<List<Commodity>>() {}.getType());
-        for(Commodity commodity: commodities)
-        {
-            balootServer.addCommidity(commodity);
+    public void addCommodities()// throws Exception
+    {
+        try {
+            String pageCommodities = getRequest("/api/commodities");
+            Gson gsonParser = new GsonBuilder().create();
+            List<Commodity> commodities = gsonParser.fromJson(pageCommodities,
+                    new TypeToken<List<Commodity>>() {
+                    }.getType());
+            for (Commodity commodity : commodities) {
+                balootServer.addCommidity(commodity);
+            }
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    public void addDiscountCode()// throws Exception
+    {
+        try {
+            String pageDiscounts = getRequest("/api/discount");
+            Gson gsonParser = new GsonBuilder().create();
+            List<DiscountCode> discountCodes = gsonParser.fromJson(pageDiscounts,
+                    new TypeToken<List<DiscountCode>>() {
+                    }.getType());
+            for (DiscountCode discountCode : discountCodes) {
+
+                balootServer.addDiscountCode(discountCode);
+            //    throw new UserNotExist(discountCode.getCode());
+            }
+
+
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
         }
     }
 

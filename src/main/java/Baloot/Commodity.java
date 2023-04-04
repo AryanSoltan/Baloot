@@ -96,7 +96,7 @@ public class Commodity {
 
     public void buyOne()
     {
-        inStock -= 1;
+        inStock -=1 ;
     }
 
     public void setProvider(String inputProviderName) {
@@ -107,12 +107,31 @@ public class Commodity {
         return categories.contains(category);
     }
 
+    public boolean hasCategory(ArrayList<String> listOfCategories)
+    {
+        for(String cat : listOfCategories)
+        {
+            if(categories.contains(cat))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean nameContains(String searchName){
+        return name.contains(searchName);
+    }
+
+
     public void setUserRatingsEmpty() {
         userRatings = new HashMap<>();
     }
 
     public int getProviderId() {
         return providerId;
+    }
+
+    public String getProviderName() {
+        return providerName;
     }
 
     public int getId() {
@@ -162,7 +181,7 @@ public class Commodity {
     public void addComment(Comment comment)
     {
         comments.add(comment);
-        comment.setUserName(name);
+       // comment.setUserName(name);
     }
 
     public ArrayList<Comment> getComments()
@@ -178,6 +197,7 @@ public class Commodity {
         }
         return false;
     }
+
 
     public void rateComment(int commentId, User user, int rate) {
         for(Comment comment: comments)

@@ -21,7 +21,7 @@ public class CommodityInterface
         String commodityHTMLPage = HTMLWriter.readHTMLFile("CommodityHeader.html");
         commodityHTMLPage += "<html>";
         commodityHTMLPage += "<body>";
-        Commodity neededCommodity = balootServer.findCommodity(Integer.parseInt(commodityId));
+        Commodity neededCommodity = balootServer.getCommodityById(Integer.parseInt(commodityId));
 
         LinkedHashMap<String, String> listCommodityAttributes = getCommodityValues(neededCommodity);
         commodityHTMLPage += HTMLWriter.writeList(idNamesCommidity, listCommodityAttributes);
