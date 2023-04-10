@@ -11,8 +11,10 @@
 
 
     margin-left: 20vmin;
+    padding-top: 20vmin;
+    margin-right: 20vmin;
     /* margin-right: 20vmin; */
-    margin-top: 10vmin;
+    /* margin-top: 10vmin; */
 
 
 
@@ -36,12 +38,13 @@
     /* background: #FCFCFC; */
 }
 
+
 .user-info-txt
 {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
-    font-size: 28px;
+    font-size: 1.5vw;
     line-height: 34px;
     /* identical to box height */
 
@@ -166,4 +169,115 @@
     /* border-radius: 15px; */
 
     /* background: #FCFCFC; */
+}
+
+.cart-item-info
+{
+    display: flex;
+}
+
+.cart-item-info img 
+{
+    /* margin-top: 1vmin; */
+    margin-right: 2vmin;
+    width: 5vmin;
+    height: 6vmin;
+}
+
+.cart-title-txt 
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+
+    color: #593C1C;
+
+}
+
+.cart-button 
+{
+    margin-left: 5vmin;
+    width: 15vmin;
+    padding-top: 1vmin;
+    /* padding-left: 1vmin; */
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
+
+.cart-button p  
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #F7F0E9;
+    padding-left: 2vmin;
+}   
+
+.cart-col-name
+{
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    margin-right: 20vmin;
+    margin-left: 5vmin;
+    padding-left: 3.1vmin;
+    padding-top: 1.2vmin;
+}
+
+.cart-col-name p 
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2vw;
+    line-height: 34px;
+    /* identical to box height */
+
+    text-align: center;
+
+    margin-right: 5vw;
+}
+
+.cart-buy-item 
+{
+    margin-right: 20vmin;
+    padding-left: 3.1vmin;
+    padding-top: 1.2vmin;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+}
+
+.cart-buy-item img 
+{
+    width: 4vw;
+
+}
+
+.cart-buy-item p
+{
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    margin-left: 2.5vw;
+    /* identical to box height */
+    
+    text-align: center;
+    
+    color: #919191;
+    
 }

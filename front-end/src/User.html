@@ -7,42 +7,92 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" , href="../css/styles.css"> -->
+    <link rel="stylesheet" , href="../css/header.css">
     <link rel="stylesheet" , href="../css/User.css">
 </head>
 <html lang="en">
 
     <body>
-        <!-- <header>
+        
+        <div class="header-container">
 
-            <div class="container-fluid p-0">
-                <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg">
 
+                <div class="navbar-nav ml-0">
                     <div class="navbar-brand">
-                        <img src="../assets/images/logo.jpg" alt="logo">
-
+                        <img src="../assets/images/logo.jpg" alt="">
+                        <span class="brand-name">Baloot</span>
                     </div>
+                </div>
 
-                    <div class="navbar-brand-name">
 
-                        Baloot
-                    </div>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item">
-                                <div class="nav-username-user">
-                                    #Marshal
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <div class = "button-cart-nav-user">
-                                    Hello
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-        </header> -->
+                <div class="navbar-nav mx-auto">
+                    <!-- <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn dropdown-toggle search-dropdown-button"
+                                data-toggle="dropdown">name</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
 
+                            </div>
+                        </div>
+                        <link rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                        <input type="hidden" name="search_param" value="all" id="search_param">
+                        <input type="text" class="form-control search-input" name="x"
+                            placeholder="search your product...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default search-icon" type="button"><span
+                                    class="fa fa-search"></span></button>
+                        </span>
+                    </div> -->
+
+                </div>
+
+
+                <!-- <ul class="navbar-nav mr-5">
+
+                    <li class="nav-item">
+                        <a role="button" href="#" class="btn header-button">
+                            <span class="header-button-txt">Login</span>
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="button" href="#" class="btn header-button">
+                            <span class="header-button-txt">Register</span>
+                        </a>
+                    </li>
+
+                </ul> -->
+
+
+                <ul class="navbar-nav mr-5">
+
+                    <li class="nav-item">
+                        <a href="#">
+                            <span class="header-username-container header-username">#Marshal</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class = "cart-button item-info">
+                            <p>Cart</p>
+                            <p>3</p>
+                        </div>
+                    </li>
+
+                </ul>
+
+
+
+            </nav>
+        </div>
+
+
+    </header>
+
+    
         <main>
             <section class = "section-user-info">
 
@@ -87,7 +137,32 @@
 
 
             <section class = "section-cart-info">
-                Cart
+                <div class = "cart-item-info">
+                    <img src = "../assets/images/cart.png"/>
+                    <p class = "cart-title-txt">Cart</p>
+                </div>
+
+                <div class = "cart-col-name">
+                    <div class = "row">
+                        <p>Image</p>
+                        <p>Name</p>
+                        <p>Categories</p>
+                        <p>Price</p>
+                        <p>Provider ID</p>
+                        <p>Rating</p>
+                        <p>In Stock</p>
+                        <p>In Cart</p>
+                    </div>
+                </div>
+
+                <ul>
+                    <li class = "cart-buy-item">
+                        <div class = "row">
+                            <img src = "../assets/images/item-in-cart.png"/>
+                            <p>Galexy S21</p>
+                        </div>
+                    </li>
+                </ul>
             </section>
 
 
