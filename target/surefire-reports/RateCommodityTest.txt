@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: RateCommodityTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
+RateCommodityTest.testUserNotExists()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "Baloot.BalootServer.rateCommodity(String, int, String)" because "this.balootServer" is null
+	at RateCommodityTest.testUserNotExists(RateCommodityTest.java:37)
+
+RateCommodityTest.testRateWhenInitialRateIsZero()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "Baloot.BalootServer.rateCommodity(String, int, String)" because "this.balootServer" is null
+	at RateCommodityTest.testRateWhenInitialRateIsZero(RateCommodityTest.java:57)
+
+RateCommodityTest.testRateWhenInitialRateIsNotZero()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "Baloot.BalootServer.rateCommodity(String, int, String)" because "this.balootServer" is null
+	at RateCommodityTest.testRateWhenInitialRateIsNotZero(RateCommodityTest.java:68)
+
+RateCommodityTest.testUpdateRate()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "Baloot.BalootServer.rateCommodity(String, int, String)" because "this.balootServer" is null
+	at RateCommodityTest.testUpdateRate(RateCommodityTest.java:82)
+
+RateCommodityTest.testCommodityNotExists()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "Baloot.BalootServer.rateCommodity(String, int, String)" because "this.balootServer" is null
+	at RateCommodityTest.testCommodityNotExists(RateCommodityTest.java:43)
+
