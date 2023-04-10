@@ -1,0 +1,130 @@
+.header-container {
+    width: 100%;
+    margin: 0 0;
+    justify-content: space-between;
+    padding: 0;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    position: fixed;
+    z-index: 1000;
+}
+
+.navbar-brand .img {
+
+    display: inline;
+    width: 102px;
+    height: 94px;
+    vertical-align: middle;
+    float: left;
+    margin-left: 2.91vw;
+
+}
+
+.brand-name {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 91px;
+    margin-left: 0.7vw;
+    color: #A97B47;
+}
+
+
+.input-group {
+    height: 6vh;
+    width: 32vw;
+    background: #F7F0E9;
+    border-radius: 15px;
+}
+
+.search-input {
+    background: #F7F0E9;
+    width: 32vw;
+    height: 6vh;
+    border: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.1rem;
+    text-align: left;
+    color: #919191;
+
+}
+
+
+.search-dropdown-button {
+    background: #D8C1A8;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    height: 6vh;
+    width: 8vw;
+    padding: 0;
+    margin: 0;
+    color: #593C1C;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.1rempx;
+    text-align: center;
+}
+
+.search-icon {
+    background: #F7F0E9;
+    opacity: 0.4;
+    border-radius: 15px;
+    height: 100%;
+
+}
+
+
+.header-button {
+    background: #F7F0E9;
+    border-radius: 15px;
+    height: 6vh;
+    width: 10em;
+    display: inline-block;
+    margin-left: 2em;
+}
+
+.header-button-txt {
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #A97B47;
+}
+
+.header-username-container {
+    margin-left: 2em;
+    margin-top: 1.5vh;
+}
+
+.header-username {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+    color: #593C1C;
+    display: inline-block;
+    text-align: left;
+}
+
+
+.card-item {
+    display: inline-block;
+    height: 6vh;
+    width: 10em;
+    background: #F7F0E9;
+    opacity: 0.4;
+    border-radius: 15px;
+    text-align: left;
+    vertical-align: middle;
+    margin-left: 2em;
+
+}
