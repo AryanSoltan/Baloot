@@ -252,7 +252,7 @@
 .cart-buy-item 
 {
     margin-right: 20vmin;
-    padding-left: 3.1vmin;
+    /* padding-left: 1vmin; */
     padding-top: 1.2vmin;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
@@ -271,13 +271,65 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
-    font-size: 28px;
+    font-size: 0.8vw;
     line-height: 34px;
-    margin-left: 2.5vw;
     /* identical to box height */
     
-    text-align: center;
     
     color: #919191;
     
+}
+
+.box-cart-item
+{
+    text-align: center;
+    width: 7vw;
+    height: 5vw;
+    margin-right: 2vw;
+    /* padding-right: 4vw; */
+    /* margin-left: 3.5vw; */
+}
+
+.col-yellow 
+{
+    color: #FFC700;
+}
+
+.col-red 
+{
+    color: #C82525;
+}
+
+.inc-dec 
+{
+    height: 2vw;
+    width: 10vw;
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    text-align: center;
+    border-radius: 15px;
+}
+
+
+.inc-dec-item
+{
+    padding-left: 2.5vw;
+    font-size: 1.1vw;
+
+    color: #000000;
+
+}
+
+.payment-button 
+{
+    width: 40vw;
+    background: #593C1C;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    margin-left: 15vw;
+}
+
+li 
+{
+    list-style-type: none;
 }
