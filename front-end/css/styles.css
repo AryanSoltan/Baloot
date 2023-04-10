@@ -14,6 +14,8 @@ section {
     background: #F5F5F5;
 }
 
+
+
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200&display=swap');
 
 :root {
@@ -21,8 +23,6 @@ section {
     --transparent-primary-color: rgba(177, 32, 37, .7);
     --background-color: #292929;
     --card-background-color: #4e4e50;
-
-
 }
 
 
@@ -37,8 +37,6 @@ header {
     position: fixed;
     z-index: 1000;
 
-
-
 }
 
 main {
@@ -49,6 +47,7 @@ header a {
     font-size: 0.9em;
 
 }
+
 
 header .nav-item {
     padding: 0.9em;
@@ -85,6 +84,7 @@ header .navbar-nav .nav-item .card-item {
     text-align: left;
 
 }
+
 
 header .navbar-nav .nav-item .header-text {
     /* position: absolute;
@@ -145,5 +145,62 @@ header .navbar-nav .nav-item .header-text {
     text-align: center;
 
     color: #593C1C;
+
+}
+
+
+header .right.navbar-nav .navbar-nav
+{
+    float: right;
+}
+
+
+.nav-username-user
+{
+    position: absolute;
+    width: 127px;
+    height: 34px;
+    left: 1527px;
+    top: 38px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #593C1C;
+}
+
+.nav-cart 
+{
+    position: absolute;
+    width: 160px;
+    height: 68px;
+    left: 1718px;
+    top: 24px;
+
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
+
+.button-cart-nav-user 
+{
+    position: absolute;
+    width: 160px;
+    height: 68px;
+    left: 1718px;
+    top: 24px;
+
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+
+    margin-right:42px;
+    margin-left:24px;
 
 }

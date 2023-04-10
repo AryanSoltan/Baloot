@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <style>
+        li {
+        	padding: 5px
+        }
+        table{
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li id="username">Username: Farhad</li>
+        <li id="email">Email: Farhad@gmail.com</li>
+        <li id="birthDate">Birth Date: 2000/07/21</li>
+        <li id="address">Tehran, North Karegar, No 10</li>
+        <li id="credit">Credit: 700000</li>
+        <li>
+            <form action="" method="POST" >
+                <label>Buy List Payment</label>
+                <input id="form_payment" type="hidden" name="userId" value="Farhad">
+                <button type="submit">Payment</button>
+            </form>
+        </li>
+    </ul>
+    <table>
+        <caption>
+            <h2>Buy List</h2>
+        </caption>
+        <tr>
+            <th>Id</th> 
+            <th>Name</th> 
+            <th>Provider Id</th> 
+            <th>Price</th> 
+            <th>Categories</th> 
+            <th>Rating</th> 
+            <th>In Stock</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>2341</th> 
+            <th>Galaxy S21</th>
+            <th>1781</th> 
+            <th>21000000</th> 
+            <th>Technology, Phone</th> 
+            <th>8.3</th> 
+            <th>17</th> 
+            <td><a href="/commodities/2341">Link</a></td>
+            <td>        
+                <form action="" method="POST" >
+                    <input id="form_commodity_id" type="hidden" name="commodityId" value="2341">
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <caption><h2>Purchased List</h2></caption>
+        <tr>
+            <th>Id</th> 
+            <th>Name</th> 
+            <th>Provider Id</th> 
+            <th>Price</th> 
+            <th>Categories</th> 
+            <th>Rating</th> 
+            <th>In Stock</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>1392</th> 
+            <th>Galaxy S8</th>
+            <th>1781</th> 
+            <th>8000000</th> 
+            <th>Technology, Phone</th> 
+            <th>7.6</th> 
+            <th>8</th> 
+            <td><a href="/commodities/1392">Link</a></td>
+        </tr>
+    </table>
+</body>
+</html>

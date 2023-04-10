@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: SearchCommiditiesTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+SearchCommiditiesTest.testCommodityNotExists()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoSuchMethodError: 'Baloot.Commodity Baloot.BalootServer.findCommodity(int)'
+	at SearchCommiditiesTest.testCommodityNotExists(SearchCommiditiesTest.java:46)
+
+SearchCommiditiesTest.testCommodityWithoutError()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoSuchMethodError: 'Baloot.Commodity Baloot.BalootServer.findCommodity(int)'
+	at SearchCommiditiesTest.testCommodityWithoutError(SearchCommiditiesTest.java:51)
+
