@@ -26,11 +26,30 @@ main {
 
 
 .custom-control-input {
+
+    /* width: 20vw; */
+    /* margin-left:20vw; */
     color: #593C1C;
     background-color: #A97B47;
 
 }
 
+/* 
+.custom-control
+{
+    : 2vw;
+}  */
+
+.custom-control-label
+{
+
+    margin-left:2vw;
+    /* height: 4vw; */
+    color: #593C1C;
+    background-color: #A97B47;
+
+
+}
 
 
 .font32 {
