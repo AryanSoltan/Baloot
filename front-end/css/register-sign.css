@@ -1,0 +1,55 @@
+.logo 
+{
+    text-align: center;
+    margin-bottom:10vw;
+}
+
+.logo img 
+{
+    width: 7vw;
+    height: 7vw;
+    margin-top: 1vw;
+}
+
+.font-title 
+{
+    font-size: 5vw;
+    color: #593C1C;
+    background-color: #F7F0E9;
+
+
+}
+
+.logo h1 
+{
+    margin-top: 3vw;
+    font-size: 2vw;
+    margin-left: 1vw;
+    color: #593C1C;
+}
+
+.logo p 
+{
+    margin-right: 3vw;
+    color: #593C1C;
+
+}
+
+.logo input 
+{
+    margin-top: 1vw;
+    width: 30vw;
+    height: 2vw;
+}
+
+.register-button 
+{
+    margin-top: 2vw;
+    margin-right: 15vw;
+    height: 2vw;
+    width: 40vw;
+    background: #593C1C;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    margin-left: 15vw;
+}

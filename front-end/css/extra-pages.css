@@ -1,0 +1,36 @@
+.logo 
+{
+    /* text-align: center; */
+    /* margin-bottom:2vw; */
+}
+
+.logo img 
+{
+    width: 5vw;
+    height: 5vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
+}
+
+.font-title 
+{
+    font-size: 2vw;
+    color: #593C1C;
+    /* background-color: #F7F0E9; */
+}
+
+h1 
+{
+    margin-top: 2vw;
+    font-size: 2vw;
+    margin-left: 1vw;
+    color: #593C1C;
+}
+
+a 
+{
+    margin-top: 2vw;
+    font-size: 2vw;
+    margin-left: 1vw;
+    color: #593C1C;    
+}
