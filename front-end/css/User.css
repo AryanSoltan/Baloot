@@ -148,7 +148,7 @@
 
 
     margin-left: 20vmin;
-    /* margin-right: 20vmin; */
+    margin-right: 20vmin;
     margin-top: 10vmin;
 
 
@@ -225,14 +225,14 @@
 
 .cart-col-name
 {
-
+    padding-left: 2vw;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
-    border-radius: 15px;
-    margin-right: 20vmin;
-    margin-left: 5vmin;
-    padding-left: 3.1vmin;
-    padding-top: 1.2vmin;
+    /* border-radius: 15px; */
+    margin-right: 2vw;
+    margin-left: 2vw;
+    /* padding-left: 3vmin; */
+    padding-top: 3vmin;
 }
 
 .cart-col-name p 
@@ -251,9 +251,14 @@
 
 .cart-buy-item 
 {
-    margin-right: 20vmin;
+    padding-left: 2vw;
+    margin-top:3vw;
+    margin-right: 1vmin;
+    margin-left: 1vmin;
+    /* padding-left: 3.1vmin;
+    padding-top: 1.2vmin; */
     /* padding-left: 1vmin; */
-    padding-top: 1.2vmin;
+    /* padding-top: 1.2vmin; */
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
@@ -262,6 +267,7 @@
 .cart-buy-item img 
 {
     width: 4vw;
+
 
 }
 
@@ -273,6 +279,7 @@
     font-weight: 600;
     font-size: 0.8vw;
     line-height: 34px;
+
     /* identical to box height */
     
     
@@ -332,4 +339,30 @@
 li 
 {
     list-style-type: none;
+}
+
+.astext {
+    margin:0;
+    padding:0;
+
+    margin-top: 0.2vw;
+
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+
+    background:none;
+    border:none;
+    cursor: pointer;
+}
+
+h6 
+{
+    margin:0;
+    padding:0;
+
+    margin-top: 0.3vw;
+
+    background:none;
+    border:none;
+    cursor: pointer;
 }
