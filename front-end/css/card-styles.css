@@ -1,0 +1,29 @@
+.card-title {
+    margin-left: 2.5rem;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.card-bottom {
+    margin-left: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+
+.commodity-card {
+    background-color: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.042vw;
+    line-height: 1.250vw;
+    margin-right: 1rem;
+    float: right;
+    text-align: center;
+    color: #59231c;
+
+}

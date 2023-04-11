@@ -1,0 +1,89 @@
+main {
+    padding-top: 300px;
+    background-color: #F5F5F5;
+}
+
+.container {
+    padding-left: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+.filter-container {
+
+    width: 75vw;
+    height: 10vh;
+    background: #F7F0E9;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+
+    padding-left: 2vw;
+    padding-right: 2vw;
+
+
+}
+
+
+.custom-control-input {
+    color: #593C1C;
+    background-color: #A97B47;
+
+}
+
+
+
+.font32 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.667vw;
+}
+
+.font28 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.458vw;
+
+}
+
+.line39 {
+    line-height: 2.031vw;
+}
+
+.line34 {
+    line-height: 1.771vw;
+}
+
+.color-593C1C {
+    color: #593C1C;
+}
+
+.color-FFFFFF {
+    color: #FFFFFF;
+}
+
+
+
+button.btn.filter-btn {
+    width: 7.813vw;
+    background: #A97B47;
+    border-radius: 15px;
+    margin-left: 2vw;
+
+}
+
+.commodities-list {
+    justify-content: center;
+    margin-top: 5vw;
+    width: 75vw;
+}
+
+
+
+
+.group-card-section .card {
+    margin-bottom: 2vw;
+
+}
