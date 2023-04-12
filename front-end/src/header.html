@@ -16,72 +16,63 @@
 
     <header>
 
-        <div class="header-container">
-
-            <nav class="navbar navbar-expand-lg">
-
-                <div class="navbar-nav ml-0">
-                    <div class="navbar-brand">
-                        <img src="../assets/images/logo.jpg" alt="">
-                        <span class="brand-name">Baloot</span>
-                    </div>
-                </div>
+        <div class="header-container navbar navbar-expand-lg flex-nowrap">
 
 
-                <div class="navbar-nav mx-auto">
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn dropdown-toggle search-dropdown-button"
-                                data-toggle="dropdown">name</button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
+            <div class="navbar-brand">
+                <div class="brand-img brand-name"></div>
+                <span class="brand-name">Baloot</span>
 
-                            </div>
+            </div>
+
+            <div class="fill-remaining-space"></div>
+
+            <!-- <div class="mx-auto">
+                <div class="navbar-nav input-group search-box">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn dropdown-toggle search-dropdown-button"
+                            data-toggle="dropdown">name</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+
                         </div>
-                        <link rel="stylesheet"
-                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                        <input type="hidden" name="search_param" value="all" id="search_param">
-                        <input type="text" class="form-control search-input" name="x"
-                            placeholder="search your product...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default search-icon" type="button"><span
-                                    class="fa fa-search"></span></button>
-                        </span>
                     </div>
-
+                    <input type="text" class="form-control" name="x" placeholder="search your product...">
+                    <button class="btn search-icon" type="button"></button>
                 </div>
 
+            </div>
 
-                <!-- <ul class="navbar-nav mr-5">
+            <div class="mr-4">
+                <ul class="navbar-nav not-logged-in-state">
 
                     <li class="nav-item">
-                        <a role="button" href="#" class="btn header-button">
-                            <span class="header-button-txt">Login</span>
-
+                        <a role="button" href="#" class="btn">
+                            Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a role="button" href="#" class="btn header-button">
-                            <span class="header-button-txt">Register</span>
+                        <a role="button" href="#" class="btn">
+                            Register
                         </a>
                     </li>
 
-                </ul> -->
+                </ul>
+            </div> -->
 
-
-                <ul class="navbar-nav mr-5">
-
+            <div class="mr-auto">
+                <ul class="navbar-nav logged-in-state align-items-center">
                     <li class="nav-item">
                         <a href="#">
-                            <span class="header-username-container header-username">#username</span>
+                            <span class="header-username-container">#username</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            <button type="button" class="btn btn-default card-item">
-                                <span class="header-username">Card </span>
-                                <span class="badge pull-right header-username">3</span>
+                            <button type="button" class="btn btn-default count-of-bought-items">
+                                Card
+                                <span class="badge">3</span>
 
 
                             </button>
@@ -89,10 +80,8 @@
                     </li>
 
                 </ul>
+            </div>
 
-
-
-            </nav>
         </div>
 
 

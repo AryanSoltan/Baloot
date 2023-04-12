@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,232 +14,267 @@
 </head>
 <html lang="en">
 
-    <body>
-        
-        <div class="header-container">
+<body>
 
-            <nav class="navbar navbar-expand-lg">
+    <header>
 
-                <div class="navbar-nav ml-0">
-                    <div class="navbar-brand">
-                        <img src="../assets/images/logo.jpg" alt="">
-                        <span class="brand-name">Baloot</span>
+        <div class="header-container navbar navbar-expand-lg flex-nowrap">
+
+
+            <div class="navbar-brand">
+                <div class="brand-img brand-name"></div>
+                <span class="brand-name">Baloot</span>
+
+            </div>
+
+            <div class="fill-remaining-space"></div>
+
+            <!-- <div class="mx-auto">
+                <div class="navbar-nav input-group search-box">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn dropdown-toggle search-dropdown-button"
+                            data-toggle="dropdown">name</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+
+                        </div>
                     </div>
+                    <input type="text" class="form-control" name="x" placeholder="search your product...">
+                    <button class="btn search-icon" type="button"></button>
                 </div>
 
+            </div>
 
-                <div class="navbar-nav mx-auto">
-                    <!-- <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn dropdown-toggle search-dropdown-button"
-                                data-toggle="dropdown">name</button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-
-                            </div>
-                        </div>
-                        <link rel="stylesheet"
-                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                        <input type="hidden" name="search_param" value="all" id="search_param">
-                        <input type="text" class="form-control search-input" name="x"
-                            placeholder="search your product...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default search-icon" type="button"><span
-                                    class="fa fa-search"></span></button>
-                        </span>
-                    </div> -->
-
-                </div>
-
-
-                <!-- <ul class="navbar-nav mr-5">
+            <div class="mr-4">
+                <ul class="navbar-nav not-logged-in-state">
 
                     <li class="nav-item">
-                        <a role="button" href="#" class="btn header-button">
-                            <span class="header-button-txt">Login</span>
-
+                        <a role="button" href="#" class="btn">
+                            Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a role="button" href="#" class="btn header-button">
-                            <span class="header-button-txt">Register</span>
+                        <a role="button" href="#" class="btn">
+                            Register
                         </a>
-                    </li>
-
-                </ul> -->
-
-
-                <ul class="navbar-nav mr-5">
-
-                    <li class="nav-item">
-                        <a href="#">
-                            <span class="header-username-container header-username">#Marshal</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <div class = "cart-button item-info">
-                            <p>Cart</p>
-                            <p>3</p>
-                        </div>
                     </li>
 
                 </ul>
+            </div> -->
+
+            <div class="mr-auto">
+                <ul class="navbar-nav logged-in-state align-items-center">
+                    <li class="nav-item">
+                        <a href="#">
+                            <span class="header-username-container">#username</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <button type="button" class="btn btn-default count-of-bought-items">
+                                Card
+                                <span class="badge">3</span>
 
 
+                            </button>
+                        </a>
+                    </li>
 
-            </nav>
+                </ul>
+            </div>
+
         </div>
 
 
     </header>
 
-    
-        <main>
-            <section class = "section-user-info">
 
-                <div class = "container-fluid p0"> 
-                    <div class = "row">
-                        
-                        <div class= "col-lg-6 col-md-12 first-row-info">
-                            <div class = "item-info">
-                                <img src = "../assets/images/user-image.jpg"/>
-                                <p class = "user-info-txt">Marshal</p>
-                            </div>
-                            <div class = "item-info">
-                                <img src = "../assets/images/user-email.png"/>
-                                <p class = "user-info-txt">Marshal.Mathers@gmail.com</p>
-                            </div>
-                            <div class = "item-info">
-                                <img src = "../assets/images/date-user-info.png"/>
-                                <p class = "user-info-txt">1972/10/17</p>
-                            </div>
-                            <div class = "item-info">
-                                <img src = "../assets/images/map-user-info.png"/>
-                                <p class = "user-info-txt">20785 Schultes Avenue, Warren, MI 48091</p>
-                            </div>
+    <main>
+        <section class="section-user-info">
+
+            <div class="container-fluid p0">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12 first-row-info">
+                        <div class="item-info">
+                            <img src="../assets/images/user-image.jpg" />
+                            <p class="user-info-txt">Marshal</p>
                         </div>
-
-                        <div class= "col-lg-6 col-md-12">
-                             <div class = "credit-info">
-                                <img src = "../assets/images/dollar.png"/>
-                                <p class = "credit-info-txt">1000000</p>
-                            </div>
-                            <input class = "box-amount" type="text" id="fname" name="fname" placeholder="$ Amount"></input>
-                            <button type="button" class = "button-credit">
-                                <p>Add more credit!</p>
-                            </button>
+                        <div class="item-info">
+                            <img src="../assets/images/user-email.png" />
+                            <p class="user-info-txt">Marshal.Mathers@gmail.com</p>
                         </div>
-
-                    </div>
-                    
-                </div>
-               
-            </section>
-
-
-            <section class = "section-cart-info">
-                <div class = "cart-item-info">
-                    <img src = "../assets/images/cart.png"/>
-                    <p class = "cart-title-txt">Cart</p>
-                </div>
-
-                <div class = "cart-col-name">
-                    <div class = "row">
-                        <p>Image</p>
-                        <p>Name</p>
-                        <p>Categories</p>
-                        <p>Price</p>
-                        <p>Provider ID</p>
-                        <p>Rating</p>
-                        <p>In Stock</p>
-                        <p>In Cart</p>
-                    </div>
-                </div>
-
-                <!-- <ul> -->
-                    <div class = "cart-buy-item">
-                        <div class = "row">
-                            <div class = "box-cart-item"><img src = "../assets/images/item-in-cart.png"/></div>
-                            <div class = "box-cart-item"><p>Galexy S21</p></div>
-                            <div class = "box-cart-item"><p> Technology, Phone</p></div>
-                            <div class = "box-cart-item"><p>$21000000</p></div>
-                            <div class = "box-cart-item"><p>1234</p></div>
-                            <div class = "box-cart-item"><h5 class = "col-yellow">8.3</p></div>
-                            <div class = "box-cart-item"><h5 class = "col-red">17</p></div>
-                            <div class = "box-cart-item inc-dec">
-                                <div class = "row">
-                                   <button class = "astext">+</button>
-                                   <h6>1</h6>
-                                   <button class = "astext">-</button>
-                                </div>
-                            </div>
+                        <div class="item-info">
+                            <img src="../assets/images/date-user-info.png" />
+                            <p class="user-info-txt">1972/10/17</p>
                         </div>
-                    </div>
-                <!-- </ul> -->
-
-
-                <button class = "payment-button">
-                    Pay now!
-                </button>
-                
-            </section>
-            
-            <section class = "section-cart-info">
-                <div class = "cart-item-info">
-                    <img src = "../assets/images/history.png"/>
-                    <p class = "cart-title-txt">History</p>
-                </div>
-
-                <div class = "cart-col-name">
-                    <div class = "row">
-                        <p>Image</p>
-                        <p>Name</p>
-                        <p>Categories</p>
-                        <p>Price</p>
-                        <p>Provider ID</p>
-                        <p>Rating</p>
-                        <p>In Stock</p>
-                        <p>Quantity</p>
-                    </div>
-                </div>
-
-                <!-- <ul> -->
-                    <div class = "cart-buy-item">
-                        <div class = "row">
-                            <div class = "box-cart-item"><img src = "../assets/images/spagheti.png"/></div>
-                            <div class = "box-cart-item"><p>Mom’s Spaghetti</p></div>
-                            <div class = "box-cart-item"><p>Food</p></div>
-                            <div class = "box-cart-item"><p>$60000</p></div>
-                            <div class = "box-cart-item"><p>313</p></div>
-                            <div class = "box-cart-item"><h5 class = "col-yellow">10</p></div>
-                            <div class = "box-cart-item"><h5 class = "col-red">3</p></div>
-                            <div class = "box-cart-item"><p>3</p></div>
-                        </div>
-                    </div>
-                    
-                    <div class = "cart-buy-item">
-                        <div class = "row">
-                            <div class = "box-cart-item"><img src = "../assets/images/dre-mic.png"/></div>
-                            <div class = "box-cart-item"><p>Dre’s Microphone</p></div>
-                            <div class = "box-cart-item"><p> Technology</p></div>
-                            <div class = "box-cart-item"><p>$4200000</p></div>
-                            <div class = "box-cart-item"><p>4321</p></div>
-                            <div class = "box-cart-item"><h5 class = "col-yellow">8.5</p></div>
-                            <div class = "box-cart-item"><h5 class = "col-red">22</p></div>
-                            <div class = "box-cart-item"><p>1</p></div>
+                        <div class="item-info">
+                            <img src="../assets/images/map-user-info.png" />
+                            <p class="user-info-txt">20785 Schultes Avenue, Warren, MI 48091</p>
                         </div>
                     </div>
 
+                    <div class="col-lg-6 col-md-12">
+                        <div class="credit-info">
+                            <img src="../assets/images/dollar.png" />
+                            <p class="credit-info-txt">1000000</p>
+                        </div>
+                        <input class="box-amount" type="text" id="fname" name="fname" placeholder="$ Amount"></input>
+                        <button type="button" class="button-credit">
+                            <p>Add more credit!</p>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="section-cart-info">
+            <div class="cart-item-info">
+                <img src="../assets/images/cart.png" />
+                <p class="cart-title-txt">Cart</p>
+            </div>
+
+            <div class="cart-col-name">
+                <div class="row">
+                    <p>Image</p>
+                    <p>Name</p>
+                    <p>Categories</p>
+                    <p>Price</p>
+                    <p>Provider ID</p>
+                    <p>Rating</p>
+                    <p>In Stock</p>
+                    <p>In Cart</p>
+                </div>
+            </div>
+
+            <!-- <ul> -->
+            <div class="cart-buy-item">
+                <div class="row">
+                    <div class="box-cart-item"><img src="../assets/images/item-in-cart.png" /></div>
+                    <div class="box-cart-item">
+                        <p>Galexy S21</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p> Technology, Phone</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>$21000000</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>1234</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <h5 class="col-yellow">8.3</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <h5 class="col-red">17</p>
+                    </div>
+                    <div class="box-cart-item inc-dec">
+                        <div class="row">
+                            <button class="astext">+</button>
+                            <h6>1</h6>
+                            <button class="astext">-</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </ul> -->
+
+
+            <button class="payment-button">
+                Pay now!
+            </button>
+
+        </section>
+
+        <section class="section-cart-info">
+            <div class="cart-item-info">
+                <img src="../assets/images/history.png" />
+                <p class="cart-title-txt">History</p>
+            </div>
+
+            <div class="cart-col-name">
+                <div class="row">
+                    <p>Image</p>
+                    <p>Name</p>
+                    <p>Categories</p>
+                    <p>Price</p>
+                    <p>Provider ID</p>
+                    <p>Rating</p>
+                    <p>In Stock</p>
+                    <p>Quantity</p>
+                </div>
+            </div>
+
+            <!-- <ul> -->
+            <div class="cart-buy-item">
+                <div class="row">
+                    <div class="box-cart-item"><img src="../assets/images/spagheti.png" /></div>
+                    <div class="box-cart-item">
+                        <p>Mom’s Spaghetti</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>Food</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>$60000</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>313</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <h5 class="col-yellow">10</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <h5 class="col-red">3</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>3</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-buy-item">
+                <div class="row">
+                    <div class="box-cart-item"><img src="../assets/images/dre-mic.png" /></div>
+                    <div class="box-cart-item">
+                        <p>Dre’s Microphone</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p> Technology</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>$4200000</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>4321</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <h5 class="col-yellow">8.5</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <h5 class="col-red">22</p>
+                    </div>
+                    <div class="box-cart-item">
+                        <p>1</p>
+                    </div>
+                </div>
+            </div>
 
 
 
-        </main>
 
-        <footer class = "footer"> 
-            <p>2023 @UT</p>
-        </footer>        
+    </main>
 
-    </body>
+    <footer class="footer">
+        <p>2023 @UT</p>
+    </footer>
+
+</body>
 
 </html>

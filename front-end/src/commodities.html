@@ -13,7 +13,7 @@
     <link rel="stylesheet" , href="../css/commodities.css">
     <link rel="stylesheet" , href="../css/card-styles.css">
     <link rel="stylesheet" , href="../css/footer.css">
-    <!-- <link rel="stylesheet" , href="../css/commodity.css"> -->
+
 
 
 </head>
@@ -22,84 +22,72 @@
 
     <header>
 
-        <div class="header-container">
+        <div class="header-container navbar navbar-expand-lg flex-nowrap">
+            <div class="navbar-brand">
+                <div class="brand-img brand-name"></div>
+                <span class="brand-name">Baloot</span>
 
-            <nav class="navbar navbar-expand-lg">
+            </div>
 
-                <div class="navbar-nav ml-0">
-                    <div class="navbar-brand">
-                        <img src="../assets/images/logo.jpg" alt="">
-                        <span class="brand-name">Baloot</span>
-                    </div>
-                </div>
+            <!-- <div class="fill-remaining-space"></div> -->
 
+            <div class="mx-auto">
+                <div class="navbar-nav input-group search-box">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn dropdown-toggle search-dropdown-button"
+                            data-toggle="dropdown">name</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
 
-                <div class="navbar-nav mx-auto">
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn dropdown-toggle search-dropdown-button"
-                                data-toggle="dropdown">name</button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-
-                            </div>
                         </div>
-                        <link rel="stylesheet"
-                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                        <input type="hidden" name="search_param" value="all" id="search_param">
-                        <input type="text" class="form-control search-input" name="x"
-                            placeholder="search your product...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default search-icon" type="button"><span
-                                    class="fa fa-search"></span></button>
-                        </span>
                     </div>
-
+                    <input type="text" class="form-control" name="x" placeholder="search your product...">
+                    <button class="btn search-icon" type="button"></button>
                 </div>
 
+            </div>
 
-                <ul class="navbar-nav mr-5">
+            <div class="mr-4">
+                <ul class="navbar-nav not-logged-in-state">
 
                     <li class="nav-item">
-                        <a role="button" href="signin.html" class="btn header-button">
-                            <span class="header-button-txt">Login</span>
-
+                        <a role="button" href="#" class="btn">
+                            Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a role="button" href="register.html" class="btn header-button">
-                            <span class="header-button-txt">Register</span>
+                        <a role="button" href="#" class="btn">
+                            Register
                         </a>
                     </li>
 
                 </ul>
+            </div>
 
-
-                <!-- <ul class="navbar-nav mr-5">
-
+            <!-- <div class="mr-auto">
+                <ul class="navbar-nav logged-in-state align-items-center">
                     <li class="nav-item">
                         <a href="#">
-                            <span class="header-username-container header-username">#username</span>
+                            <span class="header-username-container">#username</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            <button type="button" class="btn btn-default card-item">
-                                <span class="header-username">Card </span>
-                                <span class="badge pull-right header-username">3</span>
+                            <button type="button" class="btn btn-default count-of-bought-items">
+                                Card
+                                <span class="badge">3</span>
 
 
                             </button>
                         </a>
                     </li>
 
-                </ul> -->
+                </ul>
+            </div> -->
 
-
-
-            </nav>
         </div>
+
 
 
     </header>
@@ -111,40 +99,35 @@
             <div class="row filter-container mx-auto align-items-center">
 
 
-                <div class="col-sm-5 col-md-6 mr-auto">
+                <div class="col-sm-4 col-md-6 mr-auto">
+                    <div class="row d-flex p-0 m-0">
+                        <div class="col-lg-7 col-md-8 p-0 m-0">
+                            Available commodities
+                        </div>
+                        <div class="col-lg-1 col-md-5 p-0 m-0">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="available-state">
+                                <label for="available-state" class="custom-control-label"></label>
+                            </div>
+                        </div>
 
 
-
-                    <div class="d-inline-block font32 line39 color-593C1C">Available commodities</div>
-                    <div class="custom-control custom-switch d-inline-block">
-                        <input type="checkbox" class="custom-control-input" id="available-state">
-                        <label for="available-state" class="custom-control-label"></label>
                     </div>
 
 
-
-
                 </div>
-
-
-
-                <div class="col-sm-5 col-md-5 ml-auto">
-
-
+                <div class="col-sm-8 col-md-6 ml-auto">
                     <form>
 
                         <div class="form-row">
-
-                            <span class="font28 line32 color-593C1C p-2">
+                            <div class="col-lg-4 col-sm-12 col-md-12 p-2">
                                 Sort by:
-                            </span>
-                            <div class="col-lg-4 col-sm-12 col-md-12">
-                                <button type="button"
-                                    class="btn btn-lg filter-btn line34 font28 color-FFFFFF">name</button>
                             </div>
-                            <div class="col-lg-4 col-sm-12 col-md-12">
-                                <button type="button"
-                                    class="btn btn-lg filter-btn  line34 font28 color-FFFFFF">price</button>
+                            <div class="col-lg-4 col-sm-6 col-md-4">
+                                <button type="button" class="btn button-type2">name</button>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-md-4">
+                                <button type="button" class="btn button-type2">price</button>
                             </div>
 
 
@@ -162,126 +145,190 @@
             <div class="container-fluid mx-auto">
 
                 <div class="row commodities-list mx-auto align-items-center">
-                    <div class="col-lg-3">
-                        <div class="card">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
                             <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
                             </div>
                             <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
                             <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
 
-                                    <button type="button" class="btn commodity-card">Add to
-                                        card</button>
-                                </p>
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
                             </div>
 
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="card">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
                             <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
                             </div>
                             <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
                             <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
-                                    <a href="#" class="btn btn-primary commodity-card">Add to card</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
 
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
-                            </div>
-                            <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
-                            <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
-                                    <a href="#" class="btn btn-primary commodity-card ">Add to card</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
-                            </div>
-                            <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
-                            <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
-                                    <a href="#" class="btn btn-primary commodity-card ">Add to card</a>
-                                </p>
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
-                        <div class="card">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
                             <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
                             </div>
                             <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
                             <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
-                                    <a href="#" class="btn btn-primary commodity-card">Add to card</a>
-                                </p>
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
+                            <div class="card-title">
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
+                            </div>
+                            <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
+                            <div class="card-bottom p-3">
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
-                        <div class="card">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
                             <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
                             </div>
                             <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
                             <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
-                                    <a href="#" class="btn btn-primary commodity-card">Add to card</a>
-                                </p>
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
-                        <div class="card">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
                             <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
                             </div>
                             <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
                             <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
-                                    <a href="#" class="btn btn-primary commodity-card">Add to card</a>
-                                </p>
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
                             </div>
 
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="card">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
                             <div class="card-title">
-                                <p class="font28 line34 color-593C1C">Huawei nova 9</p>
-                                <p class="font16 line19 color-C82525">1 in stock</p>
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
                             </div>
                             <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
                             <div class="card-bottom p-3">
-                                <p><span class="font28 line29 color-593C1C">300</span>
-                                    <a href="#" class="btn btn-primary commodity-card">Add to card</a>
-                                </p>
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card commodity-card">
+                            <div class="card-title">
+                                <h1>Huawei nova 9</h1>
+                                <h2>1 in stock</h2>
+                            </div>
+                            <img class="card-img" src="../assets/images/small-phone.png" alt="phone2">
+                            <div class="card-bottom p-3">
+                                <div class="container-fluid row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <span class="price price-small">300$</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 p-0">
+                                        <a href="#" class="btn commodity-card-button">Add to card</a>
+                                    </div>
+
+
+                                </div>
                             </div>
 
                         </div>
@@ -292,12 +339,11 @@
         </section>
     </main>
 
+    <footer class="footer">
+        <p>2023 @UT</p>
+    </footer>
 
 
 </body>
-
-<footer class = "footer"> 
-    <p>2023 @UT</p>
-</footer>  
 
 </html>
