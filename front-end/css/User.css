@@ -58,7 +58,7 @@
 
 .credit-info img 
 {
-    margin-top: 2vmin;
+    margin-top: 4vmin;
     margin-right: 1vmin;
     width: 4vmin;
     height: 8vmin;
@@ -202,8 +202,7 @@
 
 .cart-buy-item img 
 {
-    width: 4vw;
-
+    width:3vw;
 
 }
 
