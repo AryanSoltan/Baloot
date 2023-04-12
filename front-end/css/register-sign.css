@@ -55,3 +55,18 @@
     border-radius: 15px;
     margin-left: 15vw;
 }
+
+button 
+{
+    font-size: 1vw;
+}
+
+
+input 
+{
+    border-radius: 4vw;
+    padding-left: 2vw;
+    /* border: 10vw; */
+    /* padding-top:2vw; */
+    /* text-align: center; */
+}

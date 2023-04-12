@@ -58,7 +58,7 @@
 
 .credit-info img 
 {
-    margin-top: 5vmin;
+    margin-top: 2vmin;
     margin-right: 1vmin;
     width: 4vmin;
     height: 8vmin;
@@ -251,6 +251,7 @@
     border: 1px solid #593C1C;
     text-align: center;
     border-radius: 15px;
+    padding-bottom: 3vw;
 }
 
 
@@ -301,4 +302,9 @@ h6
     background:none;
     border:none;
     cursor: pointer;
+}
+
+button 
+{
+    margin-top: 2vw;
 }
