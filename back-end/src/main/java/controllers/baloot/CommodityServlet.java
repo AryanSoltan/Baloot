@@ -56,16 +56,16 @@ public class CommodityServlet extends HttpServlet {
         String action = request.getParameter("action");
         try{
         switch (action) {
-            case "rate":
+            case "rate": //todo commodityController
                 String rate = request.getParameter("quantity");
                 BalootServer.getInstance().rateCommodity(username,commodityId, rate);
                 break;
 
-            case "add":
+            case "add":  //todo commodityController
                 BalootServer.getInstance().addCommidityToUserBuyList(username,commodityId);
                 break;
 
-            case "comment" :
+            case "comment" : //todo commentController
                 String useremail = BalootServer.getInstance().getLoggedInUser().getEmail();
                 String commentText = request.getParameter("comment");
 
@@ -76,12 +76,12 @@ public class CommodityServlet extends HttpServlet {
                 BalootServer.getInstance().addComment(comment);
                 break;
 
-            case "like" :
+            case "like" : //todo commentController
                 Integer commentId = Integer.valueOf(request.getParameter("comment_id"));
                 BalootServer.getInstance().addRatingToComment(commentId,username,1);
                 break;
 
-            case "dislike" :
+            case "dislike" : //todo commentController
                 commentId = Integer.valueOf(request.getParameter("comment_id"));
                 BalootServer.getInstance().addRatingToComment(commentId,username,-1);
                 break;
