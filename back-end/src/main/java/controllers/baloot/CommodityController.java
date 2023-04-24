@@ -77,6 +77,31 @@ public class CommodityController {
 
     }
 
+    @RequestMapping(value="/commodities/{id}/{userId}/rate",method = RequestMethod.POST)
+    public Response rateCommodity(@RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
+        try{
+            var info = new ObjectMapper().readTree(rateInfo);
+            String rate  = info.get("quantity").asText();
+            BalootServer.getInstance().rateCommodity(userID,Integer.valueOf(commodityID), rate);
+            return new Response(HttpStatus.OK.value(), "commodity rate added", null);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+
+    @RequestMapping(value="/commodities/{id}/{userId}/add",method = RequestMethod.POST)
+    public Response addCommodityToBuyLst(@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
+        try{
+
+            BalootServer.getInstance().addCommidityToUserBuyList(userID, Integer.valueOf(commodityID));
+            return new Response(HttpStatus.OK.value(), "commodity added", null);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+
 
 
 
