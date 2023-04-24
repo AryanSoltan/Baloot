@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="" />
+    <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/App.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +38,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/aryan/Desktop/University/online_courses/Semester8/IE/Projects/Baloot&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -66,7 +72,11 @@
       <updated>1681126945431</updated>
       <workItem from="1681126947095" duration="4000" />
       <workItem from="1682271642951" duration="5516000" />
-      <workItem from="1682317077212" duration="394000" />
+      <workItem from="1682317077212" duration="4756000" />
+      <workItem from="1682321854059" duration="2272000" />
+      <workItem from="1682324500593" duration="1040000" />
+      <workItem from="1682325549347" duration="658000" />
+      <workItem from="1682330075065" duration="5975000" />
     </task>
     <servers />
   </component>
