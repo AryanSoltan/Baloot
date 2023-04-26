@@ -7,10 +7,7 @@ import logo from "../assets/images/ballot.png";
 import "../Style/register-sign.css"
 import "../Style/footer.css"
 
-import axiosAPI from '../api-axios/axios';
-
-
-
+import axios from 'axios';
 
 export default class Login extends React.Component{
 
@@ -21,29 +18,44 @@ export default class Login extends React.Component{
             password: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this)
-        // this.handleUsernameChange = this.handleUsernameChange.bind(this)
-        // this.handlePasswordChange = this.handlePasswordChange.bind(this)
+        this.handleUsernameChange = this.handleUsernameChange.bind(this)
+        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+    }
 
+    handleUsernameChange(e) {
+        this.setState(
+        {
+            userName: e.target.value
+        });
+    }
+
+    handlePasswordChange(e)
+    {
+        this.setState(
+            {
+                password: e.target.value
+            }
+        );
     }
 
     handleSubmit(e) {
         e.preventDefault();
         if(!this.state.userName){
             console.log('Username is empty')
-            toast('should fill the username part')
+            toast.error('should fill the username part');
             return
         }
         else if(!this.state.password)
         {
             toast.error('should fill the password part');
         }
-        else
-        {
-            toast.success('200');
-        }
         // else
         // {
-        //     // axiosAPI.post('auth/login/', {
+        //     toast.success('200');
+        // }
+        // else
+        // {
+        //     // axios.post('auth/login/', {
         //     //     username: this.state.userName;
         //     // }).then((resp) => {
         //     //     if(resp.status === 200) {

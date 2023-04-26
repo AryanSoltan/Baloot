@@ -3,6 +3,7 @@ import './App.css';
 
 import Login from "./Pages/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 
 
