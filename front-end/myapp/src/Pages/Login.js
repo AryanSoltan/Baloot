@@ -2,31 +2,60 @@ import * as React from "react";
 import {toast} from "react-toastify";
 
 import Footer from "./Footer"
+import logo from "../assets/images/ballot.png";
 
 import "../Style/register-sign.css"
 import "../Style/footer.css"
 
+import axiosAPI from '../api-axios/axios';
+
+
 
 
 export default class Login extends React.Component{
+
     constructor(props) {
         super(props);
         this.state = {
             userName: '',
             password: '',
         }
-        // this.handleEmailChange = this.handleEmailChange.bind(this)
-        // this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        // this.handleUsernameChange = this.handleUsernameChange.bind(this)
+        // this.handlePasswordChange = this.handlePasswordChange.bind(this)
+
     }
 
     handleSubmit(e) {
         e.preventDefault();
         if(!this.state.userName){
             console.log('Username is empty')
-            toast.error('should fill the username part')
+            toast('should fill the username part')
             return
         }
+        else if(!this.state.password)
+        {
+            toast.error('should fill the password part');
+        }
+        else
+        {
+            toast.success('200');
+        }
+        // else
+        // {
+        //     // axiosAPI.post('auth/login/', {
+        //     //     username: this.state.userName;
+        //     // }).then((resp) => {
+        //     //     if(resp.status === 200) {
+        //     //         console.log('شد شد')
+        //     //         toast.success('ورود با موفقیت انجام شد.')
+        //     //         window.location.href = "http://localhost:3000/"
+        //     //     }
+        //     // }).catch(error => {
+        //     //     console.log('نشد')
+        //     //     toast.error('ایمیل نادرست است')
+        //     // })
+        // }
     }
 
     render() {
@@ -43,19 +72,19 @@ export default class Login extends React.Component{
             <body>
             <div className="logo">
 
-                <div className="font-title"><img src="../assets/images/ballot.png"></img> Baloot</div>
-                <form>
+                <div className="font-title"><img src={logo}></img> Baloot</div>
+                <form onSubmit={this.handleSubmit}>
 
                 <h1>Sign in Form </h1>
 
                 <p>Username</p>
 
-                <input type="text" placeholder="Enter Username" name="username" id="username"/>
+                <input type="text" placeholder="Enter Username" name="username" id="username" onChange={this.handleUsernameChange}/>
                 <br/>
                 <br/>
                 <p>Password</p>
 
-                <input type="password" placeholder="Enter Password" name="password" id = "password"/>
+                <input type="password" placeholder="Enter Password" name="password" id = "password" onChange={this.handlePasswordChange}/>
 
                 <br/>
 
