@@ -3,13 +3,16 @@ import {toast} from "react-toastify";
 
 import Footer from "./Footer"
 import logo from "../assets/images/ballot.png";
+import {Link, Routes, Route, useNavigate} from 'react-router-dom';
+
 
 import "../Style/register-sign.css"
 import "../Style/footer.css"
 
-import axios from 'axios';
+import axios from 'axios'
 
 export default class Login extends React.Component{
+
 
     constructor(props) {
         super(props);
@@ -41,7 +44,6 @@ export default class Login extends React.Component{
     handleSubmit(e) {
         e.preventDefault();
         if(!this.state.userName){
-            console.log('Username is empty')
             toast.error('should fill the username part');
             return
         }
@@ -49,25 +51,19 @@ export default class Login extends React.Component{
         {
             toast.error('should fill the password part');
         }
-        // else
-        // {
-        //     toast.success('200');
-        // }
-        // else
-        // {
-        //     // axios.post('auth/login/', {
-        //     //     username: this.state.userName;
-        //     // }).then((resp) => {
-        //     //     if(resp.status === 200) {
-        //     //         console.log('شد شد')
-        //     //         toast.success('ورود با موفقیت انجام شد.')
-        //     //         window.location.href = "http://localhost:3000/"
-        //     //     }
-        //     // }).catch(error => {
-        //     //     console.log('نشد')
-        //     //     toast.error('ایمیل نادرست است')
-        //     // })
-        // }
+        else
+        {
+            axios.post('login/', {
+                username: this.state.userName,
+                password: this.state.password
+            }).then((resp) => {
+                if(resp.status === 200) {
+                    window.location.href = "http://localhost:3000/homepage"
+                }
+            }).catch(error => {
+                toast.error("Wrong email or password");
+            })
+        }
     }
 
     render() {

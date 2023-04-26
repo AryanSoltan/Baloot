@@ -30,6 +30,7 @@ public class ExternalServer {
             serverAddress = inputServerAddress;
             balootServer = inputBalootServer;
             addProviders();
+
             addCommodities();
             addUsers();
             addComments();
@@ -77,6 +78,7 @@ public class ExternalServer {
 
     public void addProviders()
     {
+
         String pageProviders = getRequest("/api/providers");
         Gson gsonParser = new GsonBuilder().create();
         List<Provider> providers = gsonParser.fromJson(pageProviders,
