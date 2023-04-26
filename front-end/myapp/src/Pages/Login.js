@@ -42,33 +42,34 @@ export default class Login extends React.Component{
 
             <body>
             <div className="logo">
-                <div className="font-title"><img src="../assets/images/ballot.png" alt = "baloot logo"></img> Baloot</div>
 
+                <div className="font-title"><img src="../assets/images/ballot.png"></img> Baloot</div>
+                <form>
 
                 <h1>Sign in Form </h1>
 
-                <p><b>Username</b></p>
+                <p>Username</p>
 
-                <form onSubmit={this.handleSubmit}>
+                <input type="text" placeholder="Enter Username" name="username" id="username"/>
+                <br/>
+                <br/>
+                <p>Password</p>
 
-                    <input type="text" placeholder="Enter Username" name="username" id = "username" required/>
-                    <br/>
-                    <p><b>Password</b></p>
+                <input type="password" placeholder="Enter Password" name="password" id = "password"/>
 
-                    <input type="password" placeholder="Enter Password" name="password" id = "password" required/>
+                <br/>
 
-                    <br/>
-
-                    <button className="register-button">
-                        Sign in
-                    </button>
-                </form>
+                <button className="register-button">
+                    Sign in
+                </button>
+            </form>
 
                 <div>
                     <p>Dont' have an account? <a href="register.html">Create New Account</a>.</p>
                 </div>
-
             </div>
+
+
             <Footer/>
             </body>
             </html>
