@@ -10,11 +10,11 @@ import controllers.baloot.ReposnsePackage.Response;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-//@RequestMapping(/)
-@CrossOrigin(origins="*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:3001")
+@RequestMapping("/users")
 public class UserController {
 
-    @RequestMapping(value="/login",method = RequestMethod.POST)
+    @PostMapping("/login")
     public Response logIn (@RequestBody String userLoginInfo) throws Exception{
 
         try{
@@ -35,7 +35,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/logout",method = RequestMethod.POST)
+    @PostMapping("/logout")
     public Response logOut (@RequestBody String userLoginInfo) throws Exception{
         try {
             if (BalootServer.getInstance().getLoggedInUser() == null) {

@@ -14,6 +14,7 @@ import axios from 'axios'
 export default class Login extends React.Component{
 
 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -24,6 +25,7 @@ export default class Login extends React.Component{
         this.handleUsernameChange = this.handleUsernameChange.bind(this)
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
     }
+
 
     handleUsernameChange(e) {
         this.setState(
@@ -58,10 +60,12 @@ export default class Login extends React.Component{
                 password: this.state.password
             }).then((resp) => {
                 if(resp.status === 200) {
-                    window.location.href = "http://localhost:3000/homepage"
+                    localStorage.setItem('userLoggedIn', true);
+                    localStorage.setItem('userId', this.state.userName);
+                    window.location.href = "http://localhost:3000/Commodities"
                 }
             }).catch(error => {
-                toast.error("Wrong email or password");
+                toast.error("password or username is wrong");
                 console.log(error.toJSON().message)
             })
         }

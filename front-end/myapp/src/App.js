@@ -1,29 +1,40 @@
+import React, {useState} from "react";
 import './App.css';
 
 import Login from "./Pages/Login";
+
 import Home from "./Pages/Home";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import { Route, Link, BrowserRouter, Routes } from "react-router-dom";
+
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+
+import Commodities from "./Pages/Commodities";
 
 
 
 function App() {
   return (
-      <Router>
-        <Switch>
+      <BrowserRouter>
+          <ToastContainer />
+          <Routes>
 
-          <Route path = "/login">
-            <Login/>
-          </Route>
-          <Route path = "/homepage">
-              <Home/>
-          </Route>
 
-        </Switch>
-        <ToastContainer/>
-      </Router>
+              <Route exact path="/" element={<Login />}/>
+              <Route path="/commodities" element={<Commodities />}/>
+
+          </Routes>
+        {/*<Switch>*/}
+
+        {/*  <Route>*/}
+        {/*    <Navbar/>*/}
+        {/*  </Route>*/}
+
+        {/*</Switch>*/}
+        {/*<ToastContainer/>*/}
+      </BrowserRouter>
   );
 }
 

@@ -1,0 +1,86 @@
+.body {
+    background: #F5F5F5;
+}
+.page-container {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*row-gap: 1vw;*/
+
+
+
+}
+
+main {
+    padding-top: 10.802vw;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1.5vw;
+
+
+}
+.container {
+    padding-left: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+.filter-container {
+    width: 75vw;
+    height: 10vh;
+    background: #F7F0E9;
+    box-shadow: 0px 0.208vw 0.208vw rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    font-size: 1.667vw;
+    line-height: 2.031vw;
+    color: #593C1C;
+
+    justify-content: space-between;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.filter-container .form-row {
+    font-size: 1.458vw;
+    line-height: 1.667vw;
+}
+
+
+.button-type2 {
+    width: 7.813vw;
+    height: 3.542vw;
+    border-radius: 0.781vw;
+    background: #A97B47;
+    mix-blend-mode: normal;
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    text-align: center;
+    justify-content: center;
+    color: #F7F0E9;
+    padding: 0;
+    margin: auto;
+
+}
+
+
+
+.commodities-list {
+    justify-content: center;
+    margin-top: 5vw;
+    width: 75vw;
+
+}
+
+.group-card-section .card {
+    margin-bottom: 2vw;
+
+}
