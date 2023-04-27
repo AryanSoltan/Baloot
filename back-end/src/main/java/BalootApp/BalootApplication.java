@@ -6,7 +6,7 @@ import InterfaceServer.InterfaceServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration.class)
 
 public class BalootApplication {
     final static int PORT_NUM = 8080;
@@ -18,7 +18,7 @@ public class BalootApplication {
 
             BalootServer balootServer = new BalootServer();
             ExternalServer externalServer = new ExternalServer(externalServerAddress, balootServer);
-            InterfaceServer interfaceServer = new InterfaceServer(PORT_NUM, balootServer);
+//            InterfaceServer interfaceServer = new InterfaceServer(PORT_NUM, balootServer);
         }
         catch(Exception e)
         {

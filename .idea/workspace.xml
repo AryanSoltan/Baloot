@@ -6,12 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/CommoditiesServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/BalootApp/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/BalootApp/BalootApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/ExternalServer/ExternalServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/ExternalServer/ExternalServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/api-axios/axios.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +55,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "3a2e2ec9435805b6ced0fc44abba7cb2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -101,7 +107,8 @@
       <workItem from="1682496375005" duration="1199000" />
       <workItem from="1682514176331" duration="7469000" />
       <workItem from="1682521944863" duration="870000" />
-      <workItem from="1682523443179" duration="780000" />
+      <workItem from="1682523443179" duration="1259000" />
+      <workItem from="1682560755405" duration="3633000" />
     </task>
     <servers />
   </component>

@@ -68,6 +68,7 @@ public class ExternalServer {
                     new TypeToken<List<User>>() {
                     }.getType());
             for (User user : users) {
+//                System.out.println(user.getName());
                 balootServer.addUser(user);
             }
         }

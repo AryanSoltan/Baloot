@@ -18,6 +18,7 @@ public class UserController {
     public Response logIn (@RequestBody String userLoginInfo) throws Exception{
 
         try{
+            System.out.println("Helloooo");
             var loginInfo = new ObjectMapper().readTree(userLoginInfo);
             String username= loginInfo.get("username").asText();
             String password = loginInfo.get("password").asText();

@@ -53,7 +53,7 @@ export default class Login extends React.Component{
         }
         else
         {
-            axios.post('login/', {
+            axios.post('/login', {
                 username: this.state.userName,
                 password: this.state.password
             }).then((resp) => {
@@ -62,6 +62,7 @@ export default class Login extends React.Component{
                 }
             }).catch(error => {
                 toast.error("Wrong email or password");
+                console.log(error.toJSON().message)
             })
         }
     }
