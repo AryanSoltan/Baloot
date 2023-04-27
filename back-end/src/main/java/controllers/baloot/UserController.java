@@ -10,20 +10,18 @@ import controllers.baloot.ReposnsePackage.Response;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3001")
-@RequestMapping("/users")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class UserController {
 
-    @PostMapping("/login")
+    @RequestMapping(value="/login",method = RequestMethod.POST)
     public Response logIn (@RequestBody String userLoginInfo) throws Exception{
 
         try{
-            System.out.println("Helloooo");
             var loginInfo = new ObjectMapper().readTree(userLoginInfo);
             String username= loginInfo.get("username").asText();
             String password = loginInfo.get("password").asText();
             BalootServer.getInstance().logIn(username,password);
-            return new Response(HttpStatus.OK.value(),"logged in",username);
+            return new Response(HttpStatus.OK.value(), "logged in",null);
 
         }
         catch( JsonProcessingException e){
@@ -35,7 +33,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/logout")
+    @RequestMapping(value="/logout",method = RequestMethod.POST)
     public Response logOut (@RequestBody String userLoginInfo) throws Exception{
         try {
             if (BalootServer.getInstance().getLoggedInUser() == null) {
@@ -109,14 +107,6 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
-
-
-
-
-
-
-
-
 
 
 

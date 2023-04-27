@@ -28,6 +28,13 @@ public class UserManager {
         return neededUser;
     }
 
+    public int getNumOfUsers() throws Exception
+    {
+
+        return users.size();
+    }
+
+
     public static User getUserByUseremail(String email) throws Exception
     {
         for(User user : users.values())

@@ -25,12 +25,18 @@ public class BalootServer {
         paymentManager = new PaymentManager();
     }
 
+
     public static BalootServer getInstance()
     {
         if(instance == null)
             instance = new BalootServer();
         return instance;
 
+    }
+
+    public int getNumofUsers() throws Exception
+    {
+        return userManager.getNumOfUsers();
     }
 
     public void addUser(User newUser) throws Exception

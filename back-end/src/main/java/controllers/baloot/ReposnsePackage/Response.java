@@ -1,14 +1,27 @@
 package controllers.baloot.ReposnsePackage;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Response {
     public int status;
     public String statusMessage;
-    public Object content;
+    public Object data;
 
-    public Response(int status, String statusMessage, Object content) {
+//    public Response(int status, String statusMessage, Object content) {
+//        this.status = status;
+//        this.statusMessage = statusMessage;
+//        this.content = content;
+//    }
+    @JsonCreator
+    public Response(@JsonProperty("statusCode") Integer status,@JsonProperty("statusMsg") String statusMsg,
+                  @JsonProperty("data") Object data) throws Exception {
+        if (status == null) {
+            throw new Exception();
+        }
         this.status = status;
-        this.statusMessage = statusMessage;
-        this.content = content;
+        this.data = data;
+        this.statusMessage = statusMsg;
     }
 
     public int getStatusCode() {
@@ -20,7 +33,7 @@ public class Response {
     }
 
     public Object getContent() {
-        return content;
+        return data;
     }
 
     public void setStatusCode(int status) {
@@ -32,7 +45,7 @@ public class Response {
     }
 
     public void setContent(Object content) {
-        this.content = content;
+        this.data= content;
     }
 }
 
