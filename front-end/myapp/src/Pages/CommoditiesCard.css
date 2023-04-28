@@ -1,0 +1,111 @@
+
+.commodity-card {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    width: 18.229vw;
+    max-width: 18.229vw;
+}
+
+.commodity-card .card-title {
+    margin-left: 0.729vw;
+    margin-top: 0.885vw;
+    text-align: left;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+
+
+}
+
+.commodity-card h1 {
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+    margin-bottom: auto;
+}
+
+.commodity-card h2 {
+    margin-top: 1vw;
+    margin-bottom: 0;
+
+    font-size: 0.833vw;
+    line-height: 0.833vw;
+    color: #C82525;
+    margin-left: 1vw;
+    /* margin-left: 1.510vw; */
+}
+
+.card-img {
+    width: 17.211vw;
+    height: 16.667vw;
+    border-radius: 0.781vw;
+    max-width: 17.211vw;
+    max-height: 16.667vw;
+
+}
+
+.card-bottom {
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+
+
+.price {
+    color: #593C1C;
+    text-align: left;
+    vertical-align: middle;
+    margin: auto;
+    padding: auto;
+}
+
+.price-large {
+    font-size: 1.875vw;
+    line-height: 2.292vw;
+}
+
+.price-small {
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+}
+
+.commodity-card-button {
+    background-color: #FFFFFF;
+    border: 0.052vw solid #593C1C;
+    border-radius: 0.781vw;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.042vw;
+    line-height: 1.250vw;
+    /* margin-right: 1rem; */
+    float: right;
+    text-align: center;
+    color: #59231c;
+
+}
+
+.button-type1 {
+    width: 6.250vw;
+    height: 3.542vw;
+    border-radius: 0.781vw;
+    background: #593C1C;
+    mix-blend-mode: normal;
+
+
+    font-weight: 500;
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+
+    text-align: center;
+    justify-content: center;
+    color: #F7F0E9;
+    padding: 0;
+    margin: auto;
+
+
+}
+

@@ -18,8 +18,9 @@ main {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
     align-items: center;
+
     row-gap: 1.5vw;
 
 
@@ -43,44 +44,126 @@ main {
     line-height: 2.031vw;
     color: #593C1C;
 
-    justify-content: space-between;
+
 
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 .filter-container .form-row {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     font-size: 1.458vw;
     line-height: 1.667vw;
 }
 
 
 .button-type2 {
-    width: 7.813vw;
-    height: 3.542vw;
-    border-radius: 0.781vw;
-    background: #A97B47;
+    /*width: 7.813vw;*/
+    /*height: 3.542vw;*/
+    /*border-radius: 0.781vw;*/
+    border: none;
+    background: none;
     mix-blend-mode: normal;
     font-size: 1.458vw;
     line-height: 1.771vw;
     text-align: center;
     justify-content: center;
-    color: #F7F0E9;
-    padding: 0;
+    color:  #919191;
+    padding-left: 1.979vw;
+    padding-right: 1.979vw;
     margin: auto;
 
 }
 
-
+.button-type2:focus {
+    background: #A97B47;
+    border-radius: 0.781vw;
+    color:  #FFFFFF;
+}
 
 .commodities-list {
-    justify-content: center;
-    margin-top: 5vw;
-    width: 75vw;
 
+    width: 80vw;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 1.5vh;
+    row-gap: 1.5vh;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 18vw);
+    justify-content: space-between;
+
+}
+
+@media screen and (max-width: 900px) {
+    .commodities-list {
+        width: 70%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .commodities-list {
+        width: 50%;
+    }
 }
 
 .group-card-section .card {
     margin-bottom: 2vw;
 
 }
+.toggle label {
+    position: relative;
+    display: inline-block;
+    width: 3.577vw;
+    height: 2.031vw;
+    margin-left: 2vw;
+}
+
+.toggle input {
+    width: 0;
+    height: 0;
+}
+
+.toggle span {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:  #919191;
+    transition: 0.3s;
+    border-radius: 5.359vw;
+}
+
+
+.toggle span:before {
+    position: absolute;
+    content: "";
+    height: 1.602vw;
+    width: 1.302vw;
+    left: 0.156vw;
+    bottom: 0.135vw;
+    background-color: #fff;
+    border-radius: 80%;
+    transition: 0.3s;
+}
+
+.toggle input:checked + span {
+    background-color: #00c853;
+}
+
+.toggle input:checked + span:before {
+    transform: translateX(2vw);
+}
+
+
