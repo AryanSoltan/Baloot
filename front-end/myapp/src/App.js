@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 
 import Commodities from "./Pages/Commodities";
+import Commodity from "./Pages/Commodity";
 
 
 
@@ -24,6 +25,8 @@ function App() {
 
               <Route exact path="/" element={<Login />}/>
               <Route path="/commodities" element={<Commodities />}/>
+              <Route path="/commodities/:id" element={<Commodity />}/>
+
 
           </Routes>
         {/*<Switch>*/}

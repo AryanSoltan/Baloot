@@ -25,7 +25,7 @@ public class CommodityController {
     @RequestMapping(value="/commodities/{id}",method = RequestMethod.GET)
     public Response getCommodity(@PathVariable(value="id") String commodityID ){
         try{
-            return new Response(HttpStatus.OK.value(), "commodity info sent", BalootServer.getInstance().getSuggestedCommodities(Integer.valueOf(commodityID)));
+            return new Response(HttpStatus.OK.value(), "commodity info sent", BalootServer.getInstance().getCommodityById(Integer.valueOf(commodityID)));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
@@ -81,9 +81,10 @@ public class CommodityController {
     public Response rateCommodity(@RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
         try{
             var info = new ObjectMapper().readTree(rateInfo);
-            String rate  = info.get("quantity").asText();
+            String rate  = info.get("rate").asText();
             BalootServer.getInstance().rateCommodity(userID,Integer.valueOf(commodityID), rate);
-            return new Response(HttpStatus.OK.value(), "commodity rate added", null);
+            return new Response(HttpStatus.OK.value(), "commodity rate added",
+                    BalootServer.getInstance().getCommodityById(Integer.valueOf(commodityID)));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
@@ -101,6 +102,8 @@ public class CommodityController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
+
+
 
 
 
