@@ -107,7 +107,7 @@ export default class Login extends React.Component{
             </form>
 
                 <div>
-                    <p>Dont' have an account? <a href="register.html">Create New Account</a>.</p>
+                    <p>Dont' have an account? <a href="/signup">Create New Account</a>.</p>
                 </div>
             </div>
 

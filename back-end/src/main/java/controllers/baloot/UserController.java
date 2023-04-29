@@ -1,6 +1,7 @@
 package controllers.baloot;
 
 import Baloot.BalootServer;
+import Baloot.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
@@ -108,7 +109,29 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value="/signup",method = RequestMethod.POST)
+    public Response signUp(@RequestBody String userSignUpInfo) throws Exception{
+        try{
+            var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
+            String username= signUpInfo.get("username").asText();
 
+            String password = signUpInfo.get("password").asText();
 
+            String birthDate = signUpInfo.get("birthDate").asText();
+
+            String address = signUpInfo.get("address").asText();
+            String email = signUpInfo.get("email").asText();
+            BalootServer.getInstance().addUser(new User(username, password, email, birthDate, address, 0));
+            return new Response(HttpStatus.OK.value(), "sign up successfuly",null);
+
+        }
+        catch( JsonProcessingException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not found");
+        }
+    }
 
 }

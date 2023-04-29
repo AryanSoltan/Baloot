@@ -1,6 +1,6 @@
 import React from "react";
 import './Navbar.css'
-import logo from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/assets/images/ballot.png';
+import logo from '../../assets/images/ballot.png';
 function NavbarLogo() {
     return (
 

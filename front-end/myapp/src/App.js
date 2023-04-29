@@ -5,6 +5,8 @@ import Login from "./Pages/Login";
 
 import Home from "./Pages/Home";
 
+import SignUp from "./Pages/SignUp"
+
 
 import { Route, Link, BrowserRouter, Routes } from "react-router-dom";
 
@@ -26,6 +28,7 @@ function App() {
               <Route exact path="/" element={<Login />}/>
               <Route path="/commodities" element={<Commodities />}/>
               <Route path="/commodities/:id" element={<Commodity />}/>
+              <Route path = "/signup" element = {<SignUp />}/>
 
 
           </Routes>

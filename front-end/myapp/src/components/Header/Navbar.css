@@ -114,7 +114,7 @@
     background: #F7F0E9;
     opacity: 0.4;
     border-radius: 0.781vw;
-    background: url('/home/saba/Downloads/iemdb-front-end-iemdb-phase-5/src/assets/magnifier.png') no-repeat center;
+    /*background: url('../../assets/magnifier.png') no-repeat center;*/
     padding: 0;
     margin: 0;
 }
