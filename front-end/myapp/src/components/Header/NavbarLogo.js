@@ -1,20 +1,16 @@
 import React from "react";
-import './Navbar.css'
+import './NavbarLogo.css'
 import logo from '../../assets/images/ballot.png';
 function NavbarLogo() {
     return (
-
-        <a href="/" className="home-link">
-            <div className="brand-image">
-                <img
-                    src={logo}
-                    className="d-inline-block align-top icon img-responsive "
-                    alt="logo"
-                />
+        <div className="header-components-container">
+            <div className="row">
+                <div className="col brand-image">
+                    <img src={logo} alt="logo"/>
+                </div>
+                <div className="col brand-name">Baloot</div>
             </div>
-            <span className="brand-name">Baloot</span>
-        </a>
-
+        </div>
     );
 }
 

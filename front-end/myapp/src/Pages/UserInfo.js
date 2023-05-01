@@ -4,13 +4,13 @@ import {toast} from "react-toastify";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 
-import userPNG from "./../assets/images/user-image.jpg"
+import userPNG from "../assets/images/user-image.jpg"
 import dollarPNG from "../assets/images/dollar.png"
 import userInfoPNG from "../assets/images/map-user-info.png"
 import emailPNG from "../assets/images/user-email.png"
 import dateInfoPNG from "../assets/images/date-user-info.png"
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 

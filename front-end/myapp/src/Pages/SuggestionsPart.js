@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
-import CommodityCard from "./CommodityCard";
+import CommodityCard from "./Commodity/CommodityCard";
 import IMAGE from '../assets/images/item-in-cart.png'
-import './Commodities.css'
-import './Commodity.css'
+import './Commodities/Commodities.css'
+import './Commodity/Commodity.css'
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import CommodityCard from "./CommodityCard";
-import IMAGE from '../assets/images/item-in-cart.png'
+import CommodityCard from "../Commodity/CommodityCard";
+import IMAGE from '../../assets/images/item-in-cart.png'
 import './Commodities.css'
 
 import Row from 'react-bootstrap/Row';

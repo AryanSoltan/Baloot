@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 
 
-import Header from "../components/Header/Header";
-import CommoditiesGridShow from "./CommoditiesGridShow";
+import Header from "../../components/Header/Header";
+import CommoditiesGridShow from "../Commodities/CommoditiesGridShow";
 import CommodityInfo from "./CommodityInfo";
 import Comments from "./Comments";
 import './Commodity.css'
 import CommentsPart from "./CommentsPart";
-import SuggestionsPart from "./SuggestionsPart";
+import SuggestionsPart from "../SuggestionsPart";
 
 
 function Commodity() {

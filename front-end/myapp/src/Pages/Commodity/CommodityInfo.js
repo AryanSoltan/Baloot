@@ -2,10 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 
-import IMAGE from '../assets/images/download.png'
+import IMAGE from '../../assets/images/download.png'
 import './Commodity.css';
 import './Comments.css'
-import RateCommodity from './RateCommodity';
+import RateCommodity from '../RateCommodity';
 import Comment from './Comments'
 
 

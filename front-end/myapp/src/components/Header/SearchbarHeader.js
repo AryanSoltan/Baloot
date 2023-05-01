@@ -1,12 +1,31 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { useSearchParams } from "react-router-dom";
-
+import './Navbar.css'
 export default function SearchbarHeader() {
 //todo not complete
     const [filterBy, setFilterBy] = useState('name');
     const [searchValue, setSearchValue] = useState('');
 
     const [searchParams, setSearchParams] = useSearchParams();
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(!open);
+    };
+
+    const setFilter = (filterType) => {
+        // do something
+        setOpen(false);
+        setFilterBy(filterType);
+
+
+    };
+
+    const handleMenuTwo = () => {
+        // do something
+        setOpen(false);
+    };
     // const searchParam =
 
     const handleSearchSubmit = e => {
@@ -20,6 +39,7 @@ export default function SearchbarHeader() {
 
     return (
         <>
+            <div className="searchbar-container">
 
             <form
 
@@ -27,16 +47,22 @@ export default function SearchbarHeader() {
                 onSubmit={handleSearchSubmit}
                 className="search-bar search-box"
             >
+                <div className="dropdown">
+                    <button onClick={handleOpen}>name</button>
+                    {open ? (
+                        <ul className="menu">
+                            <li className="menu-item">
+                                <a onClick={() => { setFilter('name'); }}>name</a>
+                            </li>
+                            <li className="menu-item">
+                                <a onClick={() => { setFilter('provider'); }}>provider</a>
+                            </li>
+                            <li className="menu-item">
+                                <a onClick={() => { setFilter('category'); }}>category</a>
+                            </li>
 
-                <div class="dropdown">
-                    <button className="dropbtn">n</button>
-                    <div className="dropdown-content ">
-                        <button  className="navbar-button" onClick={() => { setFilterBy('name'); }}>name</button>
-
-                        <button  className="navbar-button" onClick={() => { setFilterBy('category'); }}>category</button>
-                        <button  className="navbar-button" onClick={() => { setFilterBy('category'); }}>provider</button>
-
-                    </div>
+                        </ul>
+                    ) : null}
                 </div>
 
                 <input
@@ -47,6 +73,7 @@ export default function SearchbarHeader() {
                 />
                 <button className="btn search-icon" type="submit"></button>
             </form>
+            </div>
 
         </>
     );

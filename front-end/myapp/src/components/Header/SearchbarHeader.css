@@ -1,0 +1,40 @@
+/*.dropdown {*/
+/*    position: relative;*/
+
+/*}*/
+
+/*.menu {*/
+/*    background-color: #D8C1A8;*/
+/*    position: absolute;*/
+
+/*    list-style-type: none;*/
+/*    margin: 0 0;*/
+/*    padding: 0;*/
+
+/*    border: 1px solid grey;*/
+/*    width: 150px;*/
+/*}*/
+
+/*.menu > li {*/
+/*    margin: 0;*/
+
+/*    background-color: white;*/
+/*}*/
+
+/*.menu > li:hover {*/
+
+/*}*/
+
+/*.menu > li > button {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    text-align: left;*/
+
+
+/*    color: inherit;*/
+/*    border: none;*/
+/*    padding: 5px;*/
+/*    margin: 0;*/
+/*    font: inherit;*/
+/*    cursor: pointer;*/
+/*}*/

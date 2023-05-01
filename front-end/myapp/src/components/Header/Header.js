@@ -12,19 +12,31 @@ function Header(props) {
     return (
 
 
-        <nav className="row Container">
+        <nav className="header-container">
 
-            <div className="col-1">
+
+            <div className="col">
                 <NavbarLogo />
             </div>
             {props.hasSearch == "1" &&
-                <div className="col-1">
+                <div className="col">
                     <SearchbarHeader />
                 </div>
             }
-            <div className="col-1">
-                <HeaderinfoPart />
+            {/*<div className="col">*/}
+            {/*    <HeaderinfoPart />*/}
+
+            {/*</div>*/}
+
+                {/*<div className="col">*/}
+                {/*    <NavbarLogo />*/}
+                {/*</div>*/}
+
+                <div className="col">
+                    <HeaderinfoPart />
+
             </div>
+
 
 
         </nav >

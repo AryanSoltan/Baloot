@@ -13,8 +13,8 @@ import { Route, Link, BrowserRouter, Routes } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 
-import Commodities from "./Pages/Commodities";
-import Commodity from "./Pages/Commodity";
+import Commodities from "./Pages/Commodities/Commodities";
+import Commodity from "./Pages/Commodity/Commodity";
 import User from "./Pages/User"
 
 

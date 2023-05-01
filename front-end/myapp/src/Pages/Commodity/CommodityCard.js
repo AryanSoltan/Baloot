@@ -1,4 +1,4 @@
-import './CommoditiesCard.css';
+import '../Commodities/CommoditiesCard.css';
 import Card from 'react-bootstrap/Card';
 export default function CommodityCard(props) {
     const {image, name, price, count} = props;

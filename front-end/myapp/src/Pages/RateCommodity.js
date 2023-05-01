@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './Commodity.css'
+import './Commodity/Commodity.css'
 import RateStar from './RateStar';
 
 export default function RateMovie(props) {

@@ -78,7 +78,7 @@
 
 .like-icon {
     display: inline-block;
-    background: url('../assets/images/icons8-thumbs-up-48 1.png') no-repeat left;
+    background: url('../../assets/images/icons8-thumbs-up-48 1.png') no-repeat left;
     width: 1.458vw;
     height: 1.458vw;
     background-size: cover;
@@ -86,7 +86,7 @@
 
 .dislike-icon {
     display: inline-block;
-    background: url('../assets/images/icons8-thumbs-up-48\ 2.png') no-repeat;
+    background: url('../../assets/images/icons8-thumbs-up-48\ 2.png') no-repeat;
     width: 1.458vw;
     height: 1.458vw;
     background-size: cover;
