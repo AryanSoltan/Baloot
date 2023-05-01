@@ -207,4 +207,8 @@ public class BalootServer {
         User user = findUser(username);
         userManager.addDiscountCodeToUserBuyList(user, discountCode);
     }
+
+    public User getUserById(String username) {
+        return userManager.getUserById(username);
+    }
 }

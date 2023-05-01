@@ -29,20 +29,26 @@ function HeaderInfoPart() {
 
         return (
             <>
-            <div className="mr-auto logged-in-state align-items-center">
+                <div className="mr-auto">
+                    <ul className="navbar-nav logged-in-state align-items-center">
+                        <li className="nav-item">
+                            <a href="#">
+                                <span className="header-username-container">#{userId}</span>
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="#">
+                                <button type="button" className="btn btn-default count-of-bought-items">
+                                    Card
+                                    <span className="badge">3</span>
 
-                        <a href="#">
-                            <span>{userId}</span>
-                        </a>
 
-                        <a href="#">
-                            <button type="button" className="btn btn-default count-of-bought-items">
-                                Card
-                                <span className="badge">3</span>
-                            </button>
-                        </a>
+                                </button>
+                            </a>
+                        </li>
 
-            </div>
+                    </ul>
+                </div>
             </>
         );
     }

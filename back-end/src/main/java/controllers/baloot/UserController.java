@@ -54,8 +54,19 @@ public class UserController {
 
     @RequestMapping(value="/users/{id}/buyList",method = RequestMethod.GET)
     public Response getBuyList (@PathVariable(value="id") String username ) throws Exception{
+
         try{
             return new Response(HttpStatus.OK.value(), "buylist sent",BalootServer.getInstance().getUserBuyList(username));
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+
+    @RequestMapping(value="/users/{id}",method = RequestMethod.GET)
+    public Response getUser (@PathVariable(value="id") String username ) throws Exception{
+        try{
+            return new Response(HttpStatus.OK.value(), "user sent",BalootServer.getInstance().getUserById(username));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());

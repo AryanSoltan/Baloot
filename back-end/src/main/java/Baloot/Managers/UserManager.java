@@ -153,5 +153,7 @@ public class UserManager {
     }
 
 
-
+    public User getUserById(String username) {
+        return users.get(username);
+    }
 }

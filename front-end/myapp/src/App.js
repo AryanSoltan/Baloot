@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 
 import Commodities from "./Pages/Commodities";
 import Commodity from "./Pages/Commodity";
+import User from "./Pages/User"
 
 
 
@@ -29,7 +30,7 @@ function App() {
               <Route path="/commodities" element={<Commodities />}/>
               <Route path="/commodities/:id" element={<Commodity />}/>
               <Route path = "/signup" element = {<SignUp />}/>
-
+              <Route path = "/user" element = {<User />}/>
 
           </Routes>
         {/*<Switch>*/}

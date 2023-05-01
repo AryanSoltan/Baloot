@@ -14,7 +14,7 @@ function Commodities() {
     return (
         <body className="page-container container">
             <header>
-            <Header />
+            <Header  hasSearch = "1" />
             </header>
             <main>
             {/*<CommoditiesFilterBox />*/}
