@@ -6,6 +6,7 @@ import './Navbar.css'
 import SearchbarHeader from './SearchbarHeader';
 
 import HeaderinfoPart from "./HeaderinfoPart";
+import { Link, useMatch } from 'react-router-dom';
 
 
 function Header(props) {
@@ -18,11 +19,14 @@ function Header(props) {
             <div className="col">
                 <NavbarLogo />
             </div>
-            {props.hasSearch == "1" &&
+
                 <div className="col">
-                    <SearchbarHeader />
+                    {useMatch('/commodities') &&
+                        <SearchbarHeader />
+                    }
+
                 </div>
-            }
+
             {/*<div className="col">*/}
             {/*    <HeaderinfoPart />*/}
 

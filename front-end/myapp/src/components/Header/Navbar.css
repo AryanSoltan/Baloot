@@ -1,9 +1,11 @@
+
+
 .header-container {
 
 
     width: 100%;
     /* height: 6.042vw; */
-    /*justify-content: space-between;*/
+    justify-content: space-between;
 
     background-color: #FFFFFF;
     box-shadow: 0px 0.208vw 0.208vw rgba(208, 208, 208, 0.25);
@@ -23,6 +25,7 @@
     overflow: visible;
     /*padding-right: 2vw;*/
     padding-left: 2vw;
+
     vertical-align: middle;
     /*margin-bottom: 2.760vw;*/
     /*padding-left: 2vw;*/
@@ -86,16 +89,24 @@
 }
 
 
+.search-icon-holder{
 
-.search-icon {
     width: 3.542vw;
     height: 3.542vw;
+
+}
+.search-icon {
+
     background: #F7F0E9;
     opacity: 0.4;
+    width: 100%;
+    height: 100%;
     border-radius: 0.781vw;
-    /*background: url('../../assets/magnifier.png') no-repeat center;*/
-    padding: 0;
-    margin: 0;
+    background: url('/src/assets/images/magnifier.png') no-repeat center;
+    background-size: contain;
+    margin: auto;
+
+    border: none;
 }
 
 
@@ -198,6 +209,7 @@
     border-radius: 0.677vw;
     width: 8.333vw;
     height: 3.542vw;
+    margin-right: 3vw;
 }
 .count-of-bought-items .badge {
     display: inline-block;

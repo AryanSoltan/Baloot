@@ -25,19 +25,22 @@ const priceCompare = (a, b) => {
     else return -1;
 };
 
-export default function CommoditiesGridShow() {
+export default function CommoditiesGridShow(props) {
+    const {items, searchType, searchValue} = props;
     const [commodities, setcommodities] = useState();
     const [fetchedCommodities, setFetchedCommodities] = useState();
     const [toggle, setToggle] = useState(true)
 
-    const [filterBy, setFilterBy] = useState();
-    const [searchValue, setSearchValue] = useState("");
+    const [filterBy, setFilterBy] = useState('all');
+    // const [searchValue, setSearchValue] = useState("");
 
     const location = useLocation();
 
-    const filterName = (item) => {
-        return item.name.includes(searchValue);
-    };
+
+   // let filterName = (item) => {
+   //      console.log('in name');
+   //      return item.name.includes(searchValue);
+   //  };
 
     const filterAvail = (item) => {
         if (item.inStock > 30) return true;
@@ -49,32 +52,47 @@ export default function CommoditiesGridShow() {
     };
 
 
+
+    var searchTypesMap = {
+        name: (item) => {
+            return item.name.includes(searchValue);
+        },
+        provider: (item) => {
+            return item.providerName.includes(searchValue);
+        },
+        category: (item) => {
+            return item.categories.includes(searchValue);
+        }
+    };
+
+
     const getFilterFunc = (filterMode) => {
         if (filterMode === "available") return filterAvail;
         if (filterMode === "all") return filterAll;
 
+
     };
 
-    useEffect(() => {
-        console.log('in loc');
-        if (location.search) {
-            const searchText = location.search;
-            const params = new URLSearchParams(searchText);
-            const filter = params.get("filterBy");
-            setFilterBy(filter);
-
-        }
-    }, [location.search]);
 
     useEffect(() => {
         if (!fetchedCommodities || !commodities) return;
 
 
         let newCommodity = fetchedCommodities.slice();
+        console.log('after filter');
+
+        if(searchValue!="") {
+            searchValue.replace(/\+/g,' ')
+
+            newCommodity = newCommodity.filter(searchTypesMap[searchType]);
+        }
         newCommodity = newCommodity.filter(getFilterFunc(filterBy));
+        // newCommodity = newCommodity.filter(getFilterFunc(filterBy));
+
 
         setcommodities(newCommodity);
-    }, [filterBy, searchValue]);
+    }, [filterBy,searchType, searchValue]);
+
 
     const handleSort = (basedOn) => {
         let compareFunction;
