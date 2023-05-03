@@ -13,6 +13,8 @@ public class Commodity {
     private int providerId;
 
     private String providerName;
+
+    private String image;
     private double price;
     private ArrayList<String> categories;
     private Map<String, Integer> userRatings;
@@ -205,5 +207,9 @@ public class Commodity {
             if(comment.getId() == commentId)
                 comment.addRate(user, rate);
         }
+    }
+
+    public String getImage() {
+        return image;
     }
 }

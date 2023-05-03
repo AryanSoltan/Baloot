@@ -73,14 +73,19 @@ export default function UserInfo()
                 {buyListCommodities &&
                     buyListCommodities.map((item) => (
                         <tr className = "cart-buy-item">
-                            <td><p>{item.name}</p></td>
+                            <td><img src = {item.image}></img></td>
                             <td><p>{item.name}</p></td>
                             <td><p>{item.categories}</p></td>
                             <td><p>${item.price}</p></td>
                             <td><p>{item.providerId}</p></td>
                             <td><h5 className="col-yellow">{item.rating}</h5></td>
                             <td><h5 className="col-red">{item.inStock}</h5></td>
+                            <td>
+                                {/*<form>*/}
 
+                                {/*</form>*/}
+                                hello
+                            </td>
                         </tr>
                     ))}
 
