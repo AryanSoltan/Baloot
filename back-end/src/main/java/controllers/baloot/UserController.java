@@ -63,6 +63,7 @@ public class UserController {
         }
     }
 
+
     @RequestMapping(value="/users/{id}",method = RequestMethod.GET)
     public Response getUser (@PathVariable(value="id") String username ) throws Exception{
         try{

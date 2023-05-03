@@ -42,7 +42,7 @@ export default class Login extends React.Component{
             <body>
 
             <Header/>
-            <main>
+            <main className="mainBody">
             <UserInfo/>
                 <Cart/>
             </main>
