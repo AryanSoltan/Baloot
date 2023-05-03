@@ -334,3 +334,28 @@ button
     margin-top: 2vw;
 }
 
+.form-dec-inc
+{
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    width: 5vw;
+    height: 2vw;
+    display: flex;
+
+}
+
+
+.btn-inc-dec
+{
+    border: none;
+    margin: 0vw;
+    background-color: inherit;
+    /*margin-bottom: 20vw;*/
+}
+
+.number-buy
+{
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+}

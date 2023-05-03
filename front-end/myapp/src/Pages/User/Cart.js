@@ -41,6 +41,7 @@ export default function UserInfo()
                 console.log(commodititesList);
 
                 setBuyListCommodities(commodititesList.allCommodities);
+                console.log(commodititesList.allCommodities)
 
 
             } catch (e) {
@@ -81,10 +82,11 @@ export default function UserInfo()
                             <td><h5 className="col-yellow">{item.rating}</h5></td>
                             <td><h5 className="col-red">{item.inStock}</h5></td>
                             <td>
-                                {/*<form>*/}
-
-                                {/*</form>*/}
-                                hello
+                                <form className = "form-dec-inc">
+                                        <button className="btn-inc-dec">+</button>
+                                        <div className="number-buy">100</div>
+                                        <button className="btn-inc-dec">-</button>
+                                </form>
                             </td>
                         </tr>
                     ))}

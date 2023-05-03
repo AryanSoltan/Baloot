@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/ExternalServer/ExternalServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/ExternalServer/ExternalServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Style/User.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Style/User.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +114,8 @@
       <workItem from="1682783144374" duration="8948000" />
       <workItem from="1682953016618" duration="622000" />
       <workItem from="1683048050444" duration="1863000" />
-      <workItem from="1683094221705" duration="11297000" />
+      <workItem from="1683094221705" duration="12132000" />
+      <workItem from="1683120482519" duration="3713000" />
     </task>
     <servers />
   </component>
