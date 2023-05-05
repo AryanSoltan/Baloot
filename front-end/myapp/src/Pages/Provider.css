@@ -1,0 +1,45 @@
+
+main {
+
+    display: flex;
+    flex-direction: column;
+
+    row-gap: 1.5vw;
+    justify-content: center;
+
+
+}
+
+.info-container{
+    display: flex;
+    flex-direction: column;
+
+    vertical-align: middle;
+
+}
+.provider-image {
+    width: 35.365vw;
+    height: 26.042vw;
+    border-radius: 0.781vw;
+    margin: 0;
+    padding: 0;
+}
+
+
+.date-info{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.250vw;
+    color: #593C1C;
+    text-align: right;
+}
+
+.providerName{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3.021vw;
+    color: #593C1C;
+}
+

@@ -211,4 +211,8 @@ public class BalootServer {
     public User getUserById(String username) {
         return userManager.getUserById(username);
     }
+
+    public Provider getProviderById(int id) throws Exception {
+        return providerManager.getProviderByID(id);
+    }
 }
