@@ -12,7 +12,10 @@ public class Commodity {
     private String name;
     private int providerId;
 
+    private String image;
+
     private String providerName;
+
     private double price;
     private ArrayList<String> categories;
     private Map<String, Integer> userRatings;
@@ -21,7 +24,7 @@ public class Commodity {
 
     ArrayList<Comment> comments;
     public Commodity(int inputId, String inputName, int inputProviderId, double inputPrice,
-              ArrayList<String> inputCategories, double inputRating, int inputInStock)
+              ArrayList<String> inputCategories, double inputRating, int inputInStock, String imageURLAddress)
     {
         id = inputId;
         name = inputName;
@@ -30,6 +33,7 @@ public class Commodity {
         categories = inputCategories;
         rating = inputRating;
         inStock = inputInStock;
+        image = imageURLAddress;
     }
 
     public void setProviderName(String name){
@@ -75,17 +79,6 @@ public class Commodity {
         return userRatings.containsKey(userName);
     }
 
-    public JSONObject getJsonData(){
-        JSONObject jObj = new JSONObject();
-        jObj.put("id",id);
-        jObj.put("name",name);
-        jObj.put("provider",providerName);
-        jObj.put("providerId",providerId);
-        jObj.put("price",price);
-        jObj.put("categories",categories);
-        jObj.put("rating",rating);
-        return jObj;
-    }
 
 
 
@@ -145,6 +138,8 @@ public class Commodity {
     public String getName() {
         return name;
     }
+
+    public String getImage() {return image;}
 
     public double getPrice() {
         return price;

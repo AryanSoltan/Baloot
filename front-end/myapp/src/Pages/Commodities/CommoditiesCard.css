@@ -40,6 +40,8 @@
 }
 
 .card-img {
+    margin-left: 0.5vw;
+    margin-top: 1vw;
     width: 17.211vw;
     height: 16.667vw;
     border-radius: 0.781vw;

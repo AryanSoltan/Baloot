@@ -26,10 +26,10 @@ main {
 }
 
 .commodity-image {
-    width: 46.491vw;
+    width: 44.491vw;
     height: 41.667vw;
     border-radius: 0.781vw;
-    margin: 0;
+    margin-right: 1vw;
     padding: 0;
 }
 
@@ -138,7 +138,7 @@ main {
     background: #FFFFFF;
     box-shadow: 0px 0.208vw 0.208vw rgba(208, 208, 208, 0.25);
     margin-top: 2.604vw;
-    margin-left: -2.042vw;
+    margin-left: -1.042vw;
     margin-bottom: 2.708vw;
     padding-left: 2vw;
     padding-top: 2vw;

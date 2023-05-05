@@ -8,12 +8,15 @@ public class Provider {
     private String name;
     private String registryDate;
 
+    String image;
+
     private ArrayList<Commodity> commodities;
-    public Provider(int inputId, String inputName, String inputRegistryDate)
+    public Provider(int inputId, String inputName, String inputRegistryDate, String imageURL)
     {
         id = inputId;
         name = inputName;
         registryDate = inputRegistryDate;
+        image=imageURL;
     }
 
     public void addCommodity(Commodity newCommodity)
@@ -31,6 +34,10 @@ public class Provider {
 
     public String getRegistryDate() {
         return registryDate;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public ArrayList<Commodity> getCommodities() {

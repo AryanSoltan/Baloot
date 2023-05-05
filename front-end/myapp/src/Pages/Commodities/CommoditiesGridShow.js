@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import ReactPaginate from "react-paginate";
+import commodity from "../Commodity/Commodity";
 
 
 
@@ -217,11 +218,8 @@ export default function CommoditiesGridShow(props) {
                       <Col key={k} xs={12} md={4} lg={3}>
                                                 {/*<Link to={"/commoditites/" + item.id}>*/}
                       <CommodityCard
-                           image={IMAGE}
-                           name={item.name}
-                           price={item.price}
-                           count = {item.inStock}
-                           id = {item.id}
+                           commodity={item}
+
                       />
 
                                                 {/*</Link>*/}

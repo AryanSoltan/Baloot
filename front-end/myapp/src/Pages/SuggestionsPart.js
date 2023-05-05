@@ -51,11 +51,8 @@ export default function SuggestionsPart() {
                         <div className="" key={item.id}>
                             {/*<Link to={"/commoditites/" + item.id}>*/}
                             <CommodityCard
-                                image={IMAGE}
-                                name={item.name}
-                                price={item.price}
-                                count = {item.inStock}
-                                id={item.id}
+                                commodity={item}
+
                             />
 
 

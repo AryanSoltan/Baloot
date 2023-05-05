@@ -80,7 +80,7 @@ public class ExternalServer {
     public void addProviders()
     {
 
-        String pageProviders = getRequest("/api/providers");
+        String pageProviders = getRequest("/api/v2/providers");
         Gson gsonParser = new GsonBuilder().create();
         List<Provider> providers = gsonParser.fromJson(pageProviders,
                 new TypeToken<List<Provider>>() {}.getType());
@@ -93,12 +93,13 @@ public class ExternalServer {
     public void addCommodities()// throws Exception
     {
         try {
-            String pageCommodities = getRequest("/api/commodities");
+            String pageCommodities = getRequest("/api/v2/commodities");
             Gson gsonParser = new GsonBuilder().create();
             List<Commodity> commodities = gsonParser.fromJson(pageCommodities,
                     new TypeToken<List<Commodity>>() {
                     }.getType());
             for (Commodity commodity : commodities) {
+
                 balootServer.addCommidity(commodity);
             }
         }

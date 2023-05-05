@@ -62,7 +62,7 @@ export default function Provider(props) {
         <>
 
             <div className="info-container">
-                <img className="provider-image" src={IMAGE} />
+                <img className="provider-image" src={provider.image} />
                 <div className="date-info">since {provider.registryDate && provider.registryDate.split('-')[0]}</div>
                 <div className="providerName">{provider.providerName}</div>
 
@@ -77,11 +77,7 @@ export default function Provider(props) {
                         <div className="" key={item.id}>
 
                                 <CommodityCard
-                                    image={IMAGE}
-                                    name={item.name}
-                                    price={item.price}
-                                    count = {item.inStock}
-                                    id = {item.id}
+                                    commodity={item}
                                 />
 
                         </div>

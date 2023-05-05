@@ -20,8 +20,6 @@ export default function CommodityInfo() {
 
     const isLoggedIn = localStorage.getItem('userLoggedIn');
     const userId = localStorage.getItem('userId');
-    console.log('user id is ');
-    console.log(userId);
 
     const navigate = useNavigate();
 
@@ -34,6 +32,7 @@ export default function CommodityInfo() {
                 const commodityR= response.data.content;
 
                 console.log(commodityR);
+
                 setCommodity(commodityR);
             } catch (e) {
                 if(e.response.status === 404) {
@@ -58,7 +57,7 @@ export default function CommodityInfo() {
                 <div className="container-fluid p-0">
                     <div className="row commodity-content-container">
                         <div className="col-1 ml-auto">
-                            <img className="commodity-image" src={IMAGE} />
+                            <img className="commodity-image" src={commodity.image} />
                         </div>
 
 
@@ -71,7 +70,7 @@ export default function CommodityInfo() {
 
                                                 <h1>{commodity.name}</h1>
                                                 <h2>{commodity.inStock} in In stock</h2>
-                                                <h3>by <a href="#">{commodity.providerName}</a></h3>
+                                                <h3>by <a className="link" href={'http://localhost:3000/providers/'+commodity.id}>{commodity.providerName}</a></h3>
                                                 <h4>Categori(s)
                                                         <ul>{commodity.categories && commodity.categories.map(cat =>
                                                             <li>{'\u2022'} {cat}</li> )}</ul>
@@ -115,15 +114,7 @@ export default function CommodityInfo() {
                         </div>
                     </div>
 
-{/*                    <div className="comment-section">*/}
-{/*<div classNama="row">*/}
-{/*                            <span>Comments</span>*/}
-{/*                            {commodity.comments.map(comment => (*/}
-{/*                                <Comment key={comment.id} comment={comment} updateComment={updateComment} />*/}
-{/*                            ))}*/}
 
-{/*</div>*/}
-{/*                    </div>*/}
             </div>
 
 
