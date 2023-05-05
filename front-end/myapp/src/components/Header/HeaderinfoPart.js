@@ -3,13 +3,31 @@ import { useNavigate } from "react-router-dom";
 import './Navbar.css';
 import logo from "../../assets/images/ballot.png";
 import './NavbarLogo.css'
+import axios from "axios";
 
 function HeaderInfoPart() {
+
+    const [itemCounts, setitemCounts] = useState(0);
 
     var isLoggedIn = localStorage.getItem('userLoggedIn');
     var userId = localStorage.getItem('userId');
     console.log("stat");
     console.log(isLoggedIn);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                console.log('in  item');
+
+                const response = await axios.get("usera/"+userId+"/buylist");
+                const userBuyList = response.data.content;
+                setitemCounts(userBuyList.commoditiesList.length);
+
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchData();
+    }, []);
 
     //
     // const handleSignup = async () => {
@@ -59,7 +77,7 @@ function HeaderInfoPart() {
                         <div className="col header-btn-container">
 
                             <button type="button" className="btn btn-default count-of-bought-items">Card
-                                                    <span className="badge">3</span>
+                                                    <span className="badge">{itemCounts}</span>
                             </button>
 
                         </div>

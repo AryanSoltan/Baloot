@@ -27,14 +27,6 @@ function Header(props) {
 
                 </div>
 
-            {/*<div className="col">*/}
-            {/*    <HeaderinfoPart />*/}
-
-            {/*</div>*/}
-
-                {/*<div className="col">*/}
-                {/*    <NavbarLogo />*/}
-                {/*</div>*/}
 
                 <div className="col">
                     <HeaderinfoPart />

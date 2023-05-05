@@ -7,6 +7,8 @@ import './Commodity.css';
 import './Comments.css'
 import RateCommodity from '../RateCommodity';
 import Comment from './Comments'
+import IncrementDecrement from "./incdecButton";
+import {Icon} from "@iconify/react";
 
 
 export default function CommodityInfo() {
@@ -51,14 +53,6 @@ export default function CommodityInfo() {
 
     }
 
-
-    const updateComment = editedComment => {
-        const commentIndex =  commodity.comments.findIndex(x => x.id === editedComment.id);
-        commodity.comments[commentIndex] = editedComment;
-        setCommodity({ ... commodity });
-    }
-
-
     return (
         <>{commodity ?
                 <div className="container-fluid p-0">
@@ -74,13 +68,13 @@ export default function CommodityInfo() {
                                     <div className="row info-part">
                                         <div className="col-1">
                             <div className="commodity-info-part">
+
                                                 <h1>{commodity.name}</h1>
                                                 <h2>{commodity.inStock} in In stock</h2>
                                                 <h3>by <a href="#">{commodity.providerName}</a></h3>
                                                 <h4>Categori(s)
-                                                        <ul><li>Technology</li>
-                                                                    <li>IT</li>
-                                                        </ul>
+                                                        <ul>{commodity.categories && commodity.categories.map(cat =>
+                                                            <li>{'\u2022'} {cat}</li> )}</ul>
                                                 </h4>
 
                             </div>
@@ -90,38 +84,32 @@ export default function CommodityInfo() {
 
                         <div className="col-1 mr-auto">
                             <div className="rate-star-row">
-                                <p className="star-icon"></p>
 
+                                <Icon
+                                    icon="codicon:star-full"
+                                    className="fixed-star-icon"
+
+                                />
                                 <p>{commodity.rating}<span>(12)</span></p>
                         </div>
                             </div>
                                 </div>
                                 </div>
-                    <div className="col-1 card item-buy-card">
+                    <div className="col-1 item-buy-card">
 
-
-                            <div className="card-body d-flex">
-                                <div className="container-fluid row">
-                                    <div className="col-lg-6 col-md-6">
-                                        <span className="price price-large">300$</span>
-                                    </div>
-
-                                    <div className="col-lg-6 col-md-6 p-0">
-                                        <a href="#" className="btn commodity-card-button">Add to card</a>
-                                    </div>
-
-
-                                </div>
+                            <div className="card-body">
+                                <span className="price price-large">{commodity.price}$</span>
+                                  <IncrementDecrement commodityId={commodity.id} currentCount={0} max={commodity.inStock}/>
                             </div>
 
                     </div>
 
-                                <div className="col-1">
+                    <div className="col-1 rateTitle">
+                         rate now
+                         <RateCommodity updateRate={updateRate} userId={userId} commodityId={commodity.id} userRate={commodity.rate}/>
 
-                                    <RateCommodity updateRate={updateRate} userId={userId} commodityId={commodity.id} userRate={commodity.rate}/>
 
-
-                                </div>
+                    </div>
 
                         </div>
                         </div>

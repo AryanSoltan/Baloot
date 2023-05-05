@@ -91,25 +91,6 @@ public class CommodityController {
         }
     }
 
-    @RequestMapping(value="/commodities/{id}/{userId}/add",method = RequestMethod.POST)
-    public Response addCommodityToBuyLst(@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
-        try{
-
-            BalootServer.getInstance().addCommidityToUserBuyList(userID, Integer.valueOf(commodityID));
-            return new Response(HttpStatus.OK.value(), "commodity added", null);
-        }
-        catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-        }
-    }
-
-
-
-
-
-
-
-
 
 
 }

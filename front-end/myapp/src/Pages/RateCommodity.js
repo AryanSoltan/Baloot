@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './Commodity/Commodity.css'
+import './Rating.css'
 import RateStar from './RateStar';
 
 export default function RateMovie(props) {
@@ -30,12 +30,6 @@ export default function RateMovie(props) {
         }
     }
 
-    // useEffect(() => {
-    //     if(userRate) {
-    //
-    //         handleHover(userRate);
-    //     }
-    // }, [])
 
     const handleHover = position => {
         stars.map((star, index) => {

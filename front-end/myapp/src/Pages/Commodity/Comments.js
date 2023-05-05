@@ -40,30 +40,7 @@ export default function Comments(props) {
             </div>
 
 
-            {/*<div className="col-1">*/}
-            {/*    <p>This was awsome!!!!!</p>*/}
-            {/*    <div className="row d-flex justify-content-between">*/}
-            {/*        <div className="row d-flex subtitle-format m-0">*/}
-            {/*            <div className="col-lg-6 col-md-6">*/}
-            {/*                2023-03-20*/}
-            {/*            </div>*/}
-            {/*            <div className="col-lg-1 col-md-1 big-dot">*/}
-            {/*                .*/}
-            {/*            </div>*/}
-            {/*            <div className="col-lg-4 col-md-4">*/}
-            {/*                {comment.userName}*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <div className="row d-flex align-items-center m-2 eval-comment-format">*/}
-            {/*            Is this comment helpful?*/}
-            {/*            <span>1</span>*/}
-            {/*            <span className="like-icon"></span>*/}
-            {/*            <span>1</span>*/}
-            {/*            <span className="dislike-icon"></span>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
 
-        {/*</div>*/}
         </div>
 
     )

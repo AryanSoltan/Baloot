@@ -110,8 +110,8 @@ public class BalootServer {
         Commodity neededCommodity = getCommodityById(commodityId);
         if(!neededCommodity.isAvailable())
             throw new CommodityOutOfStock(commodityId);
-        if(userManager.userHasBoughtCommodity(username,commodityId))
-            throw new CommodityAlreadyAdded(commodityId);
+//        if(userManager.userHasBoughtCommodity(username,commodityId))
+//            throw new CommodityAlreadyAdded(commodityId);
         userManager.addCommidityToUserBuyList(username,neededCommodity);
     }
 

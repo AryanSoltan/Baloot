@@ -42,11 +42,11 @@ export default function SuggestionsPart() {
     return (
         <>
 <div className="suggestions-section">
-    <h1>You also might like...</h1>
-
+    {commodities && <div className="suggestionTitle">You also might like ...</div>}
             <div className="commodities-list">
 
-                {commodities &&
+
+                    {commodities &&
                     commodities.map((item) => (
                         <div className="" key={item.id}>
                             {/*<Link to={"/commoditites/" + item.id}>*/}
@@ -54,11 +54,14 @@ export default function SuggestionsPart() {
                                 image={IMAGE}
                                 name={item.name}
                                 price={item.price}
-                                count = {item.inStock}/>
+                                count = {item.inStock}
+                                id={item.id}
+                            />
 
-                            {/*</Link>*/}
+
 
                         </div>
+
                     ))}
             </div>
 </div>

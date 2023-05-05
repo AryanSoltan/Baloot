@@ -95,7 +95,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/users/{id}/buyList/remove/{commodityID}",method = RequestMethod.POST)
+    @RequestMapping(value="/users/{id}/{commodityID}/remove",method = RequestMethod.POST)
     public Response removeFromBuylist (@PathVariable(value="id") String username,@PathVariable(value="commodityID") String commodityId ) throws Exception{
         try{
             int commodityID = Integer.valueOf(commodityId);
@@ -104,6 +104,18 @@ public class UserController {
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+    @RequestMapping(value="/users/{id}/{commodityId}/add/",method = RequestMethod.POST)
+    public Response addCommodityToBuyLst(@PathVariable(value="id") String userID,@PathVariable(value="commodityId") String commodityID ) {
+        try {
+
+
+            BalootServer.getInstance().addCommidityToUserBuyList(userID, Integer.valueOf(commodityID));
+            return new Response(HttpStatus.OK.value(), "commodity added", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 

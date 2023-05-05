@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import CommodityCard from "../Commodity/CommodityCard";
 import IMAGE from '../../assets/images/item-in-cart.png'
 import './Commodities.css'
+import './pagination.css'
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
+import ReactPaginate from "react-paginate";
 
 
 
@@ -27,20 +29,17 @@ const priceCompare = (a, b) => {
 
 export default function CommoditiesGridShow(props) {
     const {items, searchType, searchValue} = props;
-    const [commodities, setcommodities] = useState();
+    const [commodities, setcommodities] = useState([]);
     const [fetchedCommodities, setFetchedCommodities] = useState();
     const [toggle, setToggle] = useState(true)
+    const [sortType, setSortType] = useState();
 
     const [filterBy, setFilterBy] = useState('all');
-    // const [searchValue, setSearchValue] = useState("");
+    const [offset, setOffset] = useState(0);
+    const [perPage] = useState(12);
+    const [pageCount, setPageCount] = useState(0)
 
-    const location = useLocation();
 
-
-   // let filterName = (item) => {
-   //      console.log('in name');
-   //      return item.name.includes(searchValue);
-   //  };
 
     const filterAvail = (item) => {
         if (item.inStock > 30) return true;
@@ -65,8 +64,15 @@ export default function CommoditiesGridShow(props) {
         }
     };
 
+    var sortTypesMap = {
+        'name': nameCompare,
+        'price': priceCompare
+    };
+
 
     const getFilterFunc = (filterMode) => {
+        console.log('filter mod ei s');
+        console.log(filterMode);
         if (filterMode === "available") return filterAvail;
         if (filterMode === "all") return filterAll;
 
@@ -74,11 +80,12 @@ export default function CommoditiesGridShow(props) {
     };
 
 
-    useEffect(() => {
-        if (!fetchedCommodities || !commodities) return;
-
-
+    useMemo(() => {
+        if (!fetchedCommodities) return;
+        //
+        //
         let newCommodity = fetchedCommodities.slice();
+        //let newCommodity = commodities.slice();
         console.log('after filter');
 
         if(searchValue!="") {
@@ -87,19 +94,33 @@ export default function CommoditiesGridShow(props) {
             newCommodity = newCommodity.filter(searchTypesMap[searchType]);
         }
         newCommodity = newCommodity.filter(getFilterFunc(filterBy));
+        newCommodity.sort(sortTypesMap[sortType]);
+
+        console.log('new coms are');
+        console.log('sort type');
+        console.log(sortType);
+        console.log(newCommodity);
         // newCommodity = newCommodity.filter(getFilterFunc(filterBy));
 
 
-        setcommodities(newCommodity);
-    }, [filterBy,searchType, searchValue]);
+
+
+        setPageCount(Math.ceil(newCommodity.length/perPage))
+
+        setcommodities(newCommodity.slice(offset, offset+perPage))
+        // handleSort()
+
+    }, [sortType,filterBy,searchType, searchValue,offset]);
 
 
     const handleSort = (basedOn) => {
         let compareFunction;
         if (basedOn === "price") {
             compareFunction = priceCompare;
+            setSortType('price');
         } else if (basedOn === "name") {
             compareFunction = nameCompare;
+            setSortType('name');
         }
         commodities.sort(compareFunction);
         setcommodities(commodities.slice());
@@ -124,12 +145,16 @@ export default function CommoditiesGridShow(props) {
     useEffect(() => {
         async function fetchData() {
             try {
+                console.log('in fetch data');
                 const response = await axios.get("commodities");
                 const commodititesList = response.data.content;
 
                 setcommodities(commodititesList);
-
                 setFetchedCommodities(commodititesList);
+
+                setPageCount(Math.ceil(commodititesList.length/perPage))
+
+                setcommodities(commodititesList.slice(offset, offset+perPage))
 
             } catch (e) {
                 console.log(e);
@@ -137,6 +162,12 @@ export default function CommoditiesGridShow(props) {
         }
         fetchData();
     }, []);
+
+    const handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        setOffset((selectedPage )*perPage)
+
+    };
     return (
         <>
 
@@ -151,12 +182,12 @@ export default function CommoditiesGridShow(props) {
 
                     </div>
 
+
                     <div className="col-1 ml-auto">
                         <form>
 
-                            <div className="form-row">
-
-                                    Sort by:
+                            <div className="form-row ">
+                                <span className="sortBy">Sort by:</span>
                                 <div className="col-1">
                                     <button type="button" className="btn button-type2" onClick={() => {
                                         handleSort("name");}}>name</button>
@@ -181,20 +212,40 @@ export default function CommoditiesGridShow(props) {
         <div className="commodities-list">
 
             {commodities &&
-                commodities.map((item) => (
+                commodities.map((item,k) => (
                   <div className="" key={item.id}>
+                      <Col key={k} xs={12} md={4} lg={3}>
                                                 {/*<Link to={"/commoditites/" + item.id}>*/}
                       <CommodityCard
                            image={IMAGE}
                            name={item.name}
                            price={item.price}
-                           count = {item.inStock}/>
+                           count = {item.inStock}
+                           id = {item.id}
+                      />
 
                                                 {/*</Link>*/}
-
+                      </Col>
                   </div>
             ))}
+
          </div>
+            {pageCount>1 && <ReactPaginate
+                activeClassName={'item active '}
+                breakClassName={'item break-me '}
+                breakLabel={'...'}
+                containerClassName={'pagination'}
+                disabledClassName={'disabled-page'}
+                marginPagesDisplayed={2}
+                nextClassName={"item next"}
+                nextLabel={">"}
+                onPageChange={handlePageClick}
+                pageCount={pageCount}
+                pageClassName={'item pagination-page '}
+                pageRangeDisplayed={1}
+                previousClassName={"item previous"}
+                previousLabel={"<"}
+            />}
 
         </>
     );
