@@ -37,8 +37,8 @@ public class User {
 
     public void buyCommodity(Commodity newCommodity)
     {
-        if(!buyList.contains(newCommodity.getId()))
-            buyList.addNewCommodityToBuyList(newCommodity);
+
+        buyList.addNewCommodityToBuyList(newCommodity);
 
     }
 

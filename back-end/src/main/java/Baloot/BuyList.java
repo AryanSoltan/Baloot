@@ -9,17 +9,30 @@ import java.util.Map;
 
 public class BuyList {
     Map<Integer, Commodity> commoditiesList;
+    Map<Integer,Integer> commoditiesCount;
 
     private DiscountCode buylistDiscountCode;
 
     public BuyList()
     {
         commoditiesList = new HashMap<Integer, Commodity>();
+        commoditiesCount = new HashMap<Integer,Integer>();
         buylistDiscountCode = null;
     }
     public void addNewCommodityToBuyList(Commodity newCommodity)
     {
-        commoditiesList.put(newCommodity.getId(), newCommodity);
+        if(commoditiesList.containsKey(newCommodity.getId()))
+        {
+            commoditiesList.put(newCommodity.getId(), newCommodity);
+            commoditiesCount.put(newCommodity.getId(),1);
+        }
+        else{
+            int currCount = commoditiesCount.get(newCommodity.getId());
+            commoditiesCount.put(newCommodity.getId(),currCount+1);
+        }
+
+
+
     }
 
     public boolean contains(int commodityID)
@@ -29,7 +42,12 @@ public class BuyList {
 
     public void removeCommodityFromBuyList(int commodityID)
     {
-        commoditiesList.remove(commodityID);
+        int currCount = commoditiesCount.get(commodityID);
+        if(currCount>2) {
+            commoditiesCount.put(commodityID, currCount -1);
+        }
+        if(currCount==1)
+            commoditiesList.remove(commodityID);
     }
 
     public ArrayList<Commodity> getAllCommodities()

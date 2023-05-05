@@ -95,23 +95,28 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/users/{id}/{commodityID}/remove",method = RequestMethod.POST)
-    public Response removeFromBuylist (@PathVariable(value="id") String username,@PathVariable(value="commodityID") String commodityId ) throws Exception{
+    @RequestMapping(value="/users/{commodityID}/remove",method = RequestMethod.POST)
+    public Response removeFromBuylist (@RequestBody String reqInfo,@PathVariable(value="commodityID") String commodityID) throws Exception{
         try{
-            int commodityID = Integer.valueOf(commodityId);
-            BalootServer.getInstance().removeFromBuyList(username,commodityID);
+            var info = new ObjectMapper().readTree(reqInfo);
+            String username = info.get("userId").asText();
+
+            BalootServer.getInstance().removeFromBuyList(username,Integer.valueOf(commodityID));
             return new Response(HttpStatus.OK.value(), "suggestions sent",null);
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
-    @RequestMapping(value="/users/{id}/{commodityId}/add/",method = RequestMethod.POST)
-    public Response addCommodityToBuyLst(@PathVariable(value="id") String userID,@PathVariable(value="commodityId") String commodityID ) {
+    @RequestMapping(value="/users/{commodityID}/add",method = RequestMethod.POST)
+    public Response addCommodityToBuyLst(@RequestBody String reqInfo, @PathVariable(value="commodityID") String commodityID) {
         try {
+            var info = new ObjectMapper().readTree(reqInfo);
+            String username = info.get("userId").asText();
 
 
-            BalootServer.getInstance().addCommidityToUserBuyList(userID, Integer.valueOf(commodityID));
+            BalootServer.getInstance().addCommidityToUserBuyList(username , Integer.valueOf(commodityID));
+
             return new Response(HttpStatus.OK.value(), "commodity added", null);
         } catch (Exception e) {
             e.printStackTrace();

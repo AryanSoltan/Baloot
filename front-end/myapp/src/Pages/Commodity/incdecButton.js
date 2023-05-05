@@ -24,8 +24,8 @@ export default function IncrementDecrement(props)
         let value = validateValue(counter - 1);
         setCounter(value);
         try {
-
-            const response = await axios.post('/users/' + userId +'/'+ commodityId+ '/remove');
+            const data = { userId: userId };
+            const response = await axios.post('/users/' + commodityId+ '/remove/'+data);
 
         } catch (e) {
             console.log(e);
@@ -39,7 +39,8 @@ export default function IncrementDecrement(props)
         setCounter(value);
         try {
 
-            const response = await axios.post('/users/' + userId +'/'+ commodityId+ '/add/');
+            const data = { userId: userId };
+            const response = await axios.post('/users/' + commodityId+ '/add/'+data);
 
         } catch (e) {
             console.log(e);
