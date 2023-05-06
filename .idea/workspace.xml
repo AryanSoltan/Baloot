@@ -5,19 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/UserInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Commodity.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Commodity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodities.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/CommoditiesGridShow.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/CommoditiesGridShow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/components/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/components/Header/Navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/components/Header/Navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Commodity.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Commodity.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/UserInfo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Style/User.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Style/User.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

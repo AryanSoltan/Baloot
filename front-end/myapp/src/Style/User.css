@@ -5,9 +5,13 @@
 
 .section-user-info
 {
-    margin-left: 20vmin;
-    padding-top: 20vmin;
-    margin-right: 20vmin;
+    width: 100vw;
+    /*padding-right: vw;*/
+    padding-left: 10vw;
+    padding-bottom: 3vw;
+    margin-left: 2vw;
+    padding-top: 1vw;
+    margin-right: 2vw;
 
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
@@ -163,12 +167,13 @@
 
 .cart-col-name
 {
-    padding-left: 2vw;
+    /*padding-left: 2vw;*/
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
-    margin-right: 2vw;
-    margin-left: 2vw;
-    padding-top: 3vmin;
+    height:3vw;
+    /*margin-right: 2vw;*/
+    /*margin-left: 2vw;*/
+    /*padding-top: 3vmin;*/
 }
 
 .cart-col-name p 
@@ -306,4 +311,51 @@ h6
 button 
 {
     margin-top: 2vw;
+}
+
+.box-cart-name
+{
+    text-align: center;
+    width: 5vw;
+    height: 3vw;
+    margin-right: 2vw;
+    /* padding-right: 4vw; */
+    /* margin-left: 3.5vw; */
+}
+
+.mainBody
+{
+    margin-bottom: 4vw;
+}
+
+.table
+{
+    width: 70vw;
+    margin-top: 2vw;
+}
+
+.form-dec-inc
+{
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    width: 5vw;
+    height: 2vw;
+    display: flex;
+
+}
+
+
+.btn-inc-dec
+{
+    border: none;
+    margin: 0vw;
+    background-color: inherit;
+    /*margin-bottom: 20vw;*/
+}
+
+.number-buy
+{
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
 }

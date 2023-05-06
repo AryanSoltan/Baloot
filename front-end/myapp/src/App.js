@@ -15,7 +15,7 @@ import { ToastContainer } from "react-toastify";
 
 import Commodities from "./Pages/Commodities/Commodities";
 import Commodity from "./Pages/Commodity/Commodity";
-import User from "./Pages/User"
+import User from "./Pages/User/User"
 import Provider from "./Pages/ProviderPage"
 
 

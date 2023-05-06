@@ -1,16 +1,17 @@
 import * as React from "react";
 import {toast} from "react-toastify";
 
-import Footer from "./Footer"
-import logo from "../assets/images/ballot.png";
+import Footer from "../Footer"
+import logo from "../../assets/images/ballot.png";
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 
 import UserInfo from "./UserInfo"
 
 
-import "../Style/footer.css"
-import "../Style/User.css"
-import Header from "../components/Header/Header"
+import "../../Style/footer.css"
+import "../../Style/User.css"
+import Header from "../../components/Header/Header"
+import Cart from "./Cart"
 // import  "/bootstrap@4.6.2/dist/css/bootstrap.min.css"
 
 import axios from 'axios'
@@ -41,8 +42,9 @@ export default class Login extends React.Component{
             <body>
 
             <Header/>
-            <main>
+            <main className="mainBody">
             <UserInfo/>
+                <Cart/>
             </main>
             <Footer/>
             </body>
