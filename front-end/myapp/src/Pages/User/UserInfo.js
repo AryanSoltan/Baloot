@@ -10,11 +10,12 @@ import userInfoPNG from "../../assets/images/map-user-info.png"
 import emailPNG from "../../assets/images/user-email.png"
 import dateInfoPNG from "../../assets/images/date-user-info.png"
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 import "../../Style/User.css"
+import "./Cart.css"
 
 import axios from 'axios'
 export default function UserInfo()
@@ -90,34 +91,37 @@ export default function UserInfo()
     }
 
     return(
-            <section className="section-user-info">
+            // <section className="section-user-info">
 
-                <div className="container-fluid p0">
-                    <div className="row">
+                <div className="section-user-info">
 
-                        <div className="col-lg-6 col-md-12 first-row-info">
-                            <div className="item-info">
+
+                        <div className="col-1 first-row-info">
+                            <div className="user-info-txt">
                                 <img src={userPNG}/>
-                                <p className="user-info-txt">{user.name}</p>
+                               {user.name}
                             </div>
-                            <div className="item-info">
+                            <div className="user-info-txt">
                                 <img src={emailPNG}/>
-                                <p className="user-info-txt">{user.email}</p>
+                                {user.email}
                             </div>
-                            <div className="item-info">
+                            <div className="user-info-txt">
                                 <img src={dateInfoPNG}/>
-                                <p className="user-info-txt">{user.birthDate}</p>
+                                {user.birthDate}
                             </div>
-                            <div className="item-info">
+                            <div className="user-info-txt">
                                 <img src={userInfoPNG}/>
-                                <p className="user-info-txt">{user.address}</p>
+                               {user.address}
+                            </div>
+                            <div className="user-info-txt">
+                                <button type="submit" className="btn logout-button">logout</button>
                             </div>
                         </div>
 
-                        <div className="col-lg-6 col-md-12">
-                            <div className="credit-info">
-                                <img src={dollarPNG}/>
-                                <p className="credit-info-txt">{user.credit}</p>
+                        <div className="col-1 price-part">
+                            <div className="credit-info-txt">
+                                {/*<img src={dollarPNG}/>*/}$
+                                {user.credit}
                             </div>
                             <form onSubmit={addCredit}>
                                 <input className="box-amount" type="text" id="fname" name="fname"
@@ -128,10 +132,10 @@ export default function UserInfo()
                             </form>
                         </div>
 
-                    </div>
+
 
                 </div>
-            </section>
+            // </section>
 
     )
 }

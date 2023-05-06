@@ -11,10 +11,11 @@ import Row from 'react-bootstrap/Row';
 
 import IncrementDecrement from "../Commodity/incdecButton"
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Commodity/incdecButton.css';
 
 import "../../Style/User.css"
+import "./Cart.css"
 
 import axios from 'axios'
 
