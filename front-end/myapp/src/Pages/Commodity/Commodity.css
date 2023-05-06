@@ -78,7 +78,7 @@ main {
 
     margin:0.5vw;
 
-   /*padding: 0;*/
+    /*padding: 0;*/
 }
 .commodity-info-part ul li{
     margin-top: 0;
@@ -107,37 +107,17 @@ main {
     color: #919191;
 }
 
-/*<<<<<<< HEAD*/
-/*=======*/
-/*.star-icon {*/
+.rate-star-row {
+    display: flex;
+    align-items: center;
+    float: left;
+    padding: 0;
 
-/*    !*background: url('/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/assets/images/icons8-star-filled-48 1.png') no-repeat center;*!*/
-/*    !*nazaaaaaaaaaaaaaaaaaaaaaaaaaar url ba folder khodet ┌( ಠ_ಠ)┘*/
+    margin-top: 4vw;
+    margin-left:10vw;
+    /* padding-right: 17.865vw; */
 
-
-/*    width: 2.500vw;*/
-
-/*    height: 2.500vw;*/
-/*    background-size: cover;*/
-/*    padding: 0;*/
-/*    margin: 0;*/
-
-/*    float: left;*/
-
-/*}*/
-
-/*>>>>>>> ca5*/
-/*.rate-star-row {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    float: left;*/
-/*    padding: 0;*/
-
-/*    margin-top: 4vw;*/
-/*    margin-left:10vw;*/
-/*    !* padding-right: 17.865vw; *!*/
-
-/*}*/
+}
 .fixed-star-icon{
     width:2.500vw;
     height: 2.500vw;

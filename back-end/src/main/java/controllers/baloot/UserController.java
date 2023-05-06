@@ -115,7 +115,6 @@ public class UserController {
             var info = new ObjectMapper().readTree(reqInfo);
             String username = info.get("userId").asText();
 
-
             BalootServer.getInstance().addCommidityToUserBuyList(username , Integer.valueOf(commodityID));
 
             return new Response(HttpStatus.OK.value(), "commodity added", null);
@@ -160,6 +159,17 @@ public class UserController {
         catch (Exception e)
         {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not found");
+        }
+    }
+
+    @RequestMapping(value="/users/{id}/purchasedList",method = RequestMethod.GET)
+    public Response getPurchasedList (@PathVariable(value="id") String username ) throws Exception{
+
+        try{
+            return new Response(HttpStatus.OK.value(), "purchasedlist sent",BalootServer.getInstance().getUserPurchasedList(username));
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
 

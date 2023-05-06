@@ -151,7 +151,6 @@ public class BalootServer {
         double totalPrice = userBuyList.getBuylistPrice();
         if(user.getCredit() < totalPrice)
             throw new NotEnoughCredit();
-
         commodityManager.decreaseStock(userBuyList);
         userManager.userBoughtBuyList(user,totalPrice);
     }
@@ -214,5 +213,9 @@ public class BalootServer {
 
     public Provider getProviderById(int id) throws Exception {
         return providerManager.getProviderByID(id);
+    }
+
+    public BuyList getUserPurchasedList(String username) throws Exception{
+        return userManager.getUserPurchasedList(username);
     }
 }

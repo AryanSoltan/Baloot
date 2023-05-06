@@ -359,3 +359,8 @@ button
     padding-left: 0.5vw;
     padding-right: 0.5vw;
 }
+
+IncrementDecrement .button-user
+{
+    width: 100 vw;
+}

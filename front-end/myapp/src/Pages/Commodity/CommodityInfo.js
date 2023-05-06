@@ -98,9 +98,8 @@ export default function CommodityInfo() {
 
                             <div className="card-body">
                                 <span className="price price-large">{commodity.price}$</span>
-                                  <IncrementDecrement commodityId={commodity.id} currentCount={0} max={commodity.inStock}/>
+                                  <IncrementDecrement  commodityId={commodity.id} currentCount={0} max={commodity.inStock}/>
                             </div>
-
                     </div>
 
                     <div className="col-1 rateTitle">

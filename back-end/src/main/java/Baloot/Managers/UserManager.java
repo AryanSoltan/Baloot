@@ -156,4 +156,10 @@ public class UserManager {
     public User getUserById(String username) {
         return users.get(username);
     }
+
+    public BuyList getUserPurchasedList(String userName) throws Exception {
+
+        User neededUser = getUserByUsername(userName);
+        return neededUser.getPurchasedCommodities();
+    }
 }

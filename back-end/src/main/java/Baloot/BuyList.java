@@ -21,7 +21,7 @@ public class BuyList {
     }
     public void addNewCommodityToBuyList(Commodity newCommodity)
     {
-        if(commoditiesList.containsKey(newCommodity.getId()))
+        if(!commoditiesList.containsKey(newCommodity.getId()))
         {
             commoditiesList.put(newCommodity.getId(), newCommodity);
             commoditiesCount.put(newCommodity.getId(),1);
@@ -29,6 +29,7 @@ public class BuyList {
         else{
             int currCount = commoditiesCount.get(newCommodity.getId());
             commoditiesCount.put(newCommodity.getId(),currCount+1);
+
         }
 
 
@@ -50,11 +51,17 @@ public class BuyList {
             commoditiesList.remove(commodityID);
     }
 
-    public ArrayList<Commodity> getAllCommodities()
+    public ArrayList<CommodityInBuyList> getAllCommodities()
     {
         Collection<Commodity> collectionCommidity = commoditiesList.values();
-        ArrayList<Commodity> commiditesArray = new ArrayList<Commodity>(collectionCommidity);
-        return commiditesArray;
+        ArrayList<Commodity> commoditesArray = new ArrayList<Commodity>(collectionCommidity);
+        ArrayList<CommodityInBuyList> commoditiesInBuyList = new ArrayList<>();
+        for(Commodity commodity: commoditesArray)
+        {
+            CommodityInBuyList commodityBuyList = new CommodityInBuyList(commodity, commoditiesCount.get(commodity.getId()));
+            commoditiesInBuyList.add(commodityBuyList);
+        }
+        return commoditiesInBuyList;
 
     }
 
@@ -96,8 +103,6 @@ public class BuyList {
     {
         return buylistDiscountCode;
     }
-
-
 
 }
 

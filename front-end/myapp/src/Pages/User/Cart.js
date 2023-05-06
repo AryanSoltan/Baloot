@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import cartPNG from "../../assets/images/cart.png"
+import historyPNG from "../../assets/images/history.png"
+
 import Row from 'react-bootstrap/Row';
 
+import IncrementDecrement from "../Commodity/incdecButton"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import '../Commodity/incdecButton.css';
 
 import "../../Style/User.css"
 
@@ -20,7 +22,8 @@ export default function UserInfo()
 {
 
     const [buyListCommodities, setBuyListCommodities] = useState();
-
+    const [purchesedListCommodities, setPurchasedListCommodities] = useState();
+    const changePage = useState();
 
 
     useEffect(() => {
@@ -30,7 +33,10 @@ export default function UserInfo()
         async function fetchData() {
 
             try {
-                const response = await axios.post("/commodities/" + "1/" + userId + "/add");
+                const response = await axios.post("/users/" + "1/" + "add",
+                    {userId: userId,
+                    }
+                );
             } catch (e) {
                 console.log(e);
             }
@@ -48,9 +54,59 @@ export default function UserInfo()
                 console.log(e);
             }
 
+            try {
+                const response = await axios.get("/users/" + userId +"/purchasedList");
+                const commodititesList = response.data.content;
+                console.log(commodititesList);
+
+                setPurchasedListCommodities(commodititesList.allCommodities);
+                console.log(commodititesList.allCommodities);
+            } catch (e) {
+                console.log(e);
+            }
         }
         fetchData();
     }, []);
+
+    const handleIncrease = (e) => {
+        console.log("Increase");
+        const userId = localStorage.getItem('userId');
+
+        try {
+            const response = axios.post("/users/" + e + "/add",
+                {userId: userId,
+                }
+            );
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const handleDecrease = (e) => {
+        console.log("Decrease");
+        const userId = localStorage.getItem('userId');
+
+        try {
+            const response = axios.post("/users/" + e + "/remove",
+                {userId: userId,
+                }
+            );
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const handlePayment = (e) => {
+        const userId = localStorage.getItem('userId');
+        try {
+            const response = axios.post("/users/" + userId + "/buyList/submit");
+        } catch (e) {
+            console.log(e);
+        }
+        window.location.reload();
+    };
+
+
 
     return(
         <section className="section-cart-info">
@@ -71,79 +127,68 @@ export default function UserInfo()
                     <th>In Cart</th>
                 </tr>
 
+
                 {buyListCommodities &&
                     buyListCommodities.map((item) => (
                         <tr className = "cart-buy-item">
-                            <td><img src = {item.image}></img></td>
-                            <td><p>{item.name}</p></td>
-                            <td><p>{item.categories}</p></td>
-                            <td><p>${item.price}</p></td>
-                            <td><p>{item.providerId}</p></td>
-                            <td><h5 className="col-yellow">{item.rating}</h5></td>
-                            <td><h5 className="col-red">{item.inStock}</h5></td>
+                            <td><img src = {item.commodity.image}></img></td>
+                            <td><p>{item.commodity.name}</p></td>
+                            <td><p>{item.commodity.categories}</p></td>
+                            <td><p>${item.commodity.price}</p></td>
+                            <td><p>{item.commodity.providerId}</p></td>
+                            <td><h5 className="col-yellow">{item.commodity.rating}</h5></td>
+                            <td><h5 className="col-red">{item.commodity.inStock}</h5></td>
                             <td>
-                                <form className = "form-dec-inc">
-                                        <button className="btn-inc-dec">+</button>
-                                        <div className="number-buy">100</div>
-                                        <button className="btn-inc-dec">-</button>
-                                </form>
+                                <IncrementDecrement className = "button-user" commodityId={item.commodity.id} currentCount={item.numInStock} max={item.commodity.inStock}/>
                             </td>
                         </tr>
+
                     ))}
 
+
             </table>
-
-
-
-            {/*<div className="cart-col-name">*/}
-            {/*    <div className="row">*/}
-            {/*        <p className="box-cart-name">Image</p>*/}
-            {/*        <p className="box-cart-name">Name</p>*/}
-            {/*        <p className="box-cart-name">Categories</p>*/}
-            {/*        <p className="box-cart-name">Price</p>*/}
-            {/*        <p className="box-cart-name">Provider ID</p>*/}
-            {/*        <p className="box-cart-name">Rating</p>*/}
-            {/*        <p className="box-cart-name">In Stock</p>*/}
-            {/*        <p className="box-cart-name">In Cart</p>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-            {/*<div className="cart-buy-item">*/}
-            {/*    <div className="row">*/}
-            {/*        <div className="box-cart-item"><img src="../assets/images/item-in-cart.png"/></div>*/}
-            {/*        <div className="box-cart-item">*/}
-            {/*            <p>Galexy S21</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="box-cart-item">*/}
-            {/*            <p> Technology, Phone</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="box-cart-item">*/}
-            {/*            <p>$21000000</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="box-cart-item">*/}
-            {/*            <p>1234</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="box-cart-item">*/}
-            {/*            <h5 className="col-yellow">8.3</h5>*/}
-            {/*        </div>*/}
-            {/*        <div className="box-cart-item">*/}
-            {/*            <h5 className="col-red">17</h5>*/}
-            {/*        </div>*/}
-            {/*        <div className="box-cart-item inc-dec">*/}
-            {/*            <div className="row">*/}
-            {/*                <button className="astext">+</button>*/}
-            {/*                <h6>1</h6>*/}
-            {/*                <button className="astext">-</button>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-
-            <button className="payment-button">
+            <button className="payment-button" onClick = {handlePayment}>
                 Pay now!
             </button>
 
+
+                <div className="cart-item-info">
+                    <img src={historyPNG}/>
+                    <p className="cart-title-txt">History</p>
+                </div>
+
+                <table className="table">
+                    <tr className="cart-col-name">
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Categories</th>
+                        <th>Price</th>
+                        <th>Provider ID</th>
+                        <th>Rating</th>
+                        <th>In Stock</th>
+                        <th>Quantity</th>
+                    </tr>
+
+            {purchesedListCommodities &&
+                purchesedListCommodities.map((item) => (
+                    <tr className = "cart-buy-item">
+                        <td><img src = {item.commodity.image}></img></td>
+                        <td><p>{item.commodity.name}</p></td>
+                        <td><p>{item.commodity.categories}</p></td>
+                        <td><p>${item.commodity.price}</p></td>
+                        <td><p>{item.commodity.providerId}</p></td>
+                        <td><h5 className="col-yellow">{item.commodity.rating}</h5></td>
+                        <td><h5 className="col-red">{item.commodity.inStock}</h5></td>
+                        <td>
+                            <IncrementDecrement className = "button-user" commodityId={item.commodity.id} currentCount={item.numInStock} max={item.commodity.inStock}/>
+                        </td>
+                    </tr>
+
+                ))}
+
+
+
+                </table>
         </section>
     )
 }
