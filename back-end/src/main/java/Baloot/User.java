@@ -37,8 +37,8 @@ public class User {
 
     public void buyCommodity(Commodity newCommodity)
     {
-
-        buyList.addNewCommodityToBuyList(newCommodity);
+        CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
+        buyList.addNewCommodityToBuyList(commodity);
 
     }
 
@@ -107,7 +107,7 @@ public class User {
     {
         for(CommodityInBuyList commodity : buyList.getAllCommodities())
         {
-            purchased.addNewCommodityToBuyList(commodity.getCommodity());
+            purchased.addNewCommodityToBuyList(commodity);
         }
     }
     public void clearBuylist()
@@ -154,5 +154,9 @@ public class User {
     public void addDiscountToBuylist(DiscountCode discountCode)
     {
         buyList.setDiscountCode(discountCode);
+    }
+
+    public int getNumBought(Integer commodityId) {
+        return buyList.getBuylistNum(commodityId);
     }
 }

@@ -218,4 +218,8 @@ public class BalootServer {
     public BuyList getUserPurchasedList(String username) throws Exception{
         return userManager.getUserPurchasedList(username);
     }
+
+    public int getUserNumBought(String username, Integer commodityId) throws Exception {
+        return userManager.getUserNumBought(username, commodityId);
+    }
 }

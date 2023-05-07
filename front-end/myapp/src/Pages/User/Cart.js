@@ -33,14 +33,15 @@ export default function UserInfo()
 
         async function fetchData() {
 
-            try {
-                const response = await axios.post("/users/" + "1/" + "add",
-                    {userId: userId,
-                    }
-                );
-            } catch (e) {
-                console.log(e);
-            }
+
+            // try {
+            //     const response = await axios.post("/users/" + "1/" + "add",
+            //         {userId: userId,
+            //         }
+            //     );
+            // } catch (e) {
+            //     console.log(e);
+            // }
 
             try {
                 const response = await axios.get("/users/" + userId +"/buyList");
@@ -181,7 +182,7 @@ export default function UserInfo()
                         <td><h5 className="col-yellow">{item.commodity.rating}</h5></td>
                         <td><h5 className="col-red">{item.commodity.inStock}</h5></td>
                         <td>
-                            <IncrementDecrement className = "button-user" commodityId={item.commodity.id} currentCount={item.numInStock} max={item.commodity.inStock}/>
+                            <p>{item.numInStock}</p>
                         </td>
                     </tr>
 

@@ -98,6 +98,16 @@
     margin-top: 0.5vw;
 }
 
+.section-cart-info
+{
+    margin-bottom: 5vw;
+}
+
+td
+{
+    padding-left: 4vw;
+}
+
 /*.credit-info img*/
 /*{*/
 /*    margin-top: 4vmin;*/

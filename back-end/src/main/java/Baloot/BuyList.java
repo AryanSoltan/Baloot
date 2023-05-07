@@ -19,16 +19,16 @@ public class BuyList {
         commoditiesCount = new HashMap<Integer,Integer>();
         buylistDiscountCode = null;
     }
-    public void addNewCommodityToBuyList(Commodity newCommodity)
+    public void addNewCommodityToBuyList(CommodityInBuyList newCommodity)
     {
-        if(!commoditiesList.containsKey(newCommodity.getId()))
+        if(!commoditiesList.containsKey(newCommodity.getCommodity().getId()))
         {
-            commoditiesList.put(newCommodity.getId(), newCommodity);
-            commoditiesCount.put(newCommodity.getId(),1);
+            commoditiesList.put(newCommodity.getCommodity().getId(), newCommodity.getCommodity());
+            commoditiesCount.put(newCommodity.getCommodity().getId(),newCommodity.getNumInStock());
         }
         else{
-            int currCount = commoditiesCount.get(newCommodity.getId());
-            commoditiesCount.put(newCommodity.getId(),currCount+1);
+            int currCount = commoditiesCount.get(newCommodity.getCommodity().getId());
+            commoditiesCount.put(newCommodity.getCommodity().getId(),currCount+newCommodity.getNumInStock());
 
         }
 
@@ -79,7 +79,7 @@ public class BuyList {
         double price = 0;
         for(Commodity commodity: commoditiesList.values())
         {
-            price += commodity.getPrice();
+            price += commodity.getPrice() * commoditiesCount.get(commodity.getId());
         }
         if(buylistDiscountCode != null)
         {
@@ -104,6 +104,13 @@ public class BuyList {
         return buylistDiscountCode;
     }
 
+    public int getBuylistNum(Integer commodityId) {
+        if(!commoditiesList.containsKey(commodityId))
+        {
+            return commoditiesCount.get(commodityId);
+        }
+        else return 0;
+    }
 }
 
 

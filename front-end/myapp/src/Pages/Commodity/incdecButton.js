@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import './incdecButton.css';
 import axios from "axios";
+import {toast} from "react-toastify";
+
 import commodity from "./Commodity";
 export default function IncrementDecrement(props)
 {
@@ -25,7 +27,7 @@ export default function IncrementDecrement(props)
         setCounter(value);
         try {
             const data = { userId: userId };
-            const response = await axios.post('/users/' + commodityId+ '/remove/'+data);
+            const response = await axios.post('/users/' + commodityId+ '/remove', data);
 
         } catch (e) {
             console.log(e);
@@ -34,13 +36,16 @@ export default function IncrementDecrement(props)
     };
 
     const handleIncrement = async () => {
-        if(isDisabled) return;
+        if(isDisabled)
+        {
+            return;
+        }
         let value = validateValue(counter + 1);
         setCounter(value);
         try {
 
             const data = { userId: userId };
-            const response = await axios.post('/users/' + commodityId+ '/add/'+data);
+            const response = await axios.post('/users/' + commodityId+ '/add', data);
 
         } catch (e) {
             console.log(e);

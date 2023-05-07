@@ -173,4 +173,15 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.GET)
+    public Response getCommodityNum (@RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
+        var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
+        String username= signUpInfo.get("username").asText();
+        try{
+            return new Response(HttpStatus.OK.value(), "",BalootServer.getInstance().getUserNumBought(username, Integer.valueOf(commodityId)));
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
 }

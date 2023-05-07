@@ -89,7 +89,12 @@ public class Commodity {
 
     public void buyOne()
     {
-        inStock -=1 ;
+        inStock -=1;
+    }
+
+    public void buy(int num)
+    {
+        inStock -= num;
     }
 
     public void setProvider(String inputProviderName) {

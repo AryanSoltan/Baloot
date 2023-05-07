@@ -372,3 +372,8 @@ IncrementDecrement .button-user
 {
     width: 100 vw;
 }
+
+.cart-item-info img
+{
+    margin-top:2vw;
+}

@@ -8,19 +8,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/CommodityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/CommodityManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/InterfaceServer/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/InterfaceServer/UserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BuyList.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/BuyList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/CommodityManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/CommodityManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Commodity.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Commodity.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommodityInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommodityInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/incdecButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/incdecButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Style/User.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Style/User.css" afterDir="false" />
     </list>
@@ -134,7 +129,8 @@
       <workItem from="1682755554458" duration="3141000" />
       <workItem from="1682764033485" duration="4515000" />
       <workItem from="1682783144374" duration="8948000" />
-      <workItem from="1683393146293" duration="1163000" />
+      <workItem from="1683393146293" duration="2417000" />
+      <workItem from="1683424257943" duration="4693000" />
     </task>
     <servers />
   </component>

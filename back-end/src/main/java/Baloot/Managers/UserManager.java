@@ -162,4 +162,9 @@ public class UserManager {
         User neededUser = getUserByUsername(userName);
         return neededUser.getPurchasedCommodities();
     }
+
+    public int getUserNumBought(String userName, Integer commodityId) throws Exception {
+        User neededUser = getUserByUsername(userName);
+        return neededUser.getNumBought(commodityId);
+    }
 }

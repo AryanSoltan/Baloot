@@ -144,7 +144,7 @@ public class CommodityManager {
     {
         ArrayList<CommodityInBuyList> commoditiesList = buyList.getAllCommodities();
         for(CommodityInBuyList commodity : commoditiesList) {
-            commodity.getCommodity().buyOne();
+            commodity.getCommodity().buy(commodity.getNumInStock());
         }
     }
 
