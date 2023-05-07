@@ -5,22 +5,31 @@ import logo from "../../assets/images/ballot.png";
 import './NavbarLogo.css'
 import axios from "axios";
 
+// import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
 function HeaderInfoPart() {
 
     const [itemCounts, setitemCounts] = useState(0);
 
     var isLoggedIn = localStorage.getItem('userLoggedIn');
     var userId = localStorage.getItem('userId');
-    console.log("stat");
-    console.log(isLoggedIn);
+    // console.log("stat");
+    // const something = React.useContext(ExampleContext);
+    // console.log(something.countItem);
     useEffect(() => {
         async function fetchData() {
             try {
                 console.log('in  item');
 
-                const response = await axios.get("usera/"+userId+"/buylist");
+                const response = await axios.get("/users/"+userId+"/buyList");
                 const userBuyList = response.data.content;
-                setitemCounts(userBuyList.commoditiesList.length);
+                console.log(userBuyList);
+                var cardCount = 0;
+                for (let i = 0; i < userBuyList.allCommodities.length; i++) {
+                    console.log(userBuyList.allCommodities[i]);
+                    cardCount += userBuyList.allCommodities[i].numInStock;
+                }
+
+                setitemCounts(cardCount);
 
             } catch (e) {
                 console.log(e);

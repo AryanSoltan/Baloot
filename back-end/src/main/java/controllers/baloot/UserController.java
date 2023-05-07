@@ -54,6 +54,7 @@ public class UserController {
 
     @RequestMapping(value="/users/{id}/buyList",method = RequestMethod.GET)
     public Response getBuyList (@PathVariable(value="id") String username ) throws Exception{
+        System.out.println("in back");
 
         try{
             return new Response(HttpStatus.OK.value(), "buylist sent",BalootServer.getInstance().getUserBuyList(username));
@@ -173,10 +174,12 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.GET)
+    @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.POST)
     public Response getCommodityNum (@RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
+
         var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
         String username= signUpInfo.get("username").asText();
+
         try{
             return new Response(HttpStatus.OK.value(), "",BalootServer.getInstance().getUserNumBought(username, Integer.valueOf(commodityId)));
         }

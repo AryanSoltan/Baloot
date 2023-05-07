@@ -105,7 +105,7 @@ public class BuyList {
     }
 
     public int getBuylistNum(Integer commodityId) {
-        if(!commoditiesList.containsKey(commodityId))
+        if(commoditiesList.containsKey(commodityId))
         {
             return commoditiesCount.get(commodityId);
         }

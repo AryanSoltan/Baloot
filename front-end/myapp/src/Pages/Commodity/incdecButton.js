@@ -4,10 +4,15 @@ import axios from "axios";
 import {toast} from "react-toastify";
 
 import commodity from "./Commodity";
+
+// const myData = { countItem: 0 };
+// export const ExampleContext = React.createContext(myData);
+
 export default function IncrementDecrement(props)
 {
 
     const {commodityId, currentCount, max} = props;
+    const {isChanged, change} = useState(false);
 
     const [counter, setCounter] = useState(0);
     const [isDisabled, disable] = useState(false);
@@ -28,10 +33,12 @@ export default function IncrementDecrement(props)
         try {
             const data = { userId: userId };
             const response = await axios.post('/users/' + commodityId+ '/remove', data);
+            change(true);
 
         } catch (e) {
             console.log(e);
         }
+         window.location.reload();
 
     };
 
@@ -46,16 +53,22 @@ export default function IncrementDecrement(props)
 
             const data = { userId: userId };
             const response = await axios.post('/users/' + commodityId+ '/add', data);
+            // change(true);
 
         } catch (e) {
             console.log(e);
         }
+        window.location.reload();
     };
 
     const handleChange = (e) => {
         let value = (e.target.value ? parseInt(e.target.value) : 0);
 
         value = validateValue(value);
+        // ExampleContext.Provider.countItem = value;
+        // console.log("counttt");
+        // console.log(ExampleContext.Provider.countItem);
+        // change(value)
 
 
         setCounter(value);
@@ -79,7 +92,9 @@ export default function IncrementDecrement(props)
 
 
 
+
     <div className={"increment-decrement-disabled-"+isDisabled}  >
+
                 <a className="count-btn count-down" type="button" onClick={handleDecrement}>{counter>0&&"-"}</a>
                 <span type="number" name="counter" className="counter" onChange={handleChange} >
                     {counter==0 ? <div onClick={handleIncrement}>
@@ -92,6 +107,10 @@ export default function IncrementDecrement(props)
         );
     }
 };
+
+// export const isChanged = React.createContext(
+//     IncrementDecrement.isChanged // default value
+// );
 
 // IncrementDecrement.defaultProps = {
 //     min: 5,

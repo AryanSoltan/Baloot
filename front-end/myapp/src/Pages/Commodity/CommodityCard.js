@@ -1,10 +1,36 @@
 import '../Commodities/CommoditiesCard.css';
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom"
 // import RnIncrementDecrementBtn  from 'react-native-input-spinner';
 import IncrementDecrement from "./incdecButton";
 import Card from 'react-bootstrap/Card';
 export default function CommodityCard(props) {
     const {commodity} = props;
+
+    const [itemCounts, setitemCounts] = useState(0);
+    const userId = localStorage.getItem('userId');
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+
+
+                console.log("id is");
+                const data = { username: userId};
+                const response = await axios.post("/users/buyListNum/"+commodity.id,data);
+                const count = response.data.content;
+
+                console.log('count is ');
+                console.log(count);
+                setitemCounts(count);
+
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchData();
+    }, []);
 
 
 
@@ -26,7 +52,7 @@ export default function CommodityCard(props) {
 
                         {/*<a href="#" className="btn commodity-card-button">Add to card</a>*/}
 
-                        <IncrementDecrement commodityId={commodity.id} currentCount={0} max={commodity.inStock}/>
+                        <IncrementDecrement commodityId={commodity.id} currentCount={itemCounts} max={commodity.inStock}/>
                     </div>
 
 
