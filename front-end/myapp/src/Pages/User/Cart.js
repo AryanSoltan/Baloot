@@ -26,11 +26,16 @@ export default function UserInfo()
     const [buyListCommodities, setBuyListCommodities] = useState();
     const [purchesedListCommodities, setPurchasedListCommodities] = useState();
     const changePage = useState();
+    const [discountText, setDiscountText] = useState('');
+    const [discountPercent, setDiscountPercent] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const userId = localStorage.getItem('userId');
 
 
     useEffect(() => {
 
-        const userId = localStorage.getItem('userId');
+
 
         async function fetchData() {
 
@@ -48,6 +53,7 @@ export default function UserInfo()
                 const response = await axios.get("/users/" + userId +"/buyList");
                 const commodititesList = response.data.content;
                 console.log(commodititesList);
+                setTotalPrice(commodititesList.buylistPrice);
 
                 setBuyListCommodities(commodititesList.allCommodities);
                 console.log(commodititesList.allCommodities)
@@ -72,33 +78,7 @@ export default function UserInfo()
         fetchData();
     }, []);
 
-    const handleIncrease = (e) => {
-        console.log("Increase");
-        const userId = localStorage.getItem('userId');
 
-        try {
-            const response = axios.post("/users/" + e + "/add",
-                {userId: userId,
-                }
-            );
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    const handleDecrease = (e) => {
-        console.log("Decrease");
-        const userId = localStorage.getItem('userId');
-
-        try {
-            const response = axios.post("/users/" + e + "/remove",
-                {userId: userId,
-                }
-            );
-        } catch (e) {
-            console.log(e);
-        }
-    };
 
     const handlePayment = (e) => {
         const userId = localStorage.getItem('userId');
@@ -110,6 +90,24 @@ export default function UserInfo()
         }
         window.location.reload();
     };
+
+    const handleDiscountCodeSubmit = async e => {
+        e.preventDefault();
+        try {
+
+
+            const data = { discountCode: discountText };
+            const response = await axios.post('/users/'+userId+'/buyList/validateDiscount/', data);
+            const discountCode = response.data.content;
+            console.log('in hnadle discount');
+
+            setDiscountPercent(discountCode.percentage);
+            // addComment(newComment);
+            // setCommentText('');
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
 
 
@@ -179,23 +177,36 @@ export default function UserInfo()
                             <div className="discount-input-part">
                                 <div className="row">
                                     <input
-                                             // onChange={e => { setCommentText(e.target.value) }}
+                                             onChange={e => { setDiscountText(e.target.value) }}
                                              className="form-control discount-input-box"
                                     />
                                 </div>
                                 <div className="row">
-                                    <button type="submit" className="btn" >Submit</button>
+                                    <button type="submit" className="btn" onClick={handleDiscountCodeSubmit}>Submit</button>
                                 </div>
                             </div>
                             <ul>
                             <li>
                                 <div className="items-row">
-                                   total
+                                    total
                                 </div>
                                 <div className="price-row">
-                                    $price
+                                    ${totalPrice}
                                 </div>
                             </li>
+                                {discountPercent>0 &&
+                                    <li>
+
+                                <div className="items-row">
+                                   with discount
+                                </div>
+                                <div className="price-row">
+                                    ${totalPrice-(totalPrice*discountPercent)/100}
+
+                                    </div>
+                                    </li>
+                                }
+
                             </ul>
 
                             <div className="buttons">

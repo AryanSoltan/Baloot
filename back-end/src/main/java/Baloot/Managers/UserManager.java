@@ -152,6 +152,13 @@ public class UserManager {
         user.addDiscountToBuylist(discountCode);
     }
 
+    public boolean userHasNotUsedCode(User user, DiscountCode discountCode) throws Exception
+    {
+        if(user.hasUsedDiscountCode(discountCode))
+            throw new DiscountCodeAlreadyUsed(discountCode.getCode());
+        return true;
+    }
+
 
     public User getUserById(String username) {
         return users.get(username);

@@ -86,6 +86,19 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value="/users/{id}/buyList/validateDiscount",method = RequestMethod.POST)
+    public Response validateDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+        try{
+            var info = new ObjectMapper().readTree(reqInfo);
+            String code = info.get("discountCode").asText();
+
+            return new Response(HttpStatus.OK.value(), "discount added",BalootServer.getInstance().validateDiscountCode(username,code));
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+
     @RequestMapping(value="/users/{id}/buyList/submit",method = RequestMethod.POST)
     public Response submitBuyList (@PathVariable(value="id") String username ) throws Exception{
         try{

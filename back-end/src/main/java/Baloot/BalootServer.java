@@ -207,6 +207,18 @@ public class BalootServer {
         userManager.addDiscountCodeToUserBuyList(user, discountCode);
     }
 
+    public DiscountCode validateDiscountCode(String username, String code) throws Exception
+    {
+        if(!paymentManager.discountCodeIsValid(code))
+            throw new InvalidDiscountCode(code);
+        DiscountCode discountCode = paymentManager.getDiscountCode(code);
+        User user = findUser(username);
+        if(userManager.userHasNotUsedCode(user, discountCode))
+            return paymentManager.getDiscountCode(code);
+        else
+            throw new InvalidDiscountCode(code);
+    }
+
     public User getUserById(String username) {
         return userManager.getUserById(username);
     }
