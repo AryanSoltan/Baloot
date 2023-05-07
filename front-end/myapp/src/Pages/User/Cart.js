@@ -19,6 +19,7 @@ import "./Cart.css"
 
 import axios from 'axios'
 
+import Popup from 'reactjs-popup';
 export default function UserInfo()
 {
 
@@ -154,9 +155,63 @@ export default function UserInfo()
                 <p className="empty-cart">your cart is empty</p>
             }
 
-            <button className="payment-button" onClick = {handlePayment}>
-                Pay now!
-            </button>
+
+            <Popup trigger=
+                       {    <button className="payment-button" onClick = {handlePayment}>
+                           Pay now!
+                       </button>}
+                   modal nested>
+                {
+                    close => (
+                        <div className="popup-window">
+                           <h1>Your cart</h1>
+
+                                <ul>{buyListCommodities && buyListCommodities.map(item =>
+                                    <li>
+                                        <div className="items-row">
+                                        {'\u2022'} {item.commodity.name} * {item.numInStock}
+                                    </div>
+                                        <div className="price-row">
+                                            ${item.commodity.price}
+                                        </div>
+                                    </li> )}</ul>
+                            <div className="discount-input-part">
+                                <div className="row">
+                                    <input
+                                             // onChange={e => { setCommentText(e.target.value) }}
+                                             className="form-control discount-input-box"
+                                    />
+                                </div>
+                                <div className="row">
+                                    <button type="submit" className="btn" >Submit</button>
+                                </div>
+                            </div>
+                            <ul>
+                            <li>
+                                <div className="items-row">
+                                   total
+                                </div>
+                                <div className="price-row">
+                                    $price
+                                </div>
+                            </li>
+                            </ul>
+
+                            <div className="buttons">
+
+                                <button className="btn exit" onClick=
+                                            {() => close()}>
+                                   exit
+                                </button>
+
+                                    <button type="submit" className="btn buy" >Buy!</button>
+
+                            </div>
+                            
+                        </div>
+                    )
+                }
+            </Popup>
 
 
                 <div className="cart-item-info">

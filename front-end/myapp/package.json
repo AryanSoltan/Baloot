@@ -45,6 +45,7 @@
   "devDependencies": {
     "@iconify/react": "^4.1.0",
     "react-bootstrap": "^2.7.4",
-    "react-paginate": "^8.2.0"
+    "react-paginate": "^8.2.0",
+    "reactjs-popup": "^2.0.5"
   }
 }
