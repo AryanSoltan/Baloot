@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
 import Footer from "../Footer"
 //
 //
@@ -14,11 +16,14 @@ import Cart from "./Cart"
 
 import axios from 'axios'
 
-export default class Login extends React.Component{
+export default class User extends React.Component{
 
 
 
     constructor(props) {
+
+        var isLoggedIn = localStorage.getItem('userLoggedIn');
+
         super(props);
         this.state = {
             userName: '',

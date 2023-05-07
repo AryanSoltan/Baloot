@@ -6,15 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/CommodityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/CommodityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Commodity.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Commodity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/CommentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommodityInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommodityInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/incdecButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/incdecButton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/UserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/UserInfo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +125,9 @@
       <workItem from="1683393146293" duration="2417000" />
       <workItem from="1683424257943" duration="5329000" />
       <workItem from="1683449682741" duration="1718000" />
-      <workItem from="1683458126927" duration="13968000" />
+      <workItem from="1683458126927" duration="16753000" />
+      <workItem from="1683477272055" duration="9000" />
+      <workItem from="1683482283386" duration="6463000" />
     </task>
     <servers />
   </component>
