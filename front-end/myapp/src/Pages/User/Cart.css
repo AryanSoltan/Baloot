@@ -115,3 +115,9 @@ td
 /*    width: 4vmin;*/
 /*    height: 8vmin;*/
 /*}*/
+
+.empty-cart
+{
+    color: #A97B47;
+    margin-left: 30vw;
+}

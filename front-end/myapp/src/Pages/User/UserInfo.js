@@ -59,6 +59,9 @@ export default function UserInfo()
         console.log(e.target.value);
     }
 
+    const handleLogOut = (e) => {
+    }
+
     const addCredit = (e) =>
     {
         console.log(2);
@@ -114,7 +117,7 @@ export default function UserInfo()
                                {user.address}
                             </div>
                             <div className="user-info-txt">
-                                <button type="submit" className="btn logout-button">logout</button>
+                                <button type="submit" className="btn logout-button" onClick={handleLogOut}>logout</button>
                             </div>
                         </div>
 

@@ -50,6 +50,7 @@ export default function UserInfo()
 
                 setBuyListCommodities(commodititesList.allCommodities);
                 console.log(commodititesList.allCommodities)
+                console.log(commodititesList.allCommodities)
 
 
             } catch (e) {
@@ -130,7 +131,7 @@ export default function UserInfo()
                 </tr>
 
 
-                {buyListCommodities &&
+                {Array.isArray(buyListCommodities) && buyListCommodities.length?
                     buyListCommodities.map((item) => (
                         <tr className = "cart-buy-item">
                             <td><img src = {item.commodity.image}></img></td>
@@ -145,10 +146,14 @@ export default function UserInfo()
                             </td>
                         </tr>
 
-                    ))}
-
+                    )):<p></p>}
 
             </table>
+            {
+                !Array.isArray(buyListCommodities)  || !buyListCommodities.length &&
+                <p className="empty-cart">your cart is empty</p>
+            }
+
             <button className="payment-button" onClick = {handlePayment}>
                 Pay now!
             </button>
