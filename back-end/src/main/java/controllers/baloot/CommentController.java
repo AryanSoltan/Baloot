@@ -37,14 +37,15 @@ public class CommentController {
     }
 
 
+
     @RequestMapping(value="/commodities/{id}/{userId}/like",method = RequestMethod.POST)
     public Response likeComment(@RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
+
         try{
             var info = new ObjectMapper().readTree(rateInfo);
             Integer commentId  = Integer.valueOf(info.get("comment_id").asText());
-
-            BalootServer.getInstance().addRatingToComment(commentId,userID,1);
-            return new Response(HttpStatus.OK.value(), "comment  added", null);
+            Comment comment = BalootServer.getInstance().addRatingToComment(commentId,userID,1);
+            return new Response(HttpStatus.OK.value(), "comment  added", comment);
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
@@ -57,8 +58,9 @@ public class CommentController {
             var info = new ObjectMapper().readTree(rateInfo);
             Integer commentId  = Integer.valueOf(info.get("comment_id").asText());
 
-            BalootServer.getInstance().addRatingToComment(commentId,userID,-1);
-            return new Response(HttpStatus.OK.value(), "comment  added", null);
+            Comment comment = BalootServer.getInstance().addRatingToComment(commentId,userID,-1);
+
+            return new Response(HttpStatus.OK.value(), "comment  added", comment);
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());

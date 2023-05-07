@@ -1,19 +1,59 @@
 import axios from 'axios';
 import './Comments.css';
+import { Link, useNavigate, useParams } from "react-router-dom"
+import {useEffect, useState} from "react";
+
 
 export default function Comments(props) {
 
     const { comment, updateComment } = props;
-    console.log('comment is ');
-    console.log(comment);
 
-    const handleVote = async vote => {
+
+    // const [comment, updateComment] = useState();
+
+
+
+    const userId = localStorage.getItem('userId');
+
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const response = await axios.get('commodities/' + id);
+    //             const commodityR= response.data.content;
+    //
+    //             console.log(commodityR);
+    //
+    //             setCommodity(commodityR);
+    //         } catch (e) {
+    //             if(e.response.status === 404) {
+    //                 navigate('/404');
+    //             }
+    //         }
+    //     }
+    //
+    //     fetchData();
+    //
+    // }, []);
+
+    const handleLike = async vote => {
         try {
-            console.log('in handle vote');
-            const data = { vote };
-            const response = await axios.post('/comments/' + comment.id + '/vote/', data);
-            let newComment = response.data.content;
-            updateComment(newComment);
+            const data = {comment_id: comment.id};
+            const response = await axios.post("/commodities/" + comment.commodityId + "/" + userId + "/like", data);
+            updateComment(response.data.data);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const handledisLike = async vote => {
+        try {
+
+            const data = {comment_id: comment.id};
+            const response = await axios.post("/commodities/" + comment.commodityId + "/" + userId + "/dislike", data);
+            console.log(response);
+            updateComment(response.data.data);
+
+
         } catch (e) {
             console.log(e);
         }
@@ -33,10 +73,10 @@ export default function Comments(props) {
             </div>
             <div className="row comment-vote">
                 Is this comment helpful?
-                <span>1</span>
-                <div class="like-icon" onClick={() => { handleVote(1) }}></div>
-                <span>1</span>
-                <div class="dislike-icon" onClick={() => { handleVote(-1) }}></div>
+                <span>{comment.likes}</span>
+                <div class="like-icon" onClick={ handleLike }></div>
+                <span>{comment.disLikes}</span>
+                <div class="dislike-icon" onClick={ handledisLike }></div>
             </div>
 
 

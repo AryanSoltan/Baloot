@@ -47,6 +47,7 @@ export default function CommodityInfo() {
 
     const updateRate = newCommodity => {
         commodity.rating = newCommodity.rating;
+        commodity.userRatingsSize = newCommodity.userRatingsSize;
 
         setCommodity({...commodity});
 
@@ -89,7 +90,7 @@ export default function CommodityInfo() {
                                     className="fixed-star-icon"
 
                                 />
-                                <p>{commodity.rating}<span>(12)</span></p>
+                                <p>{commodity.rating}({commodity.userRatingsSize})</p>
                         </div>
                             </div>
                                 </div>

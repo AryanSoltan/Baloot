@@ -124,13 +124,16 @@ public class CommodityManager {
     }
 
 
-    public void rateCommoditiesComment(int commentId, User user, int rate)
+    public Comment rateCommoditiesComment(int commentId, User user, int rate)
     {
         for(Commodity commodity: commodities.values())
         {
-            if(commodity.hasCommentId(commentId))
+            if(commodity.hasCommentId(commentId)) {
                 commodity.rateComment(commentId, user, rate);
+                return commodity.getComment(commentId);
+            }
         }
+        return null;
     }
 
     public void clearSearchFilter()

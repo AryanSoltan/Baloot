@@ -138,9 +138,9 @@ public class BalootServer {
         commodityManager.addCommentToCommodity(comment, commentIdNow, user.getName());
     }
 
-    public void addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
+    public Comment addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
         User user = findUser(userName);
-        commodityManager.rateCommoditiesComment(commentId , user, rate);
+        return commodityManager.rateCommoditiesComment(commentId , user, rate);
     }
 
     public void handlePaymentUser(String userName) throws Exception //done

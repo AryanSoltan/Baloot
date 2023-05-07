@@ -10,6 +10,9 @@ import userInfoPNG from "../../assets/images/map-user-info.png"
 import emailPNG from "../../assets/images/user-email.png"
 import dateInfoPNG from "../../assets/images/date-user-info.png"
 
+
+import Popup from 'reactjs-popup';
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -126,13 +129,27 @@ export default function UserInfo()
                                 {/*<img src={dollarPNG}/>*/}$
                                 {user.credit}
                             </div>
-                            <form onSubmit={addCredit}>
-                                <input className="box-amount" type="text" id="fname" name="fname"
-                                       placeholder="$ Amount" onChange={creditChange}></input>
-                                <button type="submit" className="button-credit">
-                                    <p>Add more credit!</p>
-                                </button>
-                            </form>
+
+                                <Popup trigger=
+                                           {
+                                               <form onSubmit={addCredit}>
+                                                   <input className="box-amount" type="text" id="fname" name="fname"
+                                                          placeholder="$ Amount" onChange={creditChange}></input>
+                                                   <button type="submit" className="button-credit">
+                                                       <p>Add more credit!</p>
+                                                   </button>
+                                               </form>
+                                               }
+                                       modal nested>
+                                    {
+                                        close => (
+                                            <div className="popup-window">
+                                            <p>hello</p>
+                                            </div>
+                                        )
+                                    }
+                                </Popup>
+
                         </div>
 
 

@@ -206,4 +206,20 @@ public class Commodity {
                 comment.addRate(user, rate);
         }
     }
+
+    public int getUserRatingsSize()
+    {
+        return userRatings.size();
+    }
+
+    public Comment getComment(int commentId) {
+        for(Comment comment: comments)
+        {
+            if(comment.getId() == commentId)
+            {
+                return comment;
+            }
+        }
+        return null;
+    }
 }

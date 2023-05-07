@@ -104,6 +104,7 @@ export default function UserInfo()
         const userId = localStorage.getItem('userId');
         try {
             const response = axios.post("/users/" + userId + "/buyList/submit");
+            toast.error(e.response);
         } catch (e) {
             console.log(e);
         }
@@ -204,7 +205,7 @@ export default function UserInfo()
                                    exit
                                 </button>
 
-                                    <button type="submit" className="btn buy" >Buy!</button>
+                                    <button type="submit" className="btn buy" onClick={handlePayment} >Buy!</button>
 
                             </div>
                             
