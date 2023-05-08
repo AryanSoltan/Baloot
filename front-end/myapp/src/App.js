@@ -17,6 +17,8 @@ import Commodities from "./Pages/Commodities/Commodities";
 import Commodity from "./Pages/Commodity/Commodity";
 import User from "./Pages/User/User"
 import Provider from "./Pages/ProviderPage"
+import NotFound404 from "./Pages/NotFound404"
+import NeedLoginPages from "./Pages/NeedLoginPages"
 
 
 
@@ -30,11 +32,21 @@ function App() {
 
 
               <Route exact path="/" element={<Login />}/>
-              <Route path="/commodities" element={<Commodities />}/>
-              <Route path="/commodities/:id" element={<Commodity />}/>
               <Route path = "/signup" element = {<SignUp />}/>
-              <Route path = "/user" element = {<User />}/>
-              <Route path = "/providers/:id" element = {<Provider />}/>
+              <Route path='*' element={<NotFound404 />} />
+
+
+              <Route element={<NeedLoginPages />}>
+
+                  <Route path = "/user" element = {<User />}/>
+                  <Route path="/commodities" element={<Commodities />}/>
+                  <Route path="/commodities/:id" element={<Commodity />}/>
+                  <Route path = "/providers/:id" element = {<Provider />}/>
+
+              </Route>
+
+
+
 
           </Routes>
         {/*<Switch>*/}

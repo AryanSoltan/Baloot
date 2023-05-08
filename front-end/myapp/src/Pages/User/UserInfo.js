@@ -63,6 +63,9 @@ export default function UserInfo()
     }
 
     const handleLogOut = (e) => {
+        localStorage.setItem('userLoggedIn', null);
+        localStorage.setItem('userId', null);
+        window.location.href = "http://localhost:3000/";
     }
 
     const addCredit = (e) =>

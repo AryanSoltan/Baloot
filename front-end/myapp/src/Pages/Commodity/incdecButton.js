@@ -29,6 +29,14 @@ export default function IncrementDecrement(props)
     const handleDecrement = async() => {
         if(isDisabled) return;
         let value = validateValue(counter - 1);
+        if(value < 0)
+        {
+            toast.error("can't be less than 0");
+        }
+        if(value > max)
+        {
+            toast.error("Out of stock");
+        }
         setCounter(value);
         try {
             const data = { userId: userId };
@@ -38,7 +46,7 @@ export default function IncrementDecrement(props)
         } catch (e) {
             console.log(e);
         }
-         window.location.reload();
+         // window.location.reload();
 
     };
 
@@ -48,6 +56,14 @@ export default function IncrementDecrement(props)
             return;
         }
         let value = validateValue(counter + 1);
+        // if(value <= 0)
+        // {
+        //     toast.error("can't be less than 0");
+        // }
+        if(value >= max)
+        {
+            toast.error("Out of stock");
+        }
         setCounter(value);
         try {
 
@@ -58,7 +74,7 @@ export default function IncrementDecrement(props)
         } catch (e) {
             console.log(e);
         }
-        window.location.reload();
+        // window.location.reload();
     };
 
     const handleChange = (e) => {
