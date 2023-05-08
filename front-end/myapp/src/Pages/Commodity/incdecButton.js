@@ -1,15 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import './incdecButton.css';
 import axios from "axios";
 import {toast} from "react-toastify";
 
+
 import commodity from "./Commodity";
+import {Context} from "../Commodities/Commodities";
 
 // const myData = { countItem: 0 };
 // export const ExampleContext = React.createContext(myData);
 
 export default function IncrementDecrement(props)
 {
+
+    const {setValue} = useContext(Context);
+
 
     const {commodityId, currentCount, max} = props;
     const {isChanged, change} = useState(false);
@@ -51,11 +56,17 @@ export default function IncrementDecrement(props)
     };
 
     const handleIncrement = async () => {
+
+
+
         if(isDisabled)
         {
             return;
         }
         let value = validateValue(counter + 1);
+        setValue(value);
+        console.log("vale in inc dec us");
+        console.log(value);
         // if(value <= 0)
         // {
         //     toast.error("can't be less than 0");
@@ -81,6 +92,7 @@ export default function IncrementDecrement(props)
         let value = (e.target.value ? parseInt(e.target.value) : 0);
 
         value = validateValue(value);
+
         // ExampleContext.Provider.countItem = value;
         // console.log("counttt");
         // console.log(ExampleContext.Provider.countItem);
@@ -88,6 +100,7 @@ export default function IncrementDecrement(props)
 
 
         setCounter(value);
+
     };
 
     const validateValue = (value) => {

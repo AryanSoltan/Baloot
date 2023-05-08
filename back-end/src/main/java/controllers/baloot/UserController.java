@@ -82,7 +82,7 @@ public class UserController {
 //
 //            var info = new ObjectMapper().readTree(reqInfo);
 //            String code = info.get("discountCode").asText();
-//            BalootServer.getInstance().applyDiscountCode(username,code);
+//            BalootServer.getInstance().applyDiscountCode(username,code);z
 //            return new Response(HttpStatus.OK.value(), "discount added",null);
 //        }
 //        catch (Exception e){

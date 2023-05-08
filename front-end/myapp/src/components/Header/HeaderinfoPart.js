@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import './Navbar.css';
 import logo from "../../assets/images/ballot.png";
 import './NavbarLogo.css'
 import axios from "axios";
 
-// import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
+ import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
+import {Context} from "../../Pages/Commodities/Commodities";
+
 function HeaderInfoPart() {
 
     const [itemCounts, setitemCounts] = useState(0);
 
+    const [itemC, setitemC] = useState(0);
+
     var isLoggedIn = localStorage.getItem('userLoggedIn');
     var userId = localStorage.getItem('userId');
-    // console.log("stat");
-    // const something = React.useContext(ExampleContext);
-    // console.log(something.countItem);
+
+    const {value} = useContext(Context)
+    console.log("vale us");
+    console.log(value);
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -36,7 +42,7 @@ function HeaderInfoPart() {
             }
         }
         fetchData();
-    }, []);
+    }, [value]);
 
     //
     // const handleSignup = async () => {

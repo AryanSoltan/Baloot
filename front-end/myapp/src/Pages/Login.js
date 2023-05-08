@@ -62,6 +62,7 @@ export default class Login extends React.Component{
                 if(resp.status === 200) {
                     localStorage.setItem('userLoggedIn', true);
                     localStorage.setItem('userId', this.state.userName);
+                    localStorage.setItem('Itemcount', 0);
                     window.location.href = "http://localhost:3000/commodities"
                 }
             }).catch(error => {
