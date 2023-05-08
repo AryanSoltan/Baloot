@@ -70,6 +70,7 @@ export default function UserInfo()
 
     const addCredit = (e) =>
     {
+        
         console.log(2);
 
         const userId = localStorage.getItem('userId');
@@ -131,27 +132,36 @@ export default function UserInfo()
                             <div className="credit-info-txt">
                                 {/*<img src={dollarPNG}/>*/}$
                                 {user.credit}
-                            </div>
 
-                                <Popup trigger=
-                                           {
-                                               <form onSubmit={addCredit}>
-                                                   <input className="box-amount" type="text" id="fname" name="fname"
-                                                          placeholder="$ Amount" onChange={creditChange}></input>
-                                                   <button type="submit" className="button-credit">
-                                                       <p>Add more credit!</p>
-                                                   </button>
-                                               </form>
-                                               }
-                                       modal nested>
-                                    {
-                                        close => (
-                                            <div className="popup-window">
-                                            <p>hello</p>
-                                            </div>
-                                        )
-                                    }
-                                </Popup>
+                            </div>
+                            <input
+                                onChange={e => { setCredit(e.target.value);  }}
+                                className="form-control credit-input-box"
+                            />
+                            <button type="submit" className="credit-button" onClick={()=>{addCredit();}}>
+                                <p>Add more credit!</p>
+                            </button>
+
+
+                                {/*<Popup trigger=*/}
+                                {/*           {*/}
+                                {/*               <form onSubmit={addCredit}>*/}
+                                {/*                   <input className="box-amount" type="text" id="fname" name="fname"*/}
+                                {/*                          placeholder="$ Amount" onChange={creditChange}></input>*/}
+                                {/*                   <button type="submit" className="button-credit">*/}
+                                {/*                       <p>Add more credit!</p>*/}
+                                {/*                   </button>*/}
+                                {/*               </form>*/}
+                                {/*               }*/}
+                                {/*       modal nested>*/}
+                                {/*    {*/}
+                                {/*        close => (*/}
+                                {/*            <div className="popup-window">*/}
+                                {/*            <p>hello</p>*/}
+                                {/*            </div>*/}
+                                {/*        )*/}
+                                {/*    }*/}
+                                {/*</Popup>*/}
 
                         </div>
 
