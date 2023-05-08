@@ -175,4 +175,12 @@ public class UserManager {
         User neededUser = getUserByUsername(userName);
         return neededUser.getNumBought(commodityId);
     }
+
+    public boolean isLogIn() {
+        if(loggedInUser == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

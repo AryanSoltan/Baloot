@@ -236,4 +236,8 @@ public class BalootServer {
     public int getUserNumBought(String username, Integer commodityId) throws Exception {
         return userManager.getUserNumBought(username, commodityId);
     }
+
+    public boolean isLogIn() {
+        return userManager.isLogIn();
+    }
 }
