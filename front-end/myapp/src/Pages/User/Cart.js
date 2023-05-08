@@ -87,16 +87,22 @@ export default function UserInfo()
 
     const handlePayment = (e) => {
 
-        try {
-            const data = { discountCode: discountText };
-            // axios.post('/users/'+userId+'/buyList/applyDiscount/', data);
-            axios.post("/users/" + userId + "/buyList/submit/",data);
-            toast.error(e.response);
-        } catch (e) {
+        const data = { discountCode: discountText };
+        // axios.post('/users/'+userId+'/buyList/applyDiscount/', data);
+        axios.post("/users/" + userId + "/buyList/submit/",data).then((resp) => {
 
-            console.log(e);
-        }
-        window.location.reload();
+                                                                            if(resp.data.statusCode === 200) {
+
+                                                                                window.location.reload();
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                toast.error(resp.data.data);
+                                                                            }
+                                                                        }).catch(error => {
+                                                                            console.log(error);
+                                                                        });
+
     };
 
     const closePopup = (e) => {
@@ -123,7 +129,7 @@ export default function UserInfo()
             setInActive(true);
 
         } catch (e) {
-            notify("discount code is not valid");
+            toast.error("discount code is not valid");
             console.log(e);
         }
     }
@@ -175,7 +181,7 @@ export default function UserInfo()
 
 
             <Popup trigger=
-                       {    <button className="payment-button" onClick = {handlePayment}>
+                       {    <button className="payment-button">
                            Pay now!
                        </button>}
                    modal nested>

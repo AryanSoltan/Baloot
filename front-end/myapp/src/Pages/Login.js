@@ -29,9 +29,9 @@ export default class Login extends React.Component{
 
     handleUsernameChange(e) {
         this.setState(
-        {
-            userName: e.target.value
-        });
+            {
+                userName: e.target.value
+            });
     }
 
     handlePasswordChange(e)
@@ -62,8 +62,8 @@ export default class Login extends React.Component{
                 if(resp.status === 200) {
                     localStorage.setItem('userLoggedIn', true);
                     localStorage.setItem('userId', this.state.userName);
-                    localStorage.setItem('Itemcount', 0);
-                    window.location.href = "http://localhost:3000/commodities"
+
+                    window.location.href = "http://localhost:3000/commodities";
                 }
             }).catch(error => {
                 toast.error("password or username is wrong");
@@ -78,9 +78,9 @@ export default class Login extends React.Component{
 
             <head>
                 <meta charSet="UTF-8"/>
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                            <title>Document</title>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <title>Document</title>
             </head>
 
             <body>
@@ -89,23 +89,23 @@ export default class Login extends React.Component{
                 <div className="font-title"><img src={logo}></img> Baloot</div>
                 <form onSubmit={this.handleSubmit}>
 
-                <h1>Sign in Form </h1>
+                    <h1>Sign in Form </h1>
 
-                <p>Username</p>
+                    <p>Username</p>
 
-                <input type="text" placeholder="Enter Username" name="username" id="username" onChange={this.handleUsernameChange}/>
-                <br/>
-                <br/>
-                <p>Password</p>
+                    <input type="text" placeholder="Enter Username" name="username" id="username" onChange={this.handleUsernameChange}/>
+                    <br/>
+                    <br/>
+                    <p>Password</p>
 
-                <input type="password" placeholder="Enter Password" name="password" id = "password" onChange={this.handlePasswordChange}/>
+                    <input type="password" placeholder="Enter Password" name="password" id = "password" onChange={this.handlePasswordChange}/>
 
-                <br/>
+                    <br/>
 
-                <button className="register-button">
-                    Sign in
-                </button>
-            </form>
+                    <button className="register-button">
+                        Sign in
+                    </button>
+                </form>
 
                 <div>
                     <p>Dont' have an account? <a href="/signup">Create New Account</a>.</p>
@@ -116,7 +116,6 @@ export default class Login extends React.Component{
             <Footer/>
             </body>
             </html>
-    );
+        );
     }
 }
-

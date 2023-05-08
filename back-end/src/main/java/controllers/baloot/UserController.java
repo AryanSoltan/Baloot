@@ -34,6 +34,22 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value="/isLogin", method = RequestMethod.POST)
+    public Response isLogIn (@RequestBody String userLoginInfo) throws Exception{
+        System.out.println("HELLOOOOOOOOO");
+        try{
+            boolean isLogIn = BalootServer.getInstance().isLogIn();
+            return new Response(HttpStatus.OK.value(), "logged in",isLogIn);
+
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not found");
+        }
+    }
+
+
+
     @RequestMapping(value="/logout",method = RequestMethod.POST)
     public Response logOut (@RequestBody String userLoginInfo) throws Exception{
         try {
@@ -114,7 +130,9 @@ public class UserController {
             return new Response(HttpStatus.OK.value(), "submitted",null);
         }
         catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+            return new Response(HttpStatus.NOT_FOUND.value(), "can't submit",e.getMessage());
+
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
 
