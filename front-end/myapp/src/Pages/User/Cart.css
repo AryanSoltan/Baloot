@@ -176,6 +176,15 @@ td
     margin-right: 5vw;
 }
 
+.price-row .active{
+    color: #C82525;
+}
+
+.price-row .inactive{
+    color: #D8C1A8;
+    text-decoration: line-through;
+}
+
 .discount-input-part{
     display: flex;
     flex-direction: row;
@@ -199,7 +208,7 @@ td
 
 }
 
-.discount-input-part .btn{
+.active-btn{
     width: 7.813vw;
     height: 2.790vw;
     border-radius: 0.781vw;
@@ -215,6 +224,26 @@ td
     color: #FFFFFF;
     margin-right: 0;
     margin-left: 1vw;
+}
+
+.inactive-btn{
+    width: 7.813vw;
+    height: 2.790vw;
+    border-radius: 0.781vw;
+    mix-blend-mode: normal;
+
+    font-weight: 600;
+    font-size: 1.250vw;
+    line-height: 1.771vw;
+
+    text-align: center;
+    justify-content: center;
+    color: #FFFFFF;
+    margin-right: 0;
+    margin-left: 1vw;
+
+    background: #D8C1A8;
+
 }
 
 .buttons{

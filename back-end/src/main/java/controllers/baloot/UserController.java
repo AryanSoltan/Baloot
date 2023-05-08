@@ -75,16 +75,20 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/users/{id}/buyList/applyDiscount/{discountCode}",method = RequestMethod.POST)
-    public Response applyDiscount (@PathVariable(value="id") String username ,@PathVariable(value="discountCode") String code ) throws Exception{
-        try{
-            BalootServer.getInstance().applyDiscountCode(username,code);
-            return new Response(HttpStatus.OK.value(), "discount added",null);
-        }
-        catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-        }
-    }
+//    @RequestMapping(value="/users/{id}/buyList/applyDiscount",method = RequestMethod.POST)
+//    public Response applyDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+//        try{
+//
+//
+//            var info = new ObjectMapper().readTree(reqInfo);
+//            String code = info.get("discountCode").asText();
+//            BalootServer.getInstance().applyDiscountCode(username,code);
+//            return new Response(HttpStatus.OK.value(), "discount added",null);
+//        }
+//        catch (Exception e){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+//        }
+//    }
 
     @RequestMapping(value="/users/{id}/buyList/validateDiscount",method = RequestMethod.POST)
     public Response validateDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
@@ -100,8 +104,12 @@ public class UserController {
     }
 
     @RequestMapping(value="/users/{id}/buyList/submit",method = RequestMethod.POST)
-    public Response submitBuyList (@PathVariable(value="id") String username ) throws Exception{
+    public Response submitBuyList (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
         try{
+            var info = new ObjectMapper().readTree(reqInfo);
+            String code = info.get("discountCode").asText();
+            if(!code.equals(""))
+                BalootServer.getInstance().applyDiscountCode(username,code);
             BalootServer.getInstance().handlePaymentUser(username);
             return new Response(HttpStatus.OK.value(), "submitted",null);
         }

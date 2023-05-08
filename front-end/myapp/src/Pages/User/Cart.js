@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import {toast} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -20,6 +20,9 @@ import "./Cart.css"
 import axios from 'axios'
 
 import Popup from 'reactjs-popup';
+
+toast.configure();
+const notify = (message) => toast(message);
 export default function UserInfo()
 {
 
@@ -29,6 +32,8 @@ export default function UserInfo()
     const [discountText, setDiscountText] = useState('');
     const [discountPercent, setDiscountPercent] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
+
+    const [inactive, setInActive] = useState(false);
 
     const userId = localStorage.getItem('userId');
 
@@ -81,15 +86,27 @@ export default function UserInfo()
 
 
     const handlePayment = (e) => {
-        const userId = localStorage.getItem('userId');
+
         try {
-            const response = axios.post("/users/" + userId + "/buyList/submit");
+            const data = { discountCode: discountText };
+            // axios.post('/users/'+userId+'/buyList/applyDiscount/', data);
+            axios.post("/users/" + userId + "/buyList/submit/",data);
             toast.error(e.response);
         } catch (e) {
+
             console.log(e);
         }
         window.location.reload();
     };
+
+    const closePopup = (e) => {
+        setDiscountText("");
+        setDiscountPercent(0);
+        setInActive(false);
+
+    };
+
+
 
     const handleDiscountCodeSubmit = async e => {
         e.preventDefault();
@@ -99,12 +116,14 @@ export default function UserInfo()
             const data = { discountCode: discountText };
             const response = await axios.post('/users/'+userId+'/buyList/validateDiscount/', data);
             const discountCode = response.data.content;
+
             console.log('in hnadle discount');
 
             setDiscountPercent(discountCode.percentage);
-            // addComment(newComment);
-            // setCommentText('');
+            setInActive(true);
+
         } catch (e) {
+            notify("discount code is not valid");
             console.log(e);
         }
     }
@@ -177,12 +196,14 @@ export default function UserInfo()
                             <div className="discount-input-part">
                                 <div className="row">
                                     <input
-                                             onChange={e => { setDiscountText(e.target.value) }}
+                                             onChange={e => { setDiscountText(e.target.value); setInActive(false); }}
                                              className="form-control discount-input-box"
                                     />
                                 </div>
                                 <div className="row">
-                                    <button type="submit" className="btn" onClick={handleDiscountCodeSubmit}>Submit</button>
+                                    <button type="submit" className={inactive ? "inactive-btn":"active-btn"} onClick={handleDiscountCodeSubmit}>
+                                        {inactive ? "Submitted" : "Submit"}
+                                    </button>
                                 </div>
                             </div>
                             <ul>
@@ -190,8 +211,8 @@ export default function UserInfo()
                                 <div className="items-row">
                                     total
                                 </div>
-                                <div className="price-row">
-                                    ${totalPrice}
+                                <div className={"price-row"}>
+                                    {discountPercent>0 ? <span className="inactive">${totalPrice}</span> : <span className="active">${totalPrice}</span>}
                                 </div>
                             </li>
                                 {discountPercent>0 &&
@@ -201,7 +222,7 @@ export default function UserInfo()
                                    with discount
                                 </div>
                                 <div className="price-row">
-                                    ${totalPrice-(totalPrice*discountPercent)/100}
+                                    <span className="active">${totalPrice-(totalPrice*discountPercent)/100}</span>
 
                                     </div>
                                     </li>
@@ -211,8 +232,7 @@ export default function UserInfo()
 
                             <div className="buttons">
 
-                                <button className="btn exit" onClick=
-                                            {() => close()}>
+                                <button className="btn exit"  onClick={() => {close();closePopup();}} >
                                    exit
                                 </button>
 

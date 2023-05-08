@@ -149,6 +149,7 @@ public class BalootServer {
         BuyList userBuyList = user.getBuyList();
         commodityManager.checkIfAllCommoditiesAreAvailabel(userBuyList);
         double totalPrice = userBuyList.getBuylistPrice();
+        System.out.println("total price is"+totalPrice);
         if(user.getCredit() < totalPrice)
             throw new NotEnoughCredit();
         commodityManager.decreaseStock(userBuyList);
@@ -200,6 +201,7 @@ public class BalootServer {
 
     public void applyDiscountCode(String username, String code) throws Exception
     {
+        System.out.println("in applyDiscountCode");
         if(!paymentManager.discountCodeIsValid(code))
             throw new InvalidDiscountCode(code);
         DiscountCode discountCode = paymentManager.getDiscountCode(code);

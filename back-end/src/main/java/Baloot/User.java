@@ -153,7 +153,9 @@ public class User {
 
     public void addDiscountToBuylist(DiscountCode discountCode)
     {
+        System.out.println("addDiscountToBuylist"+discountCode.getCode());
         buyList.setDiscountCode(discountCode);
+        usedDiscountCodes.add(discountCode);
     }
 
     public int getNumBought(Integer commodityId) {

@@ -90,7 +90,10 @@ public class BuyList {
 
     public void setDiscountCode(DiscountCode discountCode)
     {
+        System.out.println("setDiscountCode"+discountCode.getCode());
         buylistDiscountCode = discountCode;
+        System.out.println("buylistDiscountCode is"+buylistDiscountCode.getCode());
+
     }
 
     public boolean hasDiscount(){

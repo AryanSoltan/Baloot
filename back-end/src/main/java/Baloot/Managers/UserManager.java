@@ -147,6 +147,7 @@ public class UserManager {
 
     public void addDiscountCodeToUserBuyList(User user, DiscountCode discountCode) throws Exception
     {
+        System.out.println("addDiscountCodeToUserBuyList");
         if(user.hasUsedDiscountCode(discountCode))
             throw new DiscountCodeAlreadyUsed(discountCode.getCode());
         user.addDiscountToBuylist(discountCode);
