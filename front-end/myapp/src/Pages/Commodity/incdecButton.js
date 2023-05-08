@@ -4,11 +4,8 @@ import axios from "axios";
 import {toast} from "react-toastify";
 
 
-import commodity from "./Commodity";
-import {Context} from "../Commodities/Commodities";
+import {Context} from "../../App";
 
-// const myData = { countItem: 0 };
-// export const ExampleContext = React.createContext(myData);
 
 export default function IncrementDecrement(props)
 {
@@ -23,8 +20,6 @@ export default function IncrementDecrement(props)
     const [isDisabled, disable] = useState(false);
     const userId = localStorage.getItem('userId');
 
-    // console.log('counter i ');
-    // console.log(counter);
     useEffect(()=>{
         setCounter(currentCount);
         if(max==5) disable(true);
@@ -34,6 +29,7 @@ export default function IncrementDecrement(props)
     const handleDecrement = async() => {
         if(isDisabled) return;
         let value = validateValue(counter - 1);
+        setValue(value);
         if(value < 0)
         {
             toast.error("can't be less than 0");
@@ -51,13 +47,10 @@ export default function IncrementDecrement(props)
         } catch (e) {
             console.log(e);
         }
-         // window.location.reload();
 
     };
 
     const handleIncrement = async () => {
-
-
 
         if(isDisabled)
         {
@@ -65,12 +58,7 @@ export default function IncrementDecrement(props)
         }
         let value = validateValue(counter + 1);
         setValue(value);
-        console.log("vale in inc dec us");
-        console.log(value);
-        // if(value <= 0)
-        // {
-        //     toast.error("can't be less than 0");
-        // }
+
         if(value >= max)
         {
             toast.error("Out of stock");

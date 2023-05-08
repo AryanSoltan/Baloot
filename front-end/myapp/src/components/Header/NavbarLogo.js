@@ -4,12 +4,15 @@ import logo from '../../assets/images/ballot.png';
 function NavbarLogo() {
     return (
         <div className="header-components-container">
-            <div className="row">
-                <div className="col brand-image">
+            {/*<div className="row">*/}
+                <div className="brand-image">
                     <img src={logo} alt="logo"/>
+
                 </div>
-                <div className="col brand-name">Baloot</div>
-            </div>
+            <div className="brand-name">Baloot</div>
+
+
+            {/*</div>*/}
         </div>
     );
 }

@@ -21,8 +21,10 @@ import NotFound404 from "./Pages/NotFound404"
 import NeedLoginPages from "./Pages/NeedLoginPages"
 
 
+export const Context = React.createContext({ value: null, setValue: () => {} });
 
 function App() {
+    const [value, setValue] = useState(0);
   return (
 
       <BrowserRouter>
@@ -38,11 +40,12 @@ function App() {
 
               <Route element={<NeedLoginPages />}>
 
-                  <Route path = "/user" element = {<User />}/>
+
+                      <Route path = "/user" element = {<User />}></Route>
+
                   <Route path="/commodities" element={<Commodities />}/>
                   <Route path="/commodities/:id" element={<Commodity />}/>
                   <Route path = "/providers/:id" element = {<Provider />}/>
-
               </Route>
 
 

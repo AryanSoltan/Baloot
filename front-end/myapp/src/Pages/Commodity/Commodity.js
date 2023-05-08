@@ -10,13 +10,17 @@ import './Commodity.css'
 import CommentsPart from "./CommentsPart";
 import SuggestionsPart from "../SuggestionsPart";
 
+import {Context} from "../../App";
+
 
 function Commodity() {
 
     const [items, setItems] = useState([]);
+    const [value, setValue] = useState(0);
 
     return (
         <body className="page-container container">
+        <Context.Provider value={{value, setValue}}>
         <header>
             <Header/>
         </header>
@@ -32,6 +36,7 @@ function Commodity() {
 
 
         </main>
+        </Context.Provider>
 
         </body>
 

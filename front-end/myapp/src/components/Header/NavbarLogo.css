@@ -1,8 +1,9 @@
-
-.header-components-container .row {
+.header-components-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    /*flex-wrap: wrap;*/
 }
+
 
 .header-components-container .col{
     flex: 20%;
@@ -13,13 +14,17 @@
 
 .header-info-part{
 
-    margin-left: 15vw;
+    margin-left: 12vw;
+    display: flex;
+    flex-direction: row;
+
+
 }
 
-.header-info-part .row {
-    display: flex;
-    flex-wrap: wrap;
-}
+/*.header-info-part .row {*/
+
+/*    flex-wrap: wrap;*/
+/*}*/
 
 .header-info-part .col{
     flex: 20%;

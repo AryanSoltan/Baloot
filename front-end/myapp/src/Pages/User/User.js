@@ -15,23 +15,28 @@ import Cart from "./Cart"
 
 
 import axios from 'axios'
+import {Context} from "../../App";
+import {useState} from "react";
 
-export default class User extends React.Component{
+export default function User() {
 
 
 
-    constructor(props) {
+
+    // constructor(props) {
+        const [value, setValue] = useState(0);
+
 
         var isLoggedIn = localStorage.getItem('userLoggedIn');
 
-        super(props);
-        this.state = {
-            userName: '',
-            password: '',
-        }
-    }
+        // super(props);
+        // this.state = {
+        //     userName: '',
+        //     password: '',
+        // }
+    // }
 
-    render() {
+    // render() {
         return (
             <html lang="en">
 
@@ -43,6 +48,7 @@ export default class User extends React.Component{
             </head>
 
             <body>
+            <Context.Provider value={{value, setValue}}>
 
             <Header/>
             <main >
@@ -50,8 +56,9 @@ export default class User extends React.Component{
                 <Cart/>
             </main>
             <Footer/>
+            </Context.Provider>
             </body>
             </html>
         );
-    }
+    // }
 }

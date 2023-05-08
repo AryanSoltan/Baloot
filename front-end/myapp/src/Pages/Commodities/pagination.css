@@ -1,14 +1,3 @@
-.item {
-    align-items: center;
-    color: #593C1C;
-    cursor: pointer;
-    display: flex;
-    font-size: 0.7vw;
-    height: 2.083vw;
-    justify-content: center;
-    width: 2.083vw;
-
-}
 
 .disabled-page {
     color: #808e9b;
@@ -16,9 +5,15 @@
 
 .active {
     /*border: solid 1px ;*/
-    border-radius: 5vw;
+    justify-self: center;
+    justify-content: center;
+    /*width: 2vw;*/
+    /*height: 2vw;*/
+    border-radius: 20vw;
 
     background-color: #F7F0E9;
+    /*margin: auto;*/
+
 }
 
 .break-me {
@@ -36,6 +31,7 @@
 .pagination {
     align-items: center;
     background-color:  #FFFFFF;
+
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 0.781vw;
     display: flex;
@@ -47,10 +43,16 @@
     width: 20.885vw;
 
     padding: 0 0;
+    cursor: pointer;
 }
 
 .pagination-page {
-    font-weight: 700;
+    font-weight: 500;
+
+    font-size: 0.2vw;
+    padding-right: 0.5vw;
+    padding-left: 0.5vw;
+
 }
 
 .previous {

@@ -229,8 +229,8 @@ export default function CommoditiesGridShow(props) {
 
          </div>
             {pageCount>1 && <ReactPaginate
-                activeClassName={'item active '}
-                breakClassName={'item break-me '}
+                activeClassName={'item active'}
+                breakClassName={'item break-me'}
                 breakLabel={'...'}
                 containerClassName={'pagination'}
                 disabledClassName={'disabled-page'}
@@ -239,7 +239,7 @@ export default function CommoditiesGridShow(props) {
                 nextLabel={">"}
                 onPageChange={handlePageClick}
                 pageCount={pageCount}
-                pageClassName={'item pagination-page '}
+                pageClassName={'item pagination-page'}
                 pageRangeDisplayed={1}
                 previousClassName={"item previous"}
                 previousLabel={"<"}

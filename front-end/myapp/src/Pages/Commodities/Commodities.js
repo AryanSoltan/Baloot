@@ -9,14 +9,17 @@ import CommoditiesGridShow from "./CommoditiesGridShow";
 
 import { Link, useLocation } from "react-router-dom";
 
-export const Context = React.createContext({ value: null, setValue: () => {} });
+import {Context} from "../../App";
 
 
 function Commodities() {
-    const [value, setValue] = useState(0);
+
     const [items, setItems] = useState([]);
     const [filterBy, setFilterBy] = useState();
     const [searchValue, setSearchValue] = useState("");
+
+    const [value, setValue] = useState(0);
+
 
     const location = useLocation();
 
@@ -26,12 +29,12 @@ function Commodities() {
             const params = new URLSearchParams(searchText);
 
             const filter = params.get("filterBy");
-            const value = params.get("searchValue");
+            const searchvalue = params.get("searchValue");
             console.log('filteer name is ');
             console.log(filter);
 
             setFilterBy(filter);
-            setSearchValue(value);
+            setSearchValue(searchvalue);
         }
     }, [location.search]);
 
@@ -41,6 +44,7 @@ function Commodities() {
 
         <body className="page-container container">
         <Context.Provider value={{value, setValue}}>
+
 
             <header>
             <Header  hasSearch = "1" />
@@ -52,6 +56,7 @@ function Commodities() {
 
             </main>
         </Context.Provider>
+
 
         </body>
 

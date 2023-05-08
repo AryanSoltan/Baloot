@@ -16,6 +16,8 @@ export default function CommodityInfo() {
     const [commodity, setCommodity] = useState();
     const { id } = useParams();
 
+    const [itemCounts, setitemCounts] = useState(0);
+
     const [error, setError] = useState('');
 
     const isLoggedIn = localStorage.getItem('userLoggedIn');
@@ -44,6 +46,26 @@ export default function CommodityInfo() {
         fetchData();
 
     }, []);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+
+                const data = { username: userId};
+                const response = await axios.post("/users/buyListNum/"+id,data);
+                const count = response.data.content;
+
+                console.log('in commodity info count is ');
+                console.log(count);
+                setitemCounts(count);
+
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchData();
+    }, []);
+
 
     const updateRate = newCommodity => {
         commodity.rating = newCommodity.rating;
@@ -99,7 +121,7 @@ export default function CommodityInfo() {
 
                             <div className="card-body">
                                 <span className="price price-large">{commodity.price}$</span>
-                                  <IncrementDecrement  commodityId={commodity.id} currentCount={0} max={commodity.inStock}/>
+                                  <IncrementDecrement  commodityId={commodity.id} currentCount={itemCounts} max={commodity.inStock}/>
                             </div>
                     </div>
 

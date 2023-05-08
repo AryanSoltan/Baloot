@@ -6,7 +6,7 @@ import './NavbarLogo.css'
 import axios from "axios";
 
  import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
-import {Context} from "../../Pages/Commodities/Commodities";
+import {Context} from "../../App";
 
 function HeaderInfoPart() {
 
@@ -85,7 +85,7 @@ function HeaderInfoPart() {
                 {/*    </ul>*/}
                 {/*</div>*/}
                 <div className="header-info-part">
-                    <div className="row">
+                    {/*<div className="row">*/}
                         <div className="col header-username-container">
                             #{userId}
                         </div>
@@ -96,7 +96,7 @@ function HeaderInfoPart() {
                             </button>
 
                         </div>
-                    </div>
+                    {/*</div>*/}
                 </div>
             </>
         );
