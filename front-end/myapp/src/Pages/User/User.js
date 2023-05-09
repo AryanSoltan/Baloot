@@ -64,8 +64,9 @@ export default function User() {
             <UserInfo />
                 <Cart/>
             </main>
-            <Footer/>
+
             </Context.Provider>
+            <Footer/>
 
             </body>
             </html>

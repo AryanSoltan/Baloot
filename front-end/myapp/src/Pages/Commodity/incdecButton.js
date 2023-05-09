@@ -27,8 +27,10 @@ export default function IncrementDecrement(props)
     },[currentCount]);
 
     const handleDecrement = async() => {
-        if(isDisabled) return;
+
         let value = validateValue(counter - 1);
+        console.log('valueeeeeee is');
+        console.log(value);
         setValue(value);
         if(value < 0)
         {
@@ -80,6 +82,8 @@ export default function IncrementDecrement(props)
         let value = (e.target.value ? parseInt(e.target.value) : 0);
 
         value = validateValue(value);
+        console.log("in handle chane");
+        console.log(value);
 
         // ExampleContext.Provider.countItem = value;
         // console.log("counttt");
@@ -93,7 +97,7 @@ export default function IncrementDecrement(props)
 
     const validateValue = (value) => {
         if(value < 0 ) {
-            var value = 0;
+            value = 0;
         }
 
         if(value > max) {

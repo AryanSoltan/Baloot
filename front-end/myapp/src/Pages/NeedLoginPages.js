@@ -19,26 +19,29 @@ export default function NeedLoginPages() {
     const navigate = useNavigate();
 
 
-    useEffect(() =>
-    {
-//        var isLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
-
-
-         async function fetchData() {
-             try {
-                const response = await axios.post("/isLogin", null);
-                console.log(response);
-
-             } catch (e) {
-                 console.log(e);
-             }
-          }
-        fetchData();
-
-        if(isLoggedIn === null) {
-            navigate("/");
-        }
-    },[]);
+//     useEffect(() =>
+//     {
+// //        var isLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
+//
+//
+//          async function fetchData() {
+//              try {
+//                 const response = await axios.post("/isLogin", null);
+//                 console.log(response);
+//
+//              } catch (e) {
+//                  console.log(e);
+//              }
+//           }
+//         fetchData();
+//
+//         if(isLoggedIn === null) {
+//             navigate("/");
+//         }
+//     },[]);
+    if(!isLoggedIn){
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
 
 
     return (<Outlet/>);

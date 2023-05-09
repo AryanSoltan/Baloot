@@ -10,6 +10,7 @@ import CommoditiesGridShow from "./CommoditiesGridShow";
 import { Link, useLocation } from "react-router-dom";
 
 import {Context} from "../../App";
+import Footer from "../Footer";
 
 
 function Commodities() {
@@ -56,6 +57,7 @@ function Commodities() {
 
             </main>
         </Context.Provider>
+        <Footer/>
 
 
         </body>

@@ -203,15 +203,37 @@
     text-align: left;
 }
 
-.header-btn-container .btn{
+
+
+.header-btn-container .active-card-btn{
+    background: #593C1C;
+    /*opacity: 0.4;*/
+    border-radius: 0.677vw;
+    width: 8.333vw;
+    height: 3.542vw;
+    margin-right: 3vw;
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #ffffff;
+    display: inline-block;
+    text-align: left;
+}
+
+.header-btn-container .inactive-card-btn{
     background: #F7F0E9;
     opacity: 0.4;
     border-radius: 0.677vw;
     width: 8.333vw;
     height: 3.542vw;
     margin-right: 3vw;
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+    display: inline-block;
+    text-align: left;
 }
-.count-of-bought-items .badge {
+
+.badge {
     display: inline-block;
 
     text-align: right;

@@ -5,74 +5,64 @@ import Footer from "./Footer"
 import logo from "../assets/images/ballot.png";
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 
-
+import {useEffect, useState} from 'react';
 import "../Style/register-sign.css"
 import "../Style/footer.css"
 
 import axios from 'axios'
 
-export default class Login extends React.Component{
+export default function Login() {
 
+    const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    useEffect(() => {
 
+      localStorage.clear();
+      console.log("in local storage clear");
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            userName: '',
-            password: '',
-        }
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleUsernameChange = this.handleUsernameChange.bind(this)
-        this.handlePasswordChange = this.handlePasswordChange.bind(this)
-    }
-
-
-    handleUsernameChange(e) {
-        this.setState(
-            {
-                userName: e.target.value
-            });
-    }
-
-    handlePasswordChange(e)
-    {
-        this.setState(
-            {
-                password: e.target.value
-            }
-        );
-    }
-
-    handleSubmit(e) {
+    }, []);
+    const handleSubmit = async(e)=> {
         e.preventDefault();
-        if(!this.state.userName){
+        console.log("username is ");
+        console.log(username);
+        console.log(password);
+        if(!username){
             toast.error('should fill the username part');
             return
         }
-        else if(!this.state.password)
+        else if(!password)
         {
             toast.error('should fill the password part');
         }
         else
         {
-            axios.post('/login', {
-                username: this.state.userName,
-                password: this.state.password
-            }).then((resp) => {
-                if(resp.status === 200) {
-                    localStorage.setItem('userLoggedIn', true);
-                    localStorage.setItem('userId', this.state.userName);
+            try{
 
-                    window.location.href = "http://localhost:3000/commodities";
-                }
-            }).catch(error => {
-                toast.error("password or username is wrong");
-                console.log(error.toJSON().message)
+            const response = await axios.post('/login', {
+                username: username,
+                password: password
             })
+
+            console.log(response);
+
+                if(response.data.statusCode == 200) {
+                    localStorage.setItem('userLoggedIn', true);
+                    localStorage.setItem('userId', username);
+                    console.log("resp is ");
+
+                     window.location.href = "http://localhost:3000/commodities";
+                    //navigate("/commodities");
+                }
+            }
+            catch(e){
+                toast.error("password or username is wrong");
+                console.log(e.message)
+            }
         }
     }
 
-    render() {
+
         return (
             <html lang="en">
 
@@ -87,18 +77,18 @@ export default class Login extends React.Component{
             <div className="logo">
 
                 <div className="font-title"><img src={logo}></img> Baloot</div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={handleSubmit}>
 
                     <h1>Sign in Form </h1>
 
                     <p>Username</p>
 
-                    <input type="text" placeholder="Enter Username" name="username" id="username" onChange={this.handleUsernameChange}/>
+                    <input type="text" placeholder="Enter Username" name="username" id="username" onChange={e => { setUsername(e.target.value) }}/>
                     <br/>
                     <br/>
                     <p>Password</p>
 
-                    <input type="password" placeholder="Enter Password" name="password" id = "password" onChange={this.handlePasswordChange}/>
+                    <input type="password" placeholder="Enter Password" name="password" id = "password"  onChange={e => { setPassword(e.target.value) }}/>
 
                     <br/>
 
@@ -117,5 +107,5 @@ export default class Login extends React.Component{
             </body>
             </html>
         );
-    }
+
 }

@@ -91,8 +91,9 @@ function HeaderInfoPart() {
                         </div>
                         <div className="col header-btn-container">
 
-                            <button type="button" className="btn btn-default count-of-bought-items">Card
-                                                    <span className="badge">{itemCounts}</span>
+                            <button type="button" className={itemCounts>0 ? "active-card-btn":"inactive-card-btn"}>
+                            Card
+                                    <span className="badge">{itemCounts}</span>
                             </button>
 
                         </div>

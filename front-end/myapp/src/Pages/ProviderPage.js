@@ -9,6 +9,7 @@ import Provider from "./Provider";
 import './Provider.css'
 
 import { Link, useLocation } from "react-router-dom";
+import Footer from "./Footer";
 
 function ProviderPage() {
 
@@ -26,6 +27,7 @@ function ProviderPage() {
             <Provider />
 
         </main>
+        <Footer/>
 
         </body>
 

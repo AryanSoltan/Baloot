@@ -3,6 +3,7 @@ import './App.css';
 
 import Login from "./Pages/Login";
 
+import { Outlet } from "react-router-dom";
 import Home from "./Pages/Home";
 
 import SignUp from "./Pages/SignUp"
@@ -52,6 +53,7 @@ function App() {
 
 
           </Routes>
+          {/*<Outlet />*/}
         {/*<Switch>*/}
 
         {/*  <Route>*/}

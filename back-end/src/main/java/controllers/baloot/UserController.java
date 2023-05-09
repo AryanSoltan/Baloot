@@ -36,7 +36,7 @@ public class UserController {
 
     @RequestMapping(value="/isLogin", method = RequestMethod.POST)
     public Response isLogIn (@RequestBody String userLoginInfo) throws Exception{
-        System.out.println("HELLOOOOOOOOO");
+
         try{
             boolean isLogIn = BalootServer.getInstance().isLogIn();
             return new Response(HttpStatus.OK.value(), "logged in",isLogIn);

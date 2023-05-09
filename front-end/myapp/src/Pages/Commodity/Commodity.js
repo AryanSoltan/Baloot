@@ -11,6 +11,7 @@ import CommentsPart from "./CommentsPart";
 import SuggestionsPart from "../SuggestionsPart";
 
 import {Context} from "../../App";
+import Footer from "../Footer";
 
 
 function Commodity() {
@@ -37,8 +38,10 @@ function Commodity() {
 
         </main>
         </Context.Provider>
+        <Footer/>
 
         </body>
+
 
 
 
