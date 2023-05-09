@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import {toast} from "react-toastify";
-import { useEffect, useState } from "react";
+import {useEffect, useMemo, useState} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import userPNG from "../../assets/images/user-image.jpg"
@@ -16,19 +16,18 @@ import Popup from 'reactjs-popup';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-
+//
 import "../../Style/User.css"
 import "./Cart.css"
 
 import axios from 'axios'
 export default function UserInfo()
 {
+
     const { id } = useParams();
     const [user, setUser] = useState('');
     const [error, setError] = useState('');
-    const [credit, setCredit] = useState('');
-
-
+    const [credit, setCredit] = useState(0);
     const navigate = useNavigate();
 
 
@@ -60,29 +59,37 @@ export default function UserInfo()
     const creditChange = (e) => {
         setCredit(e.target.value);
         console.log(e.target.value);
-    }
+    };
 
     const handleLogOut = (e) => {
         localStorage.setItem('userLoggedIn', null);
         localStorage.setItem('userId', null);
         window.location.href = "http://localhost:3000/";
-    }
+    };
+
+
 
     const addCredit = (e) =>
     {
-        
+
         console.log(2);
 
         const userId = localStorage.getItem('userId');
 
 
         try {
+            console.log("response is");
             const response = axios.post('/users/' + userId + '/buyList/addCredit',
                 {
                     credit: credit
                 });
+
+            console.log(response);
+                window.location.reload();
+
         } catch (e) {
             if(e.response.status === 404) {
+
                 navigate('/404');
             }
         }
@@ -99,6 +106,7 @@ export default function UserInfo()
         //     }
         // }
     }
+
 
     return(
             // <section className="section-user-info">
@@ -130,38 +138,34 @@ export default function UserInfo()
 
                         <div className="col-1 price-part">
                             <div className="credit-info-txt">
-                                {/*<img src={dollarPNG}/>*/}$
-                                {user.credit}
-
+                                ${user.credit}
                             </div>
                             <input
+                                placeholder={"$Amount"}
                                 onChange={e => { setCredit(e.target.value);  }}
                                 className="form-control credit-input-box"
                             />
-                            <button type="submit" className="credit-button" onClick={()=>{addCredit();}}>
-                                <p>Add more credit!</p>
-                            </button>
+                            <Popup trigger=
+                                       {     <button type="submit" className="credit-button" >Add more credit!</button>}
+                                   modal nested>
+                                {
+                                    close => (
+
+                                        <div className="popup-window">
+
+                                            <h1>Add Credit</h1>
+                                            <p>Are you sure you want to add {credit}$ to your account?</p>
+                                            <div className="buttons">
+                                                <button className="btn exit" onClick={() => {close(); } } >Close</button>
+                                                <button type="submit" className="btn buy" onClick={addCredit } >Confirm!</button>
+                                            </div>
 
 
-                                {/*<Popup trigger=*/}
-                                {/*           {*/}
-                                {/*               <form onSubmit={addCredit}>*/}
-                                {/*                   <input className="box-amount" type="text" id="fname" name="fname"*/}
-                                {/*                          placeholder="$ Amount" onChange={creditChange}></input>*/}
-                                {/*                   <button type="submit" className="button-credit">*/}
-                                {/*                       <p>Add more credit!</p>*/}
-                                {/*                   </button>*/}
-                                {/*               </form>*/}
-                                {/*               }*/}
-                                {/*       modal nested>*/}
-                                {/*    {*/}
-                                {/*        close => (*/}
-                                {/*            <div className="popup-window">*/}
-                                {/*            <p>hello</p>*/}
-                                {/*            </div>*/}
-                                {/*        )*/}
-                                {/*    }*/}
-                                {/*</Popup>*/}
+
+                                        </div>
+                                    )
+                                }
+                            </Popup>
 
                         </div>
 

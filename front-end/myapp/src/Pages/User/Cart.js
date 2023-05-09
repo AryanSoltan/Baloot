@@ -14,7 +14,7 @@ import IncrementDecrement from "../Commodity/incdecButton"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Commodity/incdecButton.css';
 
-import "../../Style/User.css"
+// import "../../Style/User.css"
 import "./Cart.css"
 
 import axios from 'axios'
@@ -91,17 +91,16 @@ export default function UserInfo()
         // axios.post('/users/'+userId+'/buyList/applyDiscount/', data);
         axios.post("/users/" + userId + "/buyList/submit/",data).then((resp) => {
 
-                                                                            if(resp.data.statusCode === 200) {
-
-                                                                                window.location.reload();
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                toast.error(resp.data.data);
-                                                                            }
-                                                                        }).catch(error => {
-                                                                            console.log(error);
-                                                                        });
+            if(resp.data.statusCode === 200) {
+                window.location.reload();
+             }
+            else
+            {
+              toast.error(resp.data.data);
+            }
+             }).catch(error => {
+             console.log(error);
+           });
 
     };
 

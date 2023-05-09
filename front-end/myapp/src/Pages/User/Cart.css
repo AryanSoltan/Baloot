@@ -1,8 +1,13 @@
+
+body{
+    background: #FCFCFC;
+}
+
 .section-user-info{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background:  #FFFFFF;
+
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
     width:70vw;
@@ -33,7 +38,7 @@
     width: 37.865vw;
     height: 2.969vw;
 
-    background: #FFFFFF;
+    /*background: #FFFFFF;*/
     border: 1px solid #919191;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     text-align: center;
@@ -108,31 +113,10 @@ td
     padding-left: 4vw;
 }
 
-/*.credit-info img*/
-/*{*/
-/*    margin-top: 4vmin;*/
-/*    margin-right: 1vmin;*/
-/*    width: 4vmin;*/
-/*    height: 8vmin;*/
-/*}*/
-
 .empty-cart
 {
     color: #A97B47;
     margin-left: 30vw;
-}
-
-.popup-window{
-    background: #d98b8b;
-    box-shadow: 0px 4px 4px rgba(217, 217, 217, 0.25);
-    border-radius: 0.781vw;
-    width: 26.042vw;
-   /* background: #FFFFFF;
-
-    /*height: 27.344vw;*/
-    heigth:100%;
-
-    padding :2vw;
 }
 
 .popup-window h1{
@@ -143,8 +127,22 @@ td
     /* identical to box height */
 
     text-align: left;
+    margin:auto;
 
     color: #000000;
+}
+::placeholder {
+    text-align: center;
+}
+.popup-window p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+
+    color: #593C1C;
+
 }
 .popup-window ul{
     padding-left: 1vw;
@@ -202,7 +200,6 @@ td
     width: 13.021vw;
     height: 2.790vw;
 
-    background: #FFFFFF;
     border-radius: 0.781vw;
 
     padding: 0;
@@ -255,7 +252,7 @@ td
     margin-right: -5vw;
 }
 .popup-window .buy{
-    width: 5.813vw;
+    width: 6.813vw;
     height: 3vw;
     border-radius: 0.781vw;
     background: #593C1C;
@@ -306,6 +303,24 @@ td
     box-shadow: 0px 0.208vw 0.208vw rgba(208, 208, 208, 0.25);
     border-radius: 0.781vw;
     height: 2.969vw;
+    font-weight: 600;
     width:100%;
-    margin-top: 0vw;
+    margin-top: 1vw;
+    padding-top: 0;
+    vertical-align: middle;
+}
+
+.popup-overlay {
+    background:rgba(217, 217, 217, 0.5);
+}
+
+.popup-content {
+    margin: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0.208vw 0.208vw rgba(217, 217, 217, 0.25);
+    border-radius: 0.781px;
+    width: 26.042vw;
+    heigth:100%;
+    padding :2vw;
+
 }

@@ -36,12 +36,12 @@
 
 }
 
-.item-info 
+.item-info
 {
     display: flex;
 }
 
-.item-info img 
+.item-info img
 {
     margin-top: 1vmin;
     margin-right: 1vmin;
@@ -61,7 +61,7 @@
 /*    color: #593C1C;*/
 /*}*/
 
-.credit-info 
+.credit-info
 {
     display: flex;
 }
@@ -109,7 +109,7 @@
 /*    */
 /*}*/
 
-.button-credit p 
+.button-credit p
 {
     margin-top:1vmin;
     color: #FFFFFF;
@@ -129,14 +129,14 @@
     display: flex;
 }
 
-.cart-item-info img 
+.cart-item-info img
 {
     margin-right: 2vmin;
     width: 5vmin;
     height: 6vmin;
 }
 
-.cart-title-txt 
+.cart-title-txt
 {
     font-family: 'Inter';
     font-style: normal;
@@ -149,7 +149,7 @@
 
 }
 
-.cart-button 
+.cart-button
 {
     margin-left: 5vmin;
     width: 15vmin;
@@ -159,7 +159,7 @@
     border-radius: 15px;
 }
 
-.cart-button p  
+.cart-button p
 {
     font-family: 'Inter';
     font-style: normal;
@@ -171,12 +171,12 @@
 
     color: #F7F0E9;
     padding-left: 2vmin;
-}   
+}
 
 .cart-col-name
 {
     /*padding-left: 2vw;*/
-    background: #FFFFFF;
+    /*background: #FFFFFF;*/
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     height:3vw;
     /*margin-right: 2vw;*/
@@ -184,7 +184,7 @@
     /*padding-top: 3vmin;*/
 }
 
-.cart-col-name p 
+.cart-col-name p
 {
     font-family: 'Inter';
     font-style: normal;
@@ -198,7 +198,7 @@
     margin-right: 5vw;
 }
 
-.cart-buy-item 
+.cart-buy-item
 {
     padding-left: 2vw;
     margin-top:3vw;
@@ -208,12 +208,12 @@
     padding-top: 1.2vmin; */
     /* padding-left: 1vmin; */
     /* padding-top: 1.2vmin; */
-    background: #FFFFFF;
+    /*background: #FFFFFF;*/
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
 }
 
-.cart-buy-item img 
+.cart-buy-item img
 {
     width:3vw;
 
@@ -229,10 +229,10 @@
     line-height: 34px;
 
     /* identical to box height */
-    
-    
+
+
     color: #919191;
-    
+
 }
 
 .box-cart-item
@@ -245,17 +245,17 @@
     /* margin-left: 3.5vw; */
 }
 
-.col-yellow 
+.col-yellow
 {
     color: #FFC700;
 }
 
-.col-red 
+.col-red
 {
     color: #C82525;
 }
 
-.inc-dec 
+.inc-dec
 {
     height: 2vw;
     width: 10vw;
@@ -276,7 +276,7 @@
 
 }
 
-.payment-button 
+.payment-button
 {
     width: 40vw;
     background: #593C1C;
@@ -285,7 +285,7 @@
     margin-left: 15vw;
 }
 
-li 
+li
 {
     list-style-type: none;
 }
@@ -304,7 +304,7 @@ li
     cursor: pointer;
 }
 
-h6 
+h6
 {
     margin:0;
     padding:0;
@@ -316,7 +316,7 @@ h6
     cursor: pointer;
 }
 
-button 
+button
 {
     margin-top: 2vw;
 }

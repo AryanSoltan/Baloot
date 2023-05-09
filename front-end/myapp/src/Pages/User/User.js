@@ -9,14 +9,15 @@ import UserInfo from "./UserInfo"
 
 
 import "../../Style/footer.css"
-import "../../Style/User.css"
+// import "../../Style/User.css"
+import "./Cart.css"
 import Header from "../../components/Header/Header"
 import Cart from "./Cart"
 
 
 import axios from 'axios'
 import {Context} from "../../App";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function User() {
 
@@ -29,6 +30,11 @@ export default function User() {
 
         var isLoggedIn = localStorage.getItem('userLoggedIn');
 
+
+
+
+
+
         // super(props);
         // this.state = {
         //     userName: '',
@@ -38,7 +44,7 @@ export default function User() {
 
     // render() {
         return (
-            <html lang="en">
+            <html lang="en" >
 
             <head>
                 <meta charSet="UTF-8"/>
@@ -47,16 +53,20 @@ export default function User() {
                 <title>Document</title>
             </head>
 
-            <body>
+            <body >
+            {/*style={popUpIsOpen ? {backgroundColor: "rgba(217, 217, 217, 0.5)" }:{backgroundColor: "white"  }}*/}
+
+
             <Context.Provider value={{value, setValue}}>
 
             <Header/>
             <main >
-            <UserInfo/>
+            <UserInfo />
                 <Cart/>
             </main>
             <Footer/>
             </Context.Provider>
+
             </body>
             </html>
         );
