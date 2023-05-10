@@ -8,15 +8,21 @@
     width: 18.229vw;
     max-width: 18.229vw;
     height: 25vw;
+    margin-bottom: 2vw;
+    margin-top:2vw;
+
 }
 
 .commodity-card .card-title {
+
     margin-left: 0.729vw;
     margin-top: 0.885vw;
     text-align: left;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
+    padding-top: 0;
+    margin-top: 0;
 
 
 }
@@ -25,17 +31,19 @@
     font-size: 1.458vw;
     line-height: 1.771vw;
     color: #593C1C;
-    margin-bottom: auto;
+    margin-bottom: 0vw;
+    margin-top: -2vw;
 }
 
 .commodity-card h2 {
-    margin-top: 1vw;
+    margin-top: 0vw;
     margin-bottom: 0;
 
     font-size: 0.833vw;
     line-height: 0.833vw;
     color: #C82525;
     margin-left: 1vw;
+
     /* margin-left: 1.510vw; */
 }
 

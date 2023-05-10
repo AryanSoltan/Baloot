@@ -44,7 +44,7 @@ export default function IncrementDecrement(props)
         try {
             const data = { userId: userId };
             const response = await axios.post('/users/' + commodityId+ '/remove', data);
-            change(true);
+            // change(true);
 
         } catch (e) {
             console.log(e);

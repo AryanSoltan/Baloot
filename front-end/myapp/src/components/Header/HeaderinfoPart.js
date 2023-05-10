@@ -25,6 +25,7 @@ function HeaderInfoPart() {
         async function fetchData() {
             try {
                 console.log('in  item');
+                console.log(value);
 
                 const response = await axios.get("/users/"+userId+"/buyList");
                 const userBuyList = response.data.content;
@@ -86,15 +87,20 @@ function HeaderInfoPart() {
                 {/*</div>*/}
                 <div className="header-info-part">
                     {/*<div className="row">*/}
-                        <div className="col header-username-container">
-                            #{userId}
-                        </div>
-                        <div className="col header-btn-container">
 
+                        <div className="col header-username-container">
+                           <span><a className="link" href={'http://localhost:3000/user'}>
+                            {userId} </a></span>
+
+                        </div>
+
+                        <div className="col header-btn-container">
+                            <a className="link" href={'http://localhost:3000/user'}>
                             <button type="button" className={itemCounts>0 ? "active-card-btn":"inactive-card-btn"}>
                             Card
                                     <span className="badge">{itemCounts}</span>
                             </button>
+                            </a>
 
                         </div>
                     {/*</div>*/}

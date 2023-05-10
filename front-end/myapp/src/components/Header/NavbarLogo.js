@@ -6,10 +6,10 @@ function NavbarLogo() {
         <div className="header-components-container">
             {/*<div className="row">*/}
                 <div className="brand-image">
-                    <img src={logo} alt="logo"/>
+                    <a className="link" href={'http://localhost:3000/commodities'}> <img src={logo} alt="logo"/></a>
 
                 </div>
-            <div className="brand-name">Baloot</div>
+           <div className="brand-name">  Baloot</div>
 
 
             {/*</div>*/}

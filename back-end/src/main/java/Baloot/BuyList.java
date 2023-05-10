@@ -44,7 +44,7 @@ public class BuyList {
     public void removeCommodityFromBuyList(int commodityID)
     {
         int currCount = commoditiesCount.get(commodityID);
-        if(currCount>2) {
+        if(currCount>=2) {
             commoditiesCount.put(commodityID, currCount -1);
         }
         if(currCount==1)
