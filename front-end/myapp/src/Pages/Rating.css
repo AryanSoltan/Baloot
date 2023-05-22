@@ -1,0 +1,38 @@
+.rate-stars-container{
+    display: flex;
+
+    width: 38.281vw;
+    justify-content: space-between;
+
+}
+.star-icon {
+    width: 2.500vw;
+    height: 2.500vw;
+    float: left;
+    color: inherit;
+
+}
+
+.active-false{
+
+    color:grey;
+}
+.active-true{
+
+    color: #dabf10;
+}
+
+
+/*.star_checked {*/
+/*    font-size: 2.5vw;*/
+/*}*/
+
+/*.checked {*/
+/*    color: orange;*/
+/*}*/
+
+/*.user_rating {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*}*/

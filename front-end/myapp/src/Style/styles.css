@@ -1,0 +1,206 @@
+/* * {
+    box-sizing: border-box;
+} */
+
+/* header,
+section {
+    overflow-x: hidden;
+
+} */
+
+
+
+.body {
+    background: #F5F5F5;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200&display=swap');
+
+:root {
+    --primary-color: #FFFFFF;
+    --transparent-primary-color: rgba(177, 32, 37, .7);
+    --background-color: #292929;
+    --card-background-color: #4e4e50;
+}
+
+
+header {
+
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    background-color: var(--primary-color);
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+
+}
+
+main {
+    padding-top: 100px;
+}
+
+header a {
+    font-size: 0.9em;
+
+}
+
+
+header .nav-item {
+    padding: 0.9em;
+}
+
+header .navbar-brand img {
+    padding-left: 2rem;
+}
+
+header .navbar-brand-name {
+    padding-left: .1rem;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 51px;
+    text-align: center;
+
+    color: #A97B47;
+
+}
+
+header .navbar-nav .nav-item .card-item {
+    /* position: absolute;*/
+    width: 160px;
+    height: 68px;
+    left: 1705px;
+    top: 25px;
+
+    background: #F7F0E9;
+    opacity: 0.4;
+    border-radius: 15px;
+    text-align: left;
+
+}
+
+
+header .navbar-nav .nav-item .header-text {
+    /* position: absolute;
+    width: 60px;
+    height: 34px;
+    left: 1718px;
+    top: 42px; */
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+
+
+    /* identical to box height */
+
+    text-align: left;
+
+    color: #593C1C;
+    /*  #593C1C; */
+
+}
+
+.section1 .container-fluid .row {
+    display: flex;
+}
+
+.section-1 {
+    padding: 5vmin 0;
+    padding-left: 7rem;
+
+}
+
+.section-1 .container-fluid .row .col-lg-6 .commodity-image {
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+    border-radius: 25px;
+}
+
+.section-1 .container-fluid .row .col-lg-6 .commodity-title {
+    /* position: relative; */
+    width: 417px;
+    height: 99px;
+    left: 1020px;
+    top: 169px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 58px;
+    line-height: 70px;
+    text-align: center;
+
+    color: #593C1C;
+
+}
+
+
+header .right.navbar-nav .navbar-nav
+{
+    float: right;
+}
+
+
+.nav-username-user
+{
+    position: absolute;
+    width: 127px;
+    height: 34px;
+    left: 1527px;
+    top: 38px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #593C1C;
+}
+
+.nav-cart 
+{
+    position: absolute;
+    width: 160px;
+    height: 68px;
+    left: 1718px;
+    top: 24px;
+
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
+
+.button-cart-nav-user 
+{
+    position: absolute;
+    width: 160px;
+    height: 68px;
+    left: 1718px;
+    top: 24px;
+
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+
+    margin-right:42px;
+    margin-left:24px;
+
+}

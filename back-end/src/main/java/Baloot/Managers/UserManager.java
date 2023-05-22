@@ -28,6 +28,13 @@ public class UserManager {
         return neededUser;
     }
 
+    public int getNumOfUsers() throws Exception
+    {
+
+        return users.size();
+    }
+
+
     public static User getUserByUseremail(String email) throws Exception
     {
         for(User user : users.values())
@@ -140,11 +147,40 @@ public class UserManager {
 
     public void addDiscountCodeToUserBuyList(User user, DiscountCode discountCode) throws Exception
     {
+        System.out.println("addDiscountCodeToUserBuyList");
         if(user.hasUsedDiscountCode(discountCode))
             throw new DiscountCodeAlreadyUsed(discountCode.getCode());
         user.addDiscountToBuylist(discountCode);
     }
 
+    public boolean userHasNotUsedCode(User user, DiscountCode discountCode) throws Exception
+    {
+        if(user.hasUsedDiscountCode(discountCode))
+            throw new DiscountCodeAlreadyUsed(discountCode.getCode());
+        return true;
+    }
 
 
+    public User getUserById(String username) {
+        return users.get(username);
+    }
+
+    public BuyList getUserPurchasedList(String userName) throws Exception {
+
+        User neededUser = getUserByUsername(userName);
+        return neededUser.getPurchasedCommodities();
+    }
+
+    public int getUserNumBought(String userName, Integer commodityId) throws Exception {
+        User neededUser = getUserByUsername(userName);
+        return neededUser.getNumBought(commodityId);
+    }
+
+    public boolean isLogIn() {
+        if(loggedInUser == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

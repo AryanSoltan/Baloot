@@ -18,7 +18,7 @@ public class User {
     private double credit;
 
     private BuyList buyList;
-    ArrayList<Commodity> purchased;
+    private BuyList purchased;
     ArrayList<DiscountCode> usedDiscountCodes ;
 
     public User(String inputUserName, String inputPassword, String inputEmail,
@@ -37,7 +37,9 @@ public class User {
 
     public void buyCommodity(Commodity newCommodity)
     {
-        buyList.addNewCommodityToBuyList(newCommodity);
+        CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
+        buyList.addNewCommodityToBuyList(commodity);
+
     }
 
     public boolean hasBoughtCommodity(int commodityId)
@@ -55,14 +57,20 @@ public class User {
     }
 
     public ArrayList<Commodity> getBoughtCommodities() {
-        return buyList.getAllCommodities();
+        ArrayList<CommodityInBuyList> commodities = buyList.getAllCommodities();
+        ArrayList<Commodity> commoditiesAns = new ArrayList<Commodity>();
+        for(CommodityInBuyList commodityInBuyList: commodities)
+        {
+            commoditiesAns.add(commodityInBuyList.getCommodity());
+        }
+        return commoditiesAns;
     }
 
     public void setBoughtCommitiesEmpty() {
 
         buyList = new BuyList();
     }
-    public void setPurchasedCommodityEmpty(){purchased = new ArrayList<Commodity>();}
+    public void setPurchasedCommodityEmpty(){purchased = new BuyList();}
 
     public void setUSedDiscountCodesEmpty(){usedDiscountCodes = new ArrayList<DiscountCode>();}
 
@@ -97,9 +105,9 @@ public class User {
 
     public void addBuyListToPurchasedCommodities()
     {
-        for(Commodity commodity: buyList.getAllCommodities())
+        for(CommodityInBuyList commodity : buyList.getAllCommodities())
         {
-            purchased.add(commodity);
+            purchased.addNewCommodityToBuyList(commodity);
         }
     }
     public void clearBuylist()
@@ -111,7 +119,7 @@ public class User {
         buyList.emptyList();
     }
 
-    public ArrayList<Commodity> getPurchasedCommodities() {
+    public BuyList getPurchasedCommodities() {
         return purchased;
     }
 
@@ -145,6 +153,12 @@ public class User {
 
     public void addDiscountToBuylist(DiscountCode discountCode)
     {
+        System.out.println("addDiscountToBuylist"+discountCode.getCode());
         buyList.setDiscountCode(discountCode);
+        usedDiscountCodes.add(discountCode);
+    }
+
+    public int getNumBought(Integer commodityId) {
+        return buyList.getBuylistNum(commodityId);
     }
 }

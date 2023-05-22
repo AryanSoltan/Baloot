@@ -124,13 +124,16 @@ public class CommodityManager {
     }
 
 
-    public void rateCommoditiesComment(int commentId, User user, int rate)
+    public Comment rateCommoditiesComment(int commentId, User user, int rate)
     {
         for(Commodity commodity: commodities.values())
         {
-            if(commodity.hasCommentId(commentId))
+            if(commodity.hasCommentId(commentId)) {
                 commodity.rateComment(commentId, user, rate);
+                return commodity.getComment(commentId);
+            }
         }
+        return null;
     }
 
     public void clearSearchFilter()
@@ -142,16 +145,18 @@ public class CommodityManager {
 
     public void decreaseStock(BuyList buyList)
     {
-        ArrayList<Commodity> commoditiesList = buyList.getAllCommodities();
-        for(Commodity commodity : commoditiesList)
-            commodity.buyOne();
+        ArrayList<CommodityInBuyList> commoditiesList = buyList.getAllCommodities();
+        for(CommodityInBuyList commodity : commoditiesList) {
+            commodity.getCommodity().buy(commodity.getNumInStock());
+        }
     }
 
     public void checkIfAllCommoditiesAreAvailabel(BuyList buyList) throws Exception
     {
-        ArrayList<Commodity> commoditiesList = buyList.getAllCommodities();
-        for(Commodity commodity: commoditiesList)
+        ArrayList<CommodityInBuyList> commoditiesList = buyList.getAllCommodities();
+        for(CommodityInBuyList commodityInBuyList: commoditiesList)
         {
+            Commodity commodity = commodityInBuyList.getCommodity();
             if(commodity.getInStock() == 0)
                 throw new CommodityOutOfStock(commodity.getId());
         }

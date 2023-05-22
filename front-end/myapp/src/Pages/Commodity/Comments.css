@@ -1,0 +1,132 @@
+.comment-container{
+
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5.573vw;
+
+}
+
+
+.comment-row{
+    /*justify-content: left;*/
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    width: 83.177vw;
+    padding: 0;
+    margin-top: 0.2vw;
+    padding-top:0.5vw ;
+    padding-bottom: 0.5vw;
+    padding-right: 1vw;
+    padding-left: 1vw;
+    /*display: flex;*/
+    /*    flex-direction:column;*/
+    /*    justify-content: left;*/
+
+}
+
+.panel-heading {
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    width: 83.177vw;
+    padding: 0;
+    margin: 0;
+}
+.comment-text{
+
+    font-size: 1.667vw;
+    line-height: 1.667vw;
+    /*text-align: center;*/
+    color: #000000;
+    /*display: inline-block;*/
+
+}
+
+.comment-info{
+    font-size: 0.938vw;
+    line-height: 1.146vw;
+    text-align: center;
+    color: #919191;
+    display: inline-block;
+}
+
+.comment-vote{
+    font-size: 1.146vw;
+    line-height: 1.406vw;
+    text-align: right;
+    color: #593C1C;
+}
+
+.comment-vote span {
+
+    font-size: 0.833vw;
+    line-height: 0.990vw;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    margin-left: 0.833vw;
+    /* margin-right: 0.313vw; */
+
+}
+
+
+.like-icon {
+    display: inline-block;
+    background: url('../../assets/images/icons8-thumbs-up-48 1.png') no-repeat left;
+    width: 1.458vw;
+    height: 1.458vw;
+    background-size: cover;
+}
+
+.dislike-icon {
+    display: inline-block;
+    background: url('../../assets/images/icons8-thumbs-up-48\ 2.png') no-repeat;
+    width: 1.458vw;
+    height: 1.458vw;
+    background-size: cover;
+}
+
+
+.big-dot {
+    width: 1.719vw;
+    font-size: 1.146vw;
+    line-height: 1.146vw;
+    color: #909090;
+    padding: 0;
+    margin-left:1vw;
+    margin-right:1vw;
+}
+.comment-input{
+    font-size: 1.458vw;
+
+    line-height: 1.771vw;
+    color: #593C1C;
+
+}
+.comment-input-part{
+    display: flex;
+    flex-direction: row;
+    align-items: self-end;
+
+
+}
+
+
+
+.comment-input-box {
+    width: 70vw;
+    height: 6.563vw;
+
+    background: #F5F5F5;
+    border-radius: 0.781vw;
+
+    padding: 0;
+    margin: 0;
+
+}

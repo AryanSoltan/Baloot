@@ -41,10 +41,10 @@ public class UserInterface
                 neededUser.getBoughtCommodities(), neededUser, true);
         userHTMLPage += HTMLWriter.writeTable(boughtCommodities,
                 "<h3>Buy List</h3>");
-        ArrayList<ArrayList<String>> purchasedCommodities = createCommodityRows(
-                neededUser.getPurchasedCommodities(), neededUser, false);
-        userHTMLPage += HTMLWriter.writeTable(purchasedCommodities,
-                "<h3>Purchased List</h3>");
+//        ArrayList<ArrayList<String>> purchasedCommodities = createCommodityRows(
+//                neededUser.getPurchasedCommodities(), neededUser, false);
+//        userHTMLPage += HTMLWriter.writeTable(purchasedCommodities,
+//                "<h3>Purchased List</h3>");
         userHTMLPage += "</body></html>";
         return userHTMLPage;
     }

@@ -1,0 +1,375 @@
+.body {
+
+    background: #F5F5F5;
+
+}
+
+main {
+
+    padding-top: 9.802vw;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+
+
+    margin: 0;
+
+}
+
+
+.button-type1 {
+    width: 6.250vw;
+    height: 3.542vw;
+    border-radius: 0.781vw;
+    background: #593C1C;
+    mix-blend-mode: normal;
+
+
+    font-weight: 500;
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+
+    text-align: center;
+    justify-content: center;
+    color: #F7F0E9;
+    padding: 0;
+    margin: auto;
+
+
+
+}
+
+.commodity-section {
+    padding-left: 5.573vw;
+
+
+
+
+    justify-content: flex-end;
+}
+
+.commodity-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 46.491vw;
+    height: 41.667vw;
+    border-radius: 0.781vw;
+}
+
+.commodity-info-part h1 {
+
+    font-size: 3.021vw;
+    line-height: 3.646vw;
+    text-align: left;
+    color: #593C1C;
+    padding-top: 0;
+
+}
+
+.commodity-info-part h2 {
+    font-size: 1.250vw;
+    line-height: 1.250vw;
+    text-align: left;
+    color: #C82525;
+
+}
+
+.commodity-info-part h3 {
+
+
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+    text-align: left;
+
+    color: #000000;
+    /* padding-left: 1.2rem; */
+}
+
+.commodity-info-part h4 {
+
+
+    font-weight: 500;
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+    text-align: left;
+
+    color: #593C1C;
+
+}
+
+
+.rate-star-row p {
+
+    font-size: 1.667vw;
+    line-height: 2.031vw;
+    text-align: center;
+    color: #593C1C;
+    display: inline;
+    padding-left: .5vw;
+
+
+}
+
+.rate-star-row p span {
+    font-weight: 500;
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+    color: #919191;
+}
+
+.commodity-info-part {
+    padding-left: 1.042vw;
+
+}
+
+
+/* .commodity-in-stock {
+    font-size: 1.250vw;
+    line-height: 1.250vw;
+    text-align: left;
+    color: #C82525;
+
+} */
+
+.star-icon {
+
+    background: url('../assets/images/icons8-star-filled-48\ 1.png') no-repeat center;
+    width: 2.500vw;
+
+    height: 2.500vw;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+
+    float: left;
+
+}
+
+.rate-star-row {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    margin-top: 4vw;
+    /* padding-right: 17.865vw; */
+
+}
+
+
+.item-buy-card {
+    width: 38.281vw;
+
+
+    background: #FFFFFF;
+    box-shadow: 0px 0.208vw 0.208vw rgba(208, 208, 208, 0.25);
+    text-align: left;
+
+
+
+    display: inline-block;
+    justify-content: center;
+
+    margin-top: 2.604vw;
+    margin-left: -2.042vw;
+    margin-bottom: 2.708vw;
+    padding: 0;
+    padding-left: 3.698vw;
+    padding-right: 0.5vw;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .item-buy-card {
+        margin-top: 0.1vw;
+        margin-bottom: 1vw;
+    }
+}
+
+.item-buy-card .price {
+    font-size: 1.875vw;
+    line-height: 2.292vw;
+    color: #593C1C;
+    text-align: left;
+    vertical-align: middle;
+
+    margin: auto;
+    padding: auto;
+
+}
+
+.rate-stars {
+    display: inline-block;
+
+    background: url('../assets/images/image 8.png');
+
+    width: 2.500vw;
+
+    height: 2.500vw;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+
+    width: 9.948vw;
+    height: 3.073vw;
+    margin-left: -.5rem;
+}
+
+.rating-part {
+    margin-top: 2.708vw;
+    margin-left: 1.563vw;
+
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+    text-align: left;
+    color: #000000;
+
+}
+
+.comment-section {
+    padding: 0;
+    margin: 0;
+    margin-top: 1.771vw;
+    padding-left: 5.573vw;
+    padding-right: 9.635vw;
+    font-weight: 500;
+
+}
+
+
+.panel-heading {
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+}
+
+.panel-heading span {
+
+    color: #909090;
+}
+
+
+.pannel-content p {
+    font-size: 1.667vw;
+    line-height: 1.667vw;
+    text-align: center;
+    color: #000000;
+}
+
+.comment-panel .subtitle-format {
+    font-size: 0.938vw;
+    line-height: 1.146vw;
+    text-align: center;
+    color: #919191;
+    display: inline-block;
+
+}
+
+
+
+
+.big-dot {
+    width: 1.719vw;
+    font-size: 1.146vw;
+    line-height: 1.146vw;
+    color: #909090;
+    padding: 0;
+
+
+
+}
+
+.eval-comment-format {
+    font-size: 1.146vw;
+    line-height: 1.406vw;
+    text-align: center;
+    color: #593C1C;
+    /* float: left; */
+}
+
+.eval-comment-format span {
+
+    font-size: 0.833vw;
+    line-height: 0.990vw;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    margin-left: 0.833vw;
+    /* margin-right: 0.313vw; */
+
+}
+
+
+.like-icon {
+    display: inline-block;
+    background: url('../assets/images/icons8-thumbs-up-48 1.png') no-repeat left;
+    width: 1.458vw;
+    height: 1.458vw;
+    background-size: cover;
+}
+
+.dislike-icon {
+    display: inline-block;
+    background: url('../assets/images/icons8-thumbs-up-48\ 2.png') no-repeat;
+    width: 1.458vw;
+    height: 1.458vw;
+    background-size: cover;
+}
+
+.panel-input-part {
+    font-size: 1.458vw;
+
+    line-height: 1.771vw;
+    color: #593C1C;
+
+
+}
+
+.panel-input-part .col-lg-12,
+.panel-input-part .col-md-12 {
+    padding-right: 0.5vw;
+}
+
+.input-form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+}
+
+
+.comment-input-box {
+    width: 70vw;
+    height: 6.563vw;
+
+    background: #F5F5F5;
+    border-radius: 0.781vw;
+
+    padding: 0;
+    margin: 0;
+
+}
+
+.suggestions-section {
+
+    padding: 0;
+    margin: 0;
+    margin-top: 3.542vw;
+    padding-left: 5.573vw;
+    padding-right: 9.635vw;
+    margin-bottom: 4.271vw;
+
+}
+
+.suggestions-section h1 {
+
+    font-weight: 600;
+    font-size: 1.667vw;
+    line-height: 1.667vw;
+    margin-bottom: 3.542vw;
+    text-align: left;
+    color: #593C1C;
+    margin-left: 1vw;
+
+}

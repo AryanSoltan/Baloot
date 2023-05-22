@@ -25,12 +25,18 @@ public class BalootServer {
         paymentManager = new PaymentManager();
     }
 
+
     public static BalootServer getInstance()
     {
         if(instance == null)
             instance = new BalootServer();
         return instance;
 
+    }
+
+    public int getNumofUsers() throws Exception
+    {
+        return userManager.getNumOfUsers();
     }
 
     public void addUser(User newUser) throws Exception
@@ -104,8 +110,8 @@ public class BalootServer {
         Commodity neededCommodity = getCommodityById(commodityId);
         if(!neededCommodity.isAvailable())
             throw new CommodityOutOfStock(commodityId);
-        if(userManager.userHasBoughtCommodity(username,commodityId))
-            throw new CommodityAlreadyAdded(commodityId);
+//        if(userManager.userHasBoughtCommodity(username,commodityId))
+//            throw new CommodityAlreadyAdded(commodityId);
         userManager.addCommidityToUserBuyList(username,neededCommodity);
     }
 
@@ -132,9 +138,9 @@ public class BalootServer {
         commodityManager.addCommentToCommodity(comment, commentIdNow, user.getName());
     }
 
-    public void addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
+    public Comment addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
         User user = findUser(userName);
-        commodityManager.rateCommoditiesComment(commentId , user, rate);
+        return commodityManager.rateCommoditiesComment(commentId , user, rate);
     }
 
     public void handlePaymentUser(String userName) throws Exception //done
@@ -143,9 +149,9 @@ public class BalootServer {
         BuyList userBuyList = user.getBuyList();
         commodityManager.checkIfAllCommoditiesAreAvailabel(userBuyList);
         double totalPrice = userBuyList.getBuylistPrice();
+        System.out.println("total price is"+totalPrice);
         if(user.getCredit() < totalPrice)
             throw new NotEnoughCredit();
-
         commodityManager.decreaseStock(userBuyList);
         userManager.userBoughtBuyList(user,totalPrice);
     }
@@ -195,10 +201,43 @@ public class BalootServer {
 
     public void applyDiscountCode(String username, String code) throws Exception
     {
+        System.out.println("in applyDiscountCode");
         if(!paymentManager.discountCodeIsValid(code))
             throw new InvalidDiscountCode(code);
         DiscountCode discountCode = paymentManager.getDiscountCode(code);
         User user = findUser(username);
         userManager.addDiscountCodeToUserBuyList(user, discountCode);
+    }
+
+    public DiscountCode validateDiscountCode(String username, String code) throws Exception
+    {
+        if(!paymentManager.discountCodeIsValid(code))
+            throw new InvalidDiscountCode(code);
+        DiscountCode discountCode = paymentManager.getDiscountCode(code);
+        User user = findUser(username);
+        if(userManager.userHasNotUsedCode(user, discountCode))
+            return paymentManager.getDiscountCode(code);
+        else
+            throw new InvalidDiscountCode(code);
+    }
+
+    public User getUserById(String username) {
+        return userManager.getUserById(username);
+    }
+
+    public Provider getProviderById(int id) throws Exception {
+        return providerManager.getProviderByID(id);
+    }
+
+    public BuyList getUserPurchasedList(String username) throws Exception{
+        return userManager.getUserPurchasedList(username);
+    }
+
+    public int getUserNumBought(String username, Integer commodityId) throws Exception {
+        return userManager.getUserNumBought(username, commodityId);
+    }
+
+    public boolean isLogIn() {
+        return userManager.isLogIn();
     }
 }

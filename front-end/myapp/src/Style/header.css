@@ -1,0 +1,153 @@
+.header-container {
+
+    width: 100%;
+    /* height: 6.042vw; */
+    justify-content: space-between;
+    background: #FFFFFF;
+    box-shadow: 0px 0.208vw 0.208vw rgba(208, 208, 208, 0.25);
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 2.760vw;
+
+
+}
+
+
+.fill-remaining-space {
+    flex: auto;
+}
+
+.brand-img {
+
+    background: url('../assets/images/ballot.png') no-repeat center;
+    width: 5.313vw;
+    height: 4.896vw;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    float: left;
+}
+
+
+.brand-name {
+    font-size: 2.188vw;
+    line-height: 4.740vw;
+    margin-left: 0.7vw;
+    color: #A97B47;
+    margin-top: 0;
+}
+
+
+.logged-in-state li a,
+.logged-in-state li a button {
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+    display: inline-block;
+    text-align: left;
+
+}
+
+.navbar-nav li {
+    margin-right: 2.865vw;
+}
+
+
+
+.count-of-bought-items {
+    display: inline-block;
+    height: 3.542vw;
+    width: 8.333vw;
+    background: #F7F0E9;
+    opacity: 0.4;
+    border-radius: 0.677vw;
+    padding: 0;
+    padding-left: 0.677vw;
+}
+
+.count-of-bought-items .badge {
+    margin-left: 1.656vw;
+}
+
+
+.not-logged-in-state li a,
+.not-logged-in-state li a button {
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #A97B47;
+    display: inline-block;
+    text-align: left;
+
+}
+
+.not-logged-in-state .nav-item {
+    margin-right: 0.781vw;
+    margin-bottom: 0.1vw;
+
+}
+
+.not-logged-in-state .btn {
+    height: 3.542vw;
+    width: 8.333vw;
+    background: #F7F0E9;
+    border-radius: 0.677vw;
+    padding: 0;
+    padding-left: 0.677vw;
+    display: table-cell;
+    text-align: center;
+    padding: 0px;
+}
+
+
+.search-box {
+    height: 3.542vw;
+    width: 36.458vw;
+    background: #F7F0E9;
+    border-radius: 0.781vw;
+    font-weight: 400;
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.search-box input {
+    background: #F7F0E9;
+    height: 3.542vw;
+    width: 36.458vw;
+    border: 0;
+    text-align: left;
+    color: #919191;
+    padding-left: 1vw;
+}
+
+
+.search-dropdown-button {
+    width: 7.135vw;
+    height: 3.542vw;
+    background: #D8C1A8;
+    mix-blend-mode: normal;
+    border-radius: 0.781vw;
+    text-align: center;
+    color: #593C1C;
+    padding: 0;
+    z-index: 1;
+}
+
+.search-icon {
+    width: 3.542vw;
+    height: 3.542vw;
+    background: #F7F0E9;
+    opacity: 0.4;
+    border-radius: 0.781vw;
+    background: url('../assets/images/magnifier.png') no-repeat center;
+    padding: 0;
+    margin: 0;
+}

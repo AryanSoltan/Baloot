@@ -1,0 +1,256 @@
+
+
+.header-container {
+
+
+    width: 100%;
+    /* height: 6.042vw; */
+    justify-content: space-between;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 0.208vw 0.208vw rgba(208, 208, 208, 0.25);
+
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    padding-top: 1vw;
+
+    padding-bottom: 0vw;
+    margin-bottom: 0;
+    overflow: visible;
+    /*padding-right: 2vw;*/
+    padding-left: 2vw;
+
+
+    vertical-align: middle;
+    /*margin-bottom: 2.760vw;*/
+    /*padding-left: 2vw;*/
+    /*padding-right: 2vw;*/
+}
+
+/*.header-container .row {*/
+/*    !*display: flex;*!*/
+/*    display: flex;*/
+/*    !*flex-wrap: nowrap;*!*/
+
+
+/*}*/
+
+
+.header-username-container {
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+    margin-top: 1vw;
+
+}
+
+.header-btn-container {
+
+    margin-top: -2vw;
+
+
+}
+
+
+
+.search-box {
+    height: 3.542vw;
+    width: 36.458vw;
+    background: #F7F0E9;
+    border-radius: 0.781vw;
+    font-weight: 400;
+    font-size: 1.250vw;
+    line-height: 1.510vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    margin:0;
+
+
+}
+
+.search-box input {
+
+    background: #F7F0E9;
+    height: 3.4vw;
+    width: 36.458vw;
+    border: none;
+    text-align: left;
+    color: #919191;
+    padding-left: 1vw;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+
+.search-icon-holder{
+
+    width: 3.542vw;
+    height: 3.542vw;
+
+}
+.search-icon {
+
+    background: #F7F0E9;
+    opacity: 0.4;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.781vw;
+    background: url('/src/assets/images/magnifier.png') no-repeat center;
+    background-size: contain;
+    margin: auto;
+
+    border: none;
+}
+
+
+.dropdown {
+    position: relative;
+
+
+}
+
+.dropdown button{
+    display: inline-block;
+    vertical-align: middle;
+    height: 3.542vw;
+    width: 7.135vw;
+    background: #D8C1A8;
+    mix-blend-mode: normal;
+    border-radius: 0.781vw;
+    padding: 0;
+    margin: 0;
+    border: none;
+
+}
+
+
+.menu {
+    /*display: inline-block;*/
+    /*vertical-align: middle;*/
+    height: 8.958vw;
+    width: 7.135vw;
+    background: #D8C1A8;
+
+    border-radius: 0.781vw;
+
+    border: none;
+
+    position: absolute;
+
+    margin: 0 0;
+    padding: 0 0;
+    /*justify-content: left;*/
+    /*float: left;*/
+
+    /*border: 1px solid grey;*/
+    /*width: 150px;*/
+}
+
+.menu > li {
+    /*margin: 1vw;*/
+    /*float: left;*/
+    margin-left: 0;
+    /*margin-top:0.5vw;*/
+    /*margin-bottom: 0.5vw;*/
+}
+
+.menu > li:hover {
+
+}
+
+.menu > li > button {
+
+    color: inherit;
+    border: none;
+    text-align: left;
+    /*padding: 5px;*/
+    /*margin: 0;*/
+    font: inherit;
+
+}
+
+
+
+/*.profile-icon {*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*    border-radius: 50%;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.porfile-dropdown-contianer {*/
+/*    width: 500px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin-right: 40px;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.show .profile-menu {*/
+/*    background-color: #FFFFFF;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    border-radius: 20px;*/
+/*    top: 70px;*/
+/*    right: 0;*/
+/*}*/
+
+.count-of-bought-items {
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+    display: inline-block;
+    text-align: left;
+}
+
+
+
+.header-btn-container .active-card-btn{
+    background: #593C1C;
+    /*opacity: 0.4;*/
+    border-radius: 0.677vw;
+    width: 8.333vw;
+    height: 3.542vw;
+    margin-right: 3vw;
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #ffffff;
+    display: inline-block;
+    text-align: left;
+}
+
+.header-btn-container .inactive-card-btn{
+    background: #F7F0E9;
+    opacity: 0.4;
+    border-radius: 0.677vw;
+    width: 8.333vw;
+    height: 3.542vw;
+    margin-right: 3vw;
+    font-size: 1.458vw;
+    line-height: 1.771vw;
+    color: #593C1C;
+    display: inline-block;
+    text-align: left;
+}
+
+.badge {
+    display: inline-block;
+
+    text-align: right;
+    margin-left: 2vw;
+}
+
+
+
+.searchbar-container{
+    margin-left: 12vw;
+
+}

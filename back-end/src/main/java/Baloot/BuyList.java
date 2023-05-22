@@ -9,17 +9,31 @@ import java.util.Map;
 
 public class BuyList {
     Map<Integer, Commodity> commoditiesList;
+    Map<Integer,Integer> commoditiesCount;
 
     private DiscountCode buylistDiscountCode;
 
     public BuyList()
     {
         commoditiesList = new HashMap<Integer, Commodity>();
+        commoditiesCount = new HashMap<Integer,Integer>();
         buylistDiscountCode = null;
     }
-    public void addNewCommodityToBuyList(Commodity newCommodity)
+    public void addNewCommodityToBuyList(CommodityInBuyList newCommodity)
     {
-        commoditiesList.put(newCommodity.getId(), newCommodity);
+        if(!commoditiesList.containsKey(newCommodity.getCommodity().getId()))
+        {
+            commoditiesList.put(newCommodity.getCommodity().getId(), newCommodity.getCommodity());
+            commoditiesCount.put(newCommodity.getCommodity().getId(),newCommodity.getNumInStock());
+        }
+        else{
+            int currCount = commoditiesCount.get(newCommodity.getCommodity().getId());
+            commoditiesCount.put(newCommodity.getCommodity().getId(),currCount+newCommodity.getNumInStock());
+
+        }
+
+
+
     }
 
     public boolean contains(int commodityID)
@@ -29,14 +43,25 @@ public class BuyList {
 
     public void removeCommodityFromBuyList(int commodityID)
     {
-        commoditiesList.remove(commodityID);
+        int currCount = commoditiesCount.get(commodityID);
+        if(currCount>=2) {
+            commoditiesCount.put(commodityID, currCount -1);
+        }
+        if(currCount==1)
+            commoditiesList.remove(commodityID);
     }
 
-    public ArrayList<Commodity> getAllCommodities()
+    public ArrayList<CommodityInBuyList> getAllCommodities()
     {
         Collection<Commodity> collectionCommidity = commoditiesList.values();
-        ArrayList<Commodity> commiditesArray = new ArrayList<Commodity>(collectionCommidity);
-        return commiditesArray;
+        ArrayList<Commodity> commoditesArray = new ArrayList<Commodity>(collectionCommidity);
+        ArrayList<CommodityInBuyList> commoditiesInBuyList = new ArrayList<>();
+        for(Commodity commodity: commoditesArray)
+        {
+            CommodityInBuyList commodityBuyList = new CommodityInBuyList(commodity, commoditiesCount.get(commodity.getId()));
+            commoditiesInBuyList.add(commodityBuyList);
+        }
+        return commoditiesInBuyList;
 
     }
 
@@ -54,7 +79,7 @@ public class BuyList {
         double price = 0;
         for(Commodity commodity: commoditiesList.values())
         {
-            price += commodity.getPrice();
+            price += commodity.getPrice() * commoditiesCount.get(commodity.getId());
         }
         if(buylistDiscountCode != null)
         {
@@ -65,7 +90,10 @@ public class BuyList {
 
     public void setDiscountCode(DiscountCode discountCode)
     {
+        System.out.println("setDiscountCode"+discountCode.getCode());
         buylistDiscountCode = discountCode;
+        System.out.println("buylistDiscountCode is"+buylistDiscountCode.getCode());
+
     }
 
     public boolean hasDiscount(){
@@ -79,8 +107,13 @@ public class BuyList {
         return buylistDiscountCode;
     }
 
-
-
+    public int getBuylistNum(Integer commodityId) {
+        if(commoditiesList.containsKey(commodityId))
+        {
+            return commoditiesCount.get(commodityId);
+        }
+        else return 0;
+    }
 }
 
 

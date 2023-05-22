@@ -1,0 +1,26 @@
+.footer 
+{
+    bottom:0vw;  
+    text-align: center;
+    background: #593C1C;
+    /* margin-top: 1vw; */
+    position: fixed;
+    /* position: relative; */
+
+    /* position: relative; */
+
+    left: 0;
+    bottom: 0;
+    height: 2vw;
+    margin-top: 30vw;
+    width: 100%;
+    padding-bottom: 0.8vw;
+}
+
+.footer p 
+{
+    font-size: 1vw;
+    margin-bottom: 5vw;
+    color: #FFFFFF; 
+}
+
