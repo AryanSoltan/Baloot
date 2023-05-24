@@ -1,10 +1,12 @@
 package Baloot;
 
+import javax.persistence.OneToOne;
+
 public class CommodityInBuyList {
 
     Commodity commodity;
     Integer numInStock;
-    public CommodityInBuyList(Commodity inputCommodity, Integer inputNumInStock) {
+    public CommodityInBuyList(CommodityInBuyList inputCommodity, Integer inputNumInStock) {
         numInStock = inputNumInStock;
         commodity = inputCommodity;
     }

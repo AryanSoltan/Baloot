@@ -15,18 +15,11 @@ public class BuyList {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "BUY_LIST_COMMODITIES", joinColumns = @JoinColumn(name = "buyListId"),
     inverseJoinColumns = @JoinColumn(name = "commodityId"))
-    Set<Commodity> commoditiesList = new HashSet<>();
-    Map<Integer,Integer> commoditiesCount;
+    Set<CommodityInBuyList> commoditiesList = new HashSet<>();
 
     @OneToOne(mappedBy = "buyList")
     private DiscountCode buylistDiscountCode;
 
-    public BuyList()
-    {
-        commoditiesList = new HashMap<Integer, Commodity>();
-        commoditiesCount = new HashMap<Integer,Integer>();
-        buylistDiscountCode = null;
-    }
     public void addNewCommodityToBuyList(CommodityInBuyList newCommodity)
     {
         if(!commoditiesList.containsKey(newCommodity.getCommodity().getId()))
@@ -39,8 +32,6 @@ public class BuyList {
             commoditiesCount.put(newCommodity.getCommodity().getId(),currCount+newCommodity.getNumInStock());
 
         }
-
-
 
     }
 

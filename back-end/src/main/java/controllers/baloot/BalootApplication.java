@@ -17,10 +17,10 @@ public class BalootApplication {
     public static void main(String[] args) {
         try {
 
-            ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
+//            ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
             MainRepository repository = new MainRepository();
             System.out.println("Repo finished");
-            SpringApplication.run(BalootApplication.class,args);
+//            SpringApplication.run(BalootApplication.class,args);
         }
         catch(Exception e)
         {
