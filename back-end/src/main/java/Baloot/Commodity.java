@@ -1,12 +1,17 @@
 package Baloot;
 
-import org.json.simple.JSONObject;
-
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
+@Entity
+@Table(name = "Commodity")
 public class Commodity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long commodityId;
 
     private int id;
     private String name;
@@ -14,11 +19,13 @@ public class Commodity {
 
     private String image;
 
-    private String providerName;
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name = "providerId")
+    private Provider provider;
 
     private double price;
-    private ArrayList<String> categories;
-    private Map<String, Integer> userRatings;
+    private List<Category> categories = new ArrayList<>();
+    private List<Vote> votes = new ArrayList<>();
     double rating;
     int inStock;
 

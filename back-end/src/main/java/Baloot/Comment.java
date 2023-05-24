@@ -1,8 +1,15 @@
 package Baloot;
 
+import javax.persistence.*;
 import java.util.HashMap;
 
+@Entity
+@Table(name = "Comment")
 public class Comment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long commentIdDB;
     private String userEmail;
     private int commodityId;
     private String text;

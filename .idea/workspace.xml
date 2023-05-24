@@ -6,7 +6,52 @@
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/InterfaceServer/InterfaceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/InterfaceServer/InterfaceServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/InterfaceServer/ProviderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/InterfaceServer/ProviderInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BuyList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Comment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Commodity.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Commodity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/CommodityInBuyList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/CommodityAlreadyAdded.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/CommodityIsNotInBuyList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/CommodityNotExist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/CommodityOutOfStock.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/DiscountCodeAlreadyUsed.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/IncorrectPassword.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/InvalidCreditValue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/InvalidDiscountCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/InvalidRating.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/NotEnoughCredit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/ProviderNotExist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/UserAlreadyExistError.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/UserNameNotValid.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Exception/UserNotExist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Provider.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Provider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/ExternalServer/ExternalServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/InterfaceServer/CommoditiesInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/InterfaceServer/CommodityInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/InterfaceServer/HTMLWriter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/InterfaceServer/ProviderInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/InterfaceServer/UserInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/CommentController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/CommodityController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/ProviderController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/ReposnsePackage/Response.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +61,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -52,7 +98,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;3a2e2ec9435805b6ced0fc44abba7cb2&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }

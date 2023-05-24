@@ -3,18 +3,33 @@ package Baloot;
 import Baloot.Exception.CommodityIsNotInBuyList;
 import InterfaceServer.CommodityInterface;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
+@Entity
+@Table(name = "User")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long userId;
 
     private String username;
+
+    @Column(name = "password")
     private String password;
+    @Column(name = "email")
+
     private String email;
+    @Column(name = "birthDate")
+
     private String birthDate;
+    @Column(name = "address")
+
     private String address;
+
+    @Column(name = "credit")
     private double credit;
 
     private BuyList buyList;

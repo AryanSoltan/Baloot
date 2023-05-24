@@ -2,15 +2,23 @@ package Baloot;
 
 import Baloot.Exception.CommodityOutOfStock;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.*;
+import java.util.*;
 
+@Entity
+@Table(name = "BuyList")
 public class BuyList {
-    Map<Integer, Commodity> commoditiesList;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long buyListId;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "BUY_LIST_COMMODITIES", joinColumns = @JoinColumn(name = "buyListId"),
+    inverseJoinColumns = @JoinColumn(name = "commodityId"))
+    Set<Commodity> commoditiesList = new HashSet<>();
     Map<Integer,Integer> commoditiesCount;
 
+    @OneToOne(mappedBy = "buyList")
     private DiscountCode buylistDiscountCode;
 
     public BuyList()

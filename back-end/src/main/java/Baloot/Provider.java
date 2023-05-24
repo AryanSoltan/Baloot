@@ -1,16 +1,24 @@
 package Baloot;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "Provider")
 public class Provider {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long providerId;
     private int id;
     private String name;
     private String registryDate;
 
     String image;
 
-    private ArrayList<Commodity> commodities;
+    @OneToMany(mappedBy = "commodityId")
+    private List<Commodity> commodities = new ArrayList<>();
     public Provider(int inputId, String inputName, String inputRegistryDate, String imageURL)
     {
         id = inputId;
