@@ -1,9 +1,7 @@
-package controllers.baloot;
-
-import Baloot.BalootServer;
-import ExternalServer.ExternalServer;
-import Repository.MainRepository;
-import org.springframework.boot.SpringApplication;
+package controllers.baloot;//import Baloot.BalootServer;
+//import ExternalServer.ExternalServer;
+//import ExternalRepository;
+import Repository.ExternalRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
@@ -18,9 +16,10 @@ public class BalootApplication {
         try {
 
 //            ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
-            MainRepository repository = new MainRepository();
-            System.out.println("Repo finished");
-//            SpringApplication.run(BalootApplication.class,args);
+            ExternalRepository externalRepository = new ExternalRepository(externalServerAddress);
+          //  MainRepository repository = new MainRepository();
+           // System.out.println("Repo finished");
+//            SpringApplication.run(controllers.baloot.BalootApplication.class,args);
         }
         catch(Exception e)
         {

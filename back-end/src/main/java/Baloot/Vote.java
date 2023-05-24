@@ -10,7 +10,7 @@ public class Vote {
     Commodity commodity;
     public Vote(User user, int vote)
     {
-        this.user = user;
+       // this.user = user;
         this.vote = vote;
     }
 

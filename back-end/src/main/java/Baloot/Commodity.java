@@ -6,27 +6,32 @@ import java.util.HashMap;
 import java.util.List;
 
 @Entity
-@Table(name = "Commodity")
+@Table(name = "Commodities")
 public class Commodity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long commodityId;
-
     private int id;
+
+
+    @Column(nullable = false)
     private String name;
     private int providerId;
 
+    @Column(name = "imageURL")
     private String image;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "providerId")
     private Provider provider;
 
+    @Column(nullable = false)
     private double price;
     private List<Category> categories = new ArrayList<>();
     private List<Vote> votes = new ArrayList<>();
     double rating;
+
+    @Column(nullable = false)
     int inStock;
 
     ArrayList<Comment> comments;

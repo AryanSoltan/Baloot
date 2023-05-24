@@ -1,7 +1,7 @@
 package Baloot;
 
 import Baloot.Exception.CommodityIsNotInBuyList;
-import InterfaceServer.CommodityInterface;
+//import InterfaceServer.CommodityInterface;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class User {
     ArrayList<DiscountCode> usedDiscountCodes ;
 
     public User(String inputUserName, String inputPassword, String inputEmail,
-         String inputBirthDate, String inputAddress, double inputCredit)
+                String inputBirthDate, String inputAddress, double inputCredit)
     {
         username = inputUserName;
         password = inputPassword;
@@ -50,12 +50,12 @@ public class User {
 
     }
 
-    public void buyCommodity(Commodity newCommodity)
-    {
-        CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
-        buyList.addNewCommodityToBuyList(commodity);
-
-    }
+//    public void buyCommodity(Commodity newCommodity)
+//    {
+//        CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
+//        buyList.addNewCommodityToBuyList(commodity);
+//
+//    }
 
     public boolean hasBoughtCommodity(int commodityId)
     {
