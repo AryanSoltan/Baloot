@@ -50,6 +50,9 @@ public class ExternalRepository {
         }
     }
 
+    public EntityManagerFactory getEntityManagerFactory() {
+        return entityManagerFactory;
+    }
 
     public void importUsers(){
         try {

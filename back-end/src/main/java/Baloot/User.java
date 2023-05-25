@@ -11,10 +11,11 @@ import java.util.Map;
 @Entity
 @Table(name = "User")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long userId;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    Long userId;
 
+    @Id
     private String username;
 
     @Column(name = "password")
@@ -120,7 +121,8 @@ public class User {
         return credit;
     }
 
-    public void addCredit(double incCredit) {
+    public void addCredit(double incCredit)
+    {
         credit += incCredit;
     }
     public void decreaseCredit(double outCredit){credit -= outCredit;}

@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BuyListRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/CommentRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/CommodityRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/ProviderRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/UserRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BuyList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Comment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Commodity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/DiscountCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/CommodityManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/CommodityManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/PaymentManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/PaymentManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/ProviderManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/ProviderManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/UserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/UserManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Provider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Vote.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/InterfaceServer/HTMLWriter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/InterfaceServer/ProviderInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
