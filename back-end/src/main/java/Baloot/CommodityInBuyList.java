@@ -8,7 +8,7 @@ public class CommodityInBuyList {
     Integer numInStock;
     public CommodityInBuyList(CommodityInBuyList inputCommodity, Integer inputNumInStock) {
         numInStock = inputNumInStock;
-        commodity = inputCommodity;
+     //   commodity = inputCommodity;
     }
 
     public Commodity getCommodity() {
