@@ -17,7 +17,7 @@ public class BuyList {
     inverseJoinColumns = @JoinColumn(name = "commodityId"))
     Set<CommodityInBuyList> commoditiesList = new HashSet<>();
 
-    @OneToOne(mappedBy = "buyList")
+    @OneToOne(mappedBy = "username")
     private DiscountCode buylistDiscountCode;
 
 //    public void addNewCommodityToBuyList(CommodityInBuyList newCommodity)

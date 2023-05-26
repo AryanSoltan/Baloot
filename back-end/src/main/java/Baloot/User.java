@@ -33,7 +33,10 @@ public class User {
     @Column(name = "credit")
     private double credit;
 
-//    private BuyList buyList;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buyListId", referencedColumnName = "username")
+    private BuyList buyList;
 //    private BuyList purchased;
 //    ArrayList<DiscountCode> usedDiscountCodes ;
 

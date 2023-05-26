@@ -16,13 +16,14 @@
 
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class = "Baloot.User"/>
+        <mapping class ="Baloot.User"/>
         <mapping class="Baloot.Commodity"/>
         <mapping class="Baloot.Category"/>
         <mapping class="Baloot.Provider"/>
         <mapping class="Baloot.Rate"/>
         <mapping class="Baloot.DiscountCode"/>
         <mapping class="Baloot.Comment"/>
+        <mapping class="Baloot.BuyList"/>
 
     </session-factory>
 </hibernate-configuration>
