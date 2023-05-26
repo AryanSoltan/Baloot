@@ -7,9 +7,22 @@
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BuyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Vote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/BuyListRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BuyListRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/resources/META-INF/persistence.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BuyList.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/BuyList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Vote.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Vote.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/META-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Repository/BuyListRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Repository/BuyListRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +39,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="50de5ae0-4acf-45a3-9d5c-e3ae73613f30" />
+        <option name="url" value="https://github.com/AryanSoltan/Baloot" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

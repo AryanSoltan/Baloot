@@ -16,6 +16,7 @@ public class User {
 //    Long userId;
 
     @Id
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password")
@@ -35,9 +36,12 @@ public class User {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "buyListId", referencedColumnName = "username")
+    @JoinColumn(name = "bought_id", referencedColumnName = "buyListId")
     private BuyList buyList;
-//    private BuyList purchased;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "purchased_id", referencedColumnName = "buyListId")
+    private BuyList purchased;
 //    ArrayList<DiscountCode> usedDiscountCodes ;
 
     public User(String inputUserName, String inputPassword, String inputEmail,
@@ -49,7 +53,8 @@ public class User {
         birthDate = inputBirthDate;
         address = inputAddress;
         credit = inputCredit;
-        //  buyList = new BuyList();
+        buyList = new BuyList();
+        purchased = new BuyList();
         // usedDiscountCodes = new ArrayList<DiscountCode>();
 
     }
@@ -167,6 +172,18 @@ public class User {
         if(email.equals(emailAdd))
             return true;
         return false;
+    }
+
+    public BuyList getPurchased() {
+        return purchased;
+    }
+    public BuyList getBuyList()
+    {
+        return buyList;
+    }
+
+    public BuyList getBought() {
+        return buyList;
     }
 
 //    public boolean hasUsedDiscountCode(DiscountCode discountCode)

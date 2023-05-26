@@ -1,14 +1,28 @@
 package Baloot;
 
-import javax.persistence.OneToOne;
+import jakarta.persistence.*;
+import java.util.*;
 
+@Entity
+@Table(name = "CommodityInBuyList")
 public class CommodityInBuyList {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long commodityInBuyListId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name = "id")
     Commodity commodity;
     Integer numInStock;
-    public CommodityInBuyList(CommodityInBuyList inputCommodity, Integer inputNumInStock) {
+
+    public CommodityInBuyList(Commodity inputCommodity, Integer inputNumInStock) {
         numInStock = inputNumInStock;
-     //   commodity = inputCommodity;
+        commodity = inputCommodity;
+    }
+
+    public CommodityInBuyList()
+    {
+
     }
 
     public Commodity getCommodity() {
@@ -17,5 +31,13 @@ public class CommodityInBuyList {
     public Integer getNumInStock()
     {
         return numInStock;
+    }
+
+    public void increaseOne() {
+        numInStock += 1;
+    }
+
+    public void decreaseOne() {
+        numInStock--;
     }
 }

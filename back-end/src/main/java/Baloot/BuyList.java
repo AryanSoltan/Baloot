@@ -2,7 +2,7 @@ package Baloot;
 
 import Baloot.Exception.CommodityOutOfStock;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.*;
 
 @Entity
@@ -11,14 +11,19 @@ public class BuyList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long buyListId;
+    private Long buyListId;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "BUY_LIST_COMMODITIES", joinColumns = @JoinColumn(name = "buyListId"),
-    inverseJoinColumns = @JoinColumn(name = "commodityId"))
+    inverseJoinColumns = @JoinColumn(name = "commodityInBuyListId"))
     Set<CommodityInBuyList> commoditiesList = new HashSet<>();
 
-    @OneToOne(mappedBy = "username")
-    private DiscountCode buylistDiscountCode;
+    @OneToOne(mappedBy = "buyList")
+    User user1;
+
+    @OneToOne(mappedBy = "purchased")
+    User user2;
+
+//    private DiscountCode buylistDiscountCode;
 
 //    public void addNewCommodityToBuyList(CommodityInBuyList newCommodity)
 //    {
@@ -35,10 +40,50 @@ public class BuyList {
 //
 //    }
 //
-//    public boolean contains(int commodityID)
-//    {
-//        return commoditiesList.containsKey(commodityID);
-//    }
+    public boolean contains(int commodityID)
+    {
+        for(CommodityInBuyList commodity: commoditiesList)
+        {
+            if(commodity.getCommodity().getId() == commodityID)
+                return true;
+        }
+        return false;
+    }
+
+    public void addSingleCommodityInBuyList(CommodityInBuyList commodity)
+    {
+        commoditiesList.add(commodity);
+    }
+
+    public CommodityInBuyList getCommodityInBuyList(int commodityId)
+    {
+        for(CommodityInBuyList commodity: commoditiesList)
+        {
+            if(commodity.getCommodity().getId() == commodityId)
+                return commodity;
+        }
+        return null;
+    }
+
+    public void decreaseOneCommodity(int commodityId)
+    {
+        for(CommodityInBuyList commodity: commoditiesList)
+        {
+            if(commodity.getCommodity().getId() == commodityId)
+            {
+                if(commodity.getNumInStock() == 1)
+                {
+                    commoditiesList.remove(commodity);
+                    break;
+                }
+                else
+                {
+                    commodity.decreaseOne();
+                }
+            }
+        }
+    }
+
 //
 //    public void removeCommodityFromBuyList(int commodityID)
 //    {
@@ -65,28 +110,33 @@ public class BuyList {
 //    }
 //
 //
-//    public void emptyList()
-//    {
-//
-//        commoditiesList = new HashMap<Integer, Commodity>();
-//        buylistDiscountCode = null;
-//    }
-//
-//    public double getBuylistPrice()
-//    {
-//
-//        double price = 0;
-//        for(Commodity commodity: commoditiesList.values())
-//        {
-//            price += commodity.getPrice() * commoditiesCount.get(commodity.getId());
-//        }
+
+    public double getBuylistPrice()
+    {
+
+        double price = 0;
+        for(CommodityInBuyList commodityInBuyList: commoditiesList)
+        {
+            Commodity commodity = commodityInBuyList.getCommodity();
+            price += commodity.getPrice() * commodityInBuyList.getNumInStock();
+        }
 //        if(buylistDiscountCode != null)
 //        {
 //            price = price - (price*buylistDiscountCode.getPercentage())/100;
 //        }
-//        return price;
-//    }
-//
+        return price;
+    }
+
+    public Set<CommodityInBuyList> getBuyList() {
+        return commoditiesList;
+    }
+
+    public void makeEmpty()
+    {
+        commoditiesList.clear();
+//        buyListDiscountCode = null;
+    }
+
 //    public void setDiscountCode(DiscountCode discountCode)
 //    {
 //        System.out.println("setDiscountCode"+discountCode.getCode());

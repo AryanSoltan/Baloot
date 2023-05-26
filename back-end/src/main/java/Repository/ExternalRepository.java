@@ -31,6 +31,9 @@ public class ExternalRepository {
     private final EntityManagerFactory entityManagerFactory;
 
     String serverAddress;
+    private UserRepository userRepo;
+    private CommodityRepository commodityRepo;
+
     public ExternalRepository(String inputServerAddress) throws ParseException {
         serverAddress = inputServerAddress;
         var registry = new StandardServiceRegistryBuilder().configure().build();
@@ -228,6 +231,8 @@ public class ExternalRepository {
         try {
 
             User user = new User(username, password, email, birthDate, address, credit);
+            entityManager.persist(user.getPurchased());
+            entityManager.persist(user.getBought());
             entityManager.persist(user);
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -251,6 +256,36 @@ public class ExternalRepository {
         return result;
     }
 
+    public Commodity findCommodityById(int commodityId, EntityManager entityManager)
+    {
+        String query = "FROM Commodity c WHERE c.id = :commodityId";
+        List commodityNeeded = entityManager.createQuery(query)
+                .setParameter("commodityId", commodityId).getResultList();
+        ;
+        if(commodityNeeded.size() == 0)
+        {
+            return null;
+        }
+        return (Commodity) commodityNeeded.get(0);
+    }
+
+    public void setUserRepo(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    public boolean checkIfAllCommoditiesAreAvailable(BuyList userBuyList)
+    {
+        return commodityRepo.checkIfAllCommoditiesAvailble(userBuyList);
+    }
+
+    public void setCommodityRepo(CommodityRepository commodityRepo) {
+        this.commodityRepo = commodityRepo;
+    }
+
+    public void decreaseStock(BuyList userBuyList)
+    {
+        commodityRepo.decreaseStock(userBuyList);
+    }
 }
 
 
