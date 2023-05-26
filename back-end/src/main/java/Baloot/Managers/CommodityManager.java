@@ -1,31 +1,31 @@
-//package Baloot.Managers;
-//
-//import Baloot.*;
-//import Baloot.Exception.CommodityNotExist;
-//import Baloot.Exception.CommodityOutOfStock;
-//import kotlin.Pair;
-//
-//import java.util.*;
-//
-//import static java.lang.Math.min;
-//
-//public class CommodityManager {
-//    static Map<Integer, Commodity> commodities;
-//    private static String filterContent;
-//    private static String sortBy;
-//    private static String filterBy;
-//    private static boolean searchFilterIsSet;
-//    private static boolean sortFilterIsSet;
-//
-//    public CommodityManager()
-//    {
-//        commodities = new HashMap<Integer, Commodity>() ;
-//        searchFilterIsSet = false;
-//        sortFilterIsSet = false;
-//        filterBy = null;
-//        sortBy = null;
-//        filterContent = null;
-//    }
+package Baloot.Managers;
+
+import Baloot.*;
+import Baloot.Exception.CommodityNotExist;
+import Baloot.Exception.CommodityOutOfStock;
+import kotlin.Pair;
+
+import java.util.*;
+
+import static java.lang.Math.min;
+
+public class CommodityManager {
+    static Map<Integer, Commodity> commodities;
+    private static String filterContent;
+    private static String sortBy;
+    private static String filterBy;
+    private static boolean searchFilterIsSet;
+    private static boolean sortFilterIsSet;
+
+    public CommodityManager()
+    {
+        commodities = new HashMap<Integer, Commodity>() ;
+        searchFilterIsSet = false;
+        sortFilterIsSet = false;
+        filterBy = null;
+        sortBy = null;
+        filterContent = null;
+    }
 //
 //
 //    public void setFilterContent(String filter)
@@ -143,24 +143,24 @@
 //        filterContent = null;
 //    }
 //
-//    public void decreaseStock(BuyList buyList)
-//    {
-//        ArrayList<CommodityInBuyList> commoditiesList = buyList.getAllCommodities();
-//        for(CommodityInBuyList commodity : commoditiesList) {
-//            commodity.getCommodity().buy(commodity.getNumInStock());
-//        }
-//    }
+    public void decreaseStock(BuyList buyList)
+    {
+        Set<CommodityInBuyList> commoditiesList = buyList.getBuyList();
+        for(CommodityInBuyList commodity : commoditiesList) {
+            commodity.getCommodity().buy(commodity.getNumInStock());
+        }
+    }
 //
-//    public void checkIfAllCommoditiesAreAvailabel(BuyList buyList) throws Exception
-//    {
-//        ArrayList<CommodityInBuyList> commoditiesList = buyList.getAllCommodities();
-//        for(CommodityInBuyList commodityInBuyList: commoditiesList)
-//        {
-//            Commodity commodity = commodityInBuyList.getCommodity();
-//            if(commodity.getInStock() == 0)
-//                throw new CommodityOutOfStock(commodity.getId());
-//        }
-//    }
+    public void checkIfAllCommoditiesAreAvailabel(BuyList buyList) throws Exception
+    {
+        Set<CommodityInBuyList> commoditiesList = buyList.getBuyList();
+        for(CommodityInBuyList commodityInBuyList: commoditiesList)
+        {
+            Commodity commodity = commodityInBuyList.getCommodity();
+            if(commodity.getInStock() == 0)
+                throw new CommodityOutOfStock(commodity.getId());
+        }
+    }
 //
 //
 //    public ArrayList<Commodity> getFilteredCommodities()
@@ -216,4 +216,4 @@
 //
 //
 //
-//}
+}

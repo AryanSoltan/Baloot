@@ -162,19 +162,19 @@ public class Commodity {
 //        providerName = inputProviderName;
 //    }
 
-//    public boolean hasCategory(String category) {
-//        return categories.contains(category);
-//    }
+    public boolean hasCategory(String category) {
+        return categories.contains(category);
+    }
 //
-//    public boolean hasCategory(ArrayList<String> listOfCategories)
-//    {
-//        for(String cat : listOfCategories)
-//        {
-//            if(categories.contains(cat))
-//                return true;
-//        }
-//        return false;
-//    }
+    public boolean hasCategory(ArrayList<String> listOfCategories)
+    {
+        for(String cat : listOfCategories)
+        {
+            if(categories.contains(cat))
+                return true;
+        }
+        return false;
+    }
 
     public boolean nameContains(String searchName){
         return name.contains(searchName);
