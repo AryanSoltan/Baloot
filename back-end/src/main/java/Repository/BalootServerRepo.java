@@ -2,13 +2,8 @@ package Repository;
 
 
 
-import Baloot.BuyList;
-import Baloot.Commodity;
-import Baloot.CommodityInBuyList;
-import Baloot.Exception.CommodityIsNotInBuyList;
-import Baloot.Exception.NotEnoughCredit;
-import Baloot.Exception.UserNotExist;
-import Baloot.User;
+import Baloot.*;
+import Baloot.Exception.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -25,12 +20,67 @@ public class BalootServerRepo
     private CommodityManager commodityManager;
 //    private PaymentManager paymentManager;
     static int commentIdNow;
+
+     private static BalootServerRepo instance = null;
+//
+
+
+    public static BalootServerRepo getInstance()
+    {
+//        if(instance == null)
+//            instance = new BalootServerRepo();
+        return instance;
+
+    }
+
     public BalootServerRepo(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
 //        userManager = new UserManager();
 //        providerManager = new ProviderManager();
         commodityManager = new CommodityManager();
 //        paymentManager = new PaymentManager();
+    }
+
+    public void logIn(String username, String password) throws Exception
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        User user = entityManager.find(User.class, username);
+        if(user == null)
+        {
+            entityManager.getTransaction().rollback();
+            throw new UserNotExist(username);
+        }
+        else{
+            if(password.equals(user.getPassword()))
+            {
+                return ;
+            }
+            else{
+                throw new IncorrectPassword();
+            }
+        }
+    }
+
+    public void addUser(User newUser) throws Exception
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        try {
+            entityManager.persist(newUser);
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new UserAlreadyExistError(newUser.getName());
+        }
+        entityManager.getTransaction().commit();
+    }
+
+    public BuyList getUserBuyList(String userName) throws Exception { //done
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        User user = entityManager.find(User.class, userName);
+
+
     }
 
     public void addCredit(String userName, double credit) throws Exception {
