@@ -30,4 +30,7 @@ public class Category {
         return commoditySet;
     }
 
+    public String getName() {
+        return categoryName;
+    }
 }

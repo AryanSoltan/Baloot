@@ -28,4 +28,12 @@ public class Rate {
         this.rateValue = rateValue;
     }
     public Rate(){}
+
+    public String getUser() {
+        return user.getName();
+    }
+
+    public double getRate() {
+        return  rateValue;
+    }
 }

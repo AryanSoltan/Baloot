@@ -9,13 +9,14 @@ import jakarta.persistence.EntityManagerFactory;
 
 import Baloot.Managers.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BalootServerRepo
 {
     private final EntityManagerFactory entityManagerFactory;
 
-//    private UserManager userManager;
+    private UserManager userManager;
 //    private ProviderManager providerManager;
     private CommodityManager commodityManager;
 //    private PaymentManager paymentManager;
@@ -35,7 +36,7 @@ public class BalootServerRepo
 
     public BalootServerRepo(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
-//        userManager = new UserManager();
+        userManager = new UserManager();
 //        providerManager = new ProviderManager();
         commodityManager = new CommodityManager();
 //        paymentManager = new PaymentManager();
@@ -79,8 +80,7 @@ public class BalootServerRepo
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = entityManager.find(User.class, userName);
-
-
+        return user.getBuyList();
     }
 
     public void addCredit(String userName, double credit) throws Exception {
@@ -162,17 +162,69 @@ public class BalootServerRepo
         entityManager.getTransaction().commit();
     }
 
+    public List getCommodityList(EntityManager entityManager)
+    {
+        List commoditiesList = commodityManager.getAllCommodities(entityManager);
+        return commoditiesList;
+    }
+
+    public ArrayList<Commodity> getCommoditiesByCategory(String category) { //done
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        ArrayList<Commodity> commodities = commodityManager.getCommoditiesByCategory(category, entityManager);
+        entityManager.getTransaction().commit();
+        return commodities;
+    }
+
     public Commodity findCommodityById(int commodityId, EntityManager entityManager)
     {
         String query = "FROM Commodity c WHERE c.id = :commodityId";
         List commodityNeeded = entityManager.createQuery(query)
                 .setParameter("commodityId", commodityId).getResultList();
-        ;
         if(commodityNeeded.size() == 0)
         {
             return null;
         }
         return (Commodity) commodityNeeded.get(0);
     }
+
+    public ArrayList<Commodity> getCommodityRangePrice(double startPrice, double endPrice) { //done
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        ArrayList<Commodity> commodities = commodityManager.getCommodityByRangePrice(startPrice, endPrice, entityManager);
+        entityManager.getTransaction().commit();
+        return commodities;
+    }
+
+    public void addComment(Comment comment) throws Exception { //done
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        User user = userManager.getUserByUseremail(comment.getUserEmail(), entityManager);
+        commodityManager.addCommentToCommodity(comment, comment.getId(), user.getName(), entityManager);
+        entityManager.getTransaction().commit();
+    }
+
+    public void rateCommodity(String username, int commodityId, String scoreStr) throws Exception
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        if(!scoreStr.matches("-?(0|[1-9]\\d*)"))
+            throw new InvalidRating();
+        int score = Integer.parseInt(scoreStr);
+        if(score < 1 || score > 10)
+            throw new InvalidRating();
+        if(!userManager.doesExist( username, entityManager))
+            throw new UserNotExist(username);
+        commodityManager.rateCommodity(username, commodityId, score, entityManager);
+        entityManager.getTransaction().commit();
+    }
+
+//    public ArrayList<Commodity> getSuggestedCommodities(int commodityID) throws Exception
+//    {
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        entityManager.getTransaction().begin();
+//        Commodity targetCommodity = entityManager.find(Commodity.class, commodityID);
+//        return CommodityManager.getMostSimilarCommodities(targetCommodity, 3);
+//    }
 }
 

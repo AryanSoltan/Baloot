@@ -31,7 +31,7 @@ public class Comment {
     @JoinColumn(name = "commentId")
     private Set<Rate> rates = new HashSet<>();
 
-//    private String userName;
+    private String userName;
    // HashMap<String, Integer> rating;
    // int commentId;
     public Comment(String inputUserEmail, int inputCommodityId, String inputText,
@@ -57,7 +57,7 @@ public class Comment {
 //    {
 //        rating = new HashMap<String, Integer>();
 //    }
-//    public void setUserName(String inputUserName){userName = inputUserName;}
+    public void setUserName(String inputUserName){userName = inputUserName;}
 
     public String getUserEmail() {
         return userEmail;

@@ -1,9 +1,16 @@
 package controllers.baloot;//import Baloot.BalootServer;
 //import ExternalServer.ExternalServer;
 //import ExternalRepository;
+import Baloot.Comment;
+import Baloot.Commodity;
 import Repository.ExternalRepository;
 import Repository.BalootServerRepo;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootApplication()
@@ -19,6 +26,12 @@ public class BalootApplication {
 //            ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
             ExternalRepository externalRepository = new ExternalRepository(externalServerAddress);
             BalootServerRepo balootServerRepo = new BalootServerRepo(externalRepository.getEntityManagerFactory());
+//            balootServerRepo.addComment(new Comment("amir@gmail.com" , 1, "very good",
+//                    "1999"));
+//            EntityManagerFactory entityManagerFactory = externalRepository.getEntityManagerFactory();
+//            EntityManager entityManager = entityManagerFactory.createEntityManager();
+//            entityManager.getTransaction().begin();
+//            entityManager.getTransaction().commit();
 //            balootServerRepo.addCommidityToUserBuyList("amir", 1);
 //            balootServerRepo.addCredit("amir", 10000030);
 //            balootServerRepo.handlePaymentUser("amir");

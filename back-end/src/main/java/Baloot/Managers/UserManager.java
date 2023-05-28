@@ -1,19 +1,26 @@
-//package Baloot.Managers;
+package Baloot.Managers;
+
+
+import Baloot.Exception.UserNotExist;
+import Baloot.User;
+import jakarta.persistence.EntityManager;
+
+import java.util.List;
+
+import Baloot.*;
+import Baloot.Exception.*;
+import java.util.HashMap;
+import java.util.Map;
 //
-//import Baloot.*;
-//import Baloot.Exception.*;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//public class UserManager {
+public class UserManager {
 //    static Map<String, User> users;
 //    public static User loggedInUser = null;
 //
-//    public UserManager()
-//    {
+    public UserManager()
+    {
 //        users = new HashMap<String, User>() ;
-//    }
-//
+    }
+
 //    public User getLoggedInUser() {
 //        return loggedInUser;
 //    }
@@ -35,18 +42,20 @@
 //    }
 //
 //
-//    public static User getUserByUseremail(String email) throws Exception
-//    {
-//        for(User user : users.values())
-//        {
-//            if(user.emailEquals(email)) {
-//                User neededUser = users.get(user.getName());
-//                return neededUser;
-//            }
-//        }
-//        throw new UserNotExist(email);
-//    }
-//
+    public User getUserByUseremail(String email, EntityManager entityManager) throws Exception
+    {
+        List users = entityManager.createQuery("SELECT u FROM User u where u.email=:userEmail")
+                .setParameter("userEmail", email).getResultList();
+        if (users.isEmpty()) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            throw new UserNotExist(email);
+        }
+        return (User) users.get(0);
+    }
+
+
 //
 //    public static boolean isAnyBodyLoggedIn()
 //    {
@@ -77,10 +86,18 @@
 //        users.put(newUser.getName(), newUser);
 //    }
 //
-//    public boolean doesExist(String userName)
-//    {
-//        return users.containsKey(userName);
-//    }
+    public boolean doesExist(String userName, EntityManager entityManager)
+    {
+        String query = "FROM User u WHERE u.username = :userName";
+        List userNeeded = entityManager.createQuery(query)
+                .setParameter("userName", userName).getResultList();
+        ;
+        if(userNeeded.size() == 0)
+        {
+            return false;
+        }
+        return true;
+    }
 //
 //    public void updateUser(String name, User newUser) throws Exception
 //    {
@@ -183,4 +200,4 @@
 //        }
 //        return true;
 //    }
-//}
+}

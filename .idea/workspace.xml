@@ -5,18 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Commodity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/CommodityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/CommodityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/BuyListRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/CommentRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/CommodityRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/CommodityRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Rate.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Rate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/MainRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/ProviderRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/CommodityManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/CommodityManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Repository/BalootServerRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Repository/BalootServerRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,26 +66,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "CA6",
-    "last_opened_file_path": "/home/aryan/Desktop/University/online_courses/Semester8/IE/Projects/Baloot",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "spring.configuration.checksum": "3a2e2ec9435805b6ced0fc44abba7cb2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;CA6&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/aryan/Desktop/University/online_courses/Semester8/IE/Projects/Baloot&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;3a2e2ec9435805b6ced0fc44abba7cb2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.BalootApplication">
     <configuration name="BalootApplication" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="20" />

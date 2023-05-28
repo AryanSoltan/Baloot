@@ -1,5 +1,6 @@
 package Baloot;
 
+import com.beust.ah.A;
 import jakarta.persistence.*;
 import java.util.*;
 
@@ -47,7 +48,9 @@ public class Commodity {
     @Transient
     private ArrayList<String> categories;
 
-   // ArrayList<Comment> comments;
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name = "id")
+    Set<Comment> comments = new HashSet<>();
     public Commodity(int inputId, String inputName, int inputProviderId, double inputPrice,
                      ArrayList<String> inputCategories, double inputRating, int inputInStock, String imageURLAddress)
     {
@@ -91,29 +94,39 @@ public class Commodity {
 //    public void setProviderName(String name){
 //        providerName=name;
 //    }
-//    public void addRating(String username, int newRating)
-//    {
-//        double sumBefore;
-//        if(userRatings.size() != 0)
-//            sumBefore = (rating * userRatings.size());
-//        else
-//            sumBefore = 0;
-//        userRatings.put(username, newRating);
-//        double newSum = sumBefore + newRating;
-//        rating = newSum / userRatings.size();
-//    }
+    public void addRating(String username, int newRating, EntityManager entityManager)
+    {
+        double sumBefore;
+        if(rates.size() != 0)
+            sumBefore = (rating * rates.size());
+        else
+            sumBefore = 0;
+        Rate rate = new Rate(entityManager.find(User.class, username), this, newRating);
+        entityManager.persist(rate);
+        rates.add(rate);
+        double newSum = sumBefore + newRating;
+        rating = newSum / rates.size();
+    }
 //
-//    private void removeRating(String username)
-//    {
-//        double sumBefore = 0;
-//        sumBefore = (rating * userRatings.size());
-//        double newSum = sumBefore - userRatings.get(username);
-//        userRatings.remove(username);
-//        if(userRatings.size() != 0)
-//            rating = newSum / userRatings.size();
-//        else
-//            rating = 0;
-//    }
+    private void removeRating(String username)
+    {
+        double sumBefore = 0;
+        sumBefore = (rating * rates.size());
+        double prev_rate = 0;
+        for(Rate rate: rates)
+        {
+            if(Objects.equals(rate.getUser(), username)) {
+                rates.remove(rate);
+                prev_rate = rate.getRate();
+                break;
+            }
+        }
+        double newSum = sumBefore - prev_rate;
+        if(rates.size() != 0)
+            rating = newSum / rates.size();
+        else
+            rating = 0;
+    }
 
     public double getRating()
     {
@@ -129,16 +142,23 @@ public class Commodity {
     }
 
 
-//    public void updateRating(String username, int newRating)
-//    {
-//        removeRating(username);
-//        addRating(username, newRating);
-//    }
+    public void updateRating(String username, int newRating, EntityManager entityManager)
+    {
+        removeRating(username);
+        addRating(username, newRating, entityManager);
+    }
 //
-//    public boolean hasRating(String userName)
-//    {
-//        return userRatings.containsKey(userName);
-//    }
+    public boolean hasRating(String userName)
+    {
+        for(Rate rating: rates)
+        {
+            if(Objects.equals(rating.getUser(), userName))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
@@ -162,8 +182,15 @@ public class Commodity {
 //        providerName = inputProviderName;
 //    }
 
-    public boolean hasCategory(String category) {
-        return categories.contains(category);
+    public boolean hasCategory(String categoryName) {
+        for(Category category: categoriesSet)
+        {
+            if(Objects.equals(category.getName(), categoryName))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 //
     public boolean hasCategory(ArrayList<String> listOfCategories)
@@ -220,7 +247,6 @@ public class Commodity {
 
     public Set<Category> getCategories()
     {
-
         return categoriesSet;
 
     }
@@ -249,11 +275,11 @@ public class Commodity {
 //        comments = new ArrayList<Comment>();
 //    }
 //
-//    public void addComment(Comment comment)
-//    {
-//        comments.add(comment);
-//       // comment.setUserName(name);
-//    }
+    public void addComment(Comment comment)
+    {
+        comments.add(comment);
+       // comment.setUserName(name);
+    }
 //
 //    public ArrayList<Comment> getComments()
 //    {
