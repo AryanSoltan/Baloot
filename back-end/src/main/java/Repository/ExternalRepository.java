@@ -224,8 +224,8 @@ public class ExternalRepository {
         try {
 
             User user = new User(username, password, email, birthDate, address, credit);
-            entityManager.persist(user.getPurchased());
-            entityManager.persist(user.getBought());
+           // entityManager.persist(user.getPurchased());
+            //entityManager.persist(user.getBought());
             entityManager.persist(user);
         } catch (Exception e) {
             entityManager.getTransaction().rollback();

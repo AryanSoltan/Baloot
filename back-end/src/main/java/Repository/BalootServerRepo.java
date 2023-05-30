@@ -123,11 +123,23 @@ public class BalootServerRepo
     public BuyList getUserBuyList(String userName) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        User user = entityManager.find(User.class, userName);
-        return user.getBuyList();
+        return userManager.getUserBuyList(userName, entityManager);
+
     }
 
-    public void addCredit(String userName, double credit) throws Exception {
+    public BuyList getUserPurchesedBuyList(String userName) throws Exception { //done
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        return userManager.getUserPurchesedBuyList(userName, entityManager);
+
+    }
+
+    public void addCredit(String userName, String credit) throws Exception {
+        if(!credit.matches("-?(0|[1-9]\\d*)"))
+            throw new InvalidCreditValue();
+        double creditVal = Double.parseDouble(credit);
+        if(creditVal < 1)
+            throw new InvalidCreditValue();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = findUserById(userName, entityManager);
@@ -138,7 +150,7 @@ public class BalootServerRepo
         }
         else
         {
-            user.addCredit(credit);
+            user.addCredit(creditVal);
         }
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -155,17 +167,17 @@ public class BalootServerRepo
         }
         return (User) userNeeded.get(0);
     }
-    public void addCommidityToUserBuyList(String username, int commodityId)
+    public void addCommidityToUserBuyList(String username, int commodityId) throws Exception
     {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = findUserById(username, entityManager);
-        BuyList buyList = user.getBuyList();
-        if(!buyList.contains(commodityId)) {
+        BuyList buyList = getUserBuyList(username);
+        if(!commodityExistsInBuylist(buyList,commodityId)) {
             Commodity newCommodity = findCommodityById(commodityId, entityManager);
             CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
             entityManager.persist(commodity);
-            buyList.addSingleCommodityInBuyList(commodity);
+            //  buyList.addSingleCommodityInBuyList(commodity);
         }
         else
         {
@@ -175,11 +187,28 @@ public class BalootServerRepo
         entityManager.getTransaction().commit();
     }
 
+    public boolean commodityExistsInBuylist(BuyList buyList, int commodityId) throws Exception
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        var userBuylistID = entityManager.createNativeQuery("select c.id" +
+                        "                                       from BUY_LIST_COMMODITIES b join CommodityInBuyList c on b.commodityInBuyListId = c.commodityInBuyListId " +
+                        "                                       where b.buyListId =: buylistId and c.id =: commodityId")
+                .setParameter("commodityId",commodityId).setParameter("buylistId",buyList.getId())
+                .getResultList();
+        if(userBuylistID.isEmpty())
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+
     public void removeFromBuyList(String username, int commodityId) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = findUserById(username, entityManager);
-        BuyList buyList = user.getBuyList();
+        BuyList buyList = getUserBuyList(username);
         if(!buyList.contains(commodityId)) {
             throw new CommodityIsNotInBuyList(commodityId);
         }
@@ -189,12 +218,13 @@ public class BalootServerRepo
         }
         entityManager.getTransaction().commit();
     }
+
     public void handlePaymentUser(String userName) throws Exception //done
     {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = findUserById(userName, entityManager);
-        BuyList userBuyList = user.getBuyList();
+        BuyList userBuyList = getUserBuyList(userName);
         commodityManager.checkIfAllCommoditiesAreAvailabel(userBuyList);
         double totalPrice = userBuyList.getBuylistPrice();
         System.out.println("total price is"+totalPrice);
@@ -206,11 +236,11 @@ public class BalootServerRepo
         entityManager.getTransaction().commit();
     }
 
-//    public List getCommodityList(EntityManager entityManager)
-//    {
-//        List commoditiesList = commodityManager.getAllCommodities(entityManager);
-//        return commoditiesList;
-//    }
+    public List getCommodityList(EntityManager entityManager)
+    {
+        List commoditiesList = commodityManager.getAllCommodities(entityManager);
+        return commoditiesList;
+    }
 
     public ArrayList<Commodity> getCommoditiesByCategory(String category) { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -269,20 +299,13 @@ public class BalootServerRepo
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-//        var cat = entityManager.createNativeQuery("select c.categoryId from Commodity_Category c where c.id=:targetCommodityId")
-//                .setParameter("targetCommodityId", 1)
-//                .getResultList();
-
-   //     System.out.println("\n\n\ncat is \n\n\n\n\n"+cat);
-
-
-
         ArrayList<Commodity> suggestions = commodityManager.getMostSimilarCommodities(commodityID,entityManager);
         return suggestions;
 
 
     }
 
+    //todo
     public void applyDiscountCode(String username, String code) throws Exception
     {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -322,5 +345,23 @@ public class BalootServerRepo
 
     }
 
+    public int getUserNumBought(String username, Integer commodityId) throws Exception {
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+            var count = entityManager.createNativeQuery("select c.numInStock" +
+                            "                                       from CommodityInBuyList c " +
+                            "                                       where c.id =: commodityId")
+                    .setParameter("commodityId",commodityId)
+                    .getSingleResult();
+            return (int) count;
+      //  return userManager.getUserNumBought(username, commodityId);
+    }
+
+    public Comment addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        User user = getUserById(userName);
+        return commodityManager.rateCommoditiesComment(commentId , user, rate,entityManager );
+    }
 }
 

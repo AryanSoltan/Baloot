@@ -134,11 +134,25 @@ public class UserManager {
 //        neededUser.buyCommodity(neededCommodity);
 //    }
 //
-//    public BuyList getUserBuyList(String userName) throws Exception {
-//
-//        User neededUser = getUserByUsername(userName);
-//        return neededUser.getBuyList();
-//    }
+    public BuyList getUserBuyList(String userName,EntityManager entityManager) throws Exception {
+        var userBuylistID = entityManager.createNativeQuery("select u.buyListId " +
+                        "from User_BuyList u join BuyList b on u.buylistId=b.buylistId " +
+                        "where u.username := username and b.isBought=false")
+                .setParameter("username",userName)
+                .getResultList();
+
+        return (BuyList) entityManager.createQuery("select b from BuyList b where b.id =: userBuylistID").setParameter("userBuylistID",userBuylistID).getSingleResult();
+    }
+
+    public BuyList getUserPurchesedBuyList(String userName,EntityManager entityManager) throws Exception {
+        var userBuylistID = entityManager.createNativeQuery("select u.buyListId " +
+                        "from User_BuyList u join BuyList b on u.buylistId=b.buylistId " +
+                        "where u.username := username and b.isBought=true")
+                .setParameter("username",userName)
+                .getResultList();
+
+        return (BuyList) entityManager.createQuery("select b from BuyList b where b.id =: userBuylistID").setParameter("userBuylistID",userBuylistID).getSingleResult();
+    }
 //
 //    public void removeCommodityFromBuyList(String username, int commodityId) throws Exception{
 //        User neededUser = getUserByUsername(username);

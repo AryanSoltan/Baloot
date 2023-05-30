@@ -126,17 +126,7 @@ public class CommodityManager {
     }
 //
 //
-//    public Comment rateCommoditiesComment(int commentId, User user, int rate)
-//    {
-//        for(Commodity commodity: commodities.values())
-//        {
-//            if(commodity.hasCommentId(commentId)) {
-//                commodity.rateComment(commentId, user, rate);
-//                return commodity.getComment(commentId);
-//            }
-//        }
-//        return null;
-//    }
+
 //
 //    public void clearSearchFilter()
 //    {

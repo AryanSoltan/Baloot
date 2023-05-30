@@ -12,16 +12,30 @@ public class BuyList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long buyListId;
+
+
+    private boolean isBought;
+
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "BUY_LIST_COMMODITIES", joinColumns = @JoinColumn(name = "buyListId"),
     inverseJoinColumns = @JoinColumn(name = "commodityInBuyListId"))
     Set<CommodityInBuyList> commoditiesList = new HashSet<>();
 
-    @OneToOne(mappedBy = "buyList")
-    User user1;
 
-    @OneToOne(mappedBy = "purchased")
-    User user2;
+    @ManyToMany(mappedBy = "buyListsSet")
+    private Set<DiscountCode> discountCodeSet = new HashSet<>();
+
+//    @OneToOne(mappedBy = "buyList")
+//    User user1;
+//
+//    @OneToOne(mappedBy = "purchased")
+//    User user2;
+
+
+
+    @ManyToMany(mappedBy = "buylistSet")
+    private Set<User> usersSet = new HashSet<>();
 
 //    private DiscountCode buylistDiscountCode;
 
@@ -40,6 +54,8 @@ public class BuyList {
 //
 //    }
 //
+
+    public long getId(){return buyListId;}
     public boolean contains(int commodityID)
     {
         for(CommodityInBuyList commodity: commoditiesList)

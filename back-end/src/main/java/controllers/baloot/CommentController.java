@@ -1,22 +1,22 @@
-//package controllers.baloot;
-//
-//import Baloot.BalootServer;
-//import Baloot.Comment;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import controllers.baloot.ReposnsePackage.Response;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.server.ResponseStatusException;
-//
-//import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
-//
-//@RestController
-//@CrossOrigin(origins = "*",allowedHeaders = "*")
-//public class CommentController {
-//
-//
-//
+package controllers.baloot;
+
+
+import Baloot.Comment;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import controllers.baloot.ReposnsePackage.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+@RestController
+@CrossOrigin(origins = "*",allowedHeaders = "*")
+public class CommentController {
+
+
+
 //    @RequestMapping(value="/commodities/{id}/comment",method = RequestMethod.POST)
 //    public Response addComment(@RequestBody String rateInfo ,@PathVariable(value="id") String commodityID ){
 //        try{
@@ -35,8 +35,8 @@
 //            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
 //        }
 //    }
-//
-//
+
+
 //
 //    @RequestMapping(value="/commodities/{id}/{userId}/like",method = RequestMethod.POST)
 //    public Response likeComment(@RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
@@ -66,6 +66,6 @@
 //            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
 //        }
 //    }
-//
-//
-//}
+
+
+}

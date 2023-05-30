@@ -93,21 +93,21 @@ public class UserController {
         }
     }
 //
-////    @RequestMapping(value="/users/{id}/buyList/applyDiscount",method = RequestMethod.POST)
-////    public Response applyDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
-////        try{
-////
-////
-////            var info = new ObjectMapper().readTree(reqInfo);
-////            String code = info.get("discountCode").asText();
-////            BalootServer.getInstance().applyDiscountCode(username,code);z
-////            return new Response(HttpStatus.OK.value(), "discount added",null);
-////        }
-////        catch (Exception e){
-////            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-////        }
-////    }
-//
+    @RequestMapping(value="/users/{id}/buyList/applyDiscount",method = RequestMethod.POST)
+    public Response applyDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+        try{
+
+
+            var info = new ObjectMapper().readTree(reqInfo);
+            String code = info.get("discountCode").asText();
+            BalootServerRepo.getInstance().applyDiscountCode(username,code);
+            return new Response(HttpStatus.OK.value(), "discount added",null);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+
     @RequestMapping(value="/users/{id}/buyList/validateDiscount",method = RequestMethod.POST)
     public Response validateDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
         try{
@@ -121,64 +121,64 @@ public class UserController {
         }
     }
 //
-//    @RequestMapping(value="/users/{id}/buyList/submit",method = RequestMethod.POST)
-//    public Response submitBuyList (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
-//        try{
-//            var info = new ObjectMapper().readTree(reqInfo);
-//            String code = info.get("discountCode").asText();
-//            if(!code.equals(""))
-//                BalootServer.getInstance().applyDiscountCode(username,code);
-//            BalootServer.getInstance().handlePaymentUser(username);
-//            return new Response(HttpStatus.OK.value(), "submitted",null);
-//        }
-//        catch (Exception e){
-//            return new Response(HttpStatus.NOT_FOUND.value(), "can't submit",e.getMessage());
-//
-////            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-//        }
-//    }
-//
-//    @RequestMapping(value="/users/{commodityID}/remove",method = RequestMethod.POST)
-//    public Response removeFromBuylist (@RequestBody String reqInfo,@PathVariable(value="commodityID") String commodityID) throws Exception{
-//        try{
-//            var info = new ObjectMapper().readTree(reqInfo);
-//            String username = info.get("userId").asText();
-//
-//            BalootServer.getInstance().removeFromBuyList(username,Integer.valueOf(commodityID));
-//            return new Response(HttpStatus.OK.value(), "suggestions sent",null);
-//        }
-//        catch (Exception e){
+    @RequestMapping(value="/users/{id}/buyList/submit",method = RequestMethod.POST)
+    public Response submitBuyList (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+        try{
+            var info = new ObjectMapper().readTree(reqInfo);
+            String code = info.get("discountCode").asText();
+            if(!code.equals(""))
+                BalootServerRepo.getInstance().applyDiscountCode(username,code);
+            BalootServerRepo.getInstance().handlePaymentUser(username);
+            return new Response(HttpStatus.OK.value(), "submitted",null);
+        }
+        catch (Exception e){
+            return new Response(HttpStatus.NOT_FOUND.value(), "can't submit",e.getMessage());
+
 //            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-//        }
-//    }
-//    @RequestMapping(value="/users/{commodityID}/add",method = RequestMethod.POST)
-//    public Response addCommodityToBuyLst(@RequestBody String reqInfo, @PathVariable(value="commodityID") String commodityID) {
-//        try {
-//            var info = new ObjectMapper().readTree(reqInfo);
-//            String username = info.get("userId").asText();
-//
-//            BalootServer.getInstance().addCommidityToUserBuyList(username , Integer.valueOf(commodityID));
-//
-//            return new Response(HttpStatus.OK.value(), "commodity added", null);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-//        }
-//    }
-//
-//    @RequestMapping(value="/users/{id}/buyList/addCredit",method = RequestMethod.POST)
-//    public Response addCredit (@RequestBody String creditInfo ,@PathVariable(value="id") String username) throws Exception{
-//        try{
-//            var info = new ObjectMapper().readTree(creditInfo);
-//            String credit = info.get("credit").asText();
-//            BalootServer.getInstance().addCredit(username, credit);
-//            return new Response(HttpStatus.OK.value(), "credit added",null);
-//        }
-//        catch (Exception e){
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-//        }
-//    }
-//
+        }
+    }
+
+    @RequestMapping(value="/users/{commodityID}/remove",method = RequestMethod.POST)
+    public Response removeFromBuylist (@RequestBody String reqInfo,@PathVariable(value="commodityID") String commodityID) throws Exception{
+        try{
+            var info = new ObjectMapper().readTree(reqInfo);
+            String username = info.get("userId").asText();
+
+            BalootServerRepo.getInstance().removeFromBuyList(username,Integer.valueOf(commodityID));
+            return new Response(HttpStatus.OK.value(), "suggestions sent",null);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+    @RequestMapping(value="/users/{commodityID}/add",method = RequestMethod.POST)
+    public Response addCommodityToBuyLst(@RequestBody String reqInfo, @PathVariable(value="commodityID") String commodityID) {
+        try {
+            var info = new ObjectMapper().readTree(reqInfo);
+            String username = info.get("userId").asText();
+
+            BalootServerRepo.getInstance().addCommidityToUserBuyList(username , Integer.valueOf(commodityID));
+
+            return new Response(HttpStatus.OK.value(), "commodity added", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
+    @RequestMapping(value="/users/{id}/buyList/addCredit",method = RequestMethod.POST)
+    public Response addCredit (@RequestBody String creditInfo ,@PathVariable(value="id") String username) throws Exception{
+        try{
+            var info = new ObjectMapper().readTree(creditInfo);
+            String credit = info.get("credit").asText();
+            BalootServerRepo.getInstance().addCredit(username,  credit);
+            return new Response(HttpStatus.OK.value(), "credit added",null);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+
     @RequestMapping(value="/signup",method = RequestMethod.POST)
     public Response signUp(@RequestBody String userSignUpInfo) throws Exception{
         try{
@@ -201,28 +201,28 @@ public class UserController {
         }
     }
 //
-//    @RequestMapping(value="/users/{id}/purchasedList",method = RequestMethod.GET)
-//    public Response getPurchasedList (@PathVariable(value="id") String username ) throws Exception{
+    @RequestMapping(value="/users/{id}/purchasedList",method = RequestMethod.GET)
+    public Response getPurchasedList (@PathVariable(value="id") String username ) throws Exception{
+
+        try{
+            return new Response(HttpStatus.OK.value(), "purchasedlist sent",BalootServerRepo.getInstance().getUserPurchesedBuyList(username));
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
 //
-//        try{
-//            return new Response(HttpStatus.OK.value(), "purchasedlist sent",BalootServer.getInstance().getUserPurchasedList(username));
-//        }
-//        catch (Exception e){
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-//        }
-//    }
-//
-//    @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.POST)
-//    public Response getCommodityNum (@RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
-//
-//        var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
-//        String username= signUpInfo.get("username").asText();
-//
-//        try{
-//            return new Response(HttpStatus.OK.value(), "",BalootServer.getInstance().getUserNumBought(username, Integer.valueOf(commodityId)));
-//        }
-//        catch (Exception e){
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-//        }
-//    }
+    @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.POST)
+    public Response getCommodityNum (@RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
+
+        var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
+        String username= signUpInfo.get("username").asText();
+
+        try{
+            return new Response(HttpStatus.OK.value(), "",BalootServerRepo.getInstance().getUserNumBought(username, Integer.valueOf(commodityId)));
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
 }

@@ -14,8 +14,8 @@ public class DiscountCode {
     int discount;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(joinColumns = {@JoinColumn(name="discountId")}, inverseJoinColumns = {@JoinColumn(name="username")})
-    private Set<User> usersSet = new HashSet<>();
+    @JoinTable(joinColumns = {@JoinColumn(name="discountId")}, inverseJoinColumns = {@JoinColumn(name="buyListId")})
+    private Set<BuyList> buyListsSet = new HashSet<>();
 
     public String getCode() {return discountCode; }
 

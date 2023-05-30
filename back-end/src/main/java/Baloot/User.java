@@ -34,19 +34,21 @@ public class User {
     private double credit;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bought_id", referencedColumnName = "buyListId")
-    private BuyList buyList;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "bought_id", referencedColumnName = "buyListId")
+//    private BuyList buyList;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(joinColumns = {@JoinColumn(name="username")}, inverseJoinColumns = {@JoinColumn(name="buyListId")})
+    private Set<BuyList> buylistSet = new HashSet<>();
 
 
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "purchased_id", referencedColumnName = "buyListId")
-    private BuyList purchased;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "purchased_id", referencedColumnName = "buyListId")
+//    private BuyList purchased;
 //    ArrayList<DiscountCode> usedDiscountCodes ;
 
-    @ManyToMany(mappedBy = "usersSet")
-    private Set<DiscountCode> discountCodeSet = new HashSet<>();
+
 
     public User(String inputUserName, String inputPassword, String inputEmail,
                 String inputBirthDate, String inputAddress, double inputCredit)
@@ -57,8 +59,8 @@ public class User {
         birthDate = inputBirthDate;
         address = inputAddress;
         credit = inputCredit;
-        buyList = new BuyList();
-        purchased = new BuyList();
+//        buyList = new BuyList();
+//        purchased = new BuyList();
         // usedDiscountCodes = new ArrayList<DiscountCode>();
 
     }
@@ -178,17 +180,17 @@ public class User {
         return false;
     }
 
-    public BuyList getPurchased() {
-        return purchased;
-    }
-    public BuyList getBuyList()
-    {
-        return buyList;
-    }
-
-    public BuyList getBought() {
-        return buyList;
-    }
+//    public BuyList getPurchased() {
+//        return purchased;
+//    }
+//    public BuyList getBuyList()
+//    {
+//        return buyList;
+//    }
+//
+//    public BuyList getBought() {
+//        return buyList;
+//    }
 
 //    public boolean hasUsedDiscountCode(DiscountCode discountCode)
 //    {
