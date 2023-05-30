@@ -9,7 +9,7 @@ import java.util.*;
 public class Commodity {
 
     @Id
-   // @GeneratedValue(strategy = GenerationType.AUTO)
+    // @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
 
@@ -32,7 +32,7 @@ public class Commodity {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(joinColumns = {@JoinColumn(name="id")}, inverseJoinColumns = {@JoinColumn(name="categoryId")})
     private Set<Category> categoriesSet = new HashSet<>();
-//
+    //
 //
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "id")
@@ -68,7 +68,7 @@ public class Commodity {
     }
 
     public Commodity(int inputId, String inputName,Provider inputProvider, double inputPrice,
-                      double inputRating, int inputInStock, String imageURLAddress)
+                     double inputRating, int inputInStock, String imageURLAddress)
     {
         id = inputId;
         name = inputName;
@@ -91,7 +91,7 @@ public class Commodity {
 
 
 
-//    public void setProviderName(String name){
+    //    public void setProviderName(String name){
 //        providerName=name;
 //    }
     public void addRating(String username, int newRating, EntityManager entityManager)
@@ -107,7 +107,7 @@ public class Commodity {
         double newSum = sumBefore + newRating;
         rating = newSum / rates.size();
     }
-//
+    //
     private void removeRating(String username)
     {
         double sumBefore = 0;
@@ -147,7 +147,7 @@ public class Commodity {
         removeRating(username);
         addRating(username, newRating, entityManager);
     }
-//
+    //
     public boolean hasRating(String userName)
     {
         for(Rate rating: rates)
@@ -192,12 +192,12 @@ public class Commodity {
         }
         return false;
     }
-//
-    public boolean hasCategory(ArrayList<String> listOfCategories)
+    //
+    public boolean hasCategory(ArrayList<Category> listOfCategories)
     {
-        for(String cat : listOfCategories)
+        for(Category cat : listOfCategories)
         {
-            if(categories.contains(cat))
+            if(categoriesSet.contains(cat))
                 return true;
         }
         return false;
@@ -270,7 +270,7 @@ public class Commodity {
 //        return result;
 //    }
 
-//    public void setCommentsEmpty()
+    //    public void setCommentsEmpty()
 //    {
 //        comments = new ArrayList<Comment>();
 //    }
@@ -278,7 +278,7 @@ public class Commodity {
     public void addComment(Comment comment)
     {
         comments.add(comment);
-       // comment.setUserName(name);
+        // comment.setUserName(name);
     }
 //
 //    public ArrayList<Comment> getComments()

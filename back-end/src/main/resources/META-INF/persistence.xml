@@ -16,6 +16,7 @@
         <class>Baloot.BuyList</class>
         <class>Baloot.Vote</class>
         <class>Baloot.CommodityInBuyList</class>
+<!--        <class>Baloot.CommodityCategory</class>-->
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

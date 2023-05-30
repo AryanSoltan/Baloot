@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Category")
 public class Category {
-//    @Id
+    //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
 //    private long categoryId;
     @Id

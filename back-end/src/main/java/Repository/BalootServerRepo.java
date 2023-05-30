@@ -10,15 +10,21 @@ import jakarta.persistence.EntityManagerFactory;
 import Baloot.Managers.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BalootServerRepo
 {
+
     private final EntityManagerFactory entityManagerFactory;
+
+    final private HashMap<String, User> sessions = new HashMap<>();
 
     private UserManager userManager;
 //    private ProviderManager providerManager;
     private CommodityManager commodityManager;
+
+    private PaymentManager paymentManager;
 //    private PaymentManager paymentManager;
     static int commentIdNow;
 
@@ -55,13 +61,51 @@ public class BalootServerRepo
         else{
             if(password.equals(user.getPassword()))
             {
+                sessions.put(user.getName(), user);
                 return ;
             }
             else{
                 throw new IncorrectPassword();
             }
         }
+
+
     }
+
+    public boolean userIsLoggedIn(String username, String password) throws Exception
+    {
+        if(sessions.containsKey(username))
+            return true;
+        else
+            return false;
+
+    }
+
+    public void logOut(String username, String password) throws Exception
+    {
+        if(sessions.containsKey(username))
+           sessions.remove(username);
+        else
+            throw new UserNotExist(username);
+
+    }
+
+    public User getUserById(String username) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        User user = findUserById(username, entityManager);
+        return user;
+      //  return userManager.getUserById(username, entityManagerFactory);
+    }
+
+    public Provider getProviderById(int providerId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Provider provider = entityManager.find(Provider.class, providerId);
+        return provider;
+        //  return userManager.getUserById(username, entityManagerFactory);
+    }
+
 
     public void addUser(User newUser) throws Exception
     {
@@ -162,11 +206,11 @@ public class BalootServerRepo
         entityManager.getTransaction().commit();
     }
 
-    public List getCommodityList(EntityManager entityManager)
-    {
-        List commoditiesList = commodityManager.getAllCommodities(entityManager);
-        return commoditiesList;
-    }
+//    public List getCommodityList(EntityManager entityManager)
+//    {
+//        List commoditiesList = commodityManager.getAllCommodities(entityManager);
+//        return commoditiesList;
+//    }
 
     public ArrayList<Commodity> getCommoditiesByCategory(String category) { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -219,12 +263,64 @@ public class BalootServerRepo
         entityManager.getTransaction().commit();
     }
 
-//    public ArrayList<Commodity> getSuggestedCommodities(int commodityID) throws Exception
-//    {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        entityManager.getTransaction().begin();
-//        Commodity targetCommodity = entityManager.find(Commodity.class, commodityID);
-//        return CommodityManager.getMostSimilarCommodities(targetCommodity, 3);
-//    }
+    public ArrayList<Commodity> getSuggestedCommodities(int commodityID) throws Exception
+    {
+        System.out.println("in Csuggesstions");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+//        var cat = entityManager.createNativeQuery("select c.categoryId from Commodity_Category c where c.id=:targetCommodityId")
+//                .setParameter("targetCommodityId", 1)
+//                .getResultList();
+
+   //     System.out.println("\n\n\ncat is \n\n\n\n\n"+cat);
+
+
+
+        ArrayList<Commodity> suggestions = commodityManager.getMostSimilarCommodities(commodityID,entityManager);
+        return suggestions;
+
+
+    }
+
+    public void applyDiscountCode(String username, String code) throws Exception
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        DiscountCode discountCode = paymentManager.getDiscountCode(code,entityManager);
+        User user = getUserById(username);
+        userManager.addDiscountCodeToUserBuyList(user, discountCode,entityManager);
+    }
+
+    public DiscountCode validateDiscountCode(String username, String code) throws Exception
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        DiscountCode discountCode = paymentManager.getDiscountCode(code,entityManager);
+        User user = getUserById(username);
+        if(!userManager.userHasUsedCode(user, discountCode, entityManager))
+            return discountCode;
+        else
+            throw new InvalidDiscountCode(code);
+    }
+
+    public ArrayList<Commodity> getAllCommodities()
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List commoditiesList = commodityManager.getAllCommodities(entityManager);
+        return (ArrayList<Commodity>) commoditiesList;
+    }
+
+    public Commodity getCommodityById(Integer id){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        return findCommodityById(id,  entityManager);
+
+
+    }
+
 }
 

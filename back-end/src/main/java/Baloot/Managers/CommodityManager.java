@@ -4,6 +4,7 @@ import Baloot.*;
 import Baloot.Exception.CommodityOutOfStock;
 import com.beust.ah.A;
 import jakarta.persistence.EntityManager;
+import kotlin.Pair;
 
 import java.util.*;
 
@@ -193,36 +194,24 @@ public class CommodityManager {
 //       return answerCommodities;
 //    }
 //
-//    public static ArrayList<Commodity> getMostSimilarCommodities(Commodity targetCommodity, int n)
-//    {
-//        ArrayList<Pair<Commodity , Double>> suggestionsList = new ArrayList<>();
-//        ArrayList<String> targetCats = targetCommodity.getCategories();
-//        double score;
-//        for(Commodity commodity : commodities.values())
-//        {
-//            if(commodity.getId() == targetCommodity.getId())
-//                continue;
-//            if(commodity.hasCategory(targetCats))
-//                score = 11 + commodity.getRating();
-//            else
-//                score = commodity.getRating();
-//            suggestionsList.add(new Pair<>(commodity, score));
-//        }
-//
-//        suggestionsList.sort(Comparator.comparing(Pair<Commodity, Double>::getSecond).reversed());
-//        //remove commodities with repeated scores
-//        HashSet<Object> seen = new HashSet<>();
-//        suggestionsList.removeIf(e -> !seen.add(e.getSecond()));
-//        ArrayList<Commodity> answerCommodities = new ArrayList<Commodity>();
-//        for(int i=0 ; i<min(n,suggestionsList.size()) ; i++)
-//        {
-//            answerCommodities.add(suggestionsList.get(i).getFirst());
-//        }
-//        return answerCommodities;
-//
-//    }
-//
-//
-//
-//
+    public static ArrayList<Commodity> getMostSimilarCommodities(int targetCommodityId,  EntityManager entityManager)
+    {
+        int n =50;
+        var suggestions = entityManager.createNativeQuery("with commodity_cat(id,is_in_same_cat) AS (SELECT cc.id , case when cc.categoryId IN (select target.categoryId from Commodity_Category target where target.id=:targetCommodityId) then 1 else 0 end as is_in_same_cat " +
+                        "                              from Commodity_Category cc )" +
+                        "                            select c.id " +
+                                "                   from Commodity c join commodity_cat t on c.id = t.id" +
+                                "                      where c.id !=:targetCommodityId" +
+                                "                    Order by 11*t.is_in_same_cat + c.rating desc " +
+                                "                      limit 5"
+                        )
+                .setParameter("targetCommodityId", targetCommodityId)
+                .getResultList();
+
+        List <Commodity> suggestedCommodities = entityManager.createQuery("select c from Commodity c where c.id in :suggestions") .setParameter("suggestions", suggestions).getResultList();
+
+        return (ArrayList<Commodity>)suggestedCommodities;
+
+    }
+
 }

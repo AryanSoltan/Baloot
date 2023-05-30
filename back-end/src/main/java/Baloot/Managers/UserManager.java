@@ -162,20 +162,27 @@ public class UserManager {
 //        user.addCredit(credit);
 //    }
 //
-//    public void addDiscountCodeToUserBuyList(User user, DiscountCode discountCode) throws Exception
-//    {
-//        System.out.println("addDiscountCodeToUserBuyList");
-//        if(user.hasUsedDiscountCode(discountCode))
-//            throw new DiscountCodeAlreadyUsed(discountCode.getCode());
-//        user.addDiscountToBuylist(discountCode);
-//    }
+    public void addDiscountCodeToUserBuyList(User user, DiscountCode discountCode,EntityManager entityManager) throws Exception
+    {
+        System.out.println("addDiscountCodeToUserBuyList");
+        if(userHasUsedCode(user,discountCode,entityManager))
+            throw new DiscountCodeAlreadyUsed(discountCode.getCode());
+     //   user.addDiscountToBuylist(discountCode);
+    }
+
+
 //
-//    public boolean userHasNotUsedCode(User user, DiscountCode discountCode) throws Exception
-//    {
-//        if(user.hasUsedDiscountCode(discountCode))
-//            throw new DiscountCodeAlreadyUsed(discountCode.getCode());
-//        return true;
-//    }
+    public boolean userHasUsedCode(User user, DiscountCode discountCode,EntityManager entityManager) throws Exception
+    {
+
+        return entityManager.createNativeQuery(
+                        "select * from DiscountCode_User " +
+                                "where discountId = :discountId and username = :username")
+                .setParameter("discountId", discountCode.getDiscountId())
+                .setParameter("username", user.getName())
+                .getResultList().isEmpty();
+
+    }
 //
 //
 //    public User getUserById(String username) {

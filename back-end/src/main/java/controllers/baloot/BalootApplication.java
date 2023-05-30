@@ -32,10 +32,10 @@ public class BalootApplication {
 //            EntityManager entityManager = entityManagerFactory.createEntityManager();
 //            entityManager.getTransaction().begin();
 //            entityManager.getTransaction().commit();
-//            balootServerRepo.addCommidityToUserBuyList("amir", 1);
-//            balootServerRepo.addCredit("amir", 10000030);
+            balootServerRepo.getSuggestedCommodities( 1);
+   //        balootServerRepo.addCommidityToUserBuyList("amir", 1);
 //            balootServerRepo.handlePaymentUser("amir");
-//            userRepo.addCommidityToUserBuyList("amir", 1);
+           // BalootServerRepo.addCommidityToUserBuyList("amir", 1);
 //            userRepo.removeFromBuyList("amir", 1);
 //            userRepo.addCredit("amir", 10);
           //  MainRepository repository = new MainRepository();

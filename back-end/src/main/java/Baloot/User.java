@@ -4,10 +4,9 @@ import Baloot.Exception.CommodityIsNotInBuyList;
 //import InterfaceServer.CommodityInterface;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
+
 @Entity
 @Table(name = "User")
 public class User {
@@ -39,10 +38,15 @@ public class User {
     @JoinColumn(name = "bought_id", referencedColumnName = "buyListId")
     private BuyList buyList;
 
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "purchased_id", referencedColumnName = "buyListId")
     private BuyList purchased;
 //    ArrayList<DiscountCode> usedDiscountCodes ;
+
+    @ManyToMany(mappedBy = "usersSet")
+    private Set<DiscountCode> discountCodeSet = new HashSet<>();
 
     public User(String inputUserName, String inputPassword, String inputEmail,
                 String inputBirthDate, String inputAddress, double inputCredit)
