@@ -29,7 +29,8 @@ public class Comment {
 
     @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name = "commentId")
-    private Set<Rate> rates = new HashSet<>();
+    private Set<Vote> votes = new HashSet<>();;
+
 
     private String userName;
    // HashMap<String, Integer> rating;

@@ -7,6 +7,7 @@ import Repository.ExternalRepository;
 import Repository.BalootServerRepo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
@@ -23,16 +24,16 @@ public class BalootApplication {
     public static void main(String[] args) {
         try {
 
-//            ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
-            ExternalRepository externalRepository = new ExternalRepository(externalServerAddress);
-            BalootServerRepo balootServerRepo = new BalootServerRepo(externalRepository.getEntityManagerFactory());
+          //  ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
+          //  ExternalRepository externalRepository = new ExternalRepository(externalServerAddress);
+         //   BalootServerRepo balootServerRepo = new BalootServerRepo(externalRepository.getEntityManagerFactory());
 //            balootServerRepo.addComment(new Comment("amir@gmail.com" , 1, "very good",
 //                    "1999"));
 //            EntityManagerFactory entityManagerFactory = externalRepository.getEntityManagerFactory();
 //            EntityManager entityManager = entityManagerFactory.createEntityManager();
 //            entityManager.getTransaction().begin();
 //            entityManager.getTransaction().commit();
-            balootServerRepo.getSuggestedCommodities( 1);
+  //          balootServerRepo.getSuggestedCommodities( 1);
    //        balootServerRepo.addCommidityToUserBuyList("amir", 1);
 //            balootServerRepo.handlePaymentUser("amir");
            // BalootServerRepo.addCommidityToUserBuyList("amir", 1);
@@ -40,7 +41,7 @@ public class BalootApplication {
 //            userRepo.addCredit("amir", 10);
           //  MainRepository repository = new MainRepository();
            // System.out.println("Repo finished");
-//            SpringApplication.run(controllers.baloot.BalootApplication.class,args);
+            SpringApplication.run(BalootApplication.class,args);
         }
         catch(Exception e)
         {

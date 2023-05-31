@@ -29,21 +29,21 @@ public class Provider {
     private Set<Commodity> commoditySet = new HashSet<>();;
 
 
-    public Provider(int inputId, String inputName, String inputRegistryDate, String imageURL)
-    {
-        id = inputId;
-        name = inputName;
-        registryDate = inputRegistryDate;
-        image=imageURL;
-    }
+//    public Provider(int inputId, String inputName, String inputRegistryDate, String imageURL)
+//    {
+//        id = inputId;
+//        name = inputName;
+//        registryDate = inputRegistryDate;
+//        image=imageURL;
+//    }
 
-    public Provider(Provider provider) {
-        this(provider.id, provider.name, provider.registryDate, provider.image);
-    }
+//    public Provider(Provider provider) {
+//        this(provider.id, provider.name, provider.registryDate, provider.image);
+//    }
 
-    public Provider() {
-
-    }
+//    public Provider() {
+//
+//    }
 
 //    public void addCommodity(Commodity newCommodity)
 //    {
