@@ -9,12 +9,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@SpringBootApplication()
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
 public class BalootApplication {
     final static int PORT_NUM = 8080;
@@ -24,9 +25,9 @@ public class BalootApplication {
     public static void main(String[] args) {
         try {
 
-          //  ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
-          //  ExternalRepository externalRepository = new ExternalRepository(externalServerAddress);
-         //   BalootServerRepo balootServerRepo = new BalootServerRepo(externalRepository.getEntityManagerFactory());
+//            ExternalServer externalServer = new ExternalServer(externalServerAddress,BalootServer.getInstance());
+            ExternalRepository externalRepository = new ExternalRepository(externalServerAddress);
+            BalootServerRepo balootServerRepo = new BalootServerRepo(externalRepository.getEntityManagerFactory());
 //            balootServerRepo.addComment(new Comment("amir@gmail.com" , 1, "very good",
 //                    "1999"));
 //            EntityManagerFactory entityManagerFactory = externalRepository.getEntityManagerFactory();
