@@ -5,7 +5,7 @@ import logo from "../../assets/images/ballot.png";
 import './NavbarLogo.css'
 import axios from "axios";
 
- import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
+// import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
 import {Context} from "../../App";
 
 function HeaderInfoPart() {
