@@ -29,11 +29,12 @@ function HeaderInfoPart() {
 
                 const response = await axios.get("/users/"+userId+"/buyList");
                 const userBuyList = response.data.content;
+                console.log("bulist is ");
                 console.log(userBuyList);
                 var cardCount = 0;
                 for (let i = 0; i < userBuyList.allCommodities.length; i++) {
                     console.log(userBuyList.allCommodities[i]);
-                    cardCount += userBuyList.allCommodities[i].numInStock;
+                    cardCount += userBuyList.allCommodities[i].countInBuylist;
                 }
 
                 setitemCounts(cardCount);

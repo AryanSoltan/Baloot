@@ -67,6 +67,7 @@ export default function IncrementDecrement(props)
         }
         setCounter(value);
         try {
+            console.log("in add inc button");
 
             const data = { userId: userId };
             const response = await axios.post('/users/' + commodityId+ '/add', data);

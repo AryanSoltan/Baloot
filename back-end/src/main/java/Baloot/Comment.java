@@ -60,6 +60,15 @@ public class Comment {
 //    }
     public void setUserName(String inputUserName){userName = inputUserName;}
 
+    public Set<Vote> getVotes()
+    {
+        return votes;
+    }
+
+    public User getUser(){return user;}
+
+    public Commodity getCommodity(){return commodity;}
+
     public String getUserEmail() {
         return userEmail;
     }

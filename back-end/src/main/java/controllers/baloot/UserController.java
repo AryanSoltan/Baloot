@@ -1,5 +1,6 @@
 package controllers.baloot;
 
+import Baloot.DTOObjects.*;
 import Repository.BalootServerRepo;
 import Baloot.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import controllers.baloot.ReposnsePackage.Response;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -75,7 +78,8 @@ public class UserController {
         System.out.println("in back");
 
         try{
-            return new Response(HttpStatus.OK.value(), "buylist sent",BalootServerRepo.getInstance().getUserBuyList(username));
+            BuyListDTO buylist = BalootServerRepo.getInstance().getUserBuyList(username);
+            return new Response(HttpStatus.OK.value(), "buylist sent",buylist);
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
@@ -100,7 +104,7 @@ public class UserController {
 
             var info = new ObjectMapper().readTree(reqInfo);
             String code = info.get("discountCode").asText();
-            BalootServerRepo.getInstance().applyDiscountCode(username,code);
+            //BalootServerRepo.getInstance().applyDiscountCode(username,code);
             return new Response(HttpStatus.OK.value(), "discount added",null);
         }
         catch (Exception e){
@@ -126,9 +130,14 @@ public class UserController {
         try{
             var info = new ObjectMapper().readTree(reqInfo);
             String code = info.get("discountCode").asText();
-            if(!code.equals(""))
-                BalootServerRepo.getInstance().applyDiscountCode(username,code);
-            BalootServerRepo.getInstance().handlePaymentUser(username);
+            String buylistID = info.get("buylistID").asText();
+            System.out.println("in buylist handle");
+            if(!code.equals("")) {
+                System.out.println("error in validation");
+                BalootServerRepo.getInstance().validateDiscountCode(username, code);
+            }
+            System.out.println("after apply discount code");
+            BalootServerRepo.getInstance().handlePayment(username, code);
             return new Response(HttpStatus.OK.value(), "submitted",null);
         }
         catch (Exception e){
@@ -144,7 +153,7 @@ public class UserController {
             var info = new ObjectMapper().readTree(reqInfo);
             String username = info.get("userId").asText();
 
-            BalootServerRepo.getInstance().removeFromBuyList(username,Integer.valueOf(commodityID));
+            BalootServerRepo.getInstance().updateCommodityCountInUserBuyList(username,Integer.valueOf(commodityID),-1);
             return new Response(HttpStatus.OK.value(), "suggestions sent",null);
         }
         catch (Exception e){
@@ -156,9 +165,7 @@ public class UserController {
         try {
             var info = new ObjectMapper().readTree(reqInfo);
             String username = info.get("userId").asText();
-
-            BalootServerRepo.getInstance().addCommidityToUserBuyList(username , Integer.valueOf(commodityID));
-
+            BalootServerRepo.getInstance().updateCommodityCountInUserBuyList(username , Integer.valueOf(commodityID),+1);
             return new Response(HttpStatus.OK.value(), "commodity added", null);
         } catch (Exception e) {
             e.printStackTrace();

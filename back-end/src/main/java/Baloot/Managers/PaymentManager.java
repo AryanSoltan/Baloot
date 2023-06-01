@@ -37,10 +37,14 @@ public class PaymentManager {
 
     public DiscountCode getDiscountCode(String code,EntityManager entityManager) throws Exception
     {
+        System.out.println("heree");
         var codes = entityManager.createQuery("select d FROM DiscountCode d WHERE d.discountCode =: code").setParameter("code", code).getResultList();
+        System.out.println("heree"+codes);
+        System.out.println("heree"+(DiscountCode) codes.get(0));
         if (codes.isEmpty())
             throw new InvalidDiscountCode(code);
         else
             return (DiscountCode) codes.get(0);
+
     }
 }

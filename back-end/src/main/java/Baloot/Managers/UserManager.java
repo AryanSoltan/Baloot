@@ -1,6 +1,8 @@
 package Baloot.Managers;
 
 
+import Baloot.DTOObjects.BuyListDTO;
+import Baloot.DTOObjects.CommodityDTO;
 import Baloot.Exception.UserNotExist;
 import Baloot.User;
 import jakarta.persistence.EntityManager;
@@ -98,103 +100,86 @@ public class UserManager {
         }
         return true;
     }
-//
-//    public void updateUser(String name, User newUser) throws Exception
-//    {
-//        if(!checkUserNameValid(name))
-//        {
-//            throw new UserNameNotValid(name);
-//        }
-//        users.remove(name);
-//        newUser.setBoughtCommitiesEmpty();
-//        users.put(name, newUser);
-//    }
-//
-//    private boolean checkUserNameValid(String userName)
-//    {
-//        return userName.matches("[a-zA-Z0-9]+");
-//    }
-//
-//
-//    public boolean commodityExistsInUserBuyList(String username, int commodityId) throws Exception
-//    {
-//        User neededUser = getUserByUsername(username);
-//        return neededUser.hasBoughtCommodity(commodityId);
-//    }
-//
-//    public boolean userHasBoughtCommodity(String username, int commodityId) throws Exception
-//    {
-//        User neededUser = getUserByUsername(username);
-//        return neededUser.hasBoughtCommodity(commodityId);
-//    }
-//
-//    public void addCommidityToUserBuyList(String username,Commodity neededCommodity) throws Exception
-//    {
-//        User neededUser = getUserByUsername(username);
-//        neededUser.buyCommodity(neededCommodity);
-//    }
-//
-    public BuyList getUserBuyList(String userName,EntityManager entityManager) throws Exception {
-        var userBuylistID = entityManager.createNativeQuery("select u.buyListId " +
-                        "from User_BuyList u join BuyList b on u.buylistId=b.buylistId " +
-                        "where u.username := username and b.isBought=false")
-                .setParameter("username",userName)
+
+
+    public static int countOfCommodityInBuylist(String username, Integer commodityId,EntityManager entityManager)  {
+
+        var count = entityManager.createQuery("select c.numInStock" +
+                        "                                       from CommodityInBuyList c " +
+                        "                                       where c.commodity.id =: commodityId and c.user.username =:name" +
+                        " and c.isBought=false")
+                .setParameter("commodityId", commodityId).setParameter("name", username)
                 .getResultList();
 
-        return (BuyList) entityManager.createQuery("select b from BuyList b where b.id =: userBuylistID").setParameter("userBuylistID",userBuylistID).getSingleResult();
+        if (count.isEmpty()){
+            return 0;
+        }
+        return (int) count.get(0);
+    }
+    public BuyListDTO getUserBuyList(String userName,EntityManager entityManager) throws Exception {
+
+        List commoditiesList = entityManager.createQuery("select c from CommodityInBuyList b join Commodity c on b.commodity.id=c.id where b.isBought=false and b.user.username=:userId ").setParameter("userId", userName).getResultList();
+        var stream = commoditiesList.stream().map(
+                commodity -> new CommodityDTO((Commodity) commodity , countOfCommodityInBuylist(userName, ((Commodity) commodity).getId(),entityManager))
+        );
+
+//        int buyListID = entityManager.createQuery("select c.id from CommodityInBuyList c where c.")
+        System.out.println("in user nuy;ist gey");
+
+        BuyListDTO buylist = new BuyListDTO(stream.toList());
+
+        return buylist;
     }
 
-    public BuyList getUserPurchesedBuyList(String userName,EntityManager entityManager) throws Exception {
-        var userBuylistID = entityManager.createNativeQuery("select u.buyListId " +
-                        "from User_BuyList u join BuyList b on u.buylistId=b.buylistId " +
-                        "where u.username := username and b.isBought=true")
-                .setParameter("username",userName)
-                .getResultList();
+    public BuyListDTO getUserPurchesedBuyList(String userName,EntityManager entityManager) throws Exception {
+        List commoditiesList = entityManager.createQuery("select c from CommodityInBuyList b join Commodity c on b.commodity.id=c.id where b.isBought=true and b.user.username=:userId ").setParameter("userId", userName).getResultList();
+        var stream = commoditiesList.stream().map(
+                commodity -> new CommodityDTO((Commodity) commodity , countOfCommodityInBuylist(userName, ((Commodity) commodity).getId(),entityManager))
+        );
 
-        return (BuyList) entityManager.createQuery("select b from BuyList b where b.id =: userBuylistID").setParameter("userBuylistID",userBuylistID).getSingleResult();
+        BuyListDTO buylist = new BuyListDTO(stream.toList());
+
+        return buylist;
     }
-//
-//    public void removeCommodityFromBuyList(String username, int commodityId) throws Exception{
-//        User neededUser = getUserByUsername(username);
-//        if(!neededUser.hasBoughtCommodity(commodityId))
-//        {
-//            throw new CommodityIsNotInBuyList(commodityId);
-//        }
-//        neededUser.removeFromBuyList(commodityId);
-//    }
-//
-//    public void userBoughtBuyList(User user, double totalPrice)
-//    {
-//        user.addBuyListToPurchasedCommodities();
-//        user.decreaseCredit(totalPrice);
-//        user.clearBuylist();
-//    }
-//
-//    public void addCredit(String username, double credit) throws Exception
-//    {
-//        User user = getUserByUsername(username);
-//        user.addCredit(credit);
-//    }
-//
-    public void addDiscountCodeToUserBuyList(User user, DiscountCode discountCode,EntityManager entityManager) throws Exception
+
+    public void addDiscountCodeToUserBuyList(User user, DiscountCode discountCode,BuyList buylist,EntityManager entityManager) throws Exception
     {
         System.out.println("addDiscountCodeToUserBuyList");
-        if(userHasUsedCode(user,discountCode,entityManager))
+        if(!userHasNotUsedCode(user,discountCode,entityManager))
             throw new DiscountCodeAlreadyUsed(discountCode.getCode());
-     //   user.addDiscountToBuylist(discountCode);
+
+    }
+
+    public  void buyBuyList(User user, DiscountCode discountCode, double totalprice ,EntityManager entityManager) throws Exception
+    {
+        double final_price = totalprice;
+        if(discountCode!=null)
+            final_price = totalprice*(100-discountCode.getPercentage())/100;
+        if (final_price > user.getCredit()) {
+            entityManager.getTransaction().rollback();
+            throw new NotEnoughCredit();
+        } else {
+            user.decreaseCredit( final_price);
+
+        }
+        if(discountCode!=null) {
+            user.getDiscountCode().add(discountCode);
+            discountCode.getUsersSet().add(user);
+        }
     }
 
 
 //
-    public boolean userHasUsedCode(User user, DiscountCode discountCode,EntityManager entityManager) throws Exception
+    public boolean userHasNotUsedCode(User user, DiscountCode discountCode,EntityManager entityManager) throws Exception
     {
 
         return entityManager.createNativeQuery(
-                        "select * from DiscountCode_User " +
-                                "where discountId = :discountId and username = :username")
+                        "select * from DiscountCode_User c " +
+                                "where c.discountId = :discountId and c.username = :username")
                 .setParameter("discountId", discountCode.getDiscountId())
                 .setParameter("username", user.getName())
                 .getResultList().isEmpty();
+
 
     }
 //

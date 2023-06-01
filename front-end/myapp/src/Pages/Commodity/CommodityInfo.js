@@ -112,7 +112,7 @@ export default function CommodityInfo() {
                                     className="fixed-star-icon"
 
                                 />
-                                <p>{commodity.rating}({commodity.userRatingsSize})</p>
+                                <p>{commodity.rating}({commodity.rateCount})</p>
                         </div>
                             </div>
                                 </div>

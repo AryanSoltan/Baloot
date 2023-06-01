@@ -14,7 +14,7 @@ public class BuyList {
     private Long buyListId;
 
 
-    private boolean isBought;
+
 
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -23,8 +23,17 @@ public class BuyList {
     Set<CommodityInBuyList> commoditiesList = new HashSet<>();
 
 
-    @ManyToMany(mappedBy = "buyListsSet")
-    private Set<DiscountCode> discountCodeSet = new HashSet<>();
+//    @ManyToMany(mappedBy = "buyListsSet")
+//    private Set<DiscountCode> discountCodeSet = new HashSet<>();
+
+//    @ManyToOne
+//    @JoinColumn(name = "username")
+//    private User user;
+
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(joinColumns = {@JoinColumn(name="buyListId")}, inverseJoinColumns = {@JoinColumn(name="usename")})
+//    private Set<User> usersSet = new HashSet<>();
+
 
 //    @OneToOne(mappedBy = "buyList")
 //    User user1;
@@ -34,8 +43,11 @@ public class BuyList {
 
 
 
-    @ManyToMany(mappedBy = "buylistSet")
-    private Set<User> usersSet = new HashSet<>();
+//    @OneToOne
+//    @JoinColumn(name = "username")
+//    private User user;
+
+//    public Set<DiscountCode> getDiscountCodeSet(){return discountCodeSet;}
 
 //    private DiscountCode buylistDiscountCode;
 

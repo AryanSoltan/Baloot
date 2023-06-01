@@ -142,6 +142,10 @@ public class Commodity {
     }
 
 
+    public Set<Rate> getRatings() {
+        return rates;
+    }
+
     public void updateRating(String username, int newRating, EntityManager entityManager)
     {
         removeRating(username);
@@ -160,6 +164,9 @@ public class Commodity {
         return false;
     }
 
+    public Provider getProvider() {
+        return provider;
+    }
 
 
 
@@ -238,6 +245,8 @@ public class Commodity {
         return price;
     }
 
+    public void decreaseStock(int outStock){inStock -= outStock;}
+
     public ArrayList<String> getCategoriesNames()
     {
 
@@ -256,6 +265,8 @@ public class Commodity {
     {
         return inStock;
     }
+
+//    public String getImage(){return image;}
 
 //    public String getStringCategories() {
 //        String result = "";

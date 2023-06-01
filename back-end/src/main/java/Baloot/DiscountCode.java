@@ -14,10 +14,12 @@ public class DiscountCode {
     int discount;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(joinColumns = {@JoinColumn(name="discountId")}, inverseJoinColumns = {@JoinColumn(name="buyListId")})
-    private Set<BuyList> buyListsSet = new HashSet<>();
+    @JoinTable(joinColumns = {@JoinColumn(name="discountId")}, inverseJoinColumns = {@JoinColumn(name="username")})
+    private Set<User> usersSet = new HashSet<>();
 
     public String getCode() {return discountCode; }
+
+//    public Set<User> getbuyLists(){return buyListsSet;}
 
     public int getPercentage(){return discount;}
 
@@ -29,4 +31,6 @@ public class DiscountCode {
     public DiscountCode(){}
 
     public long getDiscountId(){return discountId;}
+
+    public Set<User> getUsersSet(){return usersSet;}
 }

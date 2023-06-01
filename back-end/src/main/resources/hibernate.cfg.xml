@@ -8,7 +8,7 @@
 <hibernate-configuration>
     <session-factory>
 
-        <property name="connection.pool_size">100</property>
+        <property name="connection.pool_size">500</property>
 
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name = "connection.driver_class">com.mysql.cj.jdbc.Driver</property>

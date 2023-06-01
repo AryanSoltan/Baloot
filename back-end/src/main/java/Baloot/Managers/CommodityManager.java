@@ -1,7 +1,10 @@
 package Baloot.Managers;
 
 import Baloot.*;
+import Baloot.DTOObjects.CommentDTO;
+import Baloot.DTOObjects.CommodityDTO;
 import Baloot.Exception.CommodityOutOfStock;
+import Baloot.Exception.NotEnoughCredit;
 import com.beust.ah.A;
 import jakarta.persistence.EntityManager;
 import kotlin.Pair;
@@ -33,9 +36,21 @@ public class CommodityManager {
 //
     public List getAllCommodities(EntityManager entityManager)
     {
-        List commoditiesList = entityManager.createQuery("From Commodity c").getResultList();
-        return commoditiesList;
+
+        List commoditiesList = entityManager.createQuery("select c from Commodity c").getResultList();
+
+//        var stream = commoditiesList.stream().map(
+//                commodity -> new Commodity(commodity)
+//        );
+
+        var stream = commoditiesList.stream().map(
+                commodity -> new CommodityDTO((Commodity) commodity)
+        );
+     //   System.out.println("\n\n\n\nin get a;; commoditis\n\n\n\n"+stream.toList());
+        return stream.toList();
     }
+
+
 //
     public ArrayList<Commodity> getCommoditiesByCategory(String category, EntityManager entityManager)
     {
@@ -96,17 +111,51 @@ public class CommodityManager {
         }
     }
 //
-    public void checkIfAllCommoditiesAreAvailabel(BuyList buyList) throws Exception
+    public void checkIfAllCommoditiesAreAvailabel(String username, EntityManager entityManager) throws Exception
     {
-        Set<CommodityInBuyList> commoditiesList = buyList.getBuyList();
-        for(CommodityInBuyList commodityInBuyList: commoditiesList)
-        {
-            Commodity commodity = commodityInBuyList.getCommodity();
-            if(commodity.getInStock() == 0)
-                throw new CommodityOutOfStock(commodity.getId());
+
+        var buylist = (List<CommodityInBuyList>) entityManager.createQuery("select c from CommodityInBuyList c " +
+                        "where user.username=:userId and c.isBought=false ")
+                .setParameter("userId", username)
+                .getResultList();
+
+        for (var item : buylist) {
+            if (item.getCommodity().getInStock() < item.getNumInStock()) {
+                entityManager.getTransaction().rollback();
+                throw new CommodityOutOfStock(item.getCommodity().getId());
+            }
         }
+
     }
 
+    public double getBuylistPrice(String username, EntityManager entityManager){
+        var buylist = (List<CommodityInBuyList>) entityManager.createQuery("select c from CommodityInBuyList c " +
+                        "where user.username=:userId and c.isBought=false ")
+                .setParameter("userId", username)
+                .getResultList();
+
+        double totalprice=0;
+        for (var item : buylist) {
+            totalprice += item.getCommodity().getPrice() * item.getNumInStock();
+
+        }
+        return totalprice;
+    }
+
+    public  void handleBuy(String username,EntityManager entityManager) throws Exception
+    {
+        var buylist = (List<CommodityInBuyList>) entityManager.createQuery("select c from CommodityInBuyList c " +
+                        "where user.username=:userId and c.isBought=false ")
+                .setParameter("userId", username)
+                .getResultList();
+        for (var item : buylist) {
+            item.setIsBought(true);
+            item.getCommodity().decreaseStock(item.getNumInStock());
+           // item.setNumInStock()
+
+        }
+
+    }
     public ArrayList<Commodity> getCommodityByRangePrice(double startPrice, double endPrice, EntityManager entityManager)
     {
         List commoditiesList = entityManager.createQuery("FROM Commodity c WHERE c.price > :startPrice AND c.price < :endPrice").setParameter("startPrice", startPrice)
@@ -115,10 +164,10 @@ public class CommodityManager {
     }
 
 
-    public static ArrayList<Commodity> getMostSimilarCommodities(int targetCommodityId,  EntityManager entityManager)
+    public List<CommodityDTO> getMostSimilarCommodities(int targetCommodityId, String username, EntityManager entityManager)
     {
         int n =50;
-        var suggestions = entityManager.createNativeQuery("with commodity_cat(id,is_in_same_cat) AS (SELECT cc.id , case when cc.categoryId IN (select target.categoryId from Commodity_Category target where target.id=:targetCommodityId) then 1 else 0 end as is_in_same_cat " +
+        var suggestionsIDs = entityManager.createNativeQuery("with commodity_cat(id,is_in_same_cat) AS (SELECT cc.id , case when cc.categoryId IN (select target.categoryId from Commodity_Category target where target.id=:targetCommodityId) then 1 else 0 end as is_in_same_cat " +
                         "                              from Commodity_Category cc )" +
                         "                            select c.id " +
                                 "                   from Commodity c join commodity_cat t on c.id = t.id" +
@@ -129,10 +178,29 @@ public class CommodityManager {
                 .setParameter("targetCommodityId", targetCommodityId)
                 .getResultList();
 
-        List <Commodity> suggestedCommodities = entityManager.createQuery("select c from Commodity c where c.id in :suggestions") .setParameter("suggestions", suggestions).getResultList();
-
-        return (ArrayList<Commodity>)suggestedCommodities;
+        List<Commodity> suggestedCommodities = entityManager.createQuery("select c from Commodity c where c.id in :suggestions").setParameter("suggestions", suggestionsIDs).getResultList();
+        var stream = suggestedCommodities.stream().map(
+                commodity -> new CommodityDTO((Commodity) commodity , UserManager.countOfCommodityInBuylist(username, ((Commodity) commodity).getId(),entityManager))
+        );
+        return stream.toList();
 
     }
+
+    public List getCommodityComments(int commoditytId,  EntityManager entityManager)
+    {
+
+        List comments = entityManager.createQuery("select c from Comment c where c.commodity.id =:commoditytId")
+                .setParameter("commoditytId",commoditytId)
+                .getResultList();
+
+     //   List commoditiesList = entityManager.createQuery("select c from CommodityInBuyList b join Commodity c on b.commodity.id=c.id where b.user.username=:userId and b.isBought=false").setParameter("userId", userName).getResultList();
+        var stream = comments.stream().map(
+                comment -> new CommentDTO((Comment) comment)
+        );
+
+        return stream.toList();
+
+    }
+
 
 }

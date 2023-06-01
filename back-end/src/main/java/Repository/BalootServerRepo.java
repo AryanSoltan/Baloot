@@ -3,11 +3,14 @@ package Repository;
 
 
 import Baloot.*;
+import Baloot.DTOObjects.*;
 import Baloot.Exception.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 import Baloot.Managers.*;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,8 +35,13 @@ public class BalootServerRepo {
 
 
     public static BalootServerRepo getInstance() {
-//        if(instance == null)
-//            instance = new BalootServerRepo();
+        if(instance == null) {
+            EntityManagerFactory entityManagerFactory;
+            var registry = new StandardServiceRegistryBuilder().configure().build();
+            entityManagerFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+            instance = new BalootServerRepo(entityManagerFactory );
+        }
+
         return instance;
 
     }
@@ -43,12 +51,14 @@ public class BalootServerRepo {
         userManager = new UserManager();
 //        providerManager = new ProviderManager();
         commodityManager = new CommodityManager();
-//        paymentManager = new PaymentManager();
+
+        paymentManager = new PaymentManager();
     }
 
     public void logIn(String username, String password) throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
+
         User user = entityManager.find(User.class, username);
         if (user == null) {
             entityManager.getTransaction().rollback();
@@ -81,11 +91,12 @@ public class BalootServerRepo {
 
     }
 
-    public User getUserById(String username) {
+    public UserDTO getUserById(String username) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = findUserById(username, entityManager);
-        return user;
+
+        return new UserDTO(user);
         //  return userManager.getUserById(username, entityManagerFactory);
     }
 
@@ -110,14 +121,14 @@ public class BalootServerRepo {
         entityManager.getTransaction().commit();
     }
 
-    public BuyList getUserBuyList(String userName) throws Exception { //done
+    public BuyListDTO getUserBuyList(String userName) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         return userManager.getUserBuyList(userName, entityManager);
 
     }
 
-    public BuyList getUserPurchesedBuyList(String userName) throws Exception { //done
+    public BuyListDTO getUserPurchesedBuyList(String userName) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         return userManager.getUserPurchesedBuyList(userName, entityManager);
@@ -154,20 +165,45 @@ public class BalootServerRepo {
         return (User) userNeeded.get(0);
     }
 
-    public void addCommidityToUserBuyList(String username, int commodityId) throws Exception {
+    public void updateCommodityCountInUserBuyList(String username, int commodityId, int count) throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        User user = findUserById(username, entityManager);
-        BuyList buyList = getUserBuyList(username);
-        if (!commodityExistsInBuylist(buyList, commodityId)) {
-            Commodity newCommodity = findCommodityById(commodityId, entityManager);
-            CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
-            entityManager.persist(commodity);
-            //  buyList.addSingleCommodityInBuyList(commodity);
+
+        System.out.println("before in updateCommodityCountInUserBuyList");
+
+        var countList = entityManager.createQuery("select c from CommodityInBuyList c  " +
+                        "                                             where c.user.username=:userId " +
+                        "                                                  and c.isBought=false " +
+                        "                                                   and c.commodity.id=:commodityId")
+                .setParameter("userId", username)
+                .setParameter("commodityId", commodityId)
+                .getResultList();
+        System.out.println("after in updateCommodityCountInUserBuyList");
+        User user = entityManager.find(User.class , username);
+        Commodity commodity = entityManager.find(Commodity.class , commodityId);
+
+        if (countList.isEmpty()) {
+
+            BuyList buyList = new BuyList();
+            entityManager.persist(buyList);
+
+            CommodityInBuyList commodityInBuyList = new CommodityInBuyList(user,commodity, buyList, 1);
+            entityManager.persist(commodityInBuyList);
+
         } else {
-            CommodityInBuyList commodityInBuyList = buyList.getCommodityInBuyList(commodityId);
-            commodityInBuyList.increaseOne();
+//
+            CommodityInBuyList commodityInBuyList =(CommodityInBuyList) countList.get(0);
+            if(count < 0)
+            {
+                if (commodityInBuyList.getNumInStock() >= count) {
+                    commodityInBuyList.updateNumInStock(count);
+                }
+            }
+            else
+                commodityInBuyList.updateNumInStock(count);
+
         }
+
         entityManager.getTransaction().commit();
     }
 
@@ -185,35 +221,6 @@ public class BalootServerRepo {
             return true;
     }
 
-    public void removeFromBuyList(String username, int commodityId) throws Exception { //done
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        User user = findUserById(username, entityManager);
-        BuyList buyList = getUserBuyList(username);
-        if (!buyList.contains(commodityId)) {
-            throw new CommodityIsNotInBuyList(commodityId);
-        } else {
-            buyList.decreaseOneCommodity(commodityId);
-        }
-        entityManager.getTransaction().commit();
-    }
-
-    public void handlePaymentUser(String userName) throws Exception //done
-    {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        User user = findUserById(userName, entityManager);
-        BuyList userBuyList = getUserBuyList(userName);
-        commodityManager.checkIfAllCommoditiesAreAvailabel(userBuyList);
-        double totalPrice = userBuyList.getBuylistPrice();
-        System.out.println("total price is" + totalPrice);
-        if (user.getCredit() < totalPrice) {
-            throw new NotEnoughCredit();
-        }
-        commodityManager.decreaseStock(userBuyList);
-        userBuyList.makeEmpty();
-        entityManager.getTransaction().commit();
-    }
 
     public List getCommodityList(EntityManager entityManager) {
         List commoditiesList = commodityManager.getAllCommodities(entityManager);
@@ -228,14 +235,17 @@ public class BalootServerRepo {
         return commodities;
     }
 
-    public Commodity findCommodityById(int commodityId, EntityManager entityManager) {
-        String query = "FROM Commodity c WHERE c.id = :commodityId";
-        List commodityNeeded = entityManager.createQuery(query)
+    public CommodityDTO findCommodityById(int commodityId, EntityManager entityManager) {
+
+        List commoditiesList = entityManager.createQuery("select c from Commodity c where c.id=:commodityId")
                 .setParameter("commodityId", commodityId).getResultList();
-        if (commodityNeeded.size() == 0) {
-            return null;
-        }
-        return (Commodity) commodityNeeded.get(0);
+
+
+        var stream = commoditiesList.stream().map(
+                commodity -> new CommodityDTO((Commodity) commodity)
+        );
+        //   System.out.println("\n\n\n\nin get a;; commoditis\n\n\n\n"+stream.toList());
+        return (CommodityDTO) stream.toList().get(0);
     }
 
     public ArrayList<Commodity> getCommodityRangePrice(double startPrice, double endPrice) { //done
@@ -268,74 +278,106 @@ public class BalootServerRepo {
         entityManager.getTransaction().commit();
     }
 
-    public ArrayList<Commodity> getSuggestedCommodities(int commodityID) throws Exception {
+    public List<CommodityDTO> getSuggestedCommodities(int commodityID,String username) throws Exception {
         System.out.println("in Csuggesstions");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        ArrayList<Commodity> suggestions = commodityManager.getMostSimilarCommodities(commodityID, entityManager);
+        List<CommodityDTO> suggestions = commodityManager.getMostSimilarCommodities(commodityID, username, entityManager);
         return suggestions;
 
 
     }
 
     //todo
-    public void applyDiscountCode(String username, String code) throws Exception {
+    public void handlePayment(String username, String code) throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
+        System.out.println("in apply discount code");
+        DiscountCode discountCode;
+        if(code!="")
+            discountCode = paymentManager.getDiscountCode(code, entityManager);
+        else  {
+            discountCode = null;
+        }
+        User user = entityManager.find(User.class, username);
+        System.out.println("after user");
 
-        DiscountCode discountCode = paymentManager.getDiscountCode(code, entityManager);
-        User user = getUserById(username);
-        userManager.addDiscountCodeToUserBuyList(user, discountCode, entityManager);
+
+        commodityManager.checkIfAllCommoditiesAreAvailabel(username,entityManager);
+        System.out.println("after check");
+        double totalPrice = commodityManager.getBuylistPrice(username, entityManager);
+        userManager.buyBuyList(user,discountCode, totalPrice,entityManager);
+        commodityManager.handleBuy(username,entityManager);
+        entityManager.getTransaction().commit();
+
     }
 
-    public DiscountCode validateDiscountCode(String username, String code) throws Exception {
+    public DiscountCodeDTO validateDiscountCode(String username, String code) throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
+        System.out.println("befire get discount");
 
         DiscountCode discountCode = paymentManager.getDiscountCode(code, entityManager);
-        User user = getUserById(username);
-        if (!userManager.userHasUsedCode(user, discountCode, entityManager))
-            return discountCode;
+
+        System.out.println("after get discount");
+        User user = entityManager.find(User.class, username);
+
+
+        if (userManager.userHasNotUsedCode(user, discountCode, entityManager)) {
+
+            return new DiscountCodeDTO(discountCode);
+        }
         else
             throw new InvalidDiscountCode(code);
     }
 
-    public ArrayList<Commodity> getAllCommodities() {
+    public List getAllCommodities() {
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List commoditiesList = commodityManager.getAllCommodities(entityManager);
-        return (ArrayList<Commodity>) commoditiesList;
+
+        return commoditiesList;
     }
 
-    public Commodity getCommodityById(Integer id) {
+    public CommodityDTO getCommodityById(Integer id)throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        return findCommodityById(id, entityManager);
+        CommodityDTO commodity = findCommodityById(id,entityManager);
+        List<CommentDTO> comments = getCommodityComments(id);
+        commodity.setComments(comments);
+
+        return commodity;
+    }
+
+    public List getCommodityComments(int commodityId)
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<CommentDTO> comments = commodityManager.getCommodityComments(commodityId, entityManager);
+
+        return comments;
+
 
 
     }
+
 
     public int getUserNumBought(String username, Integer commodityId) throws Exception {
+
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        var count = entityManager.createNativeQuery("select c.numInStock" +
-                        "                                       from CommodityInBuyList c " +
-                        "                                       where c.id =: commodityId")
-                .setParameter("commodityId", commodityId)
-                .getSingleResult();
-        return (int) count;
-        //  return userManager.getUserNumBought(username, commodityId);
+        return userManager.countOfCommodityInBuylist( username, commodityId, entityManager);
     }
 
-    public Comment addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
+    public CommentDTO addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        if (rate != -1 || rate != 1) {
-            throw new InvalidRating();
-        }
 
         User user = entityManager.find(User.class, userName);
+
         Comment comment = entityManager.find(Comment.class, commentId);
 
         Commodity commodity = entityManager.find(Commodity.class, comment.getCommodityId());
@@ -355,10 +397,10 @@ public class BalootServerRepo {
         }
         entityManager.getTransaction().commit();
 
-        return comment;
+        return new CommentDTO(comment);
     }
 
-    public Comment addComment(String username, int commodityID, String commentText, String date) throws Exception { //done
+    public CommentDTO addComment(String username, int commodityID, String commentText, String date) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -374,9 +416,11 @@ public class BalootServerRepo {
             throw new Exception(e.getMessage());
         }
         entityManager.getTransaction().commit();
-        return com;
+
+        return new CommentDTO(com);
 
     }
+
 
 
 }

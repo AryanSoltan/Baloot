@@ -13,11 +13,26 @@ public class CommodityInBuyList {
     @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "id")
     Commodity commodity;
+
+    @ManyToOne
+    @JoinColumn(name = "username")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "buyListId")
+    private BuyList buyList;
+
+
     Integer numInStock;
 
-    public CommodityInBuyList(Commodity inputCommodity, Integer inputNumInStock) {
+    boolean isBought;
+
+    public CommodityInBuyList(User inputuser, Commodity inputCommodity,BuyList inputbuylist, Integer inputNumInStock) {
+        user = inputuser;
         numInStock = inputNumInStock;
         commodity = inputCommodity;
+        buyList =inputbuylist;
+        isBought=false;
     }
 
     public CommodityInBuyList()
@@ -28,10 +43,20 @@ public class CommodityInBuyList {
     public Commodity getCommodity() {
         return commodity;
     }
+
+    public User getUser() {
+        return user;
+    }
     public Integer getNumInStock()
     {
         return numInStock;
     }
+
+    public boolean getIsBought(){return isBought;}
+
+    public void setIsBought(boolean bought){this.isBought = bought;}
+
+    public void updateNumInStock(int count) {numInStock += count;}
 
     public void increaseOne() {
         numInStock += 1;

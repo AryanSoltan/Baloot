@@ -33,16 +33,20 @@ public class User {
     @Column(name = "credit")
     private double credit;
 
+    @ManyToMany(mappedBy = "usersSet")
+    private Set<DiscountCode> discountCodeSet = new HashSet<>();
+
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "bought_id", referencedColumnName = "buyListId")
 //    private BuyList buyList;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(joinColumns = {@JoinColumn(name="username")}, inverseJoinColumns = {@JoinColumn(name="buyListId")})
-    private Set<BuyList> buylistSet = new HashSet<>();
+//    @OneToMany(cascade=CascadeType.ALL)
+//    @JoinColumn(name = "username")
+//    private Set<BuyList> buylistSet = new HashSet<>();;
 
-
+//    @ManyToMany(mappedBy = "usersSet")
+//    private Set<BuyList> buyListsSet = new HashSet<>();
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "purchased_id", referencedColumnName = "buyListId")
 //    private BuyList purchased;
@@ -59,6 +63,7 @@ public class User {
         birthDate = inputBirthDate;
         address = inputAddress;
         credit = inputCredit;
+       // buylistSet = new HashSet<>(BuyList);
 //        buyList = new BuyList();
 //        purchased = new BuyList();
         // usedDiscountCodes = new ArrayList<DiscountCode>();
@@ -134,6 +139,10 @@ public class User {
     public double getCredit() {
         return credit;
     }
+
+    public Set<DiscountCode> getDiscountCode(){return discountCodeSet;}
+
+
 
     public void addCredit(double incCredit)
     {

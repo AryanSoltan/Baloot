@@ -22,7 +22,7 @@ export default function CommodityCard(props) {
                 const count = response.data.content;
 
                 console.log('count is ');
-                console.log(count);
+                console.log(commodity);
                 setitemCounts(count);
 
             } catch (e) {

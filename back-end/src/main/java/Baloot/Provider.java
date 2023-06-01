@@ -57,6 +57,11 @@ public class Provider {
     public int getId() {
         return id;
     }
+
+    public String getName(){return name;}
+
+    public String getImage(){return image;}
+    public String getRegistryDate(){return registryDate;}
 //
 //    public String getRegistryDate() {
 //        return registryDate;
