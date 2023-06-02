@@ -1,8 +1,12 @@
 package Baloot.Managers;
 
 import Baloot.*;
-import Baloot.Exception.CommodityNotExist;
+import Baloot.DTOObjects.CommentDTO;
+import Baloot.DTOObjects.CommodityDTO;
 import Baloot.Exception.CommodityOutOfStock;
+import Baloot.Exception.NotEnoughCredit;
+import com.beust.ah.A;
+import jakarta.persistence.EntityManager;
 import kotlin.Pair;
 
 import java.util.*;
@@ -27,193 +31,176 @@ public class CommodityManager {
         filterContent = null;
     }
 
+    //
 
-    public void setFilterContent(String filter)
+//
+    public List getAllCommodities(EntityManager entityManager)
     {
-        filterContent = filter;
-    }
-    public void setFilterType(String filter)
-    {
-        filterBy = filter;
-    }
-    public void setSearchFilter()
-     {
-         searchFilterIsSet = true;
-     }
 
-    public void setSortBy(String sort)
-    {
-        sortBy = sort;
-    }
+        List commoditiesList = entityManager.createQuery("select c from Commodity c").getResultList();
 
-    public void setSortFilter()
-    {
-        sortFilterIsSet = true;
+//        var stream = commoditiesList.stream().map(
+//                commodity -> new Commodity(commodity)
+//        );
+
+        var stream = commoditiesList.stream().map(
+                commodity -> new CommodityDTO((Commodity) commodity)
+        );
+     //   System.out.println("\n\n\n\nin get a;; commoditis\n\n\n\n"+stream.toList());
+        return stream.toList();
     }
 
-    public Commodity getCommodityByID(int commodityID) throws Exception
-    {
-        if(!commodities.containsKey(commodityID))
-            throw new CommodityNotExist(commodityID);
-        return commodities.get(commodityID);
-    }
 
-    public ArrayList<Commodity> getAllCommodities()
+//
+    public ArrayList<Commodity> getCommoditiesByCategory(String category, EntityManager entityManager)
     {
-        Collection<Commodity> collectionCommidity = commodities.values();
-        ArrayList<Commodity> commiditesArray = new ArrayList<Commodity>(collectionCommidity);
-        return commiditesArray;
-    }
-
-    public ArrayList<Commodity> getCommoditiesByCategory(String category)
-    {
-        ArrayList<Commodity> commoditiesByCategory = new ArrayList<Commodity>();
-        for(Commodity commodity: commodities.values())
+        List commoditiesList = entityManager.createQuery("FROM Commodity c").getResultList();
+        ArrayList<Commodity> commditiesCategory = new ArrayList<Commodity>();
+        for(Object commodityObj: commoditiesList)
         {
-            if(commodity.hasCategory(category))
-                commoditiesByCategory.add(commodity);
+            Commodity commodity = (Commodity) commodityObj;
+            if(((Commodity) commodityObj).hasCategory(category))
+                commditiesCategory.add(commodity);
         }
-        return commoditiesByCategory;
+        return commditiesCategory;
     }
+//
+//    public ArrayList<Commodity> getCommoditiesByName(String name)
+//    {
+//        ArrayList<Commodity> commoditiesByName = new ArrayList<Commodity>();
+//        for(Commodity commodity: commodities.values())
+//        {
+//            if(commodity.nameContains(name))
+//                commoditiesByName.add(commodity);
+//        }
+//        return commoditiesByName;
+//    }
+//
 
-    public ArrayList<Commodity> getCommoditiesByName(String name)
-    {
-        ArrayList<Commodity> commoditiesByName = new ArrayList<Commodity>();
-        for(Commodity commodity: commodities.values())
-        {
-            if(commodity.nameContains(name))
-                commoditiesByName.add(commodity);
-        }
-        return commoditiesByName;
-    }
-
-    public ArrayList<Commodity> getCommodityByRangePrice(double startPrice, double endPrice) {
-        ArrayList<Commodity> answerCommodities = new ArrayList<Commodity>();
-        for(Commodity commodity: commodities.values())
-        {
-            if(commodity.getPrice() <= endPrice && commodity.getPrice() >= startPrice)
-                answerCommodities.add(commodity);
-        }
-        return answerCommodities;
-    }
-
-    public void addNewCommodity(Commodity newCommodity,String providerName)
-    {
-        newCommodity.setProviderName(providerName);
-        newCommodity.setUserRatingsEmpty();
-        newCommodity.setCommentsEmpty();
-        commodities.put(newCommodity.getId(), newCommodity);
-    }
-
-    public void addCommentToCommodity(Comment comment,int commentIdNow, String username) throws Exception {
-        int commodityId = comment.getCommodityId();
-        comment.setRatingEmpty();
-        Commodity commodity = getCommodityByID(commodityId);
-        comment.setCommentId(commentIdNow);
+//
+//    public void addNewCommodity(Commodity newCommodity,String providerName)
+//    {
+//        newCommodity.setProviderName(providerName);
+//        newCommodity.setUserRatingsEmpty();
+//        newCommodity.setCommentsEmpty();
+//        commodities.put(newCommodity.getId(), newCommodity);
+//    }
+//
+    public void addCommentToCommodity(Comment comment, int commentIdNow, String username, EntityManager entityManager) throws Exception {
+        entityManager.persist(comment);
+        Commodity commodity = entityManager.find(Commodity.class, comment.getCommodityId());
+//        comment.setRatingEmpty();
         comment.setUserName(username);
         commodity.addComment(comment);
     }
-
-    public void rateCommodity(String username, int commodityId, int score) throws Exception
+//
+    public void rateCommodity(String username, int commodityId, int score, EntityManager entityManager) throws Exception
     {
-        Commodity neededCommodity = getCommodityByID(commodityId);
+        Commodity neededCommodity = entityManager.find(Commodity.class, commodityId);
         if(neededCommodity.hasRating(username))
-            neededCommodity.updateRating(username, score);
+            neededCommodity.updateRating(username, score, entityManager);
         else
-            neededCommodity.addRating(username, score);
-    }
-
-
-    public Comment rateCommoditiesComment(int commentId, User user, int rate)
-    {
-        for(Commodity commodity: commodities.values())
-        {
-            if(commodity.hasCommentId(commentId)) {
-                commodity.rateComment(commentId, user, rate);
-                return commodity.getComment(commentId);
-            }
-        }
-        return null;
-    }
-
-    public void clearSearchFilter()
-    {
-        searchFilterIsSet = false;
-        filterBy = null;
-        filterContent = null;
+            neededCommodity.addRating(username, score, entityManager);
     }
 
     public void decreaseStock(BuyList buyList)
     {
-        ArrayList<CommodityInBuyList> commoditiesList = buyList.getAllCommodities();
+        Set<CommodityInBuyList> commoditiesList = buyList.getBuyList();
         for(CommodityInBuyList commodity : commoditiesList) {
             commodity.getCommodity().buy(commodity.getNumInStock());
         }
     }
-
-    public void checkIfAllCommoditiesAreAvailabel(BuyList buyList) throws Exception
+//
+    public void checkIfAllCommoditiesAreAvailabel(String username, EntityManager entityManager) throws Exception
     {
-        ArrayList<CommodityInBuyList> commoditiesList = buyList.getAllCommodities();
-        for(CommodityInBuyList commodityInBuyList: commoditiesList)
-        {
-            Commodity commodity = commodityInBuyList.getCommodity();
-            if(commodity.getInStock() == 0)
-                throw new CommodityOutOfStock(commodity.getId());
-        }
-    }
 
+        var buylist = (List<CommodityInBuyList>) entityManager.createQuery("select c from CommodityInBuyList c " +
+                        "where user.username=:userId and c.isBought=false ")
+                .setParameter("userId", username)
+                .getResultList();
 
-    public ArrayList<Commodity> getFilteredCommodities()
-    {
-        ArrayList<Commodity> answerCommodities = new ArrayList<Commodity>();
-        answerCommodities = getAllCommodities();
-        if(searchFilterIsSet)
-        {
-            if(filterBy == "category")
-                answerCommodities = getCommoditiesByCategory(filterContent);
-            else if (filterBy=="name")
-                answerCommodities = getCommoditiesByName(filterContent);
+        for (var item : buylist) {
+            if (item.getCommodity().getInStock() < item.getNumInStock()) {
+                entityManager.getTransaction().rollback();
+                throw new CommodityOutOfStock(item.getCommodity().getId());
+            }
         }
-       if(sortFilterIsSet)
-       {
-           if(sortBy == "rate")
-               answerCommodities.sort(Comparator.comparing(Commodity::getRating).reversed());
-           if(sortBy == "price")
-               answerCommodities.sort(Comparator.comparing(Commodity::getPrice).reversed());
-       }
-       return answerCommodities;
-    }
-
-    public static ArrayList<Commodity> getMostSimilarCommodities(Commodity targetCommodity, int n)
-    {
-        ArrayList<Pair<Commodity , Double>> suggestionsList = new ArrayList<>();
-        ArrayList<String> targetCats = targetCommodity.getCategories();
-        double score;
-        for(Commodity commodity : commodities.values())
-        {
-            if(commodity.getId() == targetCommodity.getId())
-                continue;
-            if(commodity.hasCategory(targetCats))
-                score = 11 + commodity.getRating();
-            else
-                score = commodity.getRating();
-            suggestionsList.add(new Pair<>(commodity, score));
-        }
-
-        suggestionsList.sort(Comparator.comparing(Pair<Commodity, Double>::getSecond).reversed());
-        //remove commodities with repeated scores
-        HashSet<Object> seen = new HashSet<>();
-        suggestionsList.removeIf(e -> !seen.add(e.getSecond()));
-        ArrayList<Commodity> answerCommodities = new ArrayList<Commodity>();
-        for(int i=0 ; i<min(n,suggestionsList.size()) ; i++)
-        {
-            answerCommodities.add(suggestionsList.get(i).getFirst());
-        }
-        return answerCommodities;
 
     }
 
+    public double getBuylistPrice(String username, EntityManager entityManager){
+        var buylist = (List<CommodityInBuyList>) entityManager.createQuery("select c from CommodityInBuyList c " +
+                        "where user.username=:userId and c.isBought=false ")
+                .setParameter("userId", username)
+                .getResultList();
 
+        double totalprice=0;
+        for (var item : buylist) {
+            totalprice += item.getCommodity().getPrice() * item.getNumInStock();
+
+        }
+        return totalprice;
+    }
+
+    public  void handleBuy(String username,EntityManager entityManager) throws Exception
+    {
+        var buylist = (List<CommodityInBuyList>) entityManager.createQuery("select c from CommodityInBuyList c " +
+                        "where user.username=:userId and c.isBought=false ")
+                .setParameter("userId", username)
+                .getResultList();
+        for (var item : buylist) {
+            item.setIsBought(true);
+            item.getCommodity().decreaseStock(item.getNumInStock());
+           // item.setNumInStock()
+
+        }
+
+    }
+    public ArrayList<Commodity> getCommodityByRangePrice(double startPrice, double endPrice, EntityManager entityManager)
+    {
+        List commoditiesList = entityManager.createQuery("FROM Commodity c WHERE c.price > :startPrice AND c.price < :endPrice").setParameter("startPrice", startPrice)
+        .setParameter("endPrice", endPrice).getResultList();
+        return (ArrayList<Commodity>) commoditiesList;
+    }
+
+
+    public List<CommodityDTO> getMostSimilarCommodities(int targetCommodityId, String username, EntityManager entityManager)
+    {
+        int n =50;
+        var suggestionsIDs = entityManager.createNativeQuery("with commodity_cat(id,is_in_same_cat) AS (SELECT cc.id , case when cc.categoryId IN (select target.categoryId from Commodity_Category target where target.id=:targetCommodityId) then 1 else 0 end as is_in_same_cat " +
+                        "                              from Commodity_Category cc )" +
+                        "                            select c.id " +
+                                "                   from Commodity c join commodity_cat t on c.id = t.id" +
+                                "                      where c.id !=:targetCommodityId" +
+                                "                    Order by 11*t.is_in_same_cat + c.rating desc " +
+                                "                      limit 5"
+                        )
+                .setParameter("targetCommodityId", targetCommodityId)
+                .getResultList();
+
+        List<Commodity> suggestedCommodities = entityManager.createQuery("select c from Commodity c where c.id in :suggestions").setParameter("suggestions", suggestionsIDs).getResultList();
+        var stream = suggestedCommodities.stream().map(
+                commodity -> new CommodityDTO((Commodity) commodity , UserManager.countOfCommodityInBuylist(username, ((Commodity) commodity).getId(),entityManager))
+        );
+        return stream.toList();
+
+    }
+
+    public List getCommodityComments(int commoditytId,  EntityManager entityManager)
+    {
+
+        List comments = entityManager.createQuery("select c from Comment c where c.commodity.id =:commoditytId")
+                .setParameter("commoditytId",commoditytId)
+                .getResultList();
+
+     //   List commoditiesList = entityManager.createQuery("select c from CommodityInBuyList b join Commodity c on b.commodity.id=c.id where b.user.username=:userId and b.isBought=false").setParameter("userId", userName).getResultList();
+        var stream = comments.stream().map(
+                comment -> new CommentDTO((Comment) comment)
+        );
+
+        return stream.toList();
+
+    }
 
 
 }

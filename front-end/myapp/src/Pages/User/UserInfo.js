@@ -39,8 +39,10 @@ export default function UserInfo()
 
         async function fetchData() {
             try {
+                console.log("hereeeeeeeeeeeeee");
                 const response = await axios.get('users/' + userId);
                 const userR = response.data.content;
+                console.log("user is");
 
                 console.log(userR);
                 setUser(userR);

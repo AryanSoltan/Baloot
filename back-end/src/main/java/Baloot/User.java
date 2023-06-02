@@ -1,28 +1,61 @@
 package Baloot;
 
 import Baloot.Exception.CommodityIsNotInBuyList;
-import InterfaceServer.CommodityInterface;
+//import InterfaceServer.CommodityInterface;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import jakarta.persistence.*;
 
+import java.util.*;
+
+@Entity
+@Table(name = "User")
 public class User {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    Long userId;
 
+    @Id
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
+    @Column(name = "email")
+
     private String email;
+    @Column(name = "birthDate")
+
     private String birthDate;
+    @Column(name = "address")
+
     private String address;
+
+    @Column(name = "credit")
     private double credit;
 
-    private BuyList buyList;
-    private BuyList purchased;
-    ArrayList<DiscountCode> usedDiscountCodes ;
+    @ManyToMany(mappedBy = "usersSet")
+    private Set<DiscountCode> discountCodeSet = new HashSet<>();
+
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "bought_id", referencedColumnName = "buyListId")
+//    private BuyList buyList;
+
+//    @OneToMany(cascade=CascadeType.ALL)
+//    @JoinColumn(name = "username")
+//    private Set<BuyList> buylistSet = new HashSet<>();;
+
+//    @ManyToMany(mappedBy = "usersSet")
+//    private Set<BuyList> buyListsSet = new HashSet<>();
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "purchased_id", referencedColumnName = "buyListId")
+//    private BuyList purchased;
+//    ArrayList<DiscountCode> usedDiscountCodes ;
+
+
 
     public User(String inputUserName, String inputPassword, String inputEmail,
-         String inputBirthDate, String inputAddress, double inputCredit)
+                String inputBirthDate, String inputAddress, double inputCredit)
     {
         username = inputUserName;
         password = inputPassword;
@@ -30,49 +63,58 @@ public class User {
         birthDate = inputBirthDate;
         address = inputAddress;
         credit = inputCredit;
-        buyList = new BuyList();
+       // buylistSet = new HashSet<>(BuyList);
+//        buyList = new BuyList();
+//        purchased = new BuyList();
         // usedDiscountCodes = new ArrayList<DiscountCode>();
 
     }
+    public User(User user) {
+        this(user.username, user.password, user.email, user.birthDate, user.address, user.credit);
+    }
 
-    public void buyCommodity(Commodity newCommodity)
-    {
-        CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
-        buyList.addNewCommodityToBuyList(commodity);
+    public User() {
 
     }
 
-    public boolean hasBoughtCommodity(int commodityId)
-    {
-        return buyList.contains(commodityId);
+//    public void buyCommodity(Commodity newCommodity)
+//    {
+//        CommodityInBuyList commodity = new CommodityInBuyList(newCommodity, 1);
+//        buyList.addNewCommodityToBuyList(commodity);
+//
+//    }
 
-    }
+//    public boolean hasBoughtCommodity(int commodityId)
+//    {
+//        return buyList.contains(commodityId);
+//
+//    }
+//
+//    public void removeFromBuyList(int commodityId) throws CommodityIsNotInBuyList {
+//        if(!buyList.contains(commodityId))
+//        {
+//            throw new CommodityIsNotInBuyList(commodityId);
+//        }
+//        buyList.removeCommodityFromBuyList(commodityId);
+//    }
+//
+//    public ArrayList<Commodity> getBoughtCommodities() {
+//        ArrayList<CommodityInBuyList> commodities = buyList.getAllCommodities();
+//        ArrayList<Commodity> commoditiesAns = new ArrayList<Commodity>();
+//        for(CommodityInBuyList commodityInBuyList: commodities)
+//        {
+//            commoditiesAns.add(commodityInBuyList.getCommodity());
+//        }
+//        return commoditiesAns;
+//    }
 
-    public void removeFromBuyList(int commodityId) throws CommodityIsNotInBuyList {
-        if(!buyList.contains(commodityId))
-        {
-            throw new CommodityIsNotInBuyList(commodityId);
-        }
-        buyList.removeCommodityFromBuyList(commodityId);
-    }
-
-    public ArrayList<Commodity> getBoughtCommodities() {
-        ArrayList<CommodityInBuyList> commodities = buyList.getAllCommodities();
-        ArrayList<Commodity> commoditiesAns = new ArrayList<Commodity>();
-        for(CommodityInBuyList commodityInBuyList: commodities)
-        {
-            commoditiesAns.add(commodityInBuyList.getCommodity());
-        }
-        return commoditiesAns;
-    }
-
-    public void setBoughtCommitiesEmpty() {
-
-        buyList = new BuyList();
-    }
-    public void setPurchasedCommodityEmpty(){purchased = new BuyList();}
-
-    public void setUSedDiscountCodesEmpty(){usedDiscountCodes = new ArrayList<DiscountCode>();}
+//    public void setBoughtCommitiesEmpty() {
+//
+//        buyList = new BuyList();
+//    }
+//    public void setPurchasedCommodityEmpty(){purchased = new BuyList();}
+//
+//    public void setUSedDiscountCodesEmpty(){usedDiscountCodes = new ArrayList<DiscountCode>();}
 
     public String getName() {
         return username;
@@ -98,35 +140,40 @@ public class User {
         return credit;
     }
 
-    public void addCredit(double incCredit) {
+    public Set<DiscountCode> getDiscountCode(){return discountCodeSet;}
+
+
+
+    public void addCredit(double incCredit)
+    {
         credit += incCredit;
     }
     public void decreaseCredit(double outCredit){credit -= outCredit;}
 
-    public void addBuyListToPurchasedCommodities()
-    {
-        for(CommodityInBuyList commodity : buyList.getAllCommodities())
-        {
-            purchased.addNewCommodityToBuyList(commodity);
-        }
-    }
-    public void clearBuylist()
-    {
-        if(buyList.hasDiscount())
-        {
-            usedDiscountCodes.add(buyList.getBuylistDiscountCode());
-        }
-        buyList.emptyList();
-    }
+//    public void addBuyListToPurchasedCommodities()
+//    {
+//        for(CommodityInBuyList commodity : buyList.getAllCommodities())
+//        {
+//            purchased.addNewCommodityToBuyList(commodity);
+//        }
+//    }
+//    public void clearBuylist()
+//    {
+//        if(buyList.hasDiscount())
+//        {
+//            usedDiscountCodes.add(buyList.getBuylistDiscountCode());
+//        }
+//        buyList.emptyList();
+//    }
 
-    public BuyList getPurchasedCommodities() {
-        return purchased;
-    }
-
-    public BuyList getBuyList()
-    {
-        return buyList;
-    }
+//    public BuyList getPurchasedCommodities() {
+//        return purchased;
+//    }
+//
+//    public BuyList getBuyList()
+//    {
+//        return buyList;
+//    }
 
     public boolean passwordMatches(String pass)
     {
@@ -142,23 +189,35 @@ public class User {
         return false;
     }
 
-    public boolean hasUsedDiscountCode(DiscountCode discountCode)
-    {
-        if(usedDiscountCodes.isEmpty())
-            return false;
-        if(usedDiscountCodes.contains(discountCode))
-            return true;
-        return false;
-    }
+//    public BuyList getPurchased() {
+//        return purchased;
+//    }
+//    public BuyList getBuyList()
+//    {
+//        return buyList;
+//    }
+//
+//    public BuyList getBought() {
+//        return buyList;
+//    }
 
-    public void addDiscountToBuylist(DiscountCode discountCode)
-    {
-        System.out.println("addDiscountToBuylist"+discountCode.getCode());
-        buyList.setDiscountCode(discountCode);
-        usedDiscountCodes.add(discountCode);
-    }
+//    public boolean hasUsedDiscountCode(DiscountCode discountCode)
+//    {
+//        if(usedDiscountCodes.isEmpty())
+//            return false;
+//        if(usedDiscountCodes.contains(discountCode))
+//            return true;
+//        return false;
+//    }
 
-    public int getNumBought(Integer commodityId) {
-        return buyList.getBuylistNum(commodityId);
-    }
+//    public void addDiscountToBuylist(DiscountCode discountCode)
+//    {
+//        System.out.println("addDiscountToBuylist"+discountCode.getCode());
+//        buyList.setDiscountCode(discountCode);
+//        usedDiscountCodes.add(discountCode);
+//    }
+//
+//    public int getNumBought(Integer commodityId) {
+//        return buyList.getBuylistNum(commodityId);
+//    }
 }

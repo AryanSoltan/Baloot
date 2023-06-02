@@ -75,7 +75,7 @@ export default function Comments(props) {
                 Is this comment helpful?
                 <span>{comment.likes}</span>
                 <div class="like-icon" onClick={ handleLike }></div>
-                <span>{comment.disLikes}</span>
+                <span>{comment.dislikes}</span>
                 <div class="dislike-icon" onClick={ handledisLike }></div>
             </div>
 

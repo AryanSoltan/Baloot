@@ -5,7 +5,7 @@ import logo from "../../assets/images/ballot.png";
 import './NavbarLogo.css'
 import axios from "axios";
 
- import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
+import {ExampleContext} from './../../Pages/Commodity/incdecButton.js';
 import {Context} from "../../App";
 
 function HeaderInfoPart() {
@@ -29,11 +29,12 @@ function HeaderInfoPart() {
 
                 const response = await axios.get("/users/"+userId+"/buyList");
                 const userBuyList = response.data.content;
+                console.log("bulist is ");
                 console.log(userBuyList);
                 var cardCount = 0;
                 for (let i = 0; i < userBuyList.allCommodities.length; i++) {
                     console.log(userBuyList.allCommodities[i]);
-                    cardCount += userBuyList.allCommodities[i].numInStock;
+                    cardCount += userBuyList.allCommodities[i].countInBuylist;
                 }
 
                 setitemCounts(cardCount);

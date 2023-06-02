@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/BalootServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Managers/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/BalootServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/UserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/Managers/UserManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/Cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,12 +18,26 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="50de5ae0-4acf-45a3-9d5c-e3ae73613f30" />
+        <option name="url" value="https://github.com/AryanSoltan/Baloot" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -55,13 +62,14 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;CA6&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/aryan/Desktop/University/online_courses/Semester8/IE/Projects/Baloot&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;3a2e2ec9435805b6ced0fc44abba7cb2&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }

@@ -18,12 +18,13 @@ export default function SuggestionsPart() {
     const [fetchedCommodities, setFetchedCommodities] = useState();
 
     const { id } = useParams();
+    const userId = localStorage.getItem('userId');
 
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get("commodities/"+id+'/suggestions');
+                const response = await axios.get("commodities/"+id+'/'+userId+'/suggestions');
                 const commodititesList = response.data.content;
                 console.log('commodities list');
                 console.log(commodititesList);

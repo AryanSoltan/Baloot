@@ -1,8 +1,13 @@
 package Baloot.Managers;
 
+import Baloot.Commodity;
 import Baloot.DiscountCode;
 import Baloot.Exception.InvalidDiscountCode;
+import jakarta.persistence.EntityManager;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PaymentManager {
@@ -20,19 +25,26 @@ public class PaymentManager {
         discountCodesList.put(discountCode.getCode(),discountCode);
     }
 
-    public boolean discountCodeIsValid(String code)
-    {
-        if(discountCodesList.containsKey(code))
-            return true;
-        return false;
-    }
+//    public boolean discountCodeIsValid(String code, EntityManager entityManager)
+//    {
+//        var codes = entityManager.createQuery("select d FROM DiscountCode d WHERE d.discountCode =: code").setParameter("code", code).getResultList();
+//        if (codes.isEmpty())
+//            return false;
+//        else
+//            return true;
+//
+//    }
 
-    public DiscountCode getDiscountCode(String code) throws Exception
+    public DiscountCode getDiscountCode(String code,EntityManager entityManager) throws Exception
     {
-        if(!discountCodesList.containsKey(code))
-        {
+        System.out.println("heree");
+        var codes = entityManager.createQuery("select d FROM DiscountCode d WHERE d.discountCode =: code").setParameter("code", code).getResultList();
+        System.out.println("heree"+codes);
+        System.out.println("heree"+(DiscountCode) codes.get(0));
+        if (codes.isEmpty())
             throw new InvalidDiscountCode(code);
-        }
-        return discountCodesList.get(code);
+        else
+            return (DiscountCode) codes.get(0);
+
     }
 }

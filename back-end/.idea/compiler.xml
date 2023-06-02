@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="baloot" target="14" />
+      <module name="baloot6" target="17" />
       <module name="Bolbolestan05" target="1.8" />
       <module name="iemdb" target="14" />
     </bytecodeTargetLevel>
@@ -20,6 +21,7 @@
       <module name="Baloot" options="-parameters" />
       <module name="Bolbolestan05" options="-parameters" />
       <module name="baloot" options="-parameters" />
+      <module name="baloot6" options="-parameters" />
       <module name="iemdb" options="-parameters" />
     </option>
   </component>
