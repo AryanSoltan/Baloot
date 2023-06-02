@@ -15,8 +15,9 @@ export default function CommentForm(props) {
         try {
             console.log('in hnadle submit');
             console.log(commentText);
+            console.log(userId);
             const data = { userId: userId, comment: commentText };
-            const response = await axios.post('/commodities/'+commodityId+'/comment/', data);
+            const response = await axios.post('/commodities/'+commodityId+'/comment', data);
             const newComment = response.data.content;
             addComment(newComment);
             setCommentText('');

@@ -14,9 +14,11 @@ export default function RateMovie(props) {
         try {
             console.log('in handle rate');
             console.log(rate);
+            console.log(commodityId);
+            console.log(userId);
 
-            const data = {rate}
-            const response = await axios.post('/commodities/'+ commodityId +'/'+userId+ '/rate/', data);
+            const data = {rate:rate}
+            const response = await axios.post('/commodities/'+ commodityId +'/'+userId+ '/rate', data);
 
             // if(response.data.status){
             console.log("response.data.content");

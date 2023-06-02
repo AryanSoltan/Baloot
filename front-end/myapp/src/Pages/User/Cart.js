@@ -27,6 +27,7 @@ export default function UserInfo()
 {
 
     const [buyListCommodities, setBuyListCommodities] = useState();
+    const [buyListID, setBuyListID] = useState();
     const [purchesedListCommodities, setPurchasedListCommodities] = useState();
     const changePage = useState();
     const [discountText, setDiscountText] = useState('');
@@ -44,21 +45,12 @@ export default function UserInfo()
 
         async function fetchData() {
 
-
-            // try {
-            //     const response = await axios.post("/users/" + "1/" + "add",
-            //         {userId: userId,
-            //         }
-            //     );
-            // } catch (e) {
-            //     console.log(e);
-            // }
-
             try {
                 const response = await axios.get("/users/" + userId +"/buyList");
                 const commodititesList = response.data.content;
                 console.log(commodititesList);
                 setTotalPrice(commodititesList.buylistPrice);
+                setBuyListID(commodititesList.buylistId);
 
                 setBuyListCommodities(commodititesList.allCommodities);
                 console.log(commodititesList.allCommodities)
@@ -87,9 +79,9 @@ export default function UserInfo()
 
     const handlePayment = (e) => {
 
-        const data = { discountCode: discountText };
+        const data = { discountCode: discountText , buylistID:buyListID};
         // axios.post('/users/'+userId+'/buyList/applyDiscount/', data);
-        axios.post("/users/" + userId + "/buyList/submit/",data).then((resp) => {
+        axios.post("/users/" + userId + "/buyList/submit",data).then((resp) => {
 
             if(resp.data.statusCode === 200) {
                 window.location.reload();
@@ -119,7 +111,7 @@ export default function UserInfo()
 
 
             const data = { discountCode: discountText };
-            const response = await axios.post('/users/'+userId+'/buyList/validateDiscount/', data);
+            const response = await axios.post('/users/'+userId+'/buyList/validateDiscount', data);
             const discountCode = response.data.content;
 
             console.log('in hnadle discount');
@@ -158,15 +150,15 @@ export default function UserInfo()
                 {Array.isArray(buyListCommodities) && buyListCommodities.length?
                     buyListCommodities.map((item) => (
                         <tr className = "cart-buy-item">
-                            <td><img src = {item.commodity.image}></img></td>
-                            <td><p>{item.commodity.name}</p></td>
-                            <td><p>{item.commodity.categories}</p></td>
-                            <td><p>${item.commodity.price}</p></td>
-                            <td><p>{item.commodity.providerId}</p></td>
-                            <td><h5 className="col-yellow">{item.commodity.rating}</h5></td>
-                            <td><h5 className="col-red">{item.commodity.inStock}</h5></td>
+                            <td><img src = {item.image}></img></td>
+                            <td><p>{item.name}</p></td>
+                            <td><p>{item.categories}</p></td>
+                            <td><p>${item.price}</p></td>
+                            <td><p>{item.providerId}</p></td>
+                            <td><h5 className="col-yellow">{item.rating}</h5></td>
+                            <td><h5 className="col-red">{item.inStock}</h5></td>
                             <td>
-                                <IncrementDecrement className = "button-user" commodityId={item.commodity.id} currentCount={item.numInStock} max={item.commodity.inStock}/>
+                                <IncrementDecrement className = "button-user" commodityId={item.id} currentCount={item.countInBuylist} max={item.inStock}/>
                             </td>
                         </tr>
 
@@ -192,10 +184,10 @@ export default function UserInfo()
                                 <ul>{buyListCommodities && buyListCommodities.map(item =>
                                     <li>
                                         <div className="items-row">
-                                        {'\u2022'} {item.commodity.name} * {item.numInStock}
+                                        {'\u2022'} {item.name} * {item.countInBuylist}
                                     </div>
                                         <div className="price-row">
-                                            ${item.commodity.price}
+                                            ${item.price}
                                         </div>
                                     </li> )}</ul>
                             <div className="discount-input-part">
@@ -271,15 +263,15 @@ export default function UserInfo()
             {purchesedListCommodities &&
                 purchesedListCommodities.map((item) => (
                     <tr className = "cart-buy-item">
-                        <td><img src = {item.commodity.image}></img></td>
-                        <td><p>{item.commodity.name}</p></td>
-                        <td><p>{item.commodity.categories}</p></td>
-                        <td><p>${item.commodity.price}</p></td>
-                        <td><p>{item.commodity.providerId}</p></td>
-                        <td><h5 className="col-yellow">{item.commodity.rating}</h5></td>
-                        <td><h5 className="col-red">{item.commodity.inStock}</h5></td>
+                        <td><img src = {item.image}></img></td>
+                        <td><p>{item.name}</p></td>
+                        <td><p>{item.categories}</p></td>
+                        <td><p>${item.price}</p></td>
+                        <td><p>{item.providerId}</p></td>
+                        <td><h5 className="col-yellow">{item.rating}</h5></td>
+                        <td><h5 className="col-red">{item.inStock}</h5></td>
                         <td>
-                            <p>{item.numInStock}</p>
+                            <p>{item.countInBuylist}</p>
                         </td>
                     </tr>
 

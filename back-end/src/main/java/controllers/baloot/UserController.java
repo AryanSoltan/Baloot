@@ -1,6 +1,7 @@
 package controllers.baloot;
 
-import Baloot.BalootServer;
+import Baloot.DTOObjects.*;
+import Repository.BalootServerRepo;
 import Baloot.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import controllers.baloot.ReposnsePackage.Response;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -21,7 +24,7 @@ public class UserController {
             var loginInfo = new ObjectMapper().readTree(userLoginInfo);
             String username= loginInfo.get("username").asText();
             String password = loginInfo.get("password").asText();
-            BalootServer.getInstance().logIn(username,password);
+            BalootServerRepo.getInstance().logIn(username,password);
             return new Response(HttpStatus.OK.value(), "logged in",null);
 
         }
@@ -36,11 +39,12 @@ public class UserController {
 
     @RequestMapping(value="/isLogin", method = RequestMethod.POST)
     public Response isLogIn (@RequestBody String userLoginInfo) throws Exception{
-
+        var loginInfo = new ObjectMapper().readTree(userLoginInfo);
+        String username= loginInfo.get("username").asText();
+        String password = loginInfo.get("password").asText();
         try{
-            boolean isLogIn = BalootServer.getInstance().isLogIn();
+            boolean isLogIn = BalootServerRepo.getInstance().userIsLoggedIn(username, password);
             return new Response(HttpStatus.OK.value(), "logged in",isLogIn);
-
         }
         catch (Exception e)
         {
@@ -48,16 +52,17 @@ public class UserController {
         }
     }
 
-
-
     @RequestMapping(value="/logout",method = RequestMethod.POST)
     public Response logOut (@RequestBody String userLoginInfo) throws Exception{
+        var loginInfo = new ObjectMapper().readTree(userLoginInfo);
+        String username= loginInfo.get("username").asText();
+        String password = loginInfo.get("password").asText();
         try {
-            if (BalootServer.getInstance().getLoggedInUser() == null) {
+            if (BalootServerRepo.getInstance().userIsLoggedIn(username, password) == false) {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not logged in");
 
             } else {
-                BalootServer.getInstance().logOut();
+                BalootServerRepo.getInstance().logOut(username, password);
                 return new Response(HttpStatus.OK.value(),"logged out",null);
             }
         }
@@ -67,44 +72,45 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
+//
     @RequestMapping(value="/users/{id}/buyList",method = RequestMethod.GET)
     public Response getBuyList (@PathVariable(value="id") String username ) throws Exception{
         System.out.println("in back");
 
         try{
-            return new Response(HttpStatus.OK.value(), "buylist sent",BalootServer.getInstance().getUserBuyList(username));
+            BuyListDTO buylist = BalootServerRepo.getInstance().getUserBuyList(username);
+            return new Response(HttpStatus.OK.value(), "buylist sent",buylist);
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
-
-
+//
+//
     @RequestMapping(value="/users/{id}",method = RequestMethod.GET)
     public Response getUser (@PathVariable(value="id") String username ) throws Exception{
         try{
-            return new Response(HttpStatus.OK.value(), "user sent",BalootServer.getInstance().getUserById(username));
+            return new Response(HttpStatus.OK.value(), "user sent",BalootServerRepo.getInstance().getUserById(username));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
+//
+    @RequestMapping(value="/users/{id}/buyList/applyDiscount",method = RequestMethod.POST)
+    public Response applyDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+        try{
 
-//    @RequestMapping(value="/users/{id}/buyList/applyDiscount",method = RequestMethod.POST)
-//    public Response applyDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
-//        try{
-//
-//
-//            var info = new ObjectMapper().readTree(reqInfo);
-//            String code = info.get("discountCode").asText();
-//            BalootServer.getInstance().applyDiscountCode(username,code);z
-//            return new Response(HttpStatus.OK.value(), "discount added",null);
-//        }
-//        catch (Exception e){
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
-//        }
-//    }
+
+            var info = new ObjectMapper().readTree(reqInfo);
+            String code = info.get("discountCode").asText();
+            //BalootServerRepo.getInstance().applyDiscountCode(username,code);
+            return new Response(HttpStatus.OK.value(), "discount added",null);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
 
     @RequestMapping(value="/users/{id}/buyList/validateDiscount",method = RequestMethod.POST)
     public Response validateDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
@@ -112,21 +118,26 @@ public class UserController {
             var info = new ObjectMapper().readTree(reqInfo);
             String code = info.get("discountCode").asText();
 
-            return new Response(HttpStatus.OK.value(), "discount added",BalootServer.getInstance().validateDiscountCode(username,code));
+            return new Response(HttpStatus.OK.value(), "discount added",BalootServerRepo.getInstance().validateDiscountCode(username,code));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
-
+//
     @RequestMapping(value="/users/{id}/buyList/submit",method = RequestMethod.POST)
     public Response submitBuyList (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
         try{
             var info = new ObjectMapper().readTree(reqInfo);
             String code = info.get("discountCode").asText();
-            if(!code.equals(""))
-                BalootServer.getInstance().applyDiscountCode(username,code);
-            BalootServer.getInstance().handlePaymentUser(username);
+            String buylistID = info.get("buylistID").asText();
+            System.out.println("in buylist handle");
+            if(!code.equals("")) {
+                System.out.println("error in validation");
+                BalootServerRepo.getInstance().validateDiscountCode(username, code);
+            }
+            System.out.println("after apply discount code");
+            BalootServerRepo.getInstance().handlePayment(username, code);
             return new Response(HttpStatus.OK.value(), "submitted",null);
         }
         catch (Exception e){
@@ -142,7 +153,7 @@ public class UserController {
             var info = new ObjectMapper().readTree(reqInfo);
             String username = info.get("userId").asText();
 
-            BalootServer.getInstance().removeFromBuyList(username,Integer.valueOf(commodityID));
+            BalootServerRepo.getInstance().updateCommodityCountInUserBuyList(username,Integer.valueOf(commodityID),-1);
             return new Response(HttpStatus.OK.value(), "suggestions sent",null);
         }
         catch (Exception e){
@@ -154,9 +165,7 @@ public class UserController {
         try {
             var info = new ObjectMapper().readTree(reqInfo);
             String username = info.get("userId").asText();
-
-            BalootServer.getInstance().addCommidityToUserBuyList(username , Integer.valueOf(commodityID));
-
+            BalootServerRepo.getInstance().updateCommodityCountInUserBuyList(username , Integer.valueOf(commodityID),+1);
             return new Response(HttpStatus.OK.value(), "commodity added", null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,7 +178,7 @@ public class UserController {
         try{
             var info = new ObjectMapper().readTree(creditInfo);
             String credit = info.get("credit").asText();
-            BalootServer.getInstance().addCredit(username, credit);
+            BalootServerRepo.getInstance().addCredit(username,  credit);
             return new Response(HttpStatus.OK.value(), "credit added",null);
         }
         catch (Exception e){
@@ -182,14 +191,11 @@ public class UserController {
         try{
             var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
             String username= signUpInfo.get("username").asText();
-
             String password = signUpInfo.get("password").asText();
-
             String birthDate = signUpInfo.get("birthDate").asText();
-
             String address = signUpInfo.get("address").asText();
             String email = signUpInfo.get("email").asText();
-            BalootServer.getInstance().addUser(new User(username, password, email, birthDate, address, 0));
+            BalootServerRepo.getInstance().addUser(new User(username, password, email, birthDate, address, 0));
             return new Response(HttpStatus.OK.value(), "sign up successfuly",null);
 
         }
@@ -201,18 +207,18 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not found");
         }
     }
-
+//
     @RequestMapping(value="/users/{id}/purchasedList",method = RequestMethod.GET)
     public Response getPurchasedList (@PathVariable(value="id") String username ) throws Exception{
 
         try{
-            return new Response(HttpStatus.OK.value(), "purchasedlist sent",BalootServer.getInstance().getUserPurchasedList(username));
+            return new Response(HttpStatus.OK.value(), "purchasedlist sent",BalootServerRepo.getInstance().getUserPurchesedBuyList(username));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
-
+//
     @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.POST)
     public Response getCommodityNum (@RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
 
@@ -220,7 +226,7 @@ public class UserController {
         String username= signUpInfo.get("username").asText();
 
         try{
-            return new Response(HttpStatus.OK.value(), "",BalootServer.getInstance().getUserNumBought(username, Integer.valueOf(commodityId)));
+            return new Response(HttpStatus.OK.value(), "",BalootServerRepo.getInstance().getUserNumBought(username, Integer.valueOf(commodityId)));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());

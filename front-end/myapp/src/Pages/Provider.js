@@ -64,7 +64,7 @@ export default function Provider(props) {
             <div className="info-container">
                 <img className="provider-image" src={provider.image} />
                 <div className="date-info">since {provider.registryDate && provider.registryDate.split('-')[0]}</div>
-                <div className="providerName">{provider.providerName}</div>
+                <div className="providerName">{provider.name}</div>
 
             </div>
 

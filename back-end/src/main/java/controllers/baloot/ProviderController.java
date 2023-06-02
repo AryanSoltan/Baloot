@@ -1,9 +1,7 @@
 package controllers.baloot;
 
-
-
-import Baloot.BalootServer;
 import Baloot.User;
+import Repository.BalootServerRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
@@ -21,7 +19,7 @@ public class ProviderController {
     @RequestMapping(value="/providers/{id}",method = RequestMethod.GET)
     public Response getUser (@PathVariable(value="id") String username ) throws Exception{
         try{
-            return new Response(HttpStatus.OK.value(), "user sent",BalootServer.getInstance().getProviderById(Integer.valueOf(username)));
+            return new Response(HttpStatus.OK.value(), "user sent", BalootServerRepo.getInstance().getProviderById(Integer.valueOf(username)));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
