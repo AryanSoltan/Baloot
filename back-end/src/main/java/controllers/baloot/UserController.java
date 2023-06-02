@@ -1,17 +1,16 @@
 package controllers.baloot;
 
 import Baloot.DTOObjects.*;
+import Baloot.Exception.EmailAlreadyExist;
+import Baloot.Exception.UserAlreadyExistError;
 import Repository.BalootServerRepo;
 import Baloot.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import controllers.baloot.ReposnsePackage.Response;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -202,9 +201,19 @@ public class UserController {
         catch( JsonProcessingException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+        catch (UserAlreadyExistError e)
+        {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getClass().getName());
+        }
+        catch (EmailAlreadyExist e)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getClass().getName());
+        }
         catch (Exception e)
         {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getClass().getName());
+//            throw new ResponseStatusException(HttpStatus.,"user not found");
+
         }
     }
 //

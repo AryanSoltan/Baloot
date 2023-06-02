@@ -5,6 +5,7 @@ package Repository;
 import Baloot.*;
 import Baloot.DTOObjects.*;
 import Baloot.Exception.*;
+import com.google.common.hash.Hashing;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -12,6 +13,7 @@ import Baloot.Managers.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +66,7 @@ public class BalootServerRepo {
             entityManager.getTransaction().rollback();
             throw new UserNotExist(username);
         } else {
+            password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
             if (password.equals(user.getPassword())) {
                 sessions.put(user.getName(), user);
                 return;
@@ -110,15 +113,21 @@ public class BalootServerRepo {
 
 
     public void addUser(User newUser) throws Exception {
+        newUser.passwordGetHash();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
+        if(isEmailExist(newUser.getEmail(), entityManager))
+        {
+            entityManager.getTransaction().commit();
+            throw new EmailAlreadyExist(newUser.getEmail());
+        }
         try {
             entityManager.persist(newUser);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             throw new UserAlreadyExistError(newUser.getName());
         }
-        entityManager.getTransaction().commit();
     }
 
     public BuyListDTO getUserBuyList(String userName) throws Exception { //done
@@ -287,6 +296,16 @@ public class BalootServerRepo {
         return suggestions;
 
 
+    }
+
+    public boolean isEmailExist(String email, EntityManager entityManager) throws Exception
+    {
+        List users = entityManager.createQuery("SELECT u FROM User u where u.email=:userEmail")
+                .setParameter("userEmail", email).getResultList();
+        if (users.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     //todo

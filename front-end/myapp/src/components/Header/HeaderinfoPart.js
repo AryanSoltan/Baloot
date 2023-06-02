@@ -5,11 +5,8 @@ import logo from "../../assets/images/ballot.png";
 import './NavbarLogo.css'
 import axios from "axios";
 
-<<<<<<< HEAD
-// import {ExampleContext} from '/home/saba/Saba/UT/Term8/IE/ca5-git/Baloot/front-end/myapp/src/Pages/Commodity/incdecButton.js';
-=======
-import {ExampleContext} from './../../Pages/Commodity/incdecButton.js';
->>>>>>> 4edbc0c21c72cb967694c32245fbea7809c54ca3
+import {ExampleContext} from '../../Pages/Commodity/incdecButton.js';
+
 import {Context} from "../../App";
 
 function HeaderInfoPart() {

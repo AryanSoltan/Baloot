@@ -65,8 +65,14 @@ export default class SignUp extends React.Component {
                     window.location.href = "http://localhost:3000/commodities"
                 }
             }).catch(error => {
-                toast.error("Something went wrong!");
-                console.log(error.toJSON().message)
+                const errorMessage = error.response.data.error;
+                if (errorMessage === "Unauthorized") {
+                    toast.error("This username already exist");
+                }
+                 if (errorMessage === "Not Found") {
+                    toast.error("This email already exist");
+                }
+                console.log(errorMessage);
             })
         }
     }
