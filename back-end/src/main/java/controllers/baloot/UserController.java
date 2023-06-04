@@ -8,6 +8,7 @@ import Baloot.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class UserController {
 //    @Autowired
 //    private AuthenticationManager authenticationManager;
 
-//    @Autowired
-//    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public Response logIn (@RequestBody String userLoginInfo) throws Exception{
@@ -35,12 +36,10 @@ public class UserController {
             var loginInfo = new ObjectMapper().readTree(userLoginInfo);
             String email= loginInfo.get("email").asText();
             String password = loginInfo.get("password").asText();
-            System.out.println(email);
-            System.out.println(password);
 
             BalootServerRepo.getInstance().logIn(email,password);
-//            String jwtToken = jwtTokenUtil.generateToken(email);
-            return new Response(HttpStatus.OK.value(), "logged in",new JwtResponseDTO(email, "a"));
+            String jwtToken = jwtTokenUtil.generateToken(email);
+            return new Response(HttpStatus.OK.value(), "logged in", jwtToken);
 
         }
         catch( JsonProcessingException e){
@@ -228,7 +227,7 @@ public class UserController {
             String address = signUpInfo.get("address").asText();
             String email = signUpInfo.get("email").asText();
             BalootServerRepo.getInstance().addUser(new User(username, password, email, birthDate, address, 0));
-            return new Response(HttpStatus.OK.value(), "sign up successfuly",null);
+            return new Response(HttpStatus.OK.value(), "sign up successfuly", jwtTokenUtil.generateToken(email));
 
         }
         catch( JsonProcessingException e){

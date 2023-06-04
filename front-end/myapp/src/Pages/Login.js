@@ -23,6 +23,7 @@ export default function Login() {
 
     }, []);
     const handleSubmit = async(e)=> {
+        console.log("HELOOOO");
         e.preventDefault();
         console.log("email is ");
         console.log(email);
@@ -39,38 +40,40 @@ export default function Login() {
         {
             try{
 
-            const response = await axios.post('/login', {
-                email: email,
-                password: password
-            })
+                const response = await axios.post('/login', {
+                    email: email,
+                    password: password
+                })
 
-            console.log(response);
+                console.log(response);
 
                 if(response.data.statusCode == 200) {
                     localStorage.setItem('userLoggedIn', true);
                     localStorage.setItem('userEmail', email);
-                    localStorage.setItem('userName', response.data)
+                    localStorage.setItem('token', response.data.content);
+                    console.log("token is: ");
+                    console.log(response.data.content);
                     console.log("resp is ");
 
                     //navigate("/commodities");
                 }
+                  try {
+                        console.log('getting username');
+                        const response = await axios.post("/username", {email: email});
+                        const username = response.data.content;
+
+                        localStorage.setItem('userId', username);
+
+                        window.location.href = "http://localhost:3000/commodities";
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
             }
 
             catch(e){
                 toast.error("password or username is wrong");
                 console.log(e.message)
-            }
-
-          try {
-                console.log('getting username');
-                const response = await axios.post("/username", {email: email});
-                const username = response.data.content;
-
-                localStorage.setItem('userId', username);
-
-                window.location.href = "http://localhost:3000/commodities";
-            } catch (e) {
-                console.log(e);
             }
         }
     }

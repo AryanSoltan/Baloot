@@ -7,15 +7,9 @@
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Vote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Repository/BalootServerRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Repository/BalootServerRepo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
