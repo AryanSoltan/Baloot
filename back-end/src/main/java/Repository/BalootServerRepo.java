@@ -66,6 +66,7 @@ public class BalootServerRepo {
         if (users.size() == 0) {
             entityManager.getTransaction().rollback();
             entityManager.getTransaction().commit();
+            entityManager.close();
             throw new UserNotExist(email);
         } else {
             User user = (User) users.get(0);
@@ -73,10 +74,12 @@ public class BalootServerRepo {
             if (password.equals(user.getPassword())) {
                 sessions.put(user.getName(), user);
                 entityManager.getTransaction().commit();
+                entityManager.close();
                 return user;
             } else {
                 entityManager.getTransaction().rollback();
                 entityManager.getTransaction().commit();
+                entityManager.close();
                 throw new IncorrectPassword();
             }
         }
@@ -114,6 +117,7 @@ public class BalootServerRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = findUserById(username, entityManager);
+        entityManager.close();
 
         return new UserDTO(user);
         //  return userManager.getUserById(username, entityManagerFactory);
@@ -123,6 +127,7 @@ public class BalootServerRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Provider provider = entityManager.find(Provider.class, providerId);
+        entityManager.close();
         return provider;
         //  return userManager.getUserById(username, entityManagerFactory);
     }
@@ -136,13 +141,16 @@ public class BalootServerRepo {
         if(isEmailExist(newUser.getEmail(), entityManager))
         {
             entityManager.getTransaction().commit();
+            entityManager.close();
             throw new EmailAlreadyExist(newUser.getEmail());
         }
         try {
             entityManager.persist(newUser);
             entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
+            entityManager.close();
             throw new UserAlreadyExistError(newUser.getName());
         }
     }
@@ -150,20 +158,25 @@ public class BalootServerRepo {
     public BuyListDTO getUserBuyList(String userName) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        return userManager.getUserBuyList(userName, entityManager);
+        BuyListDTO buyListDTO = userManager.getUserBuyList(userName, entityManager);
+        entityManager.close();
+        return buyListDTO;
 
     }
 
     public BuyListDTO getUserPurchesedBuyList(String userName) throws Exception { //done
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        return userManager.getUserPurchesedBuyList(userName, entityManager);
-
+        BuyListDTO buyListDTO = userManager.getUserPurchesedBuyList(userName, entityManager);
+        entityManager.close();
+        return buyListDTO;
     }
 
     public void addCredit(String userName, String credit) throws Exception {
-        if (!credit.matches("-?(0|[1-9]\\d*)"))
+        if (!credit.matches("-?(0|[1-9]\\d*)")) {
+
             throw new InvalidCreditValue();
+        }
         double creditVal = Double.parseDouble(credit);
         if (creditVal < 1)
             throw new InvalidCreditValue();
@@ -172,6 +185,7 @@ public class BalootServerRepo {
         User user = findUserById(userName, entityManager);
         if (user == null) {
             entityManager.getTransaction().rollback();
+            entityManager.close();
             throw new UserNotExist(userName);
         } else {
             user.addCredit(creditVal);
@@ -231,6 +245,7 @@ public class BalootServerRepo {
         }
 
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public boolean commodityExistsInBuylist(BuyList buyList, int commodityId) throws Exception {
@@ -242,9 +257,12 @@ public class BalootServerRepo {
                 .setParameter("commodityId", commodityId).setParameter("buylistId", buyList.getId())
                 .getResultList();
         if (userBuylistID.isEmpty()) {
+            entityManager.close();
             return false;
-        } else
-            return true;
+        } else{
+            entityManager.close();
+
+            return true;}
     }
 
 
@@ -258,6 +276,7 @@ public class BalootServerRepo {
         entityManager.getTransaction().begin();
         ArrayList<Commodity> commodities = commodityManager.getCommoditiesByCategory(category, entityManager);
         entityManager.getTransaction().commit();
+        entityManager.close();
         return commodities;
     }
 
@@ -279,6 +298,7 @@ public class BalootServerRepo {
         entityManager.getTransaction().begin();
         ArrayList<Commodity> commodities = commodityManager.getCommodityByRangePrice(startPrice, endPrice, entityManager);
         entityManager.getTransaction().commit();
+        entityManager.close();
         return commodities;
     }
 
@@ -288,20 +308,26 @@ public class BalootServerRepo {
         User user = userManager.getUserByUseremail(comment.getUserEmail(), entityManager);
         commodityManager.addCommentToCommodity(comment, comment.getId(), user.getName(), entityManager);
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void rateCommodity(String username, int commodityId, String scoreStr) throws Exception {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+
         if (!scoreStr.matches("-?(0|[1-9]\\d*)"))
             throw new InvalidRating();
         int score = Integer.parseInt(scoreStr);
         if (score < 1 || score > 10)
             throw new InvalidRating();
-        if (!userManager.doesExist(username, entityManager))
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        if (!userManager.doesExist(username, entityManager)) {
+            entityManager.close();
             throw new UserNotExist(username);
+        }
         commodityManager.rateCommodity(username, commodityId, score, entityManager);
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public List<CommodityDTO> getSuggestedCommodities(int commodityID,String username) throws Exception {
@@ -310,6 +336,7 @@ public class BalootServerRepo {
         entityManager.getTransaction().begin();
 
         List<CommodityDTO> suggestions = commodityManager.getMostSimilarCommodities(commodityID, username, entityManager);
+        entityManager.close();
         return suggestions;
 
 
@@ -346,6 +373,7 @@ public class BalootServerRepo {
         userManager.buyBuyList(user,discountCode, totalPrice,entityManager);
         commodityManager.handleBuy(username,entityManager);
         entityManager.getTransaction().commit();
+        entityManager.close();
 
     }
 
@@ -361,10 +389,11 @@ public class BalootServerRepo {
 
 
         if (userManager.userHasNotUsedCode(user, discountCode, entityManager)) {
-
+            entityManager.close();
             return new DiscountCodeDTO(discountCode);
         }
         else
+            entityManager.close();
             throw new InvalidDiscountCode(code);
     }
 
@@ -373,7 +402,7 @@ public class BalootServerRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List commoditiesList = commodityManager.getAllCommodities(entityManager);
-
+        entityManager.close();
         return commoditiesList;
     }
 
@@ -383,7 +412,7 @@ public class BalootServerRepo {
         CommodityDTO commodity = findCommodityById(id,entityManager);
         List<CommentDTO> comments = getCommodityComments(id);
         commodity.setComments(comments);
-
+        entityManager.close();
         return commodity;
     }
 
@@ -392,11 +421,8 @@ public class BalootServerRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List<CommentDTO> comments = commodityManager.getCommodityComments(commodityId, entityManager);
-
+        entityManager.close();
         return comments;
-
-
-
     }
 
 
@@ -405,7 +431,9 @@ public class BalootServerRepo {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        return userManager.countOfCommodityInBuylist( username, commodityId, entityManager);
+        int numBought = userManager.countOfCommodityInBuylist( username, commodityId, entityManager);
+        entityManager.close();
+        return numBought;
     }
 
     public CommentDTO addRatingToComment(int commentId, String userName, int rate) throws Exception { //done
@@ -432,6 +460,7 @@ public class BalootServerRepo {
             vote.setVote(rate);
         }
         entityManager.getTransaction().commit();
+        entityManager.close();
 
         return new CommentDTO(comment);
     }
@@ -449,9 +478,11 @@ public class BalootServerRepo {
             entityManager.persist(com);
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
+            entityManager.close();
             throw new Exception(e.getMessage());
         }
         entityManager.getTransaction().commit();
+        entityManager.close();
 
         return new CommentDTO(com);
 
@@ -467,9 +498,11 @@ public class BalootServerRepo {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
+            entityManager.close();
             throw new Exception();
         }
         entityManager.getTransaction().commit();
+        entityManager.close();
         return (User) users.get(0);
     }
 }
