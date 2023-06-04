@@ -16,7 +16,7 @@ import java.util.List;
 public class CommodityController {
 
     @RequestMapping(value="/commodities",method = RequestMethod.GET)
-    public Response getCommodities(){
+    public Response getCommodities(@RequestHeader(value = "Authorization") String authJWT){
         List commodities = BalootServerRepo.getInstance().getAllCommodities();
         System.out.println("commodities are "+commodities);
         try{

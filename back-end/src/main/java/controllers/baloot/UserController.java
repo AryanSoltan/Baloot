@@ -26,8 +26,8 @@ public class UserController {
 //    @Autowired
 //    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+//    @Autowired
+//    private JwtTokenUtil jwtTokenUtil;
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public Response logIn (@RequestBody String userLoginInfo) throws Exception{
@@ -38,7 +38,7 @@ public class UserController {
             String password = loginInfo.get("password").asText();
 
             BalootServerRepo.getInstance().logIn(email,password);
-            String jwtToken = jwtTokenUtil.generateToken(email);
+            String jwtToken = JwtTokenUtil.generateToken(email);
             return new Response(HttpStatus.OK.value(), "logged in", jwtToken);
 
         }
@@ -227,7 +227,7 @@ public class UserController {
             String address = signUpInfo.get("address").asText();
             String email = signUpInfo.get("email").asText();
             BalootServerRepo.getInstance().addUser(new User(username, password, email, birthDate, address, 0));
-            return new Response(HttpStatus.OK.value(), "sign up successfuly", jwtTokenUtil.generateToken(email));
+            return new Response(HttpStatus.OK.value(), "sign up successfuly", JwtTokenUtil.generateToken(email));
 
         }
         catch( JsonProcessingException e){
@@ -261,7 +261,7 @@ public class UserController {
     }
 //
     @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.POST)
-    public Response getCommodityNum (@RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
+    public Response getCommodityNum (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
 
         var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
         String username= signUpInfo.get("username").asText();
