@@ -7,16 +7,14 @@
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Exception/IncorrectPassword.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/CommodityInBuyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Baloot/Vote.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/ExternalRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Baloot/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/target/classes/Repository/BalootServerRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Repository/BalootServerRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Repository/ExternalRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Repository/ExternalRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/components/Header/HeaderinfoPart.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,6 +144,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Baloot$Main.ic" NAME="Main Coverage Results" MODIFIED="1685609169582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

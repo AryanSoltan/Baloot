@@ -25,7 +25,7 @@ public class CommodityInBuyList {
 
     Integer numInStock;
 
-    boolean isBought;
+    boolean isBought = false;
 
     public CommodityInBuyList(User inputuser, Commodity inputCommodity,BuyList inputbuylist, Integer inputNumInStock) {
         user = inputuser;

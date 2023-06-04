@@ -7,24 +7,40 @@ import Repository.BalootServerRepo;
 import Baloot.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import controllers.baloot.ReposnsePackage.Response;
 import org.springframework.web.server.ResponseStatusException;
+import JWTTokenHandler.*;
+import org.springframework.security.authentication.AuthenticationManager;
+
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
+@ComponentScan(basePackages ={"JWTTokenHandler"})
 public class UserController {
+
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
+
+//    @Autowired
+//    private JwtTokenUtil jwtTokenUtil;
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public Response logIn (@RequestBody String userLoginInfo) throws Exception{
 
         try{
             var loginInfo = new ObjectMapper().readTree(userLoginInfo);
-            String username= loginInfo.get("username").asText();
+            String email= loginInfo.get("email").asText();
             String password = loginInfo.get("password").asText();
-            BalootServerRepo.getInstance().logIn(username,password);
-            return new Response(HttpStatus.OK.value(), "logged in",null);
+            System.out.println(email);
+            System.out.println(password);
+
+            BalootServerRepo.getInstance().logIn(email,password);
+//            String jwtToken = jwtTokenUtil.generateToken(email);
+            return new Response(HttpStatus.OK.value(), "logged in",new JwtResponseDTO(email, "a"));
 
         }
         catch( JsonProcessingException e){
@@ -33,6 +49,23 @@ public class UserController {
         catch (Exception e)
         {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not found");
+        }
+    }
+
+    @RequestMapping(value="/username",method = RequestMethod.POST)
+    public Response getUserName (@RequestBody String userLoginInfo) throws Exception{
+        System.out.println("in getting username");
+
+        var emailInfo = new ObjectMapper().readTree(userLoginInfo);
+        String email = emailInfo.get("email").asText();
+
+
+        try{
+            User user = BalootServerRepo.getInstance().getUserByEmail(email);
+            return new Response(HttpStatus.OK.value(), "userame sent", user.getName());
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
 

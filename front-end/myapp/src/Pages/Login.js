@@ -14,7 +14,7 @@ import axios from 'axios'
 export default function Login() {
 
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     useEffect(() => {
 
@@ -24,10 +24,10 @@ export default function Login() {
     }, []);
     const handleSubmit = async(e)=> {
         e.preventDefault();
-        console.log("username is ");
-        console.log(username);
+        console.log("email is ");
+        console.log(email);
         console.log(password);
-        if(!username){
+        if(!email){
             toast.error('should fill the username part');
             return
         }
@@ -40,7 +40,7 @@ export default function Login() {
             try{
 
             const response = await axios.post('/login', {
-                username: username,
+                email: email,
                 password: password
             })
 
@@ -48,16 +48,29 @@ export default function Login() {
 
                 if(response.data.statusCode == 200) {
                     localStorage.setItem('userLoggedIn', true);
-                    localStorage.setItem('userId', username);
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('userName', response.data)
                     console.log("resp is ");
 
-                     window.location.href = "http://localhost:3000/commodities";
                     //navigate("/commodities");
                 }
             }
+
             catch(e){
                 toast.error("password or username is wrong");
                 console.log(e.message)
+            }
+
+          try {
+                console.log('getting username');
+                const response = await axios.post("/username", {email: email});
+                const username = response.data.content;
+
+                localStorage.setItem('userId', username);
+
+                window.location.href = "http://localhost:3000/commodities";
+            } catch (e) {
+                console.log(e);
             }
         }
     }
@@ -81,9 +94,9 @@ export default function Login() {
 
                     <h1>Sign in Form </h1>
 
-                    <p>Username</p>
+                    <p>Email</p>
 
-                    <input type="text" placeholder="Enter Username" name="username" id="username" onChange={e => { setUsername(e.target.value) }}/>
+                    <input type="text" placeholder="Enter Email" name="email" id="email" onChange={e => { setEmail(e.target.value) }}/>
                     <br/>
                     <br/>
                     <p>Password</p>

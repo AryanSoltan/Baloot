@@ -57,25 +57,41 @@ public class BalootServerRepo {
         paymentManager = new PaymentManager();
     }
 
-    public void logIn(String username, String password) throws Exception {
+    public User logIn(String email, String password) throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        User user = entityManager.find(User.class, username);
-        if (user == null) {
+        List users = entityManager.createQuery("SELECT u FROM User u where u.email=:userEmail")
+                .setParameter("userEmail", email).getResultList();
+        if (users.size() == 0) {
             entityManager.getTransaction().rollback();
-            throw new UserNotExist(username);
+            entityManager.getTransaction().commit();
+            throw new UserNotExist(email);
         } else {
+            User user = (User) users.get(0);
             password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
             if (password.equals(user.getPassword())) {
                 sessions.put(user.getName(), user);
-                return;
+                entityManager.getTransaction().commit();
+                return user;
             } else {
+                entityManager.getTransaction().rollback();
+                entityManager.getTransaction().commit();
                 throw new IncorrectPassword();
             }
         }
+    }
 
-
+    private User getUserByEmail(String userEmail,EntityManager entityManager) throws Exception{
+        List users = entityManager.createQuery("SELECT u FROM User u where u.email=:userEmail")
+                .setParameter("userEmail", userEmail).getResultList();
+        if (users.isEmpty()) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            throw new Exception();
+        }
+        return (User) users.get(0);
     }
 
     public boolean userIsLoggedIn(String username, String password) throws Exception {
@@ -116,6 +132,7 @@ public class BalootServerRepo {
         newUser.passwordGetHash();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
+//        System.out.println(newUser.getEmail());
         if(isEmailExist(newUser.getEmail(), entityManager))
         {
             entityManager.getTransaction().commit();
@@ -441,6 +458,19 @@ public class BalootServerRepo {
     }
 
 
-
+    public User getUserByEmail(String email) throws Exception {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List users = entityManager.createQuery("SELECT u FROM User u where u.email=:userEmail")
+                .setParameter("userEmail", email).getResultList();
+        if (users.isEmpty()) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            throw new Exception();
+        }
+        entityManager.getTransaction().commit();
+        return (User) users.get(0);
+    }
 }
 
