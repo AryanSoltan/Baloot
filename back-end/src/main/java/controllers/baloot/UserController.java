@@ -17,6 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 import JWTTokenHandler.*;
 import org.springframework.security.authentication.AuthenticationManager;
 
+import java.util.Objects;
+
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -88,25 +90,34 @@ public class UserController {
         var loginInfo = new ObjectMapper().readTree(userLoginInfo);
         String username= loginInfo.get("username").asText();
         String password = loginInfo.get("password").asText();
-        try {
-            if (BalootServerRepo.getInstance().userIsLoggedIn(username, password) == false) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not logged in");
-
-            } else {
-                BalootServerRepo.getInstance().logOut(username, password);
+//        try {
+//            if (BalootServerRepo.getInstance().userIsLoggedIn(username, password) == false) {
+//                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"user not logged in");
+//
+//            } else {
+//                BalootServerRepo.getInstance().logOut(username, password);
                 return new Response(HttpStatus.OK.value(),"logged out",null);
-            }
+//            }
         }
 
-        catch (Exception e)
-        {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-    }
+//        catch (Exception e)
+//        {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
+//    }
 //
     @RequestMapping(value="/users/{id}/buyList",method = RequestMethod.GET)
-    public Response getBuyList (@PathVariable(value="id") String username ) throws Exception{
+    public Response getBuyList (@RequestHeader(value = "Authorization") String authJWT, @PathVariable(value="id") String username ) throws Exception{
         System.out.println("in back");
+
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
 
         try{
             BuyListDTO buylist = BalootServerRepo.getInstance().getUserBuyList(username);
@@ -129,7 +140,17 @@ public class UserController {
     }
 //
     @RequestMapping(value="/users/{id}/buyList/applyDiscount",method = RequestMethod.POST)
-    public Response applyDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+    public Response applyDiscount (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+
         try{
 
 
@@ -144,7 +165,16 @@ public class UserController {
     }
 
     @RequestMapping(value="/users/{id}/buyList/validateDiscount",method = RequestMethod.POST)
-    public Response validateDiscount (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+    public Response validateDiscount (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+
         try{
             var info = new ObjectMapper().readTree(reqInfo);
             String code = info.get("discountCode").asText();
@@ -157,7 +187,15 @@ public class UserController {
     }
 //
     @RequestMapping(value="/users/{id}/buyList/submit",method = RequestMethod.POST)
-    public Response submitBuyList (@RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+    public Response submitBuyList (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
         try{
             var info = new ObjectMapper().readTree(reqInfo);
             String code = info.get("discountCode").asText();
@@ -178,11 +216,20 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/users/{commodityID}/remove",method = RequestMethod.POST)
-    public Response removeFromBuylist (@RequestBody String reqInfo,@PathVariable(value="commodityID") String commodityID) throws Exception{
+    @RequestMapping(value="/users/{id}{commodityID}/remove",method = RequestMethod.POST)
+    public Response removeFromBuylist (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String reqInfo,@PathVariable(value="id") String username , @PathVariable(value="commodityID") String commodityID) throws Exception{
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
         try{
             var info = new ObjectMapper().readTree(reqInfo);
-            String username = info.get("userId").asText();
+
+//            String username = info.get("userId").asText();
 
             BalootServerRepo.getInstance().updateCommodityCountInUserBuyList(username,Integer.valueOf(commodityID),-1);
             return new Response(HttpStatus.OK.value(), "suggestions sent",null);
@@ -191,11 +238,21 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
-    @RequestMapping(value="/users/{commodityID}/add",method = RequestMethod.POST)
-    public Response addCommodityToBuyLst(@RequestBody String reqInfo, @PathVariable(value="commodityID") String commodityID) {
+    @RequestMapping(value="/users/{id}/{commodityID}/add",method = RequestMethod.POST)
+    public Response addCommodityToBuyLst(@RequestHeader(value = "Authorization") String authJWT, @RequestBody String reqInfo, @PathVariable(value="id") String username , @PathVariable(value="commodityID") String commodityID) {
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        System.out.println("in add");
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
         try {
             var info = new ObjectMapper().readTree(reqInfo);
-            String username = info.get("userId").asText();
+//            String username = info.get("userId").asText();
             BalootServerRepo.getInstance().updateCommodityCountInUserBuyList(username , Integer.valueOf(commodityID),+1);
             return new Response(HttpStatus.OK.value(), "commodity added", null);
         } catch (Exception e) {
@@ -205,7 +262,15 @@ public class UserController {
     }
 
     @RequestMapping(value="/users/{id}/buyList/addCredit",method = RequestMethod.POST)
-    public Response addCredit (@RequestBody String creditInfo ,@PathVariable(value="id") String username) throws Exception{
+    public Response addCredit (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String creditInfo ,@PathVariable(value="id") String username) throws Exception{
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
         try{
             var info = new ObjectMapper().readTree(creditInfo);
             String credit = info.get("credit").asText();
@@ -250,8 +315,15 @@ public class UserController {
     }
 //
     @RequestMapping(value="/users/{id}/purchasedList",method = RequestMethod.GET)
-    public Response getPurchasedList (@PathVariable(value="id") String username ) throws Exception{
+    public Response getPurchasedList (@RequestHeader(value = "Authorization") String authJWT, @PathVariable(value="id") String username ) throws Exception{
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
 
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
         try{
             return new Response(HttpStatus.OK.value(), "purchasedlist sent",BalootServerRepo.getInstance().getUserPurchesedBuyList(username));
         }
@@ -265,10 +337,10 @@ public class UserController {
         var tokenInfo = new ObjectMapper().readTree(userTokenInfo);
         String token = tokenInfo.get("token").asText();
         try{
-            System.out.println("1");
-            System.out.println(JwtTokenUtil.isTokenExpired(token) );
-            System.out.println("2");
-            System.out.println(JwtTokenUtil.validateTokenSigneture(token));;
+//            System.out.println("1");
+//            System.out.println(JwtTokenUtil.isTokenExpired(token) );
+//            System.out.println("2");
+//            System.out.println(JwtTokenUtil.validateTokenSigneture(token));;
             if(token != null && !JwtTokenUtil.isTokenExpired(token) && JwtTokenUtil.validateTokenSigneture(token)) {
                 return new Response(HttpStatus.OK.value(), "ok", "ok");
             }
@@ -284,7 +356,14 @@ public class UserController {
 //
     @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.POST)
     public Response getCommodityNum (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
 
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+//        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+//        if(!Objects.equals(user.getEmail(), userEmail))
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
         var signUpInfo = new ObjectMapper().readTree(userSignUpInfo);
         String username= signUpInfo.get("username").asText();
 

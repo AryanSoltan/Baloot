@@ -20,7 +20,7 @@ import java.util.List;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
-@Import(JWTFilterConfig.class)
+//@Import(JWTFilterConfig.class)
 public class BalootApplication {
     final static int PORT_NUM = 8080;
     final static String externalServerAddress = "http://5.253.25.110:5000";

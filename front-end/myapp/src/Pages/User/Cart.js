@@ -46,7 +46,8 @@ export default function UserInfo()
         async function fetchData() {
 
             try {
-                const response = await axios.get("/users/" + userId +"/buyList");
+
+                const response = await axios.get("/users/" + userId +"/buyList", {headers: {Authorization: localStorage.getItem('token')}});
                 const commodititesList = response.data.content;
                 console.log(commodititesList);
                 setTotalPrice(commodititesList.buylistPrice);
@@ -62,7 +63,7 @@ export default function UserInfo()
             }
 
             try {
-                const response = await axios.get("/users/" + userId +"/purchasedList");
+                const response = await axios.get("/users/" + userId +"/purchasedList", {headers: {Authorization: localStorage.getItem('token')}});
                 const commodititesList = response.data.content;
                 console.log(commodititesList);
 
@@ -81,7 +82,7 @@ export default function UserInfo()
 
         const data = { discountCode: discountText , buylistID:buyListID};
         // axios.post('/users/'+userId+'/buyList/applyDiscount/', data);
-        axios.post("/users/" + userId + "/buyList/submit",data).then((resp) => {
+        axios.post("/users/" + userId + "/buyList/submit",data, {headers: {Authorization: localStorage.getItem('token')}}).then((resp) => {
 
             if(resp.data.statusCode === 200) {
                 window.location.reload();
@@ -111,7 +112,7 @@ export default function UserInfo()
 
 
             const data = { discountCode: discountText };
-            const response = await axios.post('/users/'+userId+'/buyList/validateDiscount', data);
+            const response = await axios.post('/users/'+userId+'/buyList/validateDiscount', data, {headers: {Authorization: localStorage.getItem('token')}});
             const discountCode = response.data.content;
 
             console.log('in hnadle discount');

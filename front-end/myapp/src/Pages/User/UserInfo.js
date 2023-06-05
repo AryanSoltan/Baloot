@@ -81,10 +81,11 @@ export default function UserInfo()
 
         try {
             console.log("response is");
+            const tokenUser = localStorage.getItem('token');
             const response = axios.post('/users/' + userId + '/buyList/addCredit',
                 {
                     credit: credit
-                });
+                },{headers: {Authorization: tokenUser}});
 
             console.log(response);
                 window.location.reload();

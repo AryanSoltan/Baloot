@@ -4,37 +4,43 @@ import axios from 'axios';
 import { Outlet, useLocation } from "react-router-dom";
 
 export default function NeedLoginPages() {
-  const [isAuthorized, setIsAuthorized] = useState(false);
   const tokenUser = localStorage.getItem('token');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  var temp = false;
+  useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await axios.post("/authorized", { token: tokenUser });
 
-    async function fetchData() {
-    console.log("HUUUUUUUU")
-      try {
-        const response = await axios.post("/authorized", { token: tokenUser });
-        if(response.data.content === "ok")
-        {
-            console.log("WHYYYYYYYYY AAAAAA");
-            setIsAuthorized(true);
-            temp = true;
+            if(response.data.content === "not")
+            {
+                window.location.href = "http://localhost:3000/";
+            }
+            else
+            {
+                  setIsAuthenticated(true);
+//                window.location.href = "http://localhost:3000/commodities";
+                  return;
+            }
+          } catch (e) {
+            console.error(e);
+          }
         }
-        console.log(temp);
-        console.log("HELOOOOOOOOOo");
-        console.log(isAuthorized);
-        console.log(response);
-      } catch (e) {
-        console.error(e);
-      }
+        fetchData();
+    }, []);
+
+    if(isAuthenticated === true)
+    {
+        return <Outlet />;
     }
-  console.log("NAAAAAAAA");
 
-    fetchData();
-
-  console.log(temp);
-  if (!temp) {
-    return <Navigate to="/" replace />;
-  }
-
-  return <Outlet />;
+//
+//    fetchData();
+//
+//  console.log(temp);
+//  if (!temp) {
+//    return <Navigate to="/" replace />;
+//  }
+//
+//  return <Outlet />;
 }

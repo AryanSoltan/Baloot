@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.ws.rs.core.Request;
 import java.io.IOException;
 
 @Order(1)
@@ -23,14 +24,13 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var pathInfo = request.getServletPath();
-        if(pathInfo.contains("login") || pathInfo.contains("signup") || pathInfo.contains("usernameForLogin") || pathInfo.contains("authorized"))
-        {
+        if(pathInfo.contains("login") || pathInfo.contains("signup") || pathInfo.contains("usernameForLogin") || pathInfo.contains("authorized") ||
+        pathInfo.contains("commodities")) {
             filterChain.doFilter(request, response);
             return;
         }
         String jwtToken = request.getHeader("Authorization");
-        System.out.println("HELLOOO WORLD");
-        System.out.println(jwtToken);
+
         if(jwtToken == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt token not found");
         }

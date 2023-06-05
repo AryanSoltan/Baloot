@@ -30,7 +30,7 @@ export default function CommodityInfo() {
         async function fetchData() {
             try {
                 console.log("gettt");
-                const response = await axios.get('commodities/' + id);
+                const response = await axios.get('commodities/' + id, {headers: {Authorization: localStorage.getItem('token')}});
                 const commodityR= response.data.content;
 
                 console.log(commodityR);
@@ -52,7 +52,7 @@ export default function CommodityInfo() {
             try {
 
                 const data = { username: userId};
-                const response = await axios.post("/users/buyListNum/"+id,data);
+                const response = await axios.post("/users/buyListNum/" + id,data, {headers: {Authorization: localStorage.getItem('token')}});
                 const count = response.data.content;
 
                 console.log('in commodity info count is ');
