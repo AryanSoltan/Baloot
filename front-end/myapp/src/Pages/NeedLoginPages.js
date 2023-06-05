@@ -1,50 +1,40 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import {useEffect} from "react";
-
-import * as React from "react";
-
-
-import axios from 'axios'
-
-
+import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function NeedLoginPages() {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const tokenUser = localStorage.getItem('token');
 
-    const location = useLocation();
+  var temp = false;
 
-    var isLoggedIn = localStorage.getItem('userLoggedIn');
-
-    const navigate = useNavigate();
-
-
-//     useEffect(() =>
-//     {
-// //        var isLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
-//
-//
-//          async function fetchData() {
-//              try {
-//                 const response = await axios.post("/isLogin", null);
-//                 console.log(response);
-//
-//              } catch (e) {
-//                  console.log(e);
-//              }
-//           }
-//         fetchData();
-//
-//         if(isLoggedIn === null) {
-//             navigate("/");
-//         }
-//     },[]);
-    if(!isLoggedIn){
-        return <Navigate to="/" state={{ from: location }} replace />;
+    async function fetchData() {
+    console.log("HUUUUUUUU")
+      try {
+        const response = await axios.post("/authorized", { token: tokenUser });
+        if(response.data.content === "ok")
+        {
+            console.log("WHYYYYYYYYY AAAAAA");
+            setIsAuthorized(true);
+            temp = true;
+        }
+        console.log(temp);
+        console.log("HELOOOOOOOOOo");
+        console.log(isAuthorized);
+        console.log(response);
+      } catch (e) {
+        console.error(e);
+      }
     }
+  console.log("NAAAAAAAA");
 
+    fetchData();
 
-    return (<Outlet/>);
+  console.log(temp);
+  if (!temp) {
+    return <Navigate to="/" replace />;
+  }
 
-
+  return <Outlet />;
 }

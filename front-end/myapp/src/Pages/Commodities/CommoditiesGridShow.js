@@ -147,7 +147,7 @@ export default function CommoditiesGridShow(props) {
         async function fetchData() {
             try {
                 console.log('in fetch data');
-                const response = await axios.get("commodities");
+                const response = await axios.get("commodities", {headers: {'Authorization': localStorage.getItem('token')}});
                 const commodititesList = response.data.content;
 
                 setcommodities(commodititesList);

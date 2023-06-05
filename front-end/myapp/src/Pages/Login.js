@@ -52,14 +52,14 @@ export default function Login() {
                     localStorage.setItem('userEmail', email);
                     localStorage.setItem('token', response.data.content);
                     console.log("token is: ");
-                    console.log(response.data.content);
+                    console.log(localStorage.getItem('token'));
                     console.log("resp is ");
 
                     //navigate("/commodities");
                 }
                   try {
                         console.log('getting username');
-                        const response = await axios.post("/username", {email: email});
+                        const response = await axios.post("/usernameForLogin", {email: email});
                         const username = response.data.content;
 
                         localStorage.setItem('userId', username);
@@ -72,7 +72,7 @@ export default function Login() {
             }
 
             catch(e){
-                toast.error("password or username is wrong");
+                toast.error("password or email is wrong");
                 console.log(e.message)
             }
         }

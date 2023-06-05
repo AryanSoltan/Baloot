@@ -6,11 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Filter/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Filter/JWTFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/JWTTokenHandler/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/JWTTokenHandler/JwtTokenUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/CommodityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/CommodityController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Filter/JWTFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Filter/JWTFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/target/classes/JWTTokenHandler/JwtTokenUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/JWTTokenHandler/JwtTokenUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodities/CommoditiesGridShow.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodities/CommoditiesGridShow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/NeedLoginPages.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

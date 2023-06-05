@@ -51,7 +51,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="/username",method = RequestMethod.POST)
+    @RequestMapping(value="/usernameForLogin",method = RequestMethod.POST)
     public Response getUserName (@RequestBody String userLoginInfo) throws Exception{
         System.out.println("in getting username");
 
@@ -259,6 +259,28 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
+
+    @RequestMapping(value="/authorized",method = RequestMethod.POST)
+    public Response getAuthorized (@RequestBody String userTokenInfo) throws Exception{
+        var tokenInfo = new ObjectMapper().readTree(userTokenInfo);
+        String token = tokenInfo.get("token").asText();
+        try{
+            System.out.println("1");
+            System.out.println(JwtTokenUtil.isTokenExpired(token) );
+            System.out.println("2");
+            System.out.println(JwtTokenUtil.validateTokenSigneture(token));;
+            if(token != null && !JwtTokenUtil.isTokenExpired(token) && JwtTokenUtil.validateTokenSigneture(token)) {
+                return new Response(HttpStatus.OK.value(), "ok", "ok");
+            }
+            else
+                return  new Response(HttpStatus.OK.value(), "not", "not");
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
+
+
 //
     @RequestMapping(value="/users/buyListNum/{commodityId}",method = RequestMethod.POST)
     public Response getCommodityNum (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String userSignUpInfo, @PathVariable(value="commodityId") String commodityId) throws Exception{

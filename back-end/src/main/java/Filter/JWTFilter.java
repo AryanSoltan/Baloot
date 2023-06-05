@@ -23,16 +23,18 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var pathInfo = request.getServletPath();
-        if(pathInfo.contains("login") || pathInfo.contains("signup")) {
+        if(pathInfo.contains("login") || pathInfo.contains("signup") || pathInfo.contains("usernameForLogin") || pathInfo.contains("authorized"))
+        {
             filterChain.doFilter(request, response);
             return;
         }
         String jwtToken = request.getHeader("Authorization");
+        System.out.println("HELLOOO WORLD");
         System.out.println(jwtToken);
         if(jwtToken == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt token not found");
         }
-        if(!JwtTokenUtil.isTokenExpired(jwtToken))
+        if(JwtTokenUtil.isTokenExpired(jwtToken))
         {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt token expired");
         }
