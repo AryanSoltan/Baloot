@@ -62,6 +62,7 @@ export default class SignUp extends React.Component {
                 if(resp.status === 200) {
                     localStorage.setItem('userLoggedIn', true);
                     localStorage.setItem('userId', this.state.userName);
+                    localStorage.setItem('token', resp.data.content);
                     window.location.href = "http://localhost:3000/commodities"
                 }
             }).catch(error => {

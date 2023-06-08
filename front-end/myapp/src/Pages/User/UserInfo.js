@@ -40,7 +40,7 @@ export default function UserInfo()
         async function fetchData() {
             try {
                 console.log("hereeeeeeeeeeeeee");
-                const response = await axios.get('users/' + userId);
+                const response = await axios.get('users/' + userId,  {headers: {Authorization: localStorage.getItem('token')}});
                 const userR = response.data.content;
                 console.log("user is");
 
@@ -66,6 +66,7 @@ export default function UserInfo()
     const handleLogOut = (e) => {
         localStorage.setItem('userLoggedIn', null);
         localStorage.setItem('userId', null);
+        localStorage.setItem('token', null);
         window.location.href = "http://localhost:3000/";
     };
 

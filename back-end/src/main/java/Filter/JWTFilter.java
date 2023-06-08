@@ -31,6 +31,10 @@ public class JWTFilter extends OncePerRequestFilter {
         }
         String jwtToken = request.getHeader("Authorization");
 
+        System.out.println(jwtToken);
+        System.out.println("WHYYYYYYYYYY");
+        System.out.println(request.getServletPath());
+
         if(jwtToken == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt token not found");
         }

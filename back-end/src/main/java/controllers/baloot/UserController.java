@@ -8,16 +8,26 @@ import Baloot.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import controllers.baloot.ReposnsePackage.Response;
 import org.springframework.web.server.ResponseStatusException;
 import JWTTokenHandler.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import org.springframework.security.authentication.AuthenticationManager;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Map;
 import java.util.Objects;
+
+import static com.google.common.io.Resources.getResource;
 
 
 @RestController
@@ -30,6 +40,9 @@ public class UserController {
 
 //    @Autowired
 //    private JwtTokenUtil jwtTokenUtil;
+
+    static String CLIENT_ID = "19aafd1365dd0bff246e";
+    static String CLIENT_SECRET = "1f87cf5a63754023e8d925919c8954bb89c1eb2d";
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public Response logIn (@RequestBody String userLoginInfo) throws Exception{
@@ -130,7 +143,15 @@ public class UserController {
 //
 //
     @RequestMapping(value="/users/{id}",method = RequestMethod.GET)
-    public Response getUser (@PathVariable(value="id") String username ) throws Exception{
+    public Response getUser (@RequestHeader(value = "Authorization") String authJWT, @PathVariable(value="id") String username ) throws Exception{
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
+        String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+        UserDTO user = BalootServerRepo.getInstance().getUserById(username);
+        if(!Objects.equals(user.getEmail(), userEmail))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
         try{
             return new Response(HttpStatus.OK.value(), "user sent",BalootServerRepo.getInstance().getUserById(username));
         }
@@ -138,7 +159,107 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
     }
-//
+
+    @RequestMapping(value="/getUserInfo",method = RequestMethod.POST)
+    public Response getUser (@RequestBody String jwtTokenInfo) throws Exception{
+        System.out.println("ENTERED");
+        var jwtInfo = new ObjectMapper().readTree(jwtTokenInfo);
+        String token = jwtInfo.get("token").asText();
+        System.out.println("TOKEN is" + token);
+        System.out.println(BalootServerRepo.getInstance().getUserById(JwtTokenUtil.extractUserEmail(token)));
+        return new Response(HttpStatus.OK.value(), "user sent",BalootServerRepo.getInstance().getUserById(JwtTokenUtil.extractUserEmail(token)));
+    }
+
+    @RequestMapping(value="/oauth-github",method = RequestMethod.POST)
+    public Response oAuth (@RequestBody String reqInfo) throws Exception{
+        System.out.println("Enter Oauth");
+        var codeResp = new ObjectMapper().readTree(reqInfo);
+        String code = codeResp.get("code").asText();
+        String urlGithub = "https://github.com/login/oauth/access_token?client_id="
+                + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&code=" + code;
+
+        String accessToken = getAccessToken(urlGithub);
+        JsonObject userInfo = getUserInfoGithub(accessToken);
+        String userName = userInfo.get("login").getAsString();
+        System.out.println(userName);
+//        String email = "git-temp@gmail.com";
+//        if(!userInfo.get("email").isJsonNull())
+//            email = userInfo.get("email").getAsString();
+        String email = userName;
+        if(!BalootServerRepo.getInstance().isUserExist(userName))
+        {
+            User newUser = new User(userName, accessToken, email, "1.1.2000", "", (double)0);
+            BalootServerRepo.getInstance().addUser(newUser);
+        }
+        return new Response(HttpStatus.OK.value(), "user sent", JwtTokenUtil.generateToken(userName));
+    }
+
+    private JsonObject getUserInfoGithub(String accessToken) {
+        try {
+            URL url = new URL("https://api.github.com/user");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/vnd.github+json");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+            conn.setRequestProperty("X-GitHub-Api-Version", "2022-11-28");
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            System.out.println(response);
+
+            in.close();
+            conn.disconnect();
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(String.valueOf(response), JsonObject.class);
+            return jsonObject;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private String getAccessToken(String urlGithub)
+    {
+        try {
+            URL url = new URL(urlGithub);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/vnd.github+json");
+
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            conn.disconnect();
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(String.valueOf(response), JsonObject.class);
+            return jsonObject.get("access_token").getAsString();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return "";
+    }
+
+
+    //
     @RequestMapping(value="/users/{id}/buyList/applyDiscount",method = RequestMethod.POST)
     public Response applyDiscount (@RequestHeader(value = "Authorization") String authJWT, @RequestBody String reqInfo,@PathVariable(value="id") String username ) throws Exception{
 

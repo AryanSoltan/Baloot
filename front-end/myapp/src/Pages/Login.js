@@ -116,6 +116,9 @@ export default function Login() {
                 <div>
                     <p>Dont' have an account? <a href="/signup">Create New Account</a>.</p>
                 </div>
+                <div>
+                    <a href = "https://github.com/login/oauth/authorize?client_id=19aafd1365dd0bff246e&scope=user">Login with github</a>
+                </div>
             </div>
 
 

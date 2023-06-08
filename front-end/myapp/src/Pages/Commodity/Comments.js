@@ -38,7 +38,7 @@ export default function Comments(props) {
     const handleLike = async vote => {
         try {
             const data = {comment_id: comment.id};
-            const response = await axios.post("/commodities/" + comment.commodityId + "/" + userId + "/like", data);
+            const response = await axios.post("/commodities/" + comment.commodityId + "/" + userId + "/like", data,  {headers: {Authorization: localStorage.getItem('token')}});
             updateComment(response.data.data);
         } catch (e) {
             console.log(e);
@@ -49,7 +49,7 @@ export default function Comments(props) {
         try {
 
             const data = {comment_id: comment.id};
-            const response = await axios.post("/commodities/" + comment.commodityId + "/" + userId + "/dislike", data);
+            const response = await axios.post("/commodities/" + comment.commodityId + "/" + userId + "/dislike", data,  {headers: {Authorization: localStorage.getItem('token')}});
             console.log(response);
             updateComment(response.data.data);
 

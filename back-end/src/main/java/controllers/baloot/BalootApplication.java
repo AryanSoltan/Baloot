@@ -3,6 +3,7 @@ package controllers.baloot;//import Baloot.BalootServer;
 //import ExternalRepository;
 import Baloot.Comment;
 import Baloot.Commodity;
+import Config.CorsConfig;
 import Config.JWTFilterConfig;
 import Repository.ExternalRepository;
 import Repository.BalootServerRepo;

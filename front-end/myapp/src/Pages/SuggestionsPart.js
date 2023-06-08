@@ -24,7 +24,7 @@ export default function SuggestionsPart() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get("commodities/"+id+'/'+userId+'/suggestions');
+                const response = await axios.get("commodities/"+id+'/'+userId+'/suggestions',  {headers: {Authorization: localStorage.getItem('token')}});
                 const commodititesList = response.data.content;
                 console.log('commodities list');
                 console.log(commodititesList);

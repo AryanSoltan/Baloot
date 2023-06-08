@@ -97,6 +97,18 @@ public class BalootServerRepo {
         return (User) users.get(0);
     }
 
+    public boolean isUserExist(String userName)
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        User user = findUserById(userName, entityManager);
+        if(user == null)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public boolean userIsLoggedIn(String username, String password) throws Exception {
         if (sessions.containsKey(username))
             return true;

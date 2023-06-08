@@ -20,6 +20,7 @@ import User from "./Pages/User/User"
 import Provider from "./Pages/ProviderPage"
 import NotFound404 from "./Pages/NotFound404"
 import NeedLoginPages from "./Pages/NeedLoginPages"
+import OAuth from "./Pages/OAuth"
 
 
 export const Context = React.createContext({ value: null, setValue: () => {} });
@@ -36,6 +37,7 @@ function App() {
 
               <Route exact path="/" element={<Login />}/>
               <Route path = "/signup" element = {<SignUp />}/>
+              <Route path = "/github-oauth" element = {<OAuth/>}/>
               <Route path='*' element={<NotFound404 />} />
 
 
@@ -47,6 +49,7 @@ function App() {
                   <Route path="/commodities" element={<Commodities />}/>
                   <Route path="/commodities/:id" element={<Commodity />}/>
                   <Route path = "/providers/:id" element = {<Provider />}/>
+
               </Route>
 
 

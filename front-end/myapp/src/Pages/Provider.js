@@ -41,7 +41,7 @@ export default function Provider(props) {
         async function fetchData() {
             try {
 
-                const response = await axios.get('providers/' + id);
+                const response = await axios.get('providers/' + id,  {headers: {Authorization: localStorage.getItem('token')}});
                 const providerR= response.data.content;
                 console.log('pro');
                 console.log(providerR);
