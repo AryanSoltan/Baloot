@@ -27,7 +27,7 @@ function HeaderInfoPart() {
                 console.log('in  item');
                 console.log(value);
 
-                const response = await axios.get("/users/"+userId+"/buyList");
+                const response = await axios.get("/users/"+userId+"/buyList", {headers: {Authorization: localStorage.getItem('token')}});
                 const userBuyList = response.data.content;
                 console.log("bulist is ");
                 console.log(userBuyList);

@@ -43,7 +43,7 @@ export default function IncrementDecrement(props)
         setCounter(value);
         try {
             const data = { userId: userId };
-            const response = await axios.post('/users/' + commodityId+ '/remove', data);
+            const response = await axios.post('/users/' + userId + '/' + commodityId+ '/remove', data, {headers: {Authorization: localStorage.getItem('token')}});
             // change(true);
 
         } catch (e) {
@@ -70,7 +70,7 @@ export default function IncrementDecrement(props)
             console.log("in add inc button");
 
             const data = { userId: userId };
-            const response = await axios.post('/users/' + commodityId+ '/add', data);
+            const response = await axios.post('/users/' + userId + '/' + commodityId+ '/add', data, {headers: {Authorization: localStorage.getItem('token')}});
             // change(true);
 
         } catch (e) {

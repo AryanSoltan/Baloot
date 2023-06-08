@@ -3,8 +3,10 @@ package Baloot;
 import Baloot.Exception.CommodityIsNotInBuyList;
 //import InterfaceServer.CommodityInterface;
 
+import com.google.common.hash.Hashing;
 import jakarta.persistence.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Entity
@@ -187,6 +189,12 @@ public class User {
         if(email.equals(emailAdd))
             return true;
         return false;
+    }
+
+    public void passwordGetHash()
+    {
+        this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+        System.out.println(password);
     }
 
 //    public BuyList getPurchased() {

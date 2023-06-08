@@ -3,6 +3,8 @@ package controllers.baloot;//import Baloot.BalootServer;
 //import ExternalRepository;
 import Baloot.Comment;
 import Baloot.Commodity;
+import Config.CorsConfig;
+import Config.JWTFilterConfig;
 import Repository.ExternalRepository;
 import Repository.BalootServerRepo;
 import jakarta.persistence.EntityManager;
@@ -10,6 +12,8 @@ import jakarta.persistence.EntityManagerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +21,10 @@ import java.util.List;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
+//@Import(JWTFilterConfig.class)
 public class BalootApplication {
     final static int PORT_NUM = 8080;
     final static String externalServerAddress = "http://5.253.25.110:5000";
-
 
     public static void main(String[] args) {
         try {
@@ -42,7 +46,9 @@ public class BalootApplication {
 //            userRepo.addCredit("amir", 10);
           //  MainRepository repository = new MainRepository();
            // System.out.println("Repo finished");
-            SpringApplication.run(BalootApplication.class,args);
+
+            ConfigurableApplicationContext ctx = SpringApplication.run(BalootApplication.class,args);
+//            JWTFilterConfig configuration = ctx.getBean(JWTFilterConfig.class);
         }
         catch(Exception e)
         {

@@ -40,7 +40,7 @@ export default function UserInfo()
         async function fetchData() {
             try {
                 console.log("hereeeeeeeeeeeeee");
-                const response = await axios.get('users/' + userId);
+                const response = await axios.get('users/' + userId,  {headers: {Authorization: localStorage.getItem('token')}});
                 const userR = response.data.content;
                 console.log("user is");
 
@@ -66,6 +66,7 @@ export default function UserInfo()
     const handleLogOut = (e) => {
         localStorage.setItem('userLoggedIn', null);
         localStorage.setItem('userId', null);
+        localStorage.setItem('token', null);
         window.location.href = "http://localhost:3000/";
     };
 
@@ -81,10 +82,11 @@ export default function UserInfo()
 
         try {
             console.log("response is");
+            const tokenUser = localStorage.getItem('token');
             const response = axios.post('/users/' + userId + '/buyList/addCredit',
                 {
                     credit: credit
-                });
+                },{headers: {Authorization: tokenUser}});
 
             console.log(response);
                 window.location.reload();

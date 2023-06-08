@@ -14,7 +14,7 @@ import axios from 'axios'
 export default function Login() {
 
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     useEffect(() => {
 
@@ -23,11 +23,12 @@ export default function Login() {
 
     }, []);
     const handleSubmit = async(e)=> {
+        console.log("HELOOOO");
         e.preventDefault();
-        console.log("username is ");
-        console.log(username);
+        console.log("email is ");
+        console.log(email);
         console.log(password);
-        if(!username){
+        if(!email){
             toast.error('should fill the username part');
             return
         }
@@ -39,24 +40,39 @@ export default function Login() {
         {
             try{
 
-            const response = await axios.post('/login', {
-                username: username,
-                password: password
-            })
+                const response = await axios.post('/login', {
+                    email: email,
+                    password: password
+                })
 
-            console.log(response);
+                console.log(response);
 
                 if(response.data.statusCode == 200) {
                     localStorage.setItem('userLoggedIn', true);
-                    localStorage.setItem('userId', username);
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('token', response.data.content);
+                    console.log("token is: ");
+                    console.log(localStorage.getItem('token'));
                     console.log("resp is ");
 
-                     window.location.href = "http://localhost:3000/commodities";
                     //navigate("/commodities");
                 }
+                  try {
+                        console.log('getting username');
+                        const response = await axios.post("/usernameForLogin", {email: email});
+                        const username = response.data.content;
+
+                        localStorage.setItem('userId', username);
+
+                        window.location.href = "http://localhost:3000/commodities";
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
             }
+
             catch(e){
-                toast.error("password or username is wrong");
+                toast.error("password or email is wrong");
                 console.log(e.message)
             }
         }
@@ -81,9 +97,9 @@ export default function Login() {
 
                     <h1>Sign in Form </h1>
 
-                    <p>Username</p>
+                    <p>Email</p>
 
-                    <input type="text" placeholder="Enter Username" name="username" id="username" onChange={e => { setUsername(e.target.value) }}/>
+                    <input type="text" placeholder="Enter Email" name="email" id="email" onChange={e => { setEmail(e.target.value) }}/>
                     <br/>
                     <br/>
                     <p>Password</p>
@@ -99,6 +115,9 @@ export default function Login() {
 
                 <div>
                     <p>Dont' have an account? <a href="/signup">Create New Account</a>.</p>
+                </div>
+                <div>
+                    <a href = "https://github.com/login/oauth/authorize?client_id=19aafd1365dd0bff246e&scope=user">Login with github</a>
                 </div>
             </div>
 

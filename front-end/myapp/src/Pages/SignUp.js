@@ -62,11 +62,18 @@ export default class SignUp extends React.Component {
                 if(resp.status === 200) {
                     localStorage.setItem('userLoggedIn', true);
                     localStorage.setItem('userId', this.state.userName);
+                    localStorage.setItem('token', resp.data.content);
                     window.location.href = "http://localhost:3000/commodities"
                 }
             }).catch(error => {
-                toast.error("Something went wrong!");
-                console.log(error.toJSON().message)
+                const errorMessage = error.response.data.error;
+                if (errorMessage === "Unauthorized") {
+                    toast.error("This username already exist");
+                }
+                 if (errorMessage === "Not Found") {
+                    toast.error("This email already exist");
+                }
+                console.log(errorMessage);
             })
         }
     }

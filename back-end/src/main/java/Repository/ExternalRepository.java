@@ -76,13 +76,15 @@ public class ExternalRepository {
                 EntityManager entityManager = entityManagerFactory.createEntityManager();
                 entityManager.getTransaction().begin();
                 try {
-
                     entityManager.persist(provider);
+
                 } catch (Exception e) {
                     entityManager.getTransaction().rollback();
+                    entityManager.close();
                     throw new Exception(e.getMessage());
                 }
                 entityManager.getTransaction().commit();
+                entityManager.close();
             }
         }
         catch (Exception exception) {
@@ -106,11 +108,13 @@ public class ExternalRepository {
 
                 if (user == null) {
                     entityManager.getTransaction().rollback();
+                    entityManager.close();
                     throw new UserNotExist(comment.getUserEmail());
                 }
                 Commodity commodity = entityManager.find(Commodity.class, comment.getCommodityId());
                 if (commodity == null) {
                     entityManager.getTransaction().rollback();
+                    entityManager.close();
                     throw new CommodityNotExist(comment.getCommodityId());
                 }
 
@@ -119,9 +123,11 @@ public class ExternalRepository {
                     entityManager.persist(com);
                 } catch (Exception e) {
                     entityManager.getTransaction().rollback();
+                    entityManager.close();
                     throw new Exception(e.getMessage());
                 }
                 entityManager.getTransaction().commit();
+                entityManager.close();
             }
         }
         catch (Exception exception) {
@@ -157,9 +163,11 @@ public class ExternalRepository {
                     entityManager.persist(code);
                 } catch (Exception e) {
                     entityManager.getTransaction().rollback();
+                    entityManager.close();
                     throw new Exception(e.getMessage());
                 }
                 entityManager.getTransaction().commit();
+                entityManager.close();
             }
         }
         catch (Exception exception) {
@@ -185,19 +193,15 @@ public class ExternalRepository {
 
     public void addCommodity(int id, String name, int providerID, double price,double rating , int inStock, String imgURL, ArrayList<String> categories) throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-
         entityManager.getTransaction().begin();
-        System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"+providerID);
         Provider provider = entityManager.find(Provider.class, providerID);
         if (provider == null) {
             entityManager.getTransaction().rollback();
+            entityManager.close();
             throw new ProviderNotExist(providerID);
         }
-
         try {
-
             Commodity commodity = new Commodity(id, name, provider, price, rating, inStock, imgURL);
-
             for (var categoryName : categories) {
 
                 Category cat = entityManager.find(Category.class, categoryName);
@@ -212,26 +216,30 @@ public class ExternalRepository {
             entityManager.persist(commodity);
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
+            entityManager.close();
             throw new Exception(e.getMessage());
         }
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void addUser(String username, String password, String email,String birthDate, String address, double credit) throws Exception {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-
         try {
-
             User user = new User(username, password, email, birthDate, address, credit);
-           // entityManager.persist(user.getPurchased());
+            user.passwordGetHash();
+
+            // entityManager.persist(user.getPurchased());
             //entityManager.persist(user.getBought());
             entityManager.persist(user);
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
+            entityManager.close();
             throw new Exception(e.getMessage());
         }
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
     public String getRequest(String inputUrl)
     {

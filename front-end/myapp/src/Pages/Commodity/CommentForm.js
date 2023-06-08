@@ -17,7 +17,7 @@ export default function CommentForm(props) {
             console.log(commentText);
             console.log(userId);
             const data = { userId: userId, comment: commentText };
-            const response = await axios.post('/commodities/'+commodityId+'/comment', data);
+            const response = await axios.post('/commodities/'+commodityId+'/comment', data,  {headers: {Authorization: localStorage.getItem('token')}});
             const newComment = response.data.content;
             addComment(newComment);
             setCommentText('');

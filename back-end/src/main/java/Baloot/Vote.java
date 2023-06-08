@@ -20,7 +20,7 @@ public class Vote {
     private Comment comment;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "username")
     private User user;
 
     private int  vote;

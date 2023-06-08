@@ -1,50 +1,46 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import {useEffect} from "react";
-
-import * as React from "react";
-
-
-import axios from 'axios'
-
-
+import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function NeedLoginPages() {
+  const tokenUser = localStorage.getItem('token');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    const location = useLocation();
+  useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await axios.post("/authorized", { token: tokenUser });
 
-    var isLoggedIn = localStorage.getItem('userLoggedIn');
+            if(response.data.content === "not")
+            {
+                window.location.href = "http://localhost:3000/";
+            }
+            else
+            {
+                  setIsAuthenticated(true);
+//                window.location.href = "http://localhost:3000/commodities";
+                  return;
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }
+        fetchData();
+    }, []);
 
-    const navigate = useNavigate();
-
-
-//     useEffect(() =>
-//     {
-// //        var isLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
-//
-//
-//          async function fetchData() {
-//              try {
-//                 const response = await axios.post("/isLogin", null);
-//                 console.log(response);
-//
-//              } catch (e) {
-//                  console.log(e);
-//              }
-//           }
-//         fetchData();
-//
-//         if(isLoggedIn === null) {
-//             navigate("/");
-//         }
-//     },[]);
-    if(!isLoggedIn){
-        return <Navigate to="/login" state={{ from: location }} replace />;
+    if(isAuthenticated === true)
+    {
+        return <Outlet />;
     }
 
-
-    return (<Outlet/>);
-
-
+//
+//    fetchData();
+//
+//  console.log(temp);
+//  if (!temp) {
+//    return <Navigate to="/" replace />;
+//  }
+//
+//  return <Outlet />;
 }

@@ -1,6 +1,7 @@
 package controllers.baloot;
 
 import Baloot.User;
+import JWTTokenHandler.JwtTokenUtil;
 import Repository.BalootServerRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +18,12 @@ public class ProviderController {
 
 
     @RequestMapping(value="/providers/{id}",method = RequestMethod.GET)
-    public Response getUser (@PathVariable(value="id") String username ) throws Exception{
+    public Response getUser (@RequestHeader(value = "Authorization") String authJWT, @PathVariable(value="id") String username ) throws Exception{
+
+        if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+        }
+
         try{
             return new Response(HttpStatus.OK.value(), "user sent", BalootServerRepo.getInstance().getProviderById(Integer.valueOf(username)));
         }

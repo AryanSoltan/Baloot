@@ -18,7 +18,7 @@ export default function CommodityCard(props) {
 
                 console.log("id is");
                 const data = { username: userId};
-                const response = await axios.post("/users/buyListNum/"+commodity.id,data);
+                const response = await axios.post("/users/buyListNum/"+commodity.id,data, {headers: {Authorization: localStorage.getItem('token')}});
                 const count = response.data.content;
 
                 console.log('count is ');

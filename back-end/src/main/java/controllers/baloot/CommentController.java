@@ -3,6 +3,8 @@ package controllers.baloot;
 
 import Baloot.Comment;
 import Baloot.DTOObjects.CommentDTO;
+import Baloot.DTOObjects.UserDTO;
+import JWTTokenHandler.JwtTokenUtil;
 import Repository.BalootServerRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.baloot.ReposnsePackage.Response;
@@ -13,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -21,8 +24,11 @@ public class CommentController {
 
 
     @RequestMapping(value="/commodities/{commodityId}/comment",method = RequestMethod.POST)
-    public Response addComment(@RequestBody String rateInfo ,@PathVariable(value="commodityId") String commodityID ){
+    public Response addComment(@RequestHeader(value = "Authorization") String authJWT, @RequestBody String rateInfo ,@PathVariable(value="commodityId") String commodityID ){
         try{
+            if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+            }
             var info = new ObjectMapper().readTree(rateInfo);
             String commentText  = info.get("comment").asText();
             String userID = info.get("userId").asText();
@@ -54,9 +60,16 @@ public class CommentController {
 
 //
     @RequestMapping(value="/commodities/{id}/{userId}/like",method = RequestMethod.POST)
-    public Response likeComment(@RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
+    public Response likeComment(@RequestHeader(value = "Authorization") String authJWT, @RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
 
         try{
+            if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+            }
+            String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+            UserDTO user = BalootServerRepo.getInstance().getUserById(userID);
+            if(!Objects.equals(user.getEmail(), userEmail))
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
             var info = new ObjectMapper().readTree(rateInfo);
             Integer commentId  = Integer.valueOf(info.get("comment_id").asText());
             System.out.println("in like");
@@ -69,9 +82,15 @@ public class CommentController {
     }
 //
     @RequestMapping(value="/commodities/{id}/{userId}/dislike",method = RequestMethod.POST)
-    public Response dislikeComment(@RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
+    public Response dislikeComment(@RequestHeader(value = "Authorization") String authJWT, @RequestBody String rateInfo ,@PathVariable(value="id") String commodityID,@PathVariable(value="userId") String userID ){
         try{
-
+            if(authJWT == null || !JwtTokenUtil.validateTokenSigneture(authJWT) || JwtTokenUtil.isTokenExpired(authJWT)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
+            }
+            String userEmail = JwtTokenUtil.extractUserEmail(authJWT);
+            UserDTO user = BalootServerRepo.getInstance().getUserById(userID);
+            if(!Objects.equals(user.getEmail(), userEmail))
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "jwt have problem");
             var info = new ObjectMapper().readTree(rateInfo);
             Integer commentId  = Integer.valueOf(info.get("comment_id").asText());
 
