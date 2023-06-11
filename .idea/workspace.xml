@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Config/JWTFilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Config/JWTFilterConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Filter/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Filter/JWTFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Filter/JWTFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Filter/JWTFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommentForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/RateCommodity.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/RateCommodity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/SuggestionsPart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/SuggestionsPart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/UserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/UserInfo.js" afterDir="false" />
-    </list>
+    <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,25 +36,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/aryan/Desktop/University/online_courses/Semester8/IE/Projects/Baloot&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;3a2e2ec9435805b6ced0fc44abba7cb2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/media/saba/d86c6f62-ad7d-43c6-99a7-2d8823c6e581/saba/Saba/UT/Term8/IE/CA6/Baloot/back-end",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "3a2e2ec9435805b6ced0fc44abba7cb2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Baloot.Exception" />
@@ -111,6 +93,8 @@
     </configuration>
     <list>
       <item itemvalue="Application.BalootApplication" />
+      <item itemvalue="Spring Boot.BalootApplication (1)" />
+      <item itemvalue="Spring Boot.BalootApplication" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -146,6 +130,7 @@
       <workItem from="1683458126927" duration="16753000" />
       <workItem from="1683477272055" duration="9000" />
       <workItem from="1683482283386" duration="6463000" />
+      <workItem from="1686488586839" duration="19000" />
     </task>
     <servers />
   </component>
