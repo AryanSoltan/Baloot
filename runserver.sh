@@ -23,11 +23,13 @@ if docker images | awk '{print $1}' | grep -q "^baloot-db$"; then
     docker build -t baloot-frontend ./backend/src/main/java/Repository
 fi
 
+docker container stop $(docker container ls -aq)
+
 echo "frontend connected to port 3000..."
 docker run -p 3000:80 baloot-frontend &
 
 echo "DB connected to port 3306"
-docker run -p 8000:3306 baloot-db &
+docker run -p 3306:3306 baloot-db &
 
 echo "backend connected to port 8080"
 docker run -p 8080:8080 baloot-backend &
