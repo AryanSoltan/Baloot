@@ -1,12 +1,15 @@
-FROM node:12.22.9-alpine as builder
+FROM node:14.17.0-alpine as builder
 
 LABEL authors="saba"
 
 # copy the package.json to install dependencies
 COPY package.json package-lock.json ./
 
+RUN npm install -g npm
 # Install the dependencies and make the folder
-RUN npm install && mkdir /baloot_ui && mv ./node_modules ./baloot_ui
+RUN npm install
+RUN mkdir /baloot_ui
+RUN mv ./node_modules ./baloot_ui
 
 WORKDIR /baloot_ui
 
@@ -33,8 +36,6 @@ EXPOSE 3000 80
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
-
 #docker build -f Dockerfile -t baloot_ui .
 #docker run -d --name balootui -p 3000:80 baloot_ui
-
 
