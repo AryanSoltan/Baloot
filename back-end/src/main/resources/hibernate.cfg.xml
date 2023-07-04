@@ -12,7 +12,7 @@
 
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name = "connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name = "connection.url">jdbc:mysql://localhost:3306/BalootDB</property>
+        <property name = "connection.url">jdbc:mysql://db:3306/BalootDB</property>
         <property name = "hibernate.connection.username">root</property>
         <property name = "hibernate.connection.password">root</property>
         <property name="show_sql">false</property>

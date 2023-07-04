@@ -6,23 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ead4af47-8c2d-4f29-9c2e-67d03d8f3021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Config/JWTFilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Config/JWTFilterConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Filter/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Filter/JWTFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/BalootServerRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/BalootApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/controllers/baloot/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/Filter/JWTFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/Filter/JWTFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/BalootApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/target/classes/controllers/baloot/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/CommentForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Commodity/Comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/Provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/Provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/RateCommodity.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/RateCommodity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/SuggestionsPart.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/SuggestionsPart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/UserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/myapp/src/Pages/User/UserInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/Repository/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/Repository/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,9 +46,10 @@
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/aryan/Desktop/University/online_courses/Semester8/IE/Projects/Baloot&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/media/saba/d86c6f62-ad7d-43c6-99a7-2d8823c6e581/saba/Saba/UT/Term8/IE/CA6/Baloot/back-end&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -75,6 +61,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/back-end/src/main/java/Repository" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Baloot.Exception" />
     </key>
@@ -146,6 +135,7 @@
       <workItem from="1683458126927" duration="16753000" />
       <workItem from="1683477272055" duration="9000" />
       <workItem from="1683482283386" duration="6463000" />
+      <workItem from="1686488586839" duration="19000" />
     </task>
     <servers />
   </component>
